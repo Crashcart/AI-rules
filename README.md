@@ -3,7 +3,7 @@
 Versioned behavioral rules for AI systems. Written in AI-native language —
 direct imperatives, not policy documents.
 
-Current version: **1.0.0**
+Current version: **1.1.0**
 
 ---
 
@@ -24,6 +24,7 @@ rules/claude.md       — Claude-specific (written by Claude)
 rules/gpt.md          — GPT / OpenAI
 rules/gemini.md       — Gemini / Google
 rules/ollama.md       — Local models via Ollama
+rules/copilot.md      — GitHub Copilot (chat, agent, inline, PR review)
 ```
 
 `version.json` holds the current version and a SHA256 of all rule files.
@@ -36,22 +37,28 @@ acknowledgment in `acknowledgments/`.
 
 | AI | Version | Status |
 |----|---------|--------|
-| Claude | 1.0.0 | Acknowledged 2026-05-18 |
+| Claude | 1.1.0 | Acknowledged 2026-05-18 |
+| Copilot | — | Pending |
 | GPT | — | Pending |
 | Gemini | — | Pending |
 | Ollama | — | Pending |
 
-To get GPT/Gemini/Ollama to acknowledge: provide them with their respective
-rule file (`rules/{ai}.md`) and `rules/universal.md`, then ask them to
-produce the acknowledgment JSON for `acknowledgments/{ai}.ack.json`.
+To acknowledge: provide the AI with `rules/{ai}.md` and `rules/universal.md`,
+then ask it to produce the acknowledgment JSON for `acknowledgments/{ai}.ack.json`.
 
 ---
 
 ## Daily Snapshots
 
-Each day, `scripts/daily-snapshot.sh` creates a `snapshot/YYYY-MM-DD` branch
-with the current rule state. This is wired automatically via `.claude/settings.json`
-when using Claude Code. Snapshots create an immutable audit trail.
+Each day, `scripts/daily-snapshot.sh` archives the current rule state.
+Two modes — configured via `snapshotTargetRepo` in `.claude/settings.json`:
+
+- **Separate repo** (set `snapshotTargetRepo` to a git URL): pushes a
+  `rules-YYYY-MM-DD` branch to a dedicated archive repo
+- **Branch mode** (default, `snapshotTargetRepo` empty): creates a
+  `snapshot/YYYY-MM-DD` branch in this repo
+
+Runs automatically via the Claude Code PreToolUse hook. Creates an immutable audit trail.
 
 ---
 

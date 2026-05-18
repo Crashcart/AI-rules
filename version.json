@@ -1,13 +1,14 @@
 {
-  "version": "1.0.0",
+  "version": "1.1.0",
   "released": "2026-05-18",
-  "rules_sha256": "6d16fdc65d628b576746c92dbdea0b72735064d17e3a2ec7894c3160ba5c882a",
-  "changelog_entry": "Initial rule set — universal, claude, gpt, gemini, ollama",
+  "rules_sha256": "f62ce9eed68fea9d17998d036f41e7a9d0017bdd768ffd0a29b8c480f4888ee7",
+  "changelog_entry": "Added copilot.md; updated universal, claude, ollama with model selection matrix, anti-sycophancy, performance settings, separate-repo snapshot",
   "files": [
     "rules/universal.md",
     "rules/claude.md",
     "rules/gpt.md",
     "rules/gemini.md",
-    "rules/ollama.md"
+    "rules/ollama.md",
+    "rules/copilot.md"
   ]
 }

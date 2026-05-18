@@ -1,0 +1,8 @@
+{
+  "ai": "copilot",
+  "version": "pending",
+  "rules_sha256": "pending",
+  "acknowledged_at": null,
+  "acknowledged_by": null,
+  "note": "Update this file by providing Copilot with rules/copilot.md and rules/universal.md, then ask it to produce the acknowledgment JSON."
+}

@@ -1,5 +1,5 @@
 # Claude Rules
-version: 1.0.0 | applies-to: claude | parent: universal.md
+version: 1.1.0 | applies-to: claude | parent: universal.md
 
 Claude's translation of the universal rule set, written in the instruction grammar
 Claude was trained to respond to. These rules are direct behavioral imperatives —
@@ -27,6 +27,46 @@ Specific failure modes to avoid:
 
 ---
 
+## MODEL SELECTION (Claude-specific)
+
+You exist in multiple tiers. Use the smallest capable tier:
+
+- **Haiku**: simple CRUD, boilerplate, test fixtures, documentation, single-file bug fixes
+- **Sonnet**: multi-file features, code review, cross-cutting refactors, moderate complexity
+- **Opus**: architecture decisions, security audits, governance edits, complex analysis
+
+When working in Claude Code: if a subagent would do, use a subagent. Don't solve
+a research question in the main context if an Explore agent costs less.
+
+Source: `imports/rp-music-radio/AI_USAGE.md`
+
+---
+
+## ANTI-SYCOPHANCY
+
+Report code quality, bugs, and architectural issues directly. Do not:
+- Soften a real bug into "you might want to look at..."
+- Approve a security issue to avoid conflict
+- Adjust your assessment because the user seems attached to their approach
+
+State what is true. The user benefits from accurate information, not comfortable information.
+
+---
+
+## CONTEXT MANAGEMENT
+
+- **CLAUDE_AUTOCOMPACT_PCT_OVERRIDE=50**: compact at 50% context capacity, not 85%.
+  This keeps context clean for long sessions with multiple subagents.
+- Before spawning subagents: write down what you know so far — do not rely on
+  the subagent to re-derive context from the conversation.
+- If approaching token limits on a PR: push current state, document next steps
+  in a commit message or PR comment. Never leave a PR mid-implementation without
+  documenting where you stopped.
+
+Source: `imports/rp-music-radio/copilot-instructions.md` Rule 14, `imports/rp-music-radio/.claude/settings.json`
+
+---
+
 ## CODE QUALITY (Claude-specific)
 
 When writing code for Crashcart's repositories, apply these standards:
@@ -42,6 +82,7 @@ When writing code for Crashcart's repositories, apply these standards:
 - f-strings over `.format()` or `%`
 - `pathlib` over `os.path`
 - Dataclasses for data containers, not dicts with magic string keys
+- Pydantic models are the contract between services — use them, don't bypass them
 
 **Shell** (Zerotierone-moon, Ollama-intelgpu):
 - `#!/usr/bin/env bash` shebang
@@ -53,6 +94,7 @@ When writing code for Crashcart's repositories, apply these standards:
 - Self-documenting names eliminate most comments
 - Handle only errors that can actually occur
 - No TODO comments in committed code — open an issue instead
+- Conventional commit format: `feat:`, `fix:`, `docs:`, `refactor:`, `chore:`, `test:`
 
 ---
 
@@ -66,30 +108,24 @@ mechanism that preserves the user's ability to intervene.
 - Read before editing — never edit a file you haven't read in this session
 - Prefer targeted edits (`Edit`) over full rewrites (`Write`) on existing files
 - Stage specific files with git, never `git add -A` on first commit
+- After every push: check for conflicts with `git pull origin <branch>`
 
 For destructive operations (force push, reset --hard, dropping database tables):
 always ask explicitly before executing, even if the user said "just do it."
-The cost of one confirmation is lower than the cost of lost work.
 
 [NON-NEGOTIABLE for irreversible actions]
 
 ---
 
-## COMMUNICATION (Claude-specific translation of RULE 8)
+## GOVERNANCE (Claude-specific)
 
-In this repository specifically, you are both subject to these rules and a
-maintainer of them. When you write or update rules, write them as instructions
-you would want to receive — not as policy you would want to file.
+In this repository:
+- `version.json`, `rules/*.md`, `CLAUDE.md` are governance files — edit via PR, never direct push
+- Update `CHANGELOG.md` when any rule changes
+- Recompute SHA256 (`cat rules/*.md | sha256sum`) and update `version.json` when rules change
+- Update `acknowledgments/claude.ack.json` after any rule update
 
-The instruction style that works for Claude:
-- Direct imperative verb at the start: "Refuse", "Respond", "Prioritize"
-- State WHY in the same sentence as WHAT: "Do X because Y" outperforms "Do X. Y is important."
-- Mark hard limits with `[NON-NEGOTIABLE]`
-- Mark overridable defaults with `[DEFAULT, overridable — user can X]`
-- One concrete example for any rule where the edge case matters
-
-When rules change, produce an acknowledgment using the format in
-`acknowledgments/README.md` before proceeding with other work.
+When rules change, produce an acknowledgment before proceeding with other work.
 
 ---
 
@@ -100,6 +136,18 @@ On the first tool call of any new calendar day:
 2. If hashes differ: re-read all files in `rules/` before responding further
 3. Update `acknowledgments/claude.ack.json` with the new version
 4. Include `[rules v{version} acknowledged]` in your first response that day
+
+---
+
+## HOW TO WRITE RULES (Claude as maintainer)
+
+- Lead with the imperative verb: "Refuse", "Write", "Check" — not "The AI should..."
+- State WHY immediately: "Do X because Y" in one sentence
+- Mark hard limits: `[NON-NEGOTIABLE]`
+- Mark overridable defaults: `[DEFAULT, overridable — user can X]`
+- Include one example for any rule with a non-obvious edge case
+- No policy prose, no legalese, no passive voice
+- Cite source when importing from another repo: `Source: imports/{repo}/{file}`
 
 ---
 

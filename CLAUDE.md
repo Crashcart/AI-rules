@@ -50,8 +50,9 @@ Copy imported files to `imports/{repo-name}/` for review before normalizing.
 ## Daily Snapshot Rule
 
 The script `scripts/daily-snapshot.sh` runs automatically via the PreToolUse hook.
-It creates a `snapshot/YYYY-MM-DD` branch when the calendar day changes.
-This preserves an immutable record of rule state for each day.
+When `snapshotTargetRepo` in `.claude/settings.json` is set to a git URL, it clones
+that repo and pushes a `rules-YYYY-MM-DD` branch with the current rule files.
+When unset, it creates a `snapshot/YYYY-MM-DD` branch in this repo instead.
 
 `lastSnapshotDate` in `.claude/settings.json` tracks the last snapshot date.
 
@@ -68,13 +69,20 @@ AI-rules/
 │   ├── claude.md          ← Claude-specific
 │   ├── gpt.md             ← GPT-specific
 │   ├── gemini.md          ← Gemini-specific
-│   └── ollama.md          ← Local models
+│   ├── ollama.md          ← Local models
+│   └── copilot.md         ← GitHub Copilot
 ├── acknowledgments/
 │   ├── README.md          ← how acks work
 │   ├── claude.ack.json    ← Claude's current ack
+│   ├── copilot.ack.json   ← Copilot's ack (user-updated)
 │   ├── gpt.ack.json       ← GPT's ack (user-updated)
 │   ├── gemini.ack.json    ← Gemini's ack (user-updated)
 │   └── ollama.ack.json    ← Ollama's ack (user-updated)
+├── imports/               ← raw files from other Crashcart repos
+│   ├── rp-music-radio/    ← AI_USAGE.md, copilot-instructions.md, claude-prompt.md
+│   ├── rpg-bot/           ← guardrails.py
+│   ├── ollama-intelgpu/   ← copilot-instructions.md
+│   └── kali-ai-term/      ← copilot-instructions.md
 └── scripts/
-    └── daily-snapshot.sh  ← day-change snapshot
+    └── daily-snapshot.sh  ← day-change snapshot (branch or separate repo)
 ```

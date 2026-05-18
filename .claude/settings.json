@@ -1,4 +1,7 @@
 {
+  "env": {
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50"
+  },
   "hooks": {
     "PreToolUse": [
       {
@@ -10,10 +13,22 @@
           }
         ]
       }
+    ],
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=$(jq -r '.tool_input.file_path // empty' 2>/dev/null); [ -z \"$f\" ] && exit 0; case \"$f\" in *.ts|*.tsx|*.json) prettier --write \"$f\" 2>/dev/null && echo \"✓ formatted: $(basename $f)\";; *.py) black \"$f\" 2>/dev/null && echo \"✓ formatted: $(basename $f)\";; esac || true",
+            "statusMessage": "Auto-formatting..."
+          }
+        ]
+      }
     ]
   },
   "lastSnapshotDate": "2026-05-18",
-  "snapshotRepo": "AI-rules",
+  "snapshotTargetRepo": "",
   "snapshotBranch": "snapshot",
-  "rulesVersion": "1.0.0"
+  "rulesVersion": "1.1.0"
 }
