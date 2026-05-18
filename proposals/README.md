@@ -38,6 +38,43 @@ Every open proposal gets a decision — none are silently ignored.
 
 ---
 
+## Timing
+
+Claude reviews open proposals at the **start of the session in which they were committed** — not immediately on submission. If a proposal is committed to a branch that isn't the active session branch, it will be reviewed when that branch becomes active.
+
+---
+
+## Cross-AI Conflicts
+
+If two AIs submit proposals that contradict each other (e.g., GPT proposes adding a rule, Gemini proposes removing the same rule):
+
+1. Claude reads both proposals
+2. Evaluates which position is better supported by the rule's intent
+3. Implements the stronger proposal; archives both with a note explaining the decision
+4. The rejected proposal's archive entry explains why the other was chosen
+
+If the conflict is genuinely irresolvable: both are deferred with a note and the user is asked to decide via `AskUserQuestion`.
+
+---
+
+## Moving to Archive
+
+"Move to archive" means `git mv`, not copy-paste:
+
+```bash
+git mv proposals/{ai}/YYYY-MM-DD-{topic}.md proposals/archive/{ai}/YYYY-MM-DD-{topic}.md
+```
+
+The `proposals/archive/` directory was pre-created with a `.gitkeep`. First-time archive for a new AI creates the `archive/{ai}/` subdirectory via the `git mv` target path.
+
+---
+
+## Examples
+
+See [`proposals/examples/`](examples/) for a complete approved proposal and a complete rejected proposal, each showing the full format and outcome status line.
+
+---
+
 ## Proposal Types
 
 | Type | When to use |

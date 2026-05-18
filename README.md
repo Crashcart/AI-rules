@@ -5,7 +5,17 @@
 Versioned behavioral rules for AI systems — written in each AI's native instruction grammar.
 Not policy documents. Not aspirational guidelines. Direct imperatives each system actually processes.
 
-**Current version:** `1.2.0` · [Changelog](CHANGELOG.md) · [version.json](version.json)
+**Current version:** `1.3.0` · [Changelog](CHANGELOG.md) · [version.json](version.json)
+
+---
+
+## Why This Exists
+
+AIs behave inconsistently across repos when they have no explicit contract. Without versioned rules,
+token efficiency varies by whim, code style drifts, and there's no way to detect when an AI has
+silently changed behavior. This repo provides a versioned, auditable behavioral contract each AI
+can explicitly acknowledge — and a mechanism for AIs to propose rule improvements when they notice
+drift. See [`notes/decisions/001-why-this-repo.md`](notes/decisions/001-why-this-repo.md).
 
 ---
 
@@ -43,7 +53,7 @@ Each AI records when it has ingested the current rules. An acknowledgment is a r
 
 | AI | Version | Status | Last Acknowledged |
 |----|---------|--------|-------------------|
-| Claude | 1.2.0 | ✅ Acknowledged | 2026-05-18 |
+| Claude | 1.3.0 | ✅ Acknowledged | 2026-05-18 |
 | Copilot | — | ⏳ Pending | — |
 | GPT | — | ⏳ Pending | — |
 | Gemini | — | ⏳ Pending | — |
@@ -92,10 +102,13 @@ All imported patterns are cited in the rule files that use them. See [`imports/R
 ```
 rules/           — rule files per AI system + universal
 acknowledgments/ — per-AI acknowledgment records
+proposals/       — open proposals from AIs; archive/ for closed
+notes/           — decisions (ADRs), session notes, cross-AI context
 imports/         — raw source files from other repos (read-only reference)
 scripts/         — automation (daily snapshot)
 .claude/         — Claude Code hooks and settings
 version.json     — current version + SHA256 of all rule files
 CHANGELOG.md     — full version history
+MIGRATION.md     — per-version behavioral change guide for AIs
 CLAUDE.md        — Claude Code integration instructions
 ```

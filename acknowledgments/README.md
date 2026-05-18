@@ -55,6 +55,22 @@ When `version.json` changes:
 
 ---
 
+## Re-Acknowledgment for Non-Claude AIs
+
+GPT, Gemini, Copilot, and Ollama do not have automated hooks. They only re-acknowledge when the user provides them with the updated rule files and asks them to.
+
+Steps:
+1. Give the AI `rules/{ai}.md` and `rules/universal.md`
+2. Ask it to produce the acknowledgment JSON for `acknowledgments/{ai}.ack.json`
+3. Ask it to perform self-assessment per Rule 12 and produce any proposal blocks
+4. Commit the ack JSON and any proposals to the repo
+
+This is intentional — the user controls when other AIs re-acknowledge, not an automated system.
+
+See [`notes/context/ai-capabilities.md`](../notes/context/ai-capabilities.md) for the full capability matrix showing what each AI can and cannot do automatically relative to these rules.
+
+---
+
 ## Conflict Reporting
 
 If a rule conflicts with an AI's trained safety behaviors or provider policies,

@@ -4,7 +4,39 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.3.0] 2026-05-18
+
+**Rationale**: The repo had extensive rule content but no documented rationale, no cross-AI context for AIs reading cold, no migration guide, and an inconsistent SHA256 (computed in non-alphabetical file order). v1.3.0 fills those gaps without changing any rule behavior.
+
+### Added
+- `notes/` — three-layer documentation system:
+  - `notes/decisions/` — five Architecture Decision Records (001–005) explaining why the system works the way it does
+  - `notes/sessions/README.md` — format and retention policy for Claude's cross-session working notes
+  - `notes/context/` — background for any AI reading cold: Crashcart overview, AI capability matrix, troubleshooting guide
+- `MIGRATION.md` — per-version behavioral change guide so AIs know exactly what changed between versions
+- `proposals/examples/` — approved and rejected example proposals with full format and outcome status
+- `proposals/archive/.gitkeep` — pre-created archive directory so `git mv` works on first real proposal
+
+### Updated
+- `README.md` — added "Why This Exists" section; added `notes/`, `MIGRATION.md`, `proposals/` to repo layout
+- `proposals/README.md` — added Timing, Cross-AI Conflicts, Moving to Archive, and Examples sections
+- `acknowledgments/README.md` — added re-acknowledgment procedure for non-Claude AIs; linked to capability matrix
+- `CHANGELOG.md` — added rationale lines to all prior version entries
+- `version.json` — bumped to 1.3.0; corrected SHA256 to canonical alphabetical file order
+- `acknowledgments/claude.ack.json` — updated to v1.3.0
+
+### Fixed
+- SHA256 in `version.json` and `claude.ack.json` was computed using non-alphabetical file order; corrected to `cat rules/*.md | sha256sum` (alphabetical). Rule content unchanged.
+
+### Acknowledgments Required
+- Claude: acknowledged v1.3.0 (claude-sonnet-4-6, 2026-05-18)
+- All other AIs: re-acknowledge with new SHA256 (`c6af1b9d46ed0906c20aa87fc46fe34a2813d26992d498607175ec6db8b51021`)
+
+---
+
 ## [1.2.0] 2026-05-18
+
+**Rationale**: The system was static and top-down — other AIs could only receive rules, not propose improvements. v1.2.0 adds a feedback loop (Rule 12 self-assessment) so every AI can flag duplicates, conflicts, and gaps in its own rule file. Precedence clarified so there's no ambiguity when AI-specific and universal rules disagree.
 
 ### Added
 - `rules/universal.md` — **Rule 12: Self-Assessment Protocol**: all AIs must evaluate their own
@@ -25,6 +57,8 @@ Newest entries first. Format: `[VERSION] DATE — description`
 ---
 
 ## [1.1.0] 2026-05-18
+
+**Rationale**: Four other Crashcart repos already had working AI rules in ad-hoc formats (copilot-instructions.md, guardrails.py, system prompts). v1.1.0 imports those proven patterns into a single normalized set rather than letting them drift independently. Copilot added as a first-class AI with its own rule file.
 
 ### Added
 - `rules/copilot.md` — GitHub Copilot rules (all modes: chat, agent, inline, PR review);
@@ -62,6 +96,8 @@ Newest entries first. Format: `[VERSION] DATE — description`
 ---
 
 ## [1.0.0] 2026-05-18
+
+**Rationale**: No explicit behavioral contract existed across Crashcart repos — each AI operated on implicit expectations that varied by project and model. v1.0.0 establishes a baseline: versioned, per-AI rules written in each AI's native instruction grammar, with a SHA256-verified acknowledgment system so drift can be detected.
 
 ### Added
 - `rules/universal.md` — core rules for all AI systems: token efficiency, quality
