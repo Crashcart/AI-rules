@@ -101,9 +101,11 @@ All imported patterns are cited in the rule files that use them. See [`imports/R
 
 ```
 rules/           — rule files per AI system + universal
+agents/          — role profiles + circular hand-off workflow
 acknowledgments/ — per-AI acknowledgment records
 proposals/       — open proposals from AIs; archive/ for closed
 notes/           — decisions (ADRs), session notes, cross-AI context
+templates/       — starter files for new Crashcart repos (base + language overlays)
 imports/         — raw source files from other repos (read-only reference)
 scripts/         — automation (daily snapshot)
 .claude/         — Claude Code hooks and settings

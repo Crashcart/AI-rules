@@ -1,0 +1,114 @@
+name: Validate AI-Rules
+
+on:
+  push:
+    branches: [main, dev, alpha, beta]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate rules integrity
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install dependencies
+        run: sudo apt-get install -y jq
+
+      - name: Validate JSON files
+        run: |
+          echo "Checking JSON files..."
+          for f in version.json acknowledgments/*.ack.json .claude/settings.json; do
+            echo "  $f"
+            jq . "$f" > /dev/null
+          done
+          echo "All JSON files valid."
+
+      - name: Check SHA256 matches version.json
+        run: |
+          echo "Recomputing SHA256 of rules/*.md..."
+          COMPUTED=$(cat rules/*.md | sha256sum | awk '{print $1}')
+          STORED=$(jq -r '.rules_sha256' version.json)
+          echo "  Computed: $COMPUTED"
+          echo "  Stored:   $STORED"
+          if [ "$COMPUTED" != "$STORED" ]; then
+            echo "ERROR: SHA256 mismatch — rules were changed without updating version.json"
+            exit 1
+          fi
+          echo "SHA256 matches."
+
+      - name: Check claude.ack.json version matches version.json
+        run: |
+          RULES_VER=$(jq -r '.version' version.json)
+          ACK_VER=$(jq -r '.version' acknowledgments/claude.ack.json)
+          ACK_HASH=$(jq -r '.rules_sha256' acknowledgments/claude.ack.json)
+          STORED_HASH=$(jq -r '.rules_sha256' version.json)
+          echo "  version.json version:    $RULES_VER"
+          echo "  claude.ack.json version: $ACK_VER"
+          if [ "$RULES_VER" != "$ACK_VER" ]; then
+            echo "ERROR: claude.ack.json version ($ACK_VER) does not match version.json ($RULES_VER)"
+            exit 1
+          fi
+          if [ "$STORED_HASH" != "$ACK_HASH" ]; then
+            echo "ERROR: claude.ack.json SHA256 does not match version.json"
+            exit 1
+          fi
+          echo "Acknowledgment version and hash match."
+
+      - name: Check all required agent profiles exist
+        run: |
+          echo "Checking required agent profiles..."
+          REQUIRED=(
+            agents/README.md
+            agents/product-manager.md
+            agents/scrum-master.md
+            agents/ux-designer.md
+            agents/ui-designer.md
+            agents/tech-lead.md
+            agents/backend-developer.md
+            agents/frontend-developer.md
+            agents/fullstack-developer.md
+            agents/mobile-developer-ios.md
+            agents/mobile-developer-android.md
+            agents/qa-engineer.md
+            agents/security-engineer.md
+            agents/devops-engineer.md
+            agents/sre.md
+            agents/data-engineer.md
+            agents/ml-engineer.md
+            agents/dba.md
+            agents/technical-writer.md
+            agents/cloud-engineer.md
+            agents/claude/README.md
+            agents/gpt/README.md
+            agents/gemini/README.md
+            agents/copilot/README.md
+            agents/ollama/README.md
+          )
+          MISSING=0
+          for f in "${REQUIRED[@]}"; do
+            if [ ! -f "$f" ]; then
+              echo "  MISSING: $f"
+              MISSING=1
+            fi
+          done
+          if [ "$MISSING" -eq 1 ]; then
+            echo "ERROR: one or more required agent profile files are missing"
+            exit 1
+          fi
+          echo "All required agent profiles present."
+
+      - name: Validate shell script syntax
+        run: |
+          echo "Checking scripts/daily-snapshot.sh..."
+          bash -n scripts/daily-snapshot.sh
+          echo "Shell syntax OK."
+
+      - name: Check templates setup.sh syntax
+        run: |
+          echo "Checking templates/setup.sh..."
+          bash -n templates/setup.sh
+          echo "Shell syntax OK."

@@ -4,6 +4,33 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.4.0] 2026-05-18
+
+**Rationale**: The repo had roles and rules but no way for multiple AI agents to collaborate on a project in a consistent, non-overlapping way. v1.4.0 adds the circular hand-off workflow as a universal rule and provides 19 fully-defined role profiles so any AI can be assigned a specific position in the development loop.
+
+### Added
+- `rules/universal.md` — Rule 13: Agent Circular Hand-off Workflow (PM → UX → UI → Tech Lead → Backend/Frontend/Mobile → QA → Security → DevOps → SRE → PM)
+- `agents/` — 19 role profiles with invented personas, specialties, tools, and hand-off formats:
+  - Core loop: product-manager, ux-designer, ui-designer, tech-lead, backend-developer, frontend-developer, fullstack-developer, qa-engineer, security-engineer, devops-engineer, sre
+  - Mobile variants: mobile-developer-ios, mobile-developer-android
+  - Specialists: data-engineer, ml-engineer, dba, technical-writer, cloud-engineer
+  - Facilitator: scrum-master
+- `agents/README.md` — circular workflow diagram, role index table, per-AI integration guide index
+- `agents/claude/README.md` — how Claude Code uses profiles (file tools, multi-session)
+- `agents/gpt/README.md` — system message injection, manual hand-off workflow
+- `agents/gemini/README.md` — role-instruction format, 1M context window usage
+- `agents/copilot/README.md` — copilot-instructions.md injection, file-level comments
+- `agents/ollama/README.md` — Modelfile SYSTEM block, model recommendations per role
+
+### Updated
+- `rules/universal.md` — Rule 13 appended (rule content changed → SHA256 updated)
+- `CLAUDE.md` — repo structure map updated to include agents/, templates/, notes/, proposals/, MIGRATION.md
+- `README.md` — repository layout updated to include agents/ and templates/ rows
+- `version.json` — bumped to 1.4.0, new SHA256
+- `acknowledgments/claude.ack.json` — updated to v1.4.0
+
+---
+
 ## [1.3.0] 2026-05-18
 
 **Rationale**: The repo had extensive rule content but no documented rationale, no cross-AI context for AIs reading cold, no migration guide, and an inconsistent SHA256 (computed in non-alphabetical file order). v1.3.0 fills those gaps without changing any rule behavior.

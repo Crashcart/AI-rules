@@ -69,6 +69,7 @@ When unset, it creates a `snapshot/YYYY-MM-DD` branch in this repo instead.
 AI-rules/
 ├── CLAUDE.md              ← you are here
 ├── CHANGELOG.md           ← rule change history
+├── MIGRATION.md           ← per-version behavioral change guide
 ├── version.json           ← current version + hash
 ├── README.md              ← user-facing overview
 ├── rules/
@@ -78,6 +79,9 @@ AI-rules/
 │   ├── gemini.md          ← Gemini-specific
 │   ├── ollama.md          ← Local models
 │   └── copilot.md         ← GitHub Copilot
+├── agents/
+│   ├── README.md          ← circular hand-off workflow + role index
+│   └── *.md               ← one file per role (19 profiles)
 ├── acknowledgments/
 │   ├── README.md          ← how acks work
 │   ├── claude.ack.json    ← Claude's current ack
@@ -85,6 +89,22 @@ AI-rules/
 │   ├── gpt.ack.json       ← GPT's ack (user-updated)
 │   ├── gemini.ack.json    ← Gemini's ack (user-updated)
 │   └── ollama.ack.json    ← Ollama's ack (user-updated)
+├── proposals/
+│   ├── README.md          ← proposal process
+│   ├── template.md        ← standard format
+│   ├── examples/          ← approved + rejected samples
+│   └── archive/           ← closed proposals
+├── notes/
+│   ├── decisions/         ← numbered ADRs
+│   ├── sessions/          ← cross-session working notes
+│   └── context/           ← background for any AI reading cold
+├── templates/
+│   ├── README.md          ← which template to use + how to apply
+│   ├── setup.sh           ← one-command template application
+│   ├── base/              ← CLAUDE.md + .claude/ + .github/ for every repo
+│   ├── typescript/        ← TS-specific overlays
+│   ├── python/            ← Python-specific overlays
+│   └── shell/             ← Shell/Docker-specific overlays
 ├── imports/               ← raw files from other Crashcart repos
 │   ├── rp-music-radio/    ← AI_USAGE.md, copilot-instructions.md, claude-prompt.md
 │   ├── rpg-bot/           ← guardrails.py
