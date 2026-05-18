@@ -13,8 +13,9 @@ compliance. Compliance is measured by behavior.
 | File | Description |
 |------|-------------|
 | `claude.ack.json` | Claude's last-seen version and acknowledgment timestamp |
-| `gpt.ack.json` | GPT's acknowledgment record |
-| `gemini.ack.json` | Gemini's acknowledgment record |
+| `copilot.ack.json` | GitHub Copilot's acknowledgment record (user-updated) |
+| `gpt.ack.json` | GPT's acknowledgment record (user-updated) |
+| `gemini.ack.json` | Gemini's acknowledgment record (user-updated) |
 | `ollama.ack.json` | Local model acknowledgment record (user-updated) |
 
 ---

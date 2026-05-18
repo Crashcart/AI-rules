@@ -1,81 +1,101 @@
 # AI-rules
 
-Versioned behavioral rules for AI systems. Written in AI-native language —
-direct imperatives, not policy documents.
-
-Current version: **1.1.0**
-
----
-
-## Core Rule
-
 > **Minimum tokens. Maximum value. Every time.**
->
-> The smallest response that fully solves the problem is the correct response.
-> Code should be shippable. Output should be something you'd show off.
+
+Versioned behavioral rules for AI systems — written in each AI's native instruction grammar.
+Not policy documents. Not aspirational guidelines. Direct imperatives each system actually processes.
+
+**Current version:** `1.1.0` · [Changelog](CHANGELOG.md) · [version.json](version.json)
 
 ---
 
-## Structure
+## Rule Files
 
-```
-rules/universal.md    — applies to all AI systems
-rules/claude.md       — Claude-specific (written by Claude)
-rules/gpt.md          — GPT / OpenAI
-rules/gemini.md       — Gemini / Google
-rules/ollama.md       — Local models via Ollama
-rules/copilot.md      — GitHub Copilot (chat, agent, inline, PR review)
-```
+| AI System | File | Format |
+|-----------|------|--------|
+| All systems | [`rules/universal.md`](rules/universal.md) | Direct imperatives |
+| Claude | [`rules/claude.md`](rules/claude.md) | Claude instruction grammar |
+| GPT / OpenAI | [`rules/gpt.md`](rules/gpt.md) | System-message grammar |
+| Gemini | [`rules/gemini.md`](rules/gemini.md) | Role-instruction grammar |
+| Ollama / Local | [`rules/ollama.md`](rules/ollama.md) | Modelfile SYSTEM block |
+| GitHub Copilot | [`rules/copilot.md`](rules/copilot.md) | `.github/copilot-instructions.md` |
 
-`version.json` holds the current version and a SHA256 of all rule files.
-When the hash changes, all AI systems must re-read rules and update their
-acknowledgment in `acknowledgments/`.
+---
+
+## Quick Start
+
+**Claude (Code):** Rules load automatically via hooks in `.claude/settings.json`. Point `CLAUDE.md` at this repo.
+
+**GPT:** Paste relevant sections of `rules/gpt.md` into your system message.
+
+**Gemini:** Include sections of `rules/gemini.md` in your system instruction.
+
+**Copilot:** Copy `rules/copilot.md` contents to `.github/copilot-instructions.md` in your repo.
+
+**Ollama:** Copy the `MODELFILE SYSTEM BLOCK` section from `rules/ollama.md` into your Modelfile.
+Set the required performance env vars from the performance settings table before deploying.
 
 ---
 
 ## Acknowledgment Status
 
-| AI | Version | Status |
-|----|---------|--------|
-| Claude | 1.1.0 | Acknowledged 2026-05-18 |
-| Copilot | — | Pending |
-| GPT | — | Pending |
-| Gemini | — | Pending |
-| Ollama | — | Pending |
+Each AI records when it has ingested the current rules. An acknowledgment is a receipt — compliance is measured by behavior.
 
-To acknowledge: provide the AI with `rules/{ai}.md` and `rules/universal.md`,
-then ask it to produce the acknowledgment JSON for `acknowledgments/{ai}.ack.json`.
+| AI | Version | Status | Last Acknowledged |
+|----|---------|--------|-------------------|
+| Claude | 1.1.0 | ✅ Acknowledged | 2026-05-18 |
+| Copilot | — | ⏳ Pending | — |
+| GPT | — | ⏳ Pending | — |
+| Gemini | — | ⏳ Pending | — |
+| Ollama | — | ⏳ Pending | — |
+
+To trigger acknowledgment: give the AI its `rules/{ai}.md` + `rules/universal.md`, then ask it to produce the acknowledgment JSON for `acknowledgments/{ai}.ack.json`. See [`acknowledgments/README.md`](acknowledgments/README.md).
 
 ---
 
 ## Daily Snapshots
 
-Each day, `scripts/daily-snapshot.sh` archives the current rule state.
-Two modes — configured via `snapshotTargetRepo` in `.claude/settings.json`:
+`scripts/daily-snapshot.sh` archives the rule state whenever the calendar day changes.
+Runs automatically via the Claude Code PreToolUse hook — zero maintenance required.
 
-- **Separate repo** (set `snapshotTargetRepo` to a git URL): pushes a
-  `rules-YYYY-MM-DD` branch to a dedicated archive repo
-- **Branch mode** (default, `snapshotTargetRepo` empty): creates a
-  `snapshot/YYYY-MM-DD` branch in this repo
+| Mode | Config | Result |
+|------|--------|--------|
+| Branch mode (default) | `snapshotTargetRepo` empty | Creates `snapshot/YYYY-MM-DD` in this repo |
+| Separate repo mode | `snapshotTargetRepo` set to a git URL | Pushes `rules-YYYY-MM-DD` branch to archive repo |
 
-Runs automatically via the Claude Code PreToolUse hook. Creates an immutable audit trail.
-
----
-
-## Importing Rules from Other Repos
-
-See `CLAUDE.md` for the list of Crashcart repos to scan for importable patterns.
-Copy files to `imports/{repo-name}/` for review before normalizing into `rules/`.
+Both modes produce an immutable, dated audit trail.
 
 ---
 
-## Making Changes
+## Updating Rules
 
-1. Edit the relevant file(s) in `rules/`
+1. Edit the relevant file in `rules/`
 2. Recompute SHA256: `cat rules/*.md | sha256sum`
-3. Bump `version.json` (patch / minor / major per semver)
+3. Bump `version.json` (patch · minor · major per semver)
 4. Add entry to `CHANGELOG.md`
 5. Update `acknowledgments/claude.ack.json`
 6. Commit and push
 
 Claude Code handles steps 2–5 automatically when asked to update rules.
+
+---
+
+## Importing Patterns
+
+`imports/` holds raw source files from other Crashcart repos reviewed for pattern extraction.
+All imported patterns are cited in the rule files that use them. See [`imports/README.md`](imports/README.md).
+
+---
+
+## Repository Layout
+
+```
+rules/           — rule files per AI system + universal
+acknowledgments/ — per-AI acknowledgment records
+imports/         — raw source files from other repos (read-only reference)
+scripts/         — automation (daily snapshot)
+.claude/         — Claude Code hooks and settings
+version.json     — current version + SHA256 of all rule files
+CHANGELOG.md     — full version history
+CLAUDE.md        — Claude Code integration instructions
+```
