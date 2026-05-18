@@ -57,6 +57,7 @@ Work flows in a closed loop. Each agent passes a written summary to the next. Th
 | DBA | [dba.md](dba.md) | Reviews Backend + Data Eng | Schema approval, query review |
 | Cloud Engineer | [cloud-engineer.md](cloud-engineer.md) | Works with DevOps | IaC PR, cost estimate |
 | Technical Writer | [technical-writer.md](technical-writer.md) | After feature ships | Updated docs, changelog entry |
+| Project Manager | [project-manager.md](project-manager.md) | Planning layer above loop (project start + scope changes) | Project plan: scope, WBS, milestones, dependency map, risk register, resource allocation, definition of done [NON-NEGOTIABLE before any work starts] |
 
 ---
 

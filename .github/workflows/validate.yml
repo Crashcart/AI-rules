@@ -82,6 +82,7 @@ jobs:
             agents/dba.md
             agents/technical-writer.md
             agents/cloud-engineer.md
+            agents/project-manager.md
             agents/claude/README.md
             agents/gpt/README.md
             agents/gemini/README.md

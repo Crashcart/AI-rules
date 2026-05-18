@@ -16,6 +16,7 @@ Newest entries first. Format: `[VERSION] DATE — description`
   - Specialists: data-engineer, ml-engineer, dba, technical-writer, cloud-engineer
   - Facilitator: scrum-master
 - `agents/README.md` — circular workflow diagram, role index table, per-AI integration guide index
+- `agents/project-manager.md` — Simone Adler, [NON-NEGOTIABLE] seven-artifact planning rule (scope, WBS, milestones, dependency map, risk register, resource allocation, definition of done) required before any work begins
 - `agents/claude/README.md` — how Claude Code uses profiles (file tools, multi-session)
 - `agents/gpt/README.md` — system message injection, manual hand-off workflow
 - `agents/gemini/README.md` — role-instruction format, 1M context window usage
