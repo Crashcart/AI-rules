@@ -21,7 +21,7 @@ When the user asks to create or change a rule:
 3. Bump `version.json` (patch for wording, minor for new rule, major for schema change)
 4. Update `CHANGELOG.md` with a new entry at the top
 5. Update `acknowledgments/claude.ack.json`
-6. Commit to `claude/add-user-credits-S3Fd4`, push
+6. Commit and push to `main`
 
 ## How to Write Rules (AI-Native Language)
 
@@ -46,6 +46,13 @@ needs to grant GitHub MCP access to read them, or provide files manually:
 | `Crashcart/Claud` | Existing Claude project rules |
 
 Copy imported files to `imports/{repo-name}/` for review before normalizing.
+
+## Branching Policy
+
+- **This repo (`AI-rules`)**: push directly to `main`
+- **All other Crashcart repos**: push to a `dev` or feature branch — never directly to `main`
+
+[NON-NEGOTIABLE]
 
 ## Daily Snapshot Rule
 
