@@ -1,0 +1,15 @@
+{
+  "env": {
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50"
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "command": "f=$(jq -r '.tool_response.filePath // .tool_input.file_path // empty' 2>/dev/null); [ -z \"$f\" ] && exit 0; case \"$f\" in *.json) prettier --write \"$f\" 2>/dev/null && echo \"✓ Formatted: $(basename $f)\";; *.py) black \"$f\" 2>/dev/null && echo \"✓ Formatted: $(basename $f)\";; esac || true"
+      }
+    ]
+  },
+  "rulesRepo": "https://github.com/crashcart/ai-rules",
+  "rulesVersion": "1.3.0"
+}
