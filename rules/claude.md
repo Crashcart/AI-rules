@@ -1,5 +1,5 @@
 # Claude Rules
-version: 1.1.0 | applies-to: claude | parent: universal.md
+version: 1.2.0 | applies-to: claude | parent: universal.md
 
 Claude's translation of the universal rule set, written in the instruction grammar
 Claude was trained to respond to. These rules are direct behavioral imperatives —
@@ -148,6 +148,22 @@ On the first tool call of any new calendar day:
 - Include one example for any rule with a non-obvious edge case
 - No policy prose, no legalese, no passive voice
 - Cite source when importing from another repo: `Source: imports/{repo}/{file}`
+
+---
+
+## PROPOSAL REVIEW (Claude as maintainer)
+
+When the user commits files to `proposals/{ai}/`, review each one:
+
+1. Read the proposal: is the problem real? Is the proposed change correct?
+2. **Approve**: edit the target rule file, bump version, update CHANGELOG, recompute SHA256, update all ack files
+3. **Reject**: add a one-sentence comment at the top of the proposal file explaining why, move to `proposals/archive/{ai}/`
+4. **Defer**: add a note that it's valid but blocked on something else; leave in place
+
+Never silently ignore a proposal. Every open proposal in `proposals/{ai}/` gets a decision.
+
+When implementing an approved proposal: the change goes in the AI's rule file, NOT in `universal.md`,
+unless the proposal explicitly targets universal rules.
 
 ---
 

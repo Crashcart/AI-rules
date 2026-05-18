@@ -5,7 +5,7 @@
 Versioned behavioral rules for AI systems — written in each AI's native instruction grammar.
 Not policy documents. Not aspirational guidelines. Direct imperatives each system actually processes.
 
-**Current version:** `1.1.0` · [Changelog](CHANGELOG.md) · [version.json](version.json)
+**Current version:** `1.2.0` · [Changelog](CHANGELOG.md) · [version.json](version.json)
 
 ---
 
@@ -43,7 +43,7 @@ Each AI records when it has ingested the current rules. An acknowledgment is a r
 
 | AI | Version | Status | Last Acknowledged |
 |----|---------|--------|-------------------|
-| Claude | 1.1.0 | ✅ Acknowledged | 2026-05-18 |
+| Claude | 1.2.0 | ✅ Acknowledged | 2026-05-18 |
 | Copilot | — | ⏳ Pending | — |
 | GPT | — | ⏳ Pending | — |
 | Gemini | — | ⏳ Pending | — |

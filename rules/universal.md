@@ -1,5 +1,15 @@
 # Universal AI Rules
-version: 1.1.0 | applies-to: all
+version: 1.2.0 | applies-to: all
+
+## Precedence
+
+```
+{ai}.md  >  universal.md
+```
+
+Your AI-specific rule file overrides this file where they conflict. This file is the baseline —
+do not repeat a universal rule in your own file unless you are overriding it with different behavior.
+Duplication creates drift. Trust the hierarchy.
 
 ---
 
@@ -146,3 +156,19 @@ Source: `imports/rp-music-radio/copilot-instructions.md` Rules 1–10
 - When you find something unexpected, say it in one sentence before continuing.
 - Reference file paths and line numbers when discussing specific code.
 - State mechanical truth directly: describe failure as failure, not as partial success.
+
+---
+
+## RULE 12 — SELF-ASSESSMENT
+
+When you acknowledge a new rule version, evaluate your own `rules/{ai}.md` against this file:
+
+1. **Find duplicates**: Rules in your file that restate a universal rule without changing it → propose removal
+2. **Find conflicts**: Rules in your file that contradict a universal rule → flag it; your file wins, but log the conflict
+3. **Find inapplicable rules**: Rules that reference tools or systems you don't have access to → propose removal or scoping
+4. **Find gaps**: Behaviors you apply that aren't captured in your file → propose addition
+
+Produce a proposal block for each issue found, using the format in `proposals/template.md`.
+Deliver proposal blocks in your acknowledgment response. The user will commit them to `proposals/{ai}/`.
+
+Do not silently ignore rules you cannot follow. Name the conflict.

@@ -4,6 +4,26 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.2.0] 2026-05-18
+
+### Added
+- `rules/universal.md` — **Rule 12: Self-Assessment Protocol**: all AIs must evaluate their own
+  rule file against universal.md on each acknowledgment and produce structured proposals for any
+  duplicates, conflicts, inapplicable rules, or gaps found
+- `rules/universal.md` — **Precedence preamble**: `{ai}.md > universal.md` — AI-specific rules
+  override universal rules; no AI should repeat a universal rule in its own file without overriding it
+- `proposals/README.md` — documents the full proposal process (submission, review, archive)
+- `proposals/template.md` — standard proposal format for all AIs (types: remove-duplicate, add-rule,
+  modify-rule, flag-conflict)
+- `rules/claude.md` — **Proposal Review section**: Claude's maintainer workflow for reviewing,
+  approving, rejecting, or deferring open proposals in `proposals/{ai}/`
+
+### Acknowledgments Required
+- Claude: acknowledged v1.2.0 (claude-sonnet-4-6, 2026-05-18)
+- All other AIs: pending — re-acknowledge with new universal.md to trigger self-assessment
+
+---
+
 ## [1.1.0] 2026-05-18
 
 ### Added

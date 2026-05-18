@@ -1,8 +1,8 @@
 {
-  "version": "1.1.0",
+  "version": "1.2.0",
   "released": "2026-05-18",
-  "rules_sha256": "f62ce9eed68fea9d17998d036f41e7a9d0017bdd768ffd0a29b8c480f4888ee7",
-  "changelog_entry": "Added copilot.md; updated universal, claude, ollama with model selection matrix, anti-sycophancy, performance settings, separate-repo snapshot",
+  "rules_sha256": "a01a59d4def735e77ec318fa11e565ed58270b74692bed4992756ec7a8968a03",
+  "changelog_entry": "Added Rule 12 (self-assessment protocol) to universal.md; added Proposal Review to claude.md; created proposals/ infrastructure",
   "files": [
     "rules/universal.md",
     "rules/claude.md",
