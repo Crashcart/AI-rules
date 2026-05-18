@@ -1,0 +1,19 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Bash",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash scripts/daily-snapshot.sh 2>/dev/null || true"
+          }
+        ]
+      }
+    ]
+  },
+  "lastSnapshotDate": "2026-05-18",
+  "snapshotRepo": "AI-rules",
+  "snapshotBranch": "snapshot",
+  "rulesVersion": "1.0.0"
+}

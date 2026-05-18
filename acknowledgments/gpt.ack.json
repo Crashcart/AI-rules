@@ -1,0 +1,8 @@
+{
+  "ai": "gpt",
+  "version": "pending",
+  "rules_sha256": "pending",
+  "acknowledged_at": null,
+  "acknowledged_by": null,
+  "note": "Update this file by asking GPT-4o to read rules/gpt.md and rules/universal.md, then provide the acknowledgment JSON."
+}

@@ -1,0 +1,13 @@
+{
+  "version": "1.0.0",
+  "released": "2026-05-18",
+  "rules_sha256": "6d16fdc65d628b576746c92dbdea0b72735064d17e3a2ec7894c3160ba5c882a",
+  "changelog_entry": "Initial rule set — universal, claude, gpt, gemini, ollama",
+  "files": [
+    "rules/universal.md",
+    "rules/claude.md",
+    "rules/gpt.md",
+    "rules/gemini.md",
+    "rules/ollama.md"
+  ]
+}

@@ -1,0 +1,8 @@
+{
+  "ai": "gemini",
+  "version": "pending",
+  "rules_sha256": "pending",
+  "acknowledged_at": null,
+  "acknowledged_by": null,
+  "note": "Update this file by asking Gemini to read rules/gemini.md and rules/universal.md, then provide the acknowledgment JSON."
+}
