@@ -4,6 +4,25 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.4.3] 2026-05-19
+
+**Rationale**: The ticket system was open to all AIs as submitters, creating a path for other AIs to flood the queue or influence rules without human oversight. This patch restricts ticket submission to the repo owner and Claude only, adds private repo support to the update-check script so repos can stay private, and documents the auth options in the template.
+
+### Changed
+- `rules/claude-ceo.md` — SESSION-START TICKET PROCESSING: only process tickets where **Opened by** is `user` or `claude`; all others are ignored and flagged [NON-NEGOTIABLE]
+- `rules/universal.md` — RULE 14: added submitter restriction — other AIs must ask user or Claude to open tickets on their behalf
+- `tickets/template.md` — added submitter restriction note to fields block
+- `scripts/check-rules-updates.sh` — auth-aware clone: injects `AI_RULES_TOKEN` PAT into HTTPS URL if set; SSH URLs pass through to machine key; falls back to unauthenticated for public repos
+- `templates/base/.claude/settings.json` — added `AI_RULES_TOKEN: ""` env placeholder
+- `templates/base/CLAUDE.md` — added "Private AI-Rules Repo" section with PAT and SSH setup instructions
+- `version.json` — bumped to 1.4.3, new SHA256
+
+### Added
+- `notes/sessions/2026-05-19-tick-001-api-mesh-plan.md` — Simone's seven-artifact project plan for TICK-001 (Crashcart API mesh)
+- `tickets/TICK-001-cross-project-api-mesh.md` — status updated to in-progress
+
+---
+
 ## [1.4.2] 2026-05-19
 
 **Rationale**: Rule changes were previously tracked through the proposals/ system but had no structured discussion step before implementation. This patch formalizes rule-edit suggestions as tickets (RULE 14) so every AI must open a ticket, Claude discusses the rationale, and no rule is changed unilaterally.

@@ -1,8 +1,8 @@
 {
-  "version": "1.4.2",
+  "version": "1.4.3",
   "released": "2026-05-19",
-  "rules_sha256": "119cd482702c287d07d75d4c3c9302b18c047f778bc84e36c9a2ed2466c81642",
-  "changelog_entry": "RULE 14: rule-edit ticket protocol (all AIs must open tickets before modifying rules); rule-edit ticket processing behavior added to CEO rules; ticket template updated with rule-edit scope and requesting-ai field.",
+  "rules_sha256": "26d8c6fadf1cba3b30cba31724a65b9e7c8fdea1def889c73a77133dafef9b3c",
+  "changelog_entry": "Ticket submitter restriction: only 'user' and 'claude' may open tickets; RULE 14 updated; private repo support in check-rules-updates.sh (AI_RULES_TOKEN PAT or SSH); template settings updated.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

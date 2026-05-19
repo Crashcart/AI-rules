@@ -33,8 +33,15 @@ fi
 WORK_DIR=$(mktemp -d)
 trap 'rm -rf "${WORK_DIR}"' EXIT
 
-# Shallow clone — we only need current state, not history
-git clone --depth 1 --quiet "${AI_RULES_URL}" "${WORK_DIR}" 2>/dev/null || {
+# Build the clone URL — supports public repos, private HTTPS (PAT), and SSH
+CLONE_URL="${AI_RULES_URL}"
+if [[ "${AI_RULES_URL}" == https://* && -n "${AI_RULES_TOKEN:-}" ]]; then
+  # Inject PAT for private HTTPS repos: https://TOKEN@github.com/...
+  CLONE_URL="${AI_RULES_URL/https:\/\//https://${AI_RULES_TOKEN}@}"
+fi
+# SSH URLs (git@github.com:...) pass through unchanged — uses machine SSH key
+
+git clone --depth 1 --quiet "${CLONE_URL}" "${WORK_DIR}" 2>/dev/null || {
   echo "Warning: could not reach ai-rules repo — skipping update check"
   exit 0
 }

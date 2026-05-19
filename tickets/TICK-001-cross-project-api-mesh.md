@@ -5,7 +5,7 @@
 **Date**: 2026-05-19
 **Priority**: high
 **Scope**: other (cross-repo architecture)
-**Status**: open
+**Status**: in-progress
 
 ## Description
 
@@ -41,6 +41,12 @@ agent mixing applies: use existing agent profiles before requesting new hires.
 ## Resolution
 
 _To be filled when closed._
+
+## Progress
+
+2026-05-19 — CEO review: ticket accepted. Simone (PM) assigned to produce seven-artifact project plan.
+Plan in progress at `notes/sessions/2026-05-19-tick-001-api-mesh-plan.md`.
+No implementation until PM plan artifacts are complete and approved by user.
 
 ## Closed
 

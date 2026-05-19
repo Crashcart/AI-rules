@@ -190,4 +190,6 @@ If you want to suggest a change to any rule file, you do not modify the file dir
 
 **Why**: Rule changes affect all AIs and all repos. No AI edits rules unilaterally. Every change goes through the CEO review loop so intent and impact are understood before anything is committed.
 
+Only the repo owner ("user") and Claude may open tickets directly. Other AIs must ask the user or Claude to open a ticket on their behalf — they may not write to `tickets/` themselves.
+
 [NON-NEGOTIABLE — never modify rules/ directly; always open a ticket first]

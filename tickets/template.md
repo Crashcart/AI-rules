@@ -7,6 +7,9 @@
 **Priority**: high | medium | low
 **Scope**: agents/ | rules/ | templates/ | scripts/ | tickets/ | docs | rule-edit | other
 
+> **Submitter restriction**: Only the repo owner ("user") and Claude may submit tickets directly.
+> Other AIs must ask the user or Claude to open a ticket on their behalf.
+
 ## Description
 
 {What needs to happen. One paragraph maximum. If it's longer than a paragraph, it's a proposal, not a ticket.}

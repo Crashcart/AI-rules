@@ -40,6 +40,21 @@ Open a ticket in the ai-rules repo using `tickets/template.md`:
 - Set **Requesting AI** to your ai-id
 - Claude (CEO) will discuss the change with you before implementing anything
 
+## Private AI-Rules Repo
+
+If your ai-rules repo is private, `scripts/check-rules-updates.sh` needs credentials to clone it.
+Two options — set one in `.claude/settings.json` env:
+
+**Option A — GitHub PAT (HTTPS)**
+1. Create a PAT with `repo` (read) scope at GitHub → Settings → Developer settings
+2. Set `AI_RULES_TOKEN` in `.claude/settings.json` env to your PAT
+3. Keep `rulesRepo` as an HTTPS URL (`https://github.com/org/ai-rules`)
+
+**Option B — SSH key**
+1. Ensure the machine has an SSH key registered with GitHub
+2. Set `rulesRepo` to the SSH URL: `git@github.com:org/ai-rules`
+3. Leave `AI_RULES_TOKEN` empty (SSH key is used automatically)
+
 ## Repo Structure
 
 {TODO: paste your directory layout here, e.g.:}
