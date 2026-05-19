@@ -44,9 +44,12 @@ _To be filled when closed._
 
 ## Progress
 
-2026-05-19 — CEO review: ticket accepted. Simone (PM) assigned to produce seven-artifact project plan.
-Plan in progress at `notes/sessions/2026-05-19-tick-001-api-mesh-plan.md`.
-No implementation until PM plan artifacts are complete and approved by user.
+2026-05-19 — CEO review: ticket accepted. Simone (PM) seven-artifact project plan complete.
+  Plan: `notes/sessions/2026-05-19-tick-001-api-mesh-plan.md`
+2026-05-19 — Dana (Tech Lead) ADR complete. Technology evaluated: NATS JetStream (selected),
+  Redis Pub/Sub+Streams (ruled out), MQTT (ruled out), Kafka (ruled out), Consul (ruled out).
+  ADR: `notes/decisions/006-api-mesh-technology-selection.md`
+  Awaiting board approval of technology selection (WBS 1.6) before implementation begins.
 
 ## Closed
 
