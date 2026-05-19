@@ -4,6 +4,16 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.4.4] 2026-05-19
+
+**Rationale**: User directive — every Claude response must open with a one-line overview before any detail. Codified as NON-NEGOTIABLE in claude-behavior.md so it persists across sessions and repos.
+
+### Changed
+- `rules/claude-behavior.md` — RESPONSE FORMAT rule added: one-line overview required at the start of every response
+- `version.json` — bumped to 1.4.4, new SHA256
+
+---
+
 ## [1.4.3] 2026-05-19
 
 **Rationale**: The ticket system was open to all AIs as submitters, creating a path for other AIs to flood the queue or influence rules without human oversight. This patch restricts ticket submission to the repo owner and Claude only, adds private repo support to the update-check script so repos can stay private, and documents the auth options in the template.

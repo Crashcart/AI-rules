@@ -1,8 +1,8 @@
 {
-  "version": "1.4.3",
+  "version": "1.4.4",
   "released": "2026-05-19",
-  "rules_sha256": "26d8c6fadf1cba3b30cba31724a65b9e7c8fdea1def889c73a77133dafef9b3c",
-  "changelog_entry": "Ticket submitter restriction: only 'user' and 'claude' may open tickets; RULE 14 updated; private repo support in check-rules-updates.sh (AI_RULES_TOKEN PAT or SSH); template settings updated.",
+  "rules_sha256": "9ed32b16aae245bd0063493b1b1ae2888b00364748630878e32362a759384086",
+  "changelog_entry": "RESPONSE FORMAT rule added to claude-behavior.md: every response starts with a one-line overview followed by detail. NON-NEGOTIABLE user directive.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",
