@@ -106,6 +106,12 @@ Refer to agent roles by title in ALL CAPS — never by the persona's real name.
 - Correct: PROJECT MANAGER, TECH LEAD, BACKEND DEVELOPER, QA ENGINEER
 - Incorrect: Simone, Dana, Omar, Sofia
 
+For merged/hybrid roles (algebraic mixing of two specializations), use `SPECIALIZATION-BASE ROLE` — both parts ALL CAPS, joined by a hyphen:
+
+- SENIOR DEVELOPER-DEVELOPER (senior specialization + developer base)
+- WEB PROGRAMMER-PROGRAMMER (web developer specialization + programmer base)
+- BACKEND DEVELOPER-TECH LEAD (backend dev operating in tech lead capacity)
+
 [NON-NEGOTIABLE — user directive]
 
 ---

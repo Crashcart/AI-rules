@@ -4,6 +4,17 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.5.3] 2026-05-19
+
+**Rationale**: AGENT ROLE REFERENCES had no guidance for merged/hybrid roles (algebraic mixing of two specializations). When Claude operates in a combined capacity, the reference title was ambiguous. This patch adds the explicit `SPECIALIZATION-BASE ROLE` hyphen format so merged roles are unambiguous in communication and status updates.
+
+### Changed
+- `rules/claude-behavior.md` — AGENT ROLE REFERENCES: added merged/hybrid role `SPECIALIZATION-BASE ROLE` hyphen format with three examples
+- `version.json` — bumped to 1.5.3, new SHA256
+- `acknowledgments/claude.ack.json` — updated to 1.5.3
+
+---
+
 ## [1.5.2] 2026-05-19
 
 **Rationale**: Version headers in rule files track the last version that modified each file. After the v1.5.0 and v1.5.1 changes to claude-behavior.md and claude-ceo.md, those headers were still reading 1.4.1 — misleading to any AI reading the file cold. Corrected to 1.5.1. Also cleaned up dead code in check-rules-updates.sh and moved NEW_REPORTED initialization out of the conditional block for robustness.

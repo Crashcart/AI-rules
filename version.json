@@ -1,8 +1,8 @@
 {
-  "version": "1.5.2",
+  "version": "1.5.3",
   "released": "2026-05-19",
-  "rules_sha256": "c133d6006e259c26c1ced90582025b1c863ebe02c39b08bfa790b4abbbf27018",
-  "changelog_entry": "Rule file version headers corrected to reflect last-modified version.",
+  "rules_sha256": "9f92f697a81b5a0adde157327b213ba145d0369927d9ce77aa1417288534d6f5",
+  "changelog_entry": "Merged/hybrid role hyphen format added to AGENT ROLE REFERENCES.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",
