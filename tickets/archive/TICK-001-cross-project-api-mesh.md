@@ -5,7 +5,7 @@
 **Date**: 2026-05-19
 **Priority**: high
 **Scope**: other (cross-repo architecture)
-**Status**: on-hold
+**Status**: deferred
 
 ## Description
 
@@ -53,4 +53,4 @@ _To be filled when closed._
 
 ## Closed
 
-_To be filled when archived._
+2026-05-19 — Deferred by user. Architecture complete (NATS JetStream selected, project plan written, Docker stack designed). Implementation hidden pending future go signal. All artifacts preserved in `notes/`.
