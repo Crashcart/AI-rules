@@ -113,3 +113,15 @@ jobs:
           echo "Checking templates/setup.sh..."
           bash -n templates/setup.sh
           echo "Shell syntax OK."
+
+      - name: Check rulesVersion in .claude/settings.json matches version.json
+        run: |
+          RULES_VER=$(jq -r '.version' version.json)
+          SETTINGS_VER=$(jq -r '.rulesVersion' .claude/settings.json)
+          echo "  version.json version:               $RULES_VER"
+          echo "  .claude/settings.json rulesVersion: $SETTINGS_VER"
+          if [ "$RULES_VER" != "$SETTINGS_VER" ]; then
+            echo "ERROR: .claude/settings.json rulesVersion ($SETTINGS_VER) does not match version.json ($RULES_VER)"
+            exit 1
+          fi
+          echo "rulesVersion matches."

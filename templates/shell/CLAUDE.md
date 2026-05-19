@@ -10,7 +10,7 @@ This repo follows the Crashcart AI-rules system.
 
 - Rules source: https://github.com/crashcart/ai-rules
 - Governing files: `rules/claude.md` + `rules/universal.md`
-- Current version in force: `1.3.0` — check `acknowledgments/claude.ack.json` in ai-rules for updates
+- Current version in force: `1.4.0` — check `acknowledgments/claude.ack.json` in ai-rules for updates
 
 On session start: if the version in ai-rules has changed since your last session, re-read `rules/claude.md` and `rules/universal.md` before doing anything else.
 

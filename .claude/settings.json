@@ -27,9 +27,9 @@
       }
     ]
   },
-  "lastSnapshotDate": "2026-05-18",
+  "lastSnapshotDate": "2026-05-19",
   "snapshotRepo": "AI-rules",
   "snapshotTargetRepo": "",
   "snapshotBranch": "snapshot",
-  "rulesVersion": "1.2.0"
+  "rulesVersion": "1.4.0"
 }
