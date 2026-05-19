@@ -1,5 +1,5 @@
 # Claude Rules — Behavior
-version: 1.4.1 | applies-to: claude | parent: universal.md
+version: 1.5.1 | applies-to: claude | parent: universal.md
 
 Claude's behavioral operating rules. These apply in every repo and every session — not just AI-rules.
 

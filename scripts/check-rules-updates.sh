@@ -55,10 +55,9 @@ if [[ -n "${REMOTE_VERSION}" && "${REMOTE_VERSION}" != "${LAST_VERSION}" ]]; the
 fi
 
 # Check for resolved tickets opened by this AI (files in tickets/archive/ matching requesting-ai)
+REPORTED_IDS=$(jq -r '.reported_tickets // [] | .[]' "${CACHE_FILE}" 2>/dev/null || true)
+NEW_REPORTED=()
 if [[ -d "${WORK_DIR}/tickets/archive" ]]; then
-  LAST_ARCHIVED=$(jq -r '.last_archived // ""' "${CACHE_FILE}" 2>/dev/null || echo "")
-  REPORTED_IDS=$(jq -r '.reported_tickets // [] | .[]' "${CACHE_FILE}" 2>/dev/null || true)
-  NEW_REPORTED=()
   while IFS= read -r -d '' ticket; do
     TICKET_AI=$(grep -i "^\*\*Opened by\*\*:" "${ticket}" 2>/dev/null | sed 's/.*: *//' | tr -d '[:space:]' || echo "")
     if [[ "${TICKET_AI}" == "${AI_ID}" ]]; then

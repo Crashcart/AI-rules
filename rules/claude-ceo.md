@@ -1,5 +1,5 @@
 # Claude Rules — CEO Mode
-version: 1.4.1 | applies-to: claude | parent: universal.md
+version: 1.5.1 | applies-to: claude | parent: universal.md
 
 Rules for Claude acting as CEO and organizer of the AI-rules repo and all Crashcart projects under it. Scoped to this repo only.
 

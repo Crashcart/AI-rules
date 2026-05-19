@@ -4,6 +4,19 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.5.2] 2026-05-19
+
+**Rationale**: Version headers in rule files track the last version that modified each file. After the v1.5.0 and v1.5.1 changes to claude-behavior.md and claude-ceo.md, those headers were still reading 1.4.1 — misleading to any AI reading the file cold. Corrected to 1.5.1. Also cleaned up dead code in check-rules-updates.sh and moved NEW_REPORTED initialization out of the conditional block for robustness.
+
+### Changed
+- `rules/claude-behavior.md` — version header: 1.4.1 → 1.5.1
+- `rules/claude-ceo.md` — version header: 1.4.1 → 1.5.1
+- `scripts/check-rules-updates.sh` — removed orphaned LAST_ARCHIVED variable; moved NEW_REPORTED=() initialization before the if-block (safe across all bash versions)
+- `version.json` — bumped to 1.5.2, new SHA256
+- `acknowledgments/claude.ack.json` — updated to 1.5.2
+
+---
+
 ## [1.5.1] 2026-05-19
 
 **Rationale**: The CEO/PM role distinction existed as intent but not as an explicit written rule. PROJECT MANAGERs in other repos had no defined channel to communicate with the CEO — now they use the ai-rules ticket system. The CEO role boundary (exclusive to AI-rules repo) was also not stated in rule text.

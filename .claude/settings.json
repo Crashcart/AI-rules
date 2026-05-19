@@ -31,5 +31,5 @@
   "snapshotRepo": "AI-rules",
   "snapshotTargetRepo": "",
   "snapshotBranch": "snapshot",
-  "rulesVersion": "1.5.1"
+  "rulesVersion": "1.5.2"
 }
