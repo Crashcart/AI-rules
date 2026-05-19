@@ -57,20 +57,28 @@ fi
 # Check for resolved tickets opened by this AI (files in tickets/archive/ matching requesting-ai)
 if [[ -d "${WORK_DIR}/tickets/archive" ]]; then
   LAST_ARCHIVED=$(jq -r '.last_archived // ""' "${CACHE_FILE}" 2>/dev/null || echo "")
+  REPORTED_IDS=$(jq -r '.reported_tickets // [] | .[]' "${CACHE_FILE}" 2>/dev/null || true)
+  NEW_REPORTED=()
   while IFS= read -r -d '' ticket; do
-    TICKET_AI=$(grep -i "^\*\*Requesting AI\*\*:" "${ticket}" 2>/dev/null | sed 's/.*: *//' | tr -d '[:space:]' || echo "")
+    TICKET_AI=$(grep -i "^\*\*Opened by\*\*:" "${ticket}" 2>/dev/null | sed 's/.*: *//' | tr -d '[:space:]' || echo "")
     if [[ "${TICKET_AI}" == "${AI_ID}" ]]; then
       TICKET_ID=$(grep -i "^\*\*ID\*\*:" "${ticket}" 2>/dev/null | sed 's/.*: *//' | tr -d '[:space:]' || echo "")
-      RESOLUTION=$(grep -i "^\*\*Resolution\*\*:" "${ticket}" 2>/dev/null | sed 's/\*\*Resolution\*\*: *//' || echo "see ticket")
-      if [[ "${TICKET_ID}" != "${LAST_ARCHIVED}" ]]; then
+      if [[ -n "${TICKET_ID}" ]] && ! echo "${REPORTED_IDS}" | grep -qx "${TICKET_ID}"; then
+        RESOLUTION=$(grep -i "^\*\*Resolution\*\*:" "${ticket}" 2>/dev/null | sed 's/\*\*Resolution\*\*:[[:space:]]*//' || echo "see ticket")
         echo "Ticket ${TICKET_ID} resolved: ${RESOLUTION}"
+        NEW_REPORTED+=("${TICKET_ID}")
       fi
     fi
   done < <(find "${WORK_DIR}/tickets/archive" -name "*.md" -print0 2>/dev/null)
 fi
 
-# Update cache
+# Update cache — persist version and all previously-reported ticket IDs
+ALL_REPORTED=$(jq -r '.reported_tickets // []' "${CACHE_FILE}" 2>/dev/null || echo "[]")
+for id in "${NEW_REPORTED[@]+"${NEW_REPORTED[@]}"}"; do
+  ALL_REPORTED=$(echo "${ALL_REPORTED}" | jq --arg id "${id}" '. + [$id] | unique')
+done
 jq -n \
   --argjson now "${NOW}" \
   --arg version "${REMOTE_VERSION}" \
-  '{"last_check": $now, "last_version": $version}' > "${CACHE_FILE}"
+  --argjson reported "${ALL_REPORTED}" \
+  '{"last_check": $now, "last_version": $version, "reported_tickets": $reported}' > "${CACHE_FILE}"
