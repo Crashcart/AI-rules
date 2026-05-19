@@ -1,14 +1,18 @@
 {
-  "version": "1.2.0",
-  "released": "2026-05-18",
-  "rules_sha256": "a01a59d4def735e77ec318fa11e565ed58270b74692bed4992756ec7a8968a03",
-  "changelog_entry": "Added Rule 12 (self-assessment protocol) to universal.md; added Proposal Review to claude.md; created proposals/ infrastructure",
+  "version": "1.6.0",
+  "released": "2026-05-19",
+  "rules_sha256": "175add9f1a3e5396af9fb5376633cbb56f3de07b44975a6b1258282bc46b7927",
+  "changelog_entry": "ROLE ANNOUNCEMENT rule added to claude-behavior.md — agents now declare which role is performing each task.",
   "files": [
-    "rules/universal.md",
+    "rules/agent-orchestration.md",
+    "rules/claude-behavior.md",
+    "rules/claude-ceo.md",
+    "rules/claude-maintainer.md",
     "rules/claude.md",
-    "rules/gpt.md",
+    "rules/copilot.md",
     "rules/gemini.md",
+    "rules/gpt.md",
     "rules/ollama.md",
-    "rules/copilot.md"
+    "rules/universal.md"
   ]
 }
