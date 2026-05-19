@@ -9,6 +9,19 @@ SETTINGS="${REPO_ROOT}/.claude/settings.json"
 TODAY=$(date +%Y-%m-%d)
 SCRIPTS_DIR="${REPO_ROOT}/scripts"
 
+# Auto-pull from origin/main on every invocation — runs before the day-gate so rules
+# are always current regardless of whether a snapshot is due.
+git -C "${REPO_ROOT}" fetch origin main --quiet 2>/dev/null || true
+BEHIND=$(git -C "${REPO_ROOT}" rev-list HEAD..origin/main --count 2>/dev/null || echo "0")
+if [[ "${BEHIND}" -gt 0 ]]; then
+  echo "Pulling ${BEHIND} new rule commit(s) from origin/main..."
+  if git -C "${REPO_ROOT}" pull origin main --quiet 2>/dev/null; then
+    echo "Rules updated — re-read rules/ before continuing."
+  else
+    echo "Warning: auto-pull failed — run: git pull origin main"
+  fi
+fi
+
 if command -v jq &>/dev/null; then
   LAST=$(jq -r '.lastSnapshotDate // ""' "${SETTINGS}" 2>/dev/null || echo "")
   TARGET_REPO=$(jq -r '.snapshotTargetRepo // ""' "${SETTINGS}" 2>/dev/null || echo "")
@@ -20,13 +33,6 @@ fi
 
 if [[ "${LAST}" == "${TODAY}" ]]; then
   exit 0
-fi
-
-# Notify if origin/main has commits not yet pulled (never auto-pulls)
-git -C "${REPO_ROOT}" fetch origin main --quiet 2>/dev/null || true
-BEHIND=$(git -C "${REPO_ROOT}" rev-list HEAD..origin/main --count 2>/dev/null || echo "0")
-if [[ "${BEHIND}" -gt 0 ]]; then
-  echo "Rules update available: ${BEHIND} new commit(s) on origin/main — run: git pull origin main"
 fi
 
 if [[ -n "${TARGET_REPO}" ]]; then

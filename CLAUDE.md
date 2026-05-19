@@ -7,10 +7,19 @@ and a maintainer of them. Read `rules/claude.md` before working here.
 
 ## Session Start Checklist
 
-1. Check `version.json` → compare `rules_sha256` to `acknowledgments/claude.ack.json`
-2. If hash differs: re-read all files in `rules/` before doing anything else
-3. Update `acknowledgments/claude.ack.json` with the new version + timestamp
-4. The daily snapshot hook runs automatically via `.claude/settings.json`
+1. The PreToolUse hook auto-pulls from `origin/main` on every Bash call — if the hook
+   output says "Rules updated", re-read all files in `rules/` before doing anything else
+2. Check `version.json` → compare `rules_sha256` to `acknowledgments/claude.ack.json`
+3. If hash differs: re-read all files in `rules/` before doing anything else
+4. Update `acknowledgments/claude.ack.json` with the new version + timestamp
+5. Check `tickets/` for open tickets (any `.md` not in `tickets/archive/`) and process them
+
+## Auto-Update Behavior
+
+`scripts/daily-snapshot.sh` runs on every Bash tool call via the PreToolUse hook.
+It fetches `origin/main` and auto-pulls if any new commits are available.
+If it prints "Rules updated", stop and re-read `rules/` — the rules just changed.
+The daily snapshot (branch creation) still only runs once per calendar day.
 
 ## How to Update Rules
 
