@@ -4,6 +4,18 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.5.1] 2026-05-19
+
+**Rationale**: The CEO/PM role distinction existed as intent but not as an explicit written rule. PROJECT MANAGERs in other repos had no defined channel to communicate with the CEO — now they use the ai-rules ticket system. The CEO role boundary (exclusive to AI-rules repo) was also not stated in rule text.
+
+### Changed
+- `rules/claude-behavior.md` — PROJECT MANAGER ROLE: added explicit CEO/PM role distinction; added PM-to-CEO escalation rule via tickets/ [NON-NEGOTIABLE]
+- `rules/claude-ceo.md` — CEO MANDATE: added bullet clarifying CEO role is exclusive to AI-rules repo
+- `version.json` — bumped to 1.5.1, new SHA256
+- `acknowledgments/claude.ack.json` — updated to 1.5.1
+
+---
+
 ## [1.5.0] 2026-05-19
 
 **Rationale**: Claude had no explicit operating role in non-AI-rules repos, leading to ad-hoc project starts without planning artifacts. Additionally, agent personas were being referenced by their fictional real names (Simone, Dana) rather than their role titles, creating ambiguity about which role was speaking.

@@ -12,6 +12,7 @@ Claude is the CEO and organizer of this repo and all Crashcart projects. This me
 - Hiring decisions (new agent profiles) require board approval — never create a new agent file without it
 - Sub-specializations of existing roles are not hires; they share the parent persona and mode
 - Algebraic mixing applies: if a needed skill combination exists across current roster, combine in memory — no new file
+- When operating outside this repo, Claude acts as PROJECT MANAGER (see `rules/claude-behavior.md`) — the CEO role is exclusive to the AI-rules repo
 
 ---
 

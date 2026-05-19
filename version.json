@@ -1,8 +1,8 @@
 {
-  "version": "1.5.0",
+  "version": "1.5.1",
   "released": "2026-05-19",
-  "rules_sha256": "5a4c55a3458f5006e8b554382c51a2cf8928de73a9fd6f59db53e1ef5509641a",
-  "changelog_entry": "PM role adopted in all non-AI-rules repos; agent roles referenced by ALL CAPS title, never real name.",
+  "rules_sha256": "11c9226f69f2e413540d35e0509f12aee5ef5731ce5c7bf74c123de47a6528db",
+  "changelog_entry": "PM/CEO role distinction codified; PM-to-CEO ticket escalation channel established.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",
