@@ -49,7 +49,7 @@ _To be filled when closed._
 2026-05-19 — Dana (Tech Lead) ADR complete. Technology evaluated: NATS JetStream (selected),
   Redis Pub/Sub+Streams (ruled out), MQTT (ruled out), Kafka (ruled out), Consul (ruled out).
   ADR: `notes/decisions/006-api-mesh-technology-selection.md`
-  ADR approved, implementation on hold by user — no coding until further notice.
+  Board approved NATS JetStream (ADR-006) 2026-05-19. Implementation on hold — resume when user says go.
 
 ## Closed
 

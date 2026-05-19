@@ -3,7 +3,7 @@
 **Author**: Dana Kowalski (Tech Lead)
 **Date**: 2026-05-19
 **Ticket**: TICK-001
-**Status**: Proposed — awaiting board approval (WBS 1.6)
+**Status**: Accepted — board approved 2026-05-19
 
 ---
 
