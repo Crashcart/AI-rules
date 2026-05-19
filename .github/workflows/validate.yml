@@ -115,6 +115,10 @@ jobs:
         run: |
           echo "Checking scripts/daily-snapshot.sh..."
           bash -n scripts/daily-snapshot.sh
+          echo "Checking scripts/snapshot-branch.sh..."
+          bash -n scripts/snapshot-branch.sh
+          echo "Checking scripts/snapshot-external.sh..."
+          bash -n scripts/snapshot-external.sh
           echo "Shell syntax OK."
 
       - name: Check templates setup.sh syntax

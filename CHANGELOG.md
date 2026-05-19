@@ -4,6 +4,27 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.4.1] 2026-05-19
+
+**Rationale**: As the repo grew, three files were doing too much: `rules/claude.md` mixed behavioral, maintainer, and CEO operating contexts; `rules/universal.md` bundled orchestration governance with per-AI behavioral rules; `scripts/daily-snapshot.sh` contained two independent code paths behind one conditional. This patch splits each into focused, single-responsibility files and adds the CEO ticket system so other AIs can open work items for Claude to process on session start.
+
+### Added
+- `rules/claude-behavior.md` — behavioral rules extracted from claude.md (all sessions, all repos)
+- `rules/claude-maintainer.md` — maintainer rules extracted from claude.md (AI-rules repo only)
+- `rules/claude-ceo.md` — CEO ticket processing, hiring process, project oversight (AI-rules session start)
+- `rules/agent-orchestration.md` — RULE 13 extracted from universal.md (multi-agent circular hand-off)
+- `scripts/snapshot-branch.sh` — local-branch snapshot mode extracted from daily-snapshot.sh
+- `scripts/snapshot-external.sh` — external-repo snapshot mode extracted from daily-snapshot.sh
+- `tickets/` — CEO ticket system: README, template, archive/ directory
+
+### Changed
+- `rules/claude.md` — converted to routing stub pointing to three sub-files
+- `rules/universal.md` — RULE 13 replaced with one-line reference to agent-orchestration.md
+- `scripts/daily-snapshot.sh` — converted to thin dispatcher (reads config, calls sub-script)
+- `version.json` — bumped to 1.4.1, new SHA256
+
+---
+
 ## [1.4.0] 2026-05-18
 
 **Rationale**: The repo had roles and rules but no way for multiple AI agents to collaborate on a project in a consistent, non-overlapping way. v1.4.0 adds the circular hand-off workflow as a universal rule and provides 19 fully-defined role profiles so any AI can be assigned a specific position in the development loop.
