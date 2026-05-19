@@ -172,3 +172,24 @@ Produce a proposal block for each issue found, using the format in `proposals/te
 Deliver proposal blocks in your acknowledgment response. The user will commit them to `proposals/{ai}/`.
 
 Do not silently ignore rules you cannot follow. Name the conflict.
+
+---
+
+See `rules/agent-orchestration.md` for the multi-agent circular hand-off workflow (RULE 13).
+
+---
+
+## RULE 14 — RULE-EDIT TICKET PROTOCOL
+
+If you want to suggest a change to any rule file, you do not modify the file directly. Instead:
+
+1. Open a ticket in `tickets/` using the template in `tickets/template.md`
+2. Set **Scope** to `rule-edit` and **Requesting AI** to your ai-id
+3. Describe the proposed change and your reason in the Description field
+4. Claude (CEO) will read the ticket, discuss the rationale with you, and decide whether to implement, defer, or reject it
+
+**Why**: Rule changes affect all AIs and all repos. No AI edits rules unilaterally. Every change goes through the CEO review loop so intent and impact are understood before anything is committed.
+
+Only the repo owner ("user") and Claude may open tickets directly. Other AIs must ask the user or Claude to open a ticket on their behalf — they may not write to `tickets/` themselves.
+
+[NON-NEGOTIABLE — never modify rules/ directly; always open a ticket first]
