@@ -1,8 +1,8 @@
 {
-  "version": "1.4.5",
+  "version": "1.5.0",
   "released": "2026-05-19",
-  "rules_sha256": "1b1bd86fe03b088fcb9f4b276cc7febfe38c8841b69117c5760ce12a5a1eda5a",
-  "changelog_entry": "RESPONSE FORMAT rule scoped to AI-rules repo only (claude-maintainer.md); removed from claude-behavior.md (all-repo scope).",
+  "rules_sha256": "5a4c55a3458f5006e8b554382c51a2cf8928de73a9fd6f59db53e1ef5509641a",
+  "changelog_entry": "PM role adopted in all non-AI-rules repos; agent roles referenced by ALL CAPS title, never real name.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

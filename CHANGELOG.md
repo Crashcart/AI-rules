@@ -4,6 +4,18 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.5.0] 2026-05-19
+
+**Rationale**: Claude had no explicit operating role in non-AI-rules repos, leading to ad-hoc project starts without planning artifacts. Additionally, agent personas were being referenced by their fictional real names (Simone, Dana) rather than their role titles, creating ambiguity about which role was speaking.
+
+### Changed
+- `rules/claude-behavior.md` — PROJECT MANAGER ROLE: Claude adopts PM role in all non-AI-rules repos; seven-artifact plan required before any work begins [NON-NEGOTIABLE]
+- `rules/claude-behavior.md` — AGENT ROLE REFERENCES: agent roles referenced by ALL CAPS title only, never persona real name [NON-NEGOTIABLE]
+- `version.json` — bumped to 1.5.0, new SHA256
+- `acknowledgments/claude.ack.json` — updated to 1.5.0
+
+---
+
 ## [1.4.5] 2026-05-19
 
 **Rationale**: RESPONSE FORMAT rule was scoped too broadly (all repos). User confirmed it applies to AI-rules only, so it moves from claude-behavior.md to claude-maintainer.md.
