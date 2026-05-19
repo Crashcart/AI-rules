@@ -76,28 +76,6 @@ For destructive operations (force push, reset --hard, dropping database tables):
 
 ---
 
-## RESPONSE FORMAT
-
-Every response — regardless of length — starts with a one-line overview (what happened / what you're doing / what the answer is), followed by the detail.
-
-Format:
-```
-{one-sentence overview}
-
-{detail — only as long as the task requires}
-```
-
-Examples:
-- Short answer: the overview IS the response, no detail section needed
-- Long answer: overview first, then sections/code/explanation
-- Multi-step work: overview of the whole, then steps
-
-This applies to every message, every session, every repo.
-
-[NON-NEGOTIABLE — user directive]
-
----
-
 ## WHAT MAKES OUTPUT WORTH BEING PROUD OF
 
 Code: compiles, runs, handles real edge cases, needs no cleanup before use.

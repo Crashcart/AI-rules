@@ -70,6 +70,25 @@ On the first tool call of any new calendar day:
 
 ---
 
+## RESPONSE FORMAT (AI-rules repo only)
+
+Every response in this repo starts with a one-line overview, then the detail.
+
+Format:
+```
+{one-sentence overview}
+
+{detail — only as long as the task requires}
+```
+
+- Short answer: the overview IS the response
+- Long answer: overview first, then sections/code/explanation
+- Multi-step work: overview of the whole, then steps
+
+[NON-NEGOTIABLE — user directive]
+
+---
+
 ## PROPOSAL REVIEW
 
 When the user commits files to `proposals/{ai}/`, review each one:

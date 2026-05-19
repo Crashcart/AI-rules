@@ -4,6 +4,17 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.4.5] 2026-05-19
+
+**Rationale**: RESPONSE FORMAT rule was scoped too broadly (all repos). User confirmed it applies to AI-rules only, so it moves from claude-behavior.md to claude-maintainer.md.
+
+### Changed
+- `rules/claude-maintainer.md` — RESPONSE FORMAT rule added (AI-rules repo only)
+- `rules/claude-behavior.md` — RESPONSE FORMAT rule removed (was incorrectly all-repo scope)
+- `version.json` — bumped to 1.4.5, new SHA256
+
+---
+
 ## [1.4.4] 2026-05-19
 
 **Rationale**: User directive — every Claude response must open with a one-line overview before any detail. Codified as NON-NEGOTIABLE in claude-behavior.md so it persists across sessions and repos.
