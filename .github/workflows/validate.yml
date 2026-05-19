@@ -74,11 +74,20 @@ jobs:
             agents/mobile-developer-ios.md
             agents/mobile-developer-android.md
             agents/qa-engineer.md
+            agents/qa-automation.md
+            agents/qa-manual.md
             agents/security-engineer.md
+            agents/security-appsec.md
+            agents/security-infra.md
             agents/devops-engineer.md
+            agents/devops-pipeline.md
+            agents/devops-incident.md
             agents/sre.md
             agents/data-engineer.md
             agents/ml-engineer.md
+            agents/ml-researcher.md
+            agents/ml-ops-engineer.md
+            agents/ai-prompt-engineer.md
             agents/dba.md
             agents/technical-writer.md
             agents/cloud-engineer.md

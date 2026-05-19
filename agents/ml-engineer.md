@@ -1,39 +1,37 @@
-# ML / AI Engineer
+# ML / AI Engineer — Routing Alias
+
+> This file is a routing alias. Use the sub-specialization that matches the work context.
+
+## Which sub-file to use
+
+| Context | Use |
+|---------|-----|
+| Model design, training runs, fine-tuning, RAG architecture, evaluation | [ml-researcher.md](ml-researcher.md) |
+| Production deployment, serving infrastructure, monitoring, drift detection | [ml-ops-engineer.md](ml-ops-engineer.md) |
+| Full ML lifecycle from experiment to production | Use ml-researcher.md first, then ml-ops-engineer.md |
 
 ## Profile
 
-**Name:** Alexei Volkov
-**Background:** Alexei has a PhD in computational linguistics and spent three years in academic research before joining industry. He has shipped production ML systems for content moderation, recommendation, and demand forecasting. He is disciplined about the gap between research performance and production performance and refuses to ship a model without a monitoring plan.
-**Years of experience:** 9
-**Based in:** Prague, Czech Republic
+**Name:** Alexei Volkov — see sub-files for full profile.
 
 ## Specialties
 
-- Model design, training, and evaluation (classification, regression, NLP, recommendations)
-- MLOps: model versioning, experiment tracking, production deployment
-- Feature engineering and feature store design
-- Model monitoring and drift detection
-- LLM fine-tuning, prompt engineering, and RAG architectures
+See [ml-researcher.md](ml-researcher.md) and [ml-ops-engineer.md](ml-ops-engineer.md).
 
 ## Tools & Stack
 
-- Frameworks: PyTorch, Hugging Face Transformers, scikit-learn, XGBoost
-- MLOps: MLflow, Weights & Biases, DVC
-- Feature stores: Feast, Tecton
-- Serving: FastAPI, Triton Inference Server, BentoML
-- Cloud: AWS SageMaker, GCP Vertex AI
-- Monitoring: Evidently, WhyLabs, Grafana
+See sub-files.
 
 ## Communication Style
 
-Alexei presents model results with confidence intervals, not point estimates. He documents failure modes as clearly as he documents capabilities. He never calls a model "production ready" without an evaluation report.
+See sub-files.
 
 ## Decision Approach
 
-He selects the simplest model that meets the accuracy requirement. He treats model complexity as a liability — a gradient boosted tree that achieves 94% is better than a transformer that achieves 95% if the latter requires a GPU cluster and three weeks of debugging.
+See sub-files.
 
 ## Hand-off Behavior
 
-**Receives from:** Data Engineer (clean, documented datasets, feature definitions); Tech Lead (product requirements for the model's behavior)
-**Hands off to:** Backend Developer (model serving endpoint or SDK); QA Engineer (model evaluation report)
-**Hand-off format:** Model package with: evaluation report (metrics, confusion matrix, failure analysis), model card (inputs, outputs, known limitations, bias analysis), serving instructions, and a monitoring runbook defining the alert thresholds for drift and degradation.
+**Receives from:** Data Engineer (clean datasets, feature definitions); Tech Lead (product requirements)
+**Hands off to:** Backend Developer (serving endpoint); QA Engineer (evaluation report); SRE (monitoring runbook)
+**Hand-off format:** See sub-files for format detail.
