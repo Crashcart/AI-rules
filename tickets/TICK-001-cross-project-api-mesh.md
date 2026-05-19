@@ -5,7 +5,7 @@
 **Date**: 2026-05-19
 **Priority**: high
 **Scope**: other (cross-repo architecture)
-**Status**: in-progress
+**Status**: on-hold
 
 ## Description
 
@@ -49,7 +49,7 @@ _To be filled when closed._
 2026-05-19 — Dana (Tech Lead) ADR complete. Technology evaluated: NATS JetStream (selected),
   Redis Pub/Sub+Streams (ruled out), MQTT (ruled out), Kafka (ruled out), Consul (ruled out).
   ADR: `notes/decisions/006-api-mesh-technology-selection.md`
-  Awaiting board approval of technology selection (WBS 1.6) before implementation begins.
+  ADR approved, implementation on hold by user — no coding until further notice.
 
 ## Closed
 
