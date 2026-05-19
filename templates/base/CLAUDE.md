@@ -8,17 +8,21 @@
 
 This repo follows the Crashcart AI-rules system.
 
-- Rules source: https://github.com/crashcart/ai-rules
+- Rules source: `https://github.com/crashcart/ai-rules` (set in `.claude/settings.json` as `rulesRepo`)
 - Governing files: `rules/claude.md` + `rules/universal.md`
-- Current version in force: `1.4.0` — check `acknowledgments/claude.ack.json` in ai-rules for updates
+- Current version in force: check `rulesVersion` in `.claude/settings.json`
 
-On session start: if the version in ai-rules has changed since your last session, re-read `rules/claude.md` and `rules/universal.md` before doing anything else.
+The PreToolUse hook in `.claude/settings.json` calls `scripts/check-rules-updates.sh` on every
+Bash tool call (rate-limited to once per hour). If it prints "Rules updated to vX.Y.Z", stop
+and re-read your rules before continuing.
 
 ## Session Start Checklist
 
-1. Read this file (`CLAUDE.md`)
+1. Check hook output — if it says "Rules updated", re-read `rules/` before anything else
 2. Check for a `TODO.md` — if it exists, review open items from the last session
 3. Confirm the active branch is `dev` (or a feature branch) — never `main`
+4. Check for any resolved tickets that were opened by this repo's AI (hook output will say
+   "Ticket TICK-NNN resolved")
 
 ## Branching Policy
 
@@ -28,6 +32,14 @@ On session start: if the version in ai-rules has changed since your last session
 
 [NON-NEGOTIABLE]
 
+## Rule-Edit Suggestions
+
+If you want to suggest a change to any rule in ai-rules, do not modify the file directly.
+Open a ticket in the ai-rules repo using `tickets/template.md`:
+- Set **Scope** to `rule-edit`
+- Set **Requesting AI** to your ai-id
+- Claude (CEO) will discuss the change with you before implementing anything
+
 ## Repo Structure
 
 {TODO: paste your directory layout here, e.g.:}
@@ -36,7 +48,9 @@ On session start: if the version in ai-rules has changed since your last session
 {repo-name}/
 ├── src/          ← source code
 ├── tests/        ← test files
-├── .claude/      ← Claude Code settings
+├── scripts/      ← local scripts
+│   └── check-rules-updates.sh  ← copy from ai-rules/scripts/
+├── .claude/      ← Claude Code settings + hooks
 ├── .github/      ← Copilot instructions, workflows
 └── CLAUDE.md     ← you are here
 ```

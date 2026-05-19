@@ -4,6 +4,20 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.4.2] 2026-05-19
+
+**Rationale**: Rule changes were previously tracked through the proposals/ system but had no structured discussion step before implementation. This patch formalizes rule-edit suggestions as tickets (RULE 14) so every AI must open a ticket, Claude discusses the rationale, and no rule is changed unilaterally.
+
+### Added
+- `rules/universal.md` — RULE 14: Rule-Edit Ticket Protocol — all AIs must open a ticket before modifying any rule file
+- `rules/claude-ceo.md` — rule-edit ticket processing section: discuss rationale with requesting AI before implementing, rejecting, or deferring
+- `tickets/template.md` — `rule-edit` scope option and `Requesting AI` field
+
+### Changed
+- `version.json` — bumped to 1.4.2, new SHA256
+
+---
+
 ## [1.4.1] 2026-05-19
 
 **Rationale**: As the repo grew, three files were doing too much: `rules/claude.md` mixed behavioral, maintainer, and CEO operating contexts; `rules/universal.md` bundled orchestration governance with per-AI behavioral rules; `scripts/daily-snapshot.sh` contained two independent code paths behind one conditional. This patch splits each into focused, single-responsibility files and adds the CEO ticket system so other AIs can open work items for Claude to process on session start.

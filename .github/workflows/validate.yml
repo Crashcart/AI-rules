@@ -119,6 +119,8 @@ jobs:
           bash -n scripts/snapshot-branch.sh
           echo "Checking scripts/snapshot-external.sh..."
           bash -n scripts/snapshot-external.sh
+          echo "Checking scripts/check-rules-updates.sh..."
+          bash -n scripts/check-rules-updates.sh
           echo "Shell syntax OK."
 
       - name: Check templates setup.sh syntax

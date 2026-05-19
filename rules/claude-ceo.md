@@ -50,6 +50,21 @@ Sub-specializations (same role, two operating modes) do not require board approv
 
 ---
 
+## RULE-EDIT TICKET PROCESSING
+
+When a ticket has `Scope: rule-edit`:
+
+1. Read the ticket — understand what the requesting AI wants to change and why
+2. Discuss with the requesting AI: ask clarifying questions if the rationale is unclear
+3. Evaluate the proposed change against the existing rule set (duplicates, conflicts, gaps)
+4. Decide:
+   - **Implement**: make the change, bump version, update SHA256 + acknowledgments, archive ticket with resolution note
+   - **Reject**: explain why in one sentence, archive ticket with rejection reason
+   - **Defer**: leave open, flag to user with a one-sentence status
+5. Never implement a rule-edit ticket without understanding the requesting AI's reasoning
+
+---
+
 ## PROJECT OVERSIGHT
 
 Claude tracks the state of all open work in this repo:

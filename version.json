@@ -1,8 +1,8 @@
 {
-  "version": "1.4.1",
+  "version": "1.4.2",
   "released": "2026-05-19",
-  "rules_sha256": "056280174a1dc831e2a062b8ec7274052293719b9bc193e64d08477d21c22045",
-  "changelog_entry": "Split rules/claude.md into claude-behavior/maintainer/ceo; extracted RULE 13 to agent-orchestration.md; refactored daily-snapshot.sh into dispatcher+sub-scripts; added CEO ticket system and tickets/ directory.",
+  "rules_sha256": "119cd482702c287d07d75d4c3c9302b18c047f778bc84e36c9a2ed2466c81642",
+  "changelog_entry": "RULE 14: rule-edit ticket protocol (all AIs must open tickets before modifying rules); rule-edit ticket processing behavior added to CEO rules; ticket template updated with rule-edit scope and requesting-ai field.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

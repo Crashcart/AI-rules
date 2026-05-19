@@ -2,9 +2,10 @@
 
 **ID**: TICK-{number}
 **Opened by**: {ai-id or "user"}
+**Requesting AI**: {ai-id if this ticket is a rule-edit suggestion, otherwise "—"}
 **Date**: {ISO date — YYYY-MM-DD}
 **Priority**: high | medium | low
-**Scope**: agents/ | rules/ | templates/ | scripts/ | tickets/ | docs | other
+**Scope**: agents/ | rules/ | templates/ | scripts/ | tickets/ | docs | rule-edit | other
 
 ## Description
 
