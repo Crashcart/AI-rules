@@ -22,6 +22,13 @@ if [[ "${LAST}" == "${TODAY}" ]]; then
   exit 0
 fi
 
+# Notify if origin/main has commits not yet pulled (never auto-pulls)
+git -C "${REPO_ROOT}" fetch origin main --quiet 2>/dev/null || true
+BEHIND=$(git -C "${REPO_ROOT}" rev-list HEAD..origin/main --count 2>/dev/null || echo "0")
+if [[ "${BEHIND}" -gt 0 ]]; then
+  echo "Rules update available: ${BEHIND} new commit(s) on origin/main — run: git pull origin main"
+fi
+
 if [[ -n "${TARGET_REPO}" ]]; then
   "${SCRIPTS_DIR}/snapshot-external.sh" "${REPO_ROOT}" "${TODAY}" "${TARGET_REPO}" || {
     echo "External snapshot failed — falling back to branch mode"
