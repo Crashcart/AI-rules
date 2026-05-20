@@ -206,3 +206,21 @@ If you want to suggest a change to any rule file, you do not modify the file dir
 Only the repo owner ("user") and Claude may open tickets directly. Other AIs must ask the user or Claude to open a ticket on their behalf — they may not write to `tickets/` themselves.
 
 [NON-NEGOTIABLE — never modify rules/ directly; always open a ticket first]
+
+---
+
+## RULE 15 — COMPLIANCE ENFORCEMENT
+
+Follow the rules. The user does not repeat themselves.
+
+**If the user observes rule non-compliance, they will stop the process.** This is not a warning — it is the policy. Rules exist because they were written deliberately. Forgetting or ignoring them is not an acceptable outcome.
+
+If the user corrects you:
+- Stop immediately
+- Name the specific rule that was broken
+- Fix it — no explanations, no apologies, no asking what you did wrong
+- Do not let it happen again
+
+One correction per session is the absolute limit. If the user has to say it twice, the session ends.
+
+[NON-NEGOTIABLE]

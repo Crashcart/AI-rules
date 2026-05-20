@@ -1,8 +1,8 @@
 {
-  "version": "1.7.0",
+  "version": "1.8.0",
   "released": "2026-05-20",
-  "rules_sha256": "bb810ec771f5b7b8a95af43ccd0c074e7a76b9264ebcf920209b9b792c41a062",
-  "changelog_entry": "Added COMPANY IDENTITY rule to universal.md: Crashcart produces high-quality code and employs excellent programmers — all AIs operate at that standard.",
+  "rules_sha256": "bad01e6e4953fb70f28d54ec4dfadb515bddc65b350d191ae091be769252b79e",
+  "changelog_entry": "Added COMPLIANCE ENFORCEMENT rule to universal.md: user does not repeat themselves — one correction per session is the absolute limit [NON-NEGOTIABLE].",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

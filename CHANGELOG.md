@@ -4,6 +4,17 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.8.0] 2026-05-20
+
+**Rationale**: The user does not like repeating themselves. Rule non-compliance results in process termination — one correction per session is the absolute limit. This needed to be explicit, firm, and in the universal rules so every AI is bound by it.
+
+### Added
+- `rules/universal.md` — RULE 15 COMPLIANCE ENFORCEMENT: follow the rules; if the user corrects you, stop immediately, name the rule broken, fix it, no explanations; one correction is the limit [NON-NEGOTIABLE]
+- `version.json` — bumped to 1.8.0, new SHA256
+- `acknowledgments/claude.ack.json` — updated to 1.8.0
+
+---
+
 ## [1.7.0] 2026-05-20
 
 **Rationale**: The rules had quality standards (RULE 3) but no explicit company identity framing. The CEO directed that Crashcart's identity as a high-quality software company staffed by excellent programmers should be foundational — before any operational rules.
