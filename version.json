@@ -1,8 +1,8 @@
 {
-  "version": "1.6.0",
-  "released": "2026-05-19",
-  "rules_sha256": "175add9f1a3e5396af9fb5376633cbb56f3de07b44975a6b1258282bc46b7927",
-  "changelog_entry": "ROLE ANNOUNCEMENT rule added to claude-behavior.md — agents now declare which role is performing each task.",
+  "version": "1.6.1",
+  "released": "2026-05-20",
+  "rules_sha256": "b24925799abe90a4b60507e124efff97c69141f5299fc0063037ca4147c3dc9b",
+  "changelog_entry": "Expanded ticket submitters in claude-ceo.md: user | claude | gemini (or any user-confirmed AI agent).",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

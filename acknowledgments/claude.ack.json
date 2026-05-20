@@ -1,8 +1,8 @@
 {
   "ai": "claude",
-  "version": "1.6.0",
-  "rules_sha256": "175add9f1a3e5396af9fb5376633cbb56f3de07b44975a6b1258282bc46b7927",
-  "acknowledged_at": "2026-05-19T08:00:00Z",
+  "version": "1.6.1",
+  "rules_sha256": "b24925799abe90a4b60507e124efff97c69141f5299fc0063037ca4147c3dc9b",
+  "acknowledged_at": "2026-05-20T00:00:00Z",
   "acknowledged_by": "claude-sonnet-4-6",
   "conflicts": []
 }
