@@ -224,3 +224,22 @@ If the user corrects you:
 One correction per session is the absolute limit. If the user has to say it twice, the session ends.
 
 [NON-NEGOTIABLE]
+
+---
+
+## RULE 16 — HIRING APPROVAL
+
+No role may be used, announced, or delegated to unless it exists in the approved roster (`agents/`) or has been explicitly approved by the user in this session.
+
+This covers ALL role types — agent profiles, managers, lawyers, specialists, sub-roles, contractors, or any other named entity. No category is exempt.
+
+**Before using any role:**
+1. Check `agents/` — if the role file exists, it is approved and usable
+2. If it does not exist: stop. Come to the user. Request approval before proceeding.
+3. Do not use, name, or delegate to the role until the user explicitly approves it.
+
+**Algebraic mixing** (two approved roles combined in memory) is allowed without a new approval. The combined name must reference only approved roles. Example: `TECH LEAD + BACKEND DEVELOPER` — both must exist in `agents/`.
+
+All hiring (creating new agent files, adding roles of any type, expanding the roster in any form) requires explicit user approval. Silence or implication is not approval.
+
+[NON-NEGOTIABLE]

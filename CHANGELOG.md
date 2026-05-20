@@ -4,6 +4,18 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.9.0] 2026-05-20
+
+**Rationale**: CLAUDE MAINTAINER was used as an agent role announcement but is not in the approved roster (`agents/`). The user corrected this and directed that all role usage — agent, manager, lawyer, any type — requires either an existing `agents/` file or explicit user approval. Sub-specializations are no longer exempt.
+
+### Added
+- `rules/universal.md` — RULE 16 HIRING APPROVAL: no role may be used unless it exists in `agents/` or user approves it; covers all role types; all hiring requires explicit user approval; algebraic mixing allowed only from approved roles [NON-NEGOTIABLE]
+- `rules/claude-ceo.md` — HIRING PROCESS section rewritten: references RULE 16, removes sub-spec exemption, explicitly states using an unapproved role is a RULE 16 violation
+- `version.json` — bumped to 1.9.0, new SHA256
+- `acknowledgments/claude.ack.json` — updated to 1.9.0
+
+---
+
 ## [1.8.0] 2026-05-20
 
 **Rationale**: The user does not like repeating themselves. Rule non-compliance results in process termination — one correction per session is the absolute limit. This needed to be explicit, firm, and in the universal rules so every AI is bound by it.

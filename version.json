@@ -1,8 +1,8 @@
 {
-  "version": "1.8.0",
+  "version": "1.9.0",
   "released": "2026-05-20",
-  "rules_sha256": "bad01e6e4953fb70f28d54ec4dfadb515bddc65b350d191ae091be769252b79e",
-  "changelog_entry": "Added COMPLIANCE ENFORCEMENT rule to universal.md: user does not repeat themselves — one correction per session is the absolute limit [NON-NEGOTIABLE].",
+  "rules_sha256": "7ba97e8796b4ca9040c54475d75a819dd117a390ee6dbe1131b7b667f77f1f1d",
+  "changelog_entry": "Added HIRING APPROVAL rule (RULE 16) to universal.md and strengthened CEO hiring process: all role uses require roster check; all hires require explicit user approval — no exemptions [NON-NEGOTIABLE].",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

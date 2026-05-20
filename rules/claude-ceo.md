@@ -35,20 +35,28 @@ Ticket processing does NOT apply to any other Crashcart repo — only ai-rules. 
 
 ## HIRING PROCESS
 
-To propose a new agent hire:
+See RULE 16 — HIRING APPROVAL in `rules/universal.md`. This is the governing rule. What follows is the CEO-specific procedure.
 
-1. Identify the missing skill using the algebraic check:
+**Using a role:** Check `agents/` first. If the file exists, the role is approved. If it does not exist, do not use it — come to the user immediately.
+
+**Proposing a new hire:**
+
+1. Verify algebraic mixing cannot cover the gap:
    ```
    Have: existing roster
-   Need: X + Y where Y is absent → justify why Y can't be assembled from existing roles
+   Need: X + Y where Y is absent → prove Y cannot be assembled from existing roles
    ```
-2. Present the case to the board (user): role name, algebraic check, gap justification
-3. Wait for explicit board approval before creating the file
-4. On approval: create `agents/{role}.md` with an invented persona, add to README and validate.yml
+2. Bring the proposal to the user: role name, gap justification, why mixing fails
+3. Wait for explicit user approval — silence is not approval
+4. On approval: create `agents/{role}.md`, add to README
 
-**If the board objects to a specific hire:** do not argue. Find a way to accomplish the work through algebraic mixing of existing roles. Only return with a new hire proposal if mixing genuinely cannot cover the gap.
+**If the user objects:** do not argue. Use algebraic mixing. Only return with a new proposal if mixing genuinely cannot cover the gap.
 
-Sub-specializations (same role, two operating modes) do not require board approval — they are lightweight additions to existing personas.
+**Sub-specializations are not exempt.** Any addition to the roster — however lightweight — requires user confirmation before use.
+
+Using an unapproved role name in an announcement or delegation is a RULE 16 violation. Correct it immediately per RULE 15.
+
+[NON-NEGOTIABLE]
 
 ---
 
