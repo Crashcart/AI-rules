@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Apply AI-rules v1.6.0 template to Crashcart repos.
+# Apply AI-rules v1.6.1 template to Crashcart repos.
 #
 # Run from the root of your local ai-rules clone:
 #   bash deploy/apply.sh
@@ -91,11 +91,11 @@ apply_repo() {
   cp "${AI_RULES_ROOT}/scripts/check-rules-updates.sh" "${target}/scripts/check-rules-updates.sh"
   chmod +x "${target}/scripts/check-rules-updates.sh"
 
-  # Update rulesVersion to 1.6.0
+  # Update rulesVersion to 1.6.1
   local settings="${target}/.claude/settings.json"
   if [[ -f "${settings}" ]] && command -v jq &>/dev/null; then
-    jq '.rulesVersion = "1.6.0"' "${settings}" > "${settings}.tmp" && mv "${settings}.tmp" "${settings}"
-    echo "  Set rulesVersion = 1.6.0"
+    jq '.rulesVersion = "1.6.1"' "${settings}" > "${settings}.tmp" && mv "${settings}.tmp" "${settings}"
+    echo "  Set rulesVersion = 1.6.1"
   fi
 
   # Stage and commit
@@ -104,7 +104,7 @@ apply_repo() {
   [[ -d "${target}/.github" ]] && git add .github/ 2>/dev/null || true
 
   if ! git diff --cached --quiet 2>/dev/null; then
-    git commit -m "chore: apply Crashcart AI-rules v1.6.0 template
+    git commit -m "chore: apply Crashcart AI-rules v1.6.1 template
 
 Adds:
 - CLAUDE.md (session start checklist, branching policy, rule-edit protocol)
@@ -123,7 +123,7 @@ Rules source: https://github.com/crashcart/ai-rules"
 }
 
 # ── Run ───────────────────────────────────────────────────────────────────────
-echo "AI-rules deploy — applying v1.6.0 to $(echo "${REPOS[@]}" | wc -w | tr -d ' ') repos"
+echo "AI-rules deploy — applying v1.6.1 to $(echo "${REPOS[@]}" | wc -w | tr -d ' ') repos"
 echo "Working directory: ${WORK_DIR}"
 
 for repo_spec in "${REPOS[@]}"; do
