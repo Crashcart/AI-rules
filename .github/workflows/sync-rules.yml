@@ -1,0 +1,29 @@
+name: Sync AI-Rules to Target Repos
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - version.json
+
+jobs:
+  sync:
+    name: Push updated files to Crashcart repos
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout AI-rules
+        uses: actions/checkout@v4
+
+      - name: Install jq
+        run: sudo apt-get install -y jq
+
+      - name: Read new version
+        id: version
+        run: echo "version=$(jq -r '.version' version.json)" >> "$GITHUB_OUTPUT"
+
+      - name: Run sync script
+        env:
+          GITHUB_TOKEN: ${{ secrets.RULES_SYNC_TOKEN }}
+          RULES_VERSION: ${{ steps.version.outputs.version }}
+        run: bash deploy/sync.sh
