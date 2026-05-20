@@ -1,8 +1,8 @@
 {
-  "version": "1.5.3",
-  "released": "2026-05-19",
-  "rules_sha256": "9f92f697a81b5a0adde157327b213ba145d0369927d9ce77aa1417288534d6f5",
-  "changelog_entry": "Merged/hybrid role hyphen format added to AGENT ROLE REFERENCES.",
+  "version": "1.6.1",
+  "released": "2026-05-20",
+  "rules_sha256": "b24925799abe90a4b60507e124efff97c69141f5299fc0063037ca4147c3dc9b",
+  "changelog_entry": "Expanded ticket submitters in claude-ceo.md: user | claude | gemini (or any user-confirmed AI agent).",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

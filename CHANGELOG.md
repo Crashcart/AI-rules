@@ -4,6 +4,35 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.6.1] 2026-05-20
+
+**Rationale**: The CEO ticket rule only allowed `user` and `claude` as submitters. Gemini is also a Crashcart-controlled AI and should be able to open tickets. The rule now also has an escape hatch for any other AI the user explicitly confirms, and requires asking the user before processing unrecognized sources.
+
+### Changed
+- `rules/claude-ceo.md` — SESSION-START TICKET PROCESSING: approved submitters expanded to `user | claude | gemini`; unrecognized sources require user confirmation before processing
+- `version.json` — bumped to 1.6.1, new SHA256
+- `acknowledgments/claude.ack.json` — updated to 1.6.1
+
+### Added
+- `deploy/apply.sh` — master script to propagate AI-rules template to Crashcart repos (run locally)
+- `deploy/repos/kali-ai-term/CLAUDE.md` — filled-in shell template for Kali-AI-term
+- `deploy/repos/rpg-bot/CLAUDE.md` — filled-in python template for RPG-Bot
+- `deploy/repos/ollama-intelgpu/CLAUDE.md` — filled-in shell template for Ollama-intelgpu
+- `deploy/repos/claud/CLAUDE.md` — filled-in base template for Claud
+
+---
+
+## [1.6.0] 2026-05-19
+
+**Rationale**: Agents were silently performing work without declaring which role was active. Adding the ROLE ANNOUNCEMENT rule makes the team model visible: the user knows which specialization is on the job, transitions between roles are explicit, and the multi-agent simulation becomes legible without extra narration.
+
+### Added
+- `rules/claude-behavior.md` — new ROLE ANNOUNCEMENT section: role-header format, announce/skip triggers, hybrid-role examples, overridable default
+- `version.json` — bumped to 1.6.0, new SHA256
+- `acknowledgments/claude.ack.json` — updated to 1.6.0
+
+---
+
 ## [1.5.3] 2026-05-19
 
 **Rationale**: AGENT ROLE REFERENCES had no guidance for merged/hybrid roles (algebraic mixing of two specializations). When Claude operates in a combined capacity, the reference title was ambiguous. This patch adds the explicit `SPECIALIZATION-BASE ROLE` hyphen format so merged roles are unambiguous in communication and status updates.
