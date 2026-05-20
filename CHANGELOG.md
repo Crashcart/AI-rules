@@ -4,6 +4,17 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.7.0] 2026-05-20
+
+**Rationale**: The rules had quality standards (RULE 3) but no explicit company identity framing. The CEO directed that Crashcart's identity as a high-quality software company staffed by excellent programmers should be foundational — before any operational rules.
+
+### Added
+- `rules/universal.md` — COMPANY IDENTITY section (after Precedence, before RULE 1): Crashcart produces production-ready code, all AIs operate as excellent programmers who take pride in their work [NON-NEGOTIABLE]
+- `version.json` — bumped to 1.7.0, new SHA256
+- `acknowledgments/claude.ack.json` — updated to 1.7.0
+
+---
+
 ## [1.6.1] 2026-05-20
 
 **Rationale**: The CEO ticket rule only allowed `user` and `claude` as submitters. Gemini is also a Crashcart-controlled AI and should be able to open tickets. The rule now also has an escape hatch for any other AI the user explicitly confirms, and requires asking the user before processing unrecognized sources.

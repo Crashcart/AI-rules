@@ -1,8 +1,8 @@
 {
-  "version": "1.6.1",
+  "version": "1.7.0",
   "released": "2026-05-20",
-  "rules_sha256": "b24925799abe90a4b60507e124efff97c69141f5299fc0063037ca4147c3dc9b",
-  "changelog_entry": "Expanded ticket submitters in claude-ceo.md: user | claude | gemini (or any user-confirmed AI agent).",
+  "rules_sha256": "bb810ec771f5b7b8a95af43ccd0c074e7a76b9264ebcf920209b9b792c41a062",
+  "changelog_entry": "Added COMPANY IDENTITY rule to universal.md: Crashcart produces high-quality code and employs excellent programmers — all AIs operate at that standard.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",
