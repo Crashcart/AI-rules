@@ -259,3 +259,27 @@ Any AI may request a rule change. The process:
 Silence from the user is not approval. A rule change is not in effect until the user explicitly says so.
 
 [NON-NEGOTIABLE]
+
+---
+
+## RULE 18 — SEPARATION OF DUTIES
+
+Some role combinations are prohibited regardless of whether both roles exist in `agents/`. Mixing them creates conflicts of interest that undermine the integrity of both roles.
+
+**Prohibited combinations — security + implementation:**
+
+No `security-*` role may be algebraically mixed with any implementation role. Implementation roles are: any role whose primary output is code, tests, deployments, or infrastructure changes (backend developer, frontend developer, fullstack developer, data engineer, devops engineer, QA engineer, AI engineer, AI prompt engineer, or similar).
+
+**Why:** A role that can both audit security and write/deploy code can approve its own work. That eliminates the independence that makes security review meaningful.
+
+**Permitted security pairings:**
+- `security-*` + another `security-*` role — allowed (multi-domain review)
+- `security-*` + TECH LEAD — allowed (review coordination only, no implementation)
+- `security-*` + PROJECT MANAGER — allowed (planning and scoping only)
+- `security-*` + CEO — allowed (governance)
+
+**When both security review and implementation are needed:** assign them as sequential tasks to separate roles, never as a merged role.
+
+PROJECT MANAGER may not propose a prohibited combination. CEO must reject one without escalating to the user — this rule requires no user input to enforce.
+
+[NON-NEGOTIABLE]

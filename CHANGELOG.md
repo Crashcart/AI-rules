@@ -4,6 +4,15 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.12.0] 2026-05-21
+
+**Rationale**: Algebraic mixing had no guardrails — PROJECT MANAGER could propose `SECURITY ENGINEER + BACKEND DEVELOPER`, giving the auditor write access to the code they're reviewing. A role that can approve its own work is not a security role.
+
+### Added
+- `rules/universal.md` — RULE 18 — SEPARATION OF DUTIES: prohibits mixing any `security-*` role with any implementation role; lists permitted security pairings (other security roles, TECH LEAD for coordination, PM for planning, CEO for governance); CEO must reject prohibited combinations without escalating to user [NON-NEGOTIABLE]
+
+---
+
 ## [1.11.4] 2026-05-21
 
 **Rationale**: A different Claude instance opening this repo (automated run, sub-agent, CI) should not assume CEO authority. CEO belongs exclusively to the direct, interactive session with the repo owner.
