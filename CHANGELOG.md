@@ -4,6 +4,20 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.13.0] 2026-05-21
+
+**Rationale**: PROJECT MANAGER was doing double duty — managing projects AND owning hiring. Those are separate concerns. HIRING MANAGER (HR) is a dedicated role that owns the full hiring pipeline: gap intake from any role, algebraic check, proposal writing, and CEO escalation.
+
+### Added
+- `agents/hiring-manager.md` — HIRING MANAGER (HR) profile: Jordan Reyes; owns gap analysis, algebraic checks, hire proposals to CEO; may NOT create agent files or approve hires unilaterally
+
+### Changed
+- `rules/universal.md` — RULE 16: HIRING MANAGER replaces PROJECT MANAGER as the designated hiring initiator; all gaps go to HR first
+- `rules/claude-ceo.md` — HIRING PROCESS: updated throughout to reference HIRING MANAGER (HR) instead of PROJECT MANAGER
+- `agents/registry.json` — hiring-manager.md added
+
+---
+
 ## [1.12.1] 2026-05-21
 
 **Rationale**: RULE 18 incorrectly implied security roles shouldn't know how to program. Clarified: review roles are expected to be technically deep — the restriction is on their acting capacity (read/assess/flag only, never write/commit/deploy). Rule also generalized from security-specific to any reviewer+implementer conflict.

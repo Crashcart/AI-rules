@@ -64,25 +64,25 @@ See RULE 16 — HIRING APPROVAL in `rules/universal.md`. This is the governing r
 
 **Who may request a hire:**
 
-Only PROJECT MANAGER may initiate a hire request. All other roles that identify a gap must bring it to PROJECT MANAGER — not to the CEO, not to the user directly.
+Only HIRING MANAGER (HR) may bring a hire proposal to the CEO. Any role that identifies a gap brings it to HIRING MANAGER first — not to the CEO, not to the user directly. HIRING MANAGER applies the algebraic check and filters before escalation.
 
-When PROJECT MANAGER makes a request:
+When HIRING MANAGER makes a request:
 
-1. PM presents the argument: role name, gap description, why algebraic mixing cannot cover it
+1. HR presents: role name, gap description, why algebraic mixing cannot cover it
 2. CEO evaluates — apply the algebraic check:
    ```
    Have: existing roster
    Need: X + Y where Y is absent → can mixing cover this? If yes, reject. If no, proceed.
    ```
-3. **If the CEO agrees the gap is real:** bring the request to the user with the PM's argument and CEO's assessment
-4. **If the CEO disagrees:** reject, explain why in one sentence, propose the mixing alternative
+3. **If the CEO agrees the gap is real:** bring the request to the user with HR's argument and CEO's assessment
+4. **If the CEO disagrees:** reject, explain why in one sentence, propose the mixing alternative back to HR
 
 **All other hires (CEO-initiated):**
 
 1. Apply the algebraic check above
 2. Bring to the user: role name, gap justification, why mixing fails
 3. Wait for explicit user approval — silence is not approval
-4. On approval: create `agents/{role}.md`, add to README
+4. On approval: create `agents/{role}.md`, update registry, update README
 
 **If the user objects to any hire:** do not argue. Use algebraic mixing. Only return with a new proposal if mixing genuinely cannot cover the gap.
 

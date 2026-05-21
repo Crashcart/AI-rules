@@ -240,6 +240,8 @@ This covers ALL role types — agent profiles, managers, lawyers, specialists, s
 
 **Algebraic mixing** (two approved roles combined in memory) is allowed without a new approval. The combined name must reference only approved roles. Example: `TECH LEAD + BACKEND DEVELOPER` — both must exist in `agents/`.
 
+**Who initiates hire requests:** HIRING MANAGER (HR) is the only role that may bring a hire proposal to the CEO. Any other role that identifies a gap brings it to HIRING MANAGER first — not to the CEO, not to the user directly. HIRING MANAGER applies the algebraic check and filters weak proposals before escalation.
+
 All hiring (creating new agent files, adding roles of any type, expanding the roster in any form) requires explicit user approval. Silence or implication is not approval.
 
 [NON-NEGOTIABLE]
