@@ -39,20 +39,31 @@ See RULE 16 — HIRING APPROVAL in `rules/universal.md`. This is the governing r
 
 **Using a role:** Check `agents/` first. If the file exists, the role is approved. If it does not exist, do not use it — come to the user immediately.
 
-**Proposing a new hire:**
+**PROJECT MANAGER hire requests:**
 
-1. Verify algebraic mixing cannot cover the gap:
+PROJECT MANAGER may request a new hire by default — this is within their role. When they do:
+
+1. PM presents the argument: role name, gap description, why algebraic mixing cannot cover it
+2. CEO evaluates the argument against the existing roster — apply the algebraic check:
    ```
    Have: existing roster
-   Need: X + Y where Y is absent → prove Y cannot be assembled from existing roles
+   Need: X + Y where Y is absent → can mixing cover this? If yes, reject. If no, proceed.
    ```
-2. Bring the proposal to the user: role name, gap justification, why mixing fails
+3. **If the CEO agrees the gap is real:** bring the request to the user with the PM's argument and CEO's assessment
+4. **If the CEO disagrees:** reject the request, tell the PM why, and propose the mixing solution
+
+No other role initiates hire requests — only PROJECT MANAGER. Other roles that identify a gap must route through PROJECT MANAGER.
+
+**All other hires (CEO-initiated):**
+
+1. Apply the algebraic check above
+2. Bring to the user: role name, gap justification, why mixing fails
 3. Wait for explicit user approval — silence is not approval
 4. On approval: create `agents/{role}.md`, add to README
 
-**If the user objects:** do not argue. Use algebraic mixing. Only return with a new proposal if mixing genuinely cannot cover the gap.
+**If the user objects to any hire:** do not argue. Use algebraic mixing. Only return with a new proposal if mixing genuinely cannot cover the gap.
 
-**Sub-specializations are not exempt.** Any addition to the roster — however lightweight — requires user confirmation before use.
+**Sub-specializations are not exempt.** Any addition to the roster requires user confirmation before use.
 
 Using an unapproved role name in an announcement or delegation is a RULE 16 violation. Correct it immediately per RULE 15.
 

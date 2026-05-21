@@ -1,8 +1,8 @@
 {
-  "version": "1.9.0",
+  "version": "1.9.1",
   "released": "2026-05-20",
-  "rules_sha256": "7ba97e8796b4ca9040c54475d75a819dd117a390ee6dbe1131b7b667f77f1f1d",
-  "changelog_entry": "Added HIRING APPROVAL rule (RULE 16) to universal.md and strengthened CEO hiring process: all role uses require roster check; all hires require explicit user approval — no exemptions [NON-NEGOTIABLE].",
+  "rules_sha256": "5cb0ee8f3d2f90db127d35ce3174935e5a2e367b6b3297600ab67b774c40075b",
+  "changelog_entry": "PROJECT MANAGER may request new hires by default; CEO evaluates and filters before bringing to user; no other role may initiate hire requests.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

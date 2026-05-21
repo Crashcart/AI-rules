@@ -4,6 +4,15 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.9.1] 2026-05-20
+
+**Rationale**: PROJECT MANAGER should be able to argue for new hires — that's within their role. But every request is filtered by the CEO before reaching the user. This keeps the user out of noise while ensuring nothing gets approved without their sign-off.
+
+### Changed
+- `rules/claude-ceo.md` — HIRING PROCESS: PROJECT MANAGER may request hires by default; CEO applies algebraic check and evaluates before escalating; only appropriate requests reach the user; no other role may initiate hire requests
+
+---
+
 ## [1.9.0] 2026-05-20
 
 **Rationale**: CLAUDE MAINTAINER was used as an agent role announcement but is not in the approved roster (`agents/`). The user corrected this and directed that all role usage — agent, manager, lawyer, any type — requires either an existing `agents/` file or explicit user approval. Sub-specializations are no longer exempt.
