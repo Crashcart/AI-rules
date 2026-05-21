@@ -1,8 +1,8 @@
 {
-  "version": "1.13.1",
+  "version": "1.13.2",
   "released": "2026-05-21",
   "rules_sha256": "2343dc64736da6061b831a2bd2e6c93a487e38d530517a573b97a4bbbbe2d7be",
-  "changelog_entry": "Agent proposal form: open New Agent Proposal issue on mobile, workflow creates agents/pending/{draft}.md for CEO review. No approval bypass — RULE 16 still applies.",
+  "changelog_entry": "HIRING MANAGER profile expanded: deliberate 5-step evaluation process (Thinking Process), explicit constraints on what HR may not do, hand-off behavior, repo scope.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

@@ -4,6 +4,15 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.13.2] 2026-05-21
+
+**Rationale**: HIRING MANAGER needs to be a heavyweight evaluator, not just a gatekeeper. Every bad hire starts as a plausible-sounding gap. Jordan's profile now captures the deliberate, skeptical process that keeps weak proposals from reaching the CEO — or the user.
+
+### Changed
+- `agents/hiring-manager.md` — expanded Thinking Process: 5-step deliberate evaluation (understand gap, challenge premise, apply full rule set, design with constraints, write case or close); explicit scope limits on what HR may not do; hand-off behavior; repo scope [NON-NEGOTIABLE]
+
+---
+
 ## [1.13.1] 2026-05-21
 
 **Rationale**: HR needs a mobile-friendly way to submit agent proposals without copy-pasting markdown. Same pattern as the ticket form — fill a structured issue, workflow generates the draft.
