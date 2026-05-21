@@ -4,6 +4,16 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.14.1] 2026-05-21
+
+**Rationale**: PM surveyed all 12 Crashcart repos and identified a capability gap: no existing roster role covers media pipeline engineering (ffmpeg, real-time audio streaming, Discord voice channel integration). HIRING MANAGER confirmed algebraic mixing fails — no pairing of current roles has media pipeline competency. Approved by user.
+
+### Added
+- `agents/audio-streaming-engineer.md` — Kai Nakamura, 9 years. Scoped to RP-Music-Radio and MusicBot projects. Specialties: FFmpeg pipelines, RTMP/HLS/Icecast, Discord voice (Lavalink), stream health monitoring. Role Scope: may not make backend API decisions or deploy infrastructure.
+- `agents/registry.json` — new entry for `audio-streaming-engineer.md`
+
+---
+
 ## [1.14.0] 2026-05-21
 
 **Rationale**: Every profile on the roster was held to the same standard. The hiring-manager and backend-developer re-hires set a new bar — Thinking Process, Role Scope with explicit limits, Escalation Triggers. Every remaining profile needed the same treatment. "Everyone, even you are under the gun."

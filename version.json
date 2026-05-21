@@ -1,18 +1,7 @@
 {
-  "version": "1.14.0",
+  "version": "1.14.1",
   "released": "2026-05-21",
   "rules_sha256": "c9ee51402c14d9f5091ae09158679d2b65ac6fcc6545688289af652d5278131b",
-  "changelog_entry": "Roster-wide profile upgrade: all 11 remaining thin profiles expanded to hiring-manager standard (Thinking Process, Role Scope, Escalation Triggers). CEO Thinking Process added to rules/claude-ceo.md.",
-  "files": [
-    "rules/agent-orchestration.md",
-    "rules/claude-behavior.md",
-    "rules/claude-ceo.md",
-    "rules/claude-maintainer.md",
-    "rules/claude.md",
-    "rules/copilot.md",
-    "rules/gemini.md",
-    "rules/gpt.md",
-    "rules/ollama.md",
-    "rules/universal.md"
-  ]
+  "changelog_entry": "New hire: Audio/Streaming Engineer (Kai Nakamura). Approved via full hiring process — PM gap analysis, HIRING MANAGER vetting (algebraic mixing fails: no existing role covers media pipelines), CEO presentation, user approval.",
+  "files": ["agents/audio-streaming-engineer.md", "agents/registry.json"]
 }
