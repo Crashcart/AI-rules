@@ -1,8 +1,8 @@
 {
-  "version": "1.11.0",
+  "version": "1.11.1",
   "released": "2026-05-21",
-  "rules_sha256": "91fcbc4ba3b2c0e19f7dc42f10cbf55d83547a54e003f1eeb784638a46ff674f",
-  "changelog_entry": "Added AGENT FILE INTEGRITY system: registry.json manifest of all approved agents; unauthorized files deleted immediately on session start; authorship verified via git log.",
+  "rules_sha256": "7eebd971a8e67088e8fad92fa7fe26c4ccf78bfbe2ca154acd8fccfc245d1bfc",
+  "changelog_entry": "Cross-repo ticket posting: receive-ticket.yml workflow + post-ticket.sh script; other Crashcart repos can submit tickets via repository_dispatch — writes to tickets/ only.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

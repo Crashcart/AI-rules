@@ -1,0 +1,94 @@
+name: Receive Cross-Repo Ticket
+
+on:
+  repository_dispatch:
+    types: [submit-ticket]
+
+jobs:
+  write-ticket:
+    name: Write ticket to tickets/
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout AI-rules
+        uses: actions/checkout@v4
+
+      - name: Validate payload
+        id: validate
+        run: |
+          TITLE="${{ github.event.client_payload.title }}"
+          SCOPE="${{ github.event.client_payload.scope }}"
+          REPO="${{ github.event.client_payload.repo }}"
+          OPENED_BY="${{ github.event.client_payload.opened_by }}"
+          DESCRIPTION="${{ github.event.client_payload.description }}"
+
+          if [[ -z "$TITLE" || -z "$SCOPE" || -z "$REPO" || -z "$OPENED_BY" || -z "$DESCRIPTION" ]]; then
+            echo "ERROR: Missing required fields (title, scope, repo, opened_by, description)"
+            exit 1
+          fi
+
+          TIMESTAMP=$(date -u +"%Y%m%dT%H%M%SZ")
+          SLUG=$(echo "$TITLE" | tr '[:upper:]' '[:lower:]' | sed 's/[^a-z0-9]/-/g' | sed 's/--*/-/g' | cut -c1-40)
+          FILENAME="tickets/${REPO}-${TIMESTAMP}-${SLUG}.md"
+          DATE=$(date -u +"%Y-%m-%d")
+
+          echo "filename=$FILENAME" >> "$GITHUB_OUTPUT"
+          echo "timestamp=$TIMESTAMP" >> "$GITHUB_OUTPUT"
+          echo "date=$DATE" >> "$GITHUB_OUTPUT"
+          echo "title=$TITLE" >> "$GITHUB_OUTPUT"
+          echo "scope=$SCOPE" >> "$GITHUB_OUTPUT"
+          echo "repo=$REPO" >> "$GITHUB_OUTPUT"
+          echo "opened_by=$OPENED_BY" >> "$GITHUB_OUTPUT"
+
+      - name: Write ticket file
+        run: |
+          PRIORITY="${{ github.event.client_payload.priority }}"
+          PRIORITY="${PRIORITY:-medium}"
+          CRITERIA="${{ github.event.client_payload.acceptance_criteria }}"
+          CRITERIA="${CRITERIA:-- [ ] Reviewed and actioned by CEO}"
+          CONTEXT="${{ github.event.client_payload.context }}"
+          CONTEXT="${CONTEXT:-- Submitted automatically from repo: ${{ steps.validate.outputs.repo }}}"
+
+          cat > "${{ steps.validate.outputs.filename }}" <<'TICKET_EOF'
+          # Ticket — ${{ steps.validate.outputs.title }}
+
+          **ID**: TICK-${{ steps.validate.outputs.timestamp }}
+          **Opened by**: ${{ steps.validate.outputs.opened_by }} (via ${{ steps.validate.outputs.repo }})
+          **Requesting AI**: ${{ steps.validate.outputs.opened_by }}
+          **Date**: ${{ steps.validate.outputs.date }}
+          **Priority**: PRIORITY_PLACEHOLDER
+          **Scope**: ${{ steps.validate.outputs.scope }}
+          **Source repo**: ${{ steps.validate.outputs.repo }}
+
+          ## Description
+
+          ${{ github.event.client_payload.description }}
+
+          ## Acceptance criteria
+
+          CRITERIA_PLACEHOLDER
+
+          ## Context
+
+          CONTEXT_PLACEHOLDER
+
+          ---
+
+          *Do not edit below this line — Claude fills in resolution on close.*
+
+          **Status**: open
+          **Resolution**: —
+          **Closed**: —
+          TICKET_EOF
+
+          sed -i "s/PRIORITY_PLACEHOLDER/${PRIORITY}/" "${{ steps.validate.outputs.filename }}"
+          sed -i "s|CRITERIA_PLACEHOLDER|${CRITERIA}|" "${{ steps.validate.outputs.filename }}"
+          sed -i "s|CONTEXT_PLACEHOLDER|${CONTEXT}|" "${{ steps.validate.outputs.filename }}"
+
+      - name: Commit ticket
+        run: |
+          git config user.name "AI-rules ticket bot"
+          git config user.email "noreply@crashcart.dev"
+          git add "${{ steps.validate.outputs.filename }}"
+          git commit -m "chore: cross-repo ticket from ${{ steps.validate.outputs.repo }} — ${{ steps.validate.outputs.title }}"
+          git push

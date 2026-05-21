@@ -4,6 +4,20 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.11.1] 2026-05-21
+
+**Rationale**: Other Crashcart repos need to be able to post tickets to AI-rules without the user having to copy them manually. The workflow restricts writes to `tickets/` only — no other path is touched.
+
+### Added
+- `.github/workflows/receive-ticket.yml` — listens for `repository_dispatch` events of type `submit-ticket`; validates payload; writes `tickets/{repo}-{timestamp}-{slug}.md`; commits and pushes
+- `scripts/post-ticket.sh` — helper for other repos: call with `--title`, `--scope`, `--opened-by`, `--description` etc.; fires the dispatch event; requires a PAT with `Contents: write` on AI-rules only
+- `rules/claude-ceo.md` — ticket submitter check updated: Crashcart source repos are now valid submitters; unrecognized source repos still flagged to user
+
+### Required setup
+- Add `TICKET_DISPATCH_TOKEN` secret to each source repo (fine-grained PAT: Contents write on `Crashcart/AI-rules` only)
+
+---
+
 ## [1.11.0] 2026-05-21
 
 **Rationale**: Unauthorized agent files must be caught and deleted immediately. If an AI or external actor creates a role file without going through the approval process, the integrity check on session start finds and removes it. Authorship is verified via git log against the registry.
