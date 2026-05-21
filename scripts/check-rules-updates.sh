@@ -1,11 +1,18 @@
 #!/usr/bin/env bash
-# Checks ai-rules (origin) for rule version updates and ticket resolutions.
+# Checks for AI-rules version updates and resolved tickets.
 # Called from other Crashcart repos via their .claude/settings.json PreToolUse hook.
-# Usage: check-rules-updates.sh <ai-rules-repo-url> <this-repo-ai-id>
+# Usage: check-rules-updates.sh [ai-rules-repo-url] [this-repo-ai-id]
+#
+# Version check: reads rulesVersion from local .claude/settings.json, which the
+#   AI-rules sync workflow keeps current. No network access needed — works when
+#   AI-rules is a private repo.
+#
+# Ticket resolution: clones AI-rules if AI_RULES_URL is provided. Skipped if URL
+#   is absent or unreachable (non-fatal).
 #
 # Outputs:
 #   "Rules updated to vX.Y.Z — re-read rules/ before continuing." if version changed
-#   "Ticket TICK-NNN resolved: <title>" for any tickets opened by this AI that are now archived
+#   "Ticket TICK-NNN resolved: <title>" for any tickets opened by this AI now archived
 set -euo pipefail
 
 AI_RULES_URL="${1:-}"
@@ -13,10 +20,6 @@ AI_ID="${2:-claude}"
 CACHE_DIR="${HOME}/.cache/crashcart-ai-rules"
 CACHE_FILE="${CACHE_DIR}/last-check.json"
 CHECK_INTERVAL=3600  # seconds between checks (1 hour)
-
-if [[ -z "${AI_RULES_URL}" ]]; then
-  exit 0
-fi
 
 mkdir -p "${CACHE_DIR}"
 
@@ -30,34 +33,51 @@ if [[ -f "${CACHE_FILE}" ]]; then
   fi
 fi
 
-WORK_DIR=$(mktemp -d)
-trap 'rm -rf "${WORK_DIR}"' EXIT
-
-# Build the clone URL — supports public repos, private HTTPS (PAT), and SSH
-CLONE_URL="${AI_RULES_URL}"
-if [[ "${AI_RULES_URL}" == https://* && -n "${AI_RULES_TOKEN:-}" ]]; then
-  # Inject PAT for private HTTPS repos: https://TOKEN@github.com/...
-  CLONE_URL="${AI_RULES_URL/https:\/\//https://${AI_RULES_TOKEN}@}"
-fi
-# SSH URLs (git@github.com:...) pass through unchanged — uses machine SSH key
-
-git clone --depth 1 --quiet "${CLONE_URL}" "${WORK_DIR}" 2>/dev/null || {
-  echo "Warning: could not reach ai-rules repo — skipping update check"
-  exit 0
-}
-
-# Check rule version
-REMOTE_VERSION=$(jq -r '.version // ""' "${WORK_DIR}/version.json" 2>/dev/null || echo "")
 LAST_VERSION=$(jq -r '.last_version // ""' "${CACHE_FILE}" 2>/dev/null || echo "")
+
+# ── Version check: read from local .claude/settings.json (synced by AI-rules workflow) ──
+# This requires no network access and works when AI-rules is a private repo.
+REPO_ROOT=$(git rev-parse --show-toplevel 2>/dev/null || pwd)
+LOCAL_SETTINGS="${REPO_ROOT}/.claude/settings.json"
+REMOTE_VERSION=""
+
+if [[ -f "${LOCAL_SETTINGS}" ]]; then
+  REMOTE_VERSION=$(jq -r '.rulesVersion // ""' "${LOCAL_SETTINGS}" 2>/dev/null || echo "")
+fi
+
+# ── Remote clone: only when URL provided (ticket resolution + version fallback) ──
+WORK_DIR=""
+if [[ -n "${AI_RULES_URL}" ]]; then
+  WORK_DIR=$(mktemp -d)
+  trap 'rm -rf "${WORK_DIR}"' EXIT
+
+  CLONE_URL="${AI_RULES_URL}"
+  if [[ "${AI_RULES_URL}" == https://* && -n "${AI_RULES_TOKEN:-}" ]]; then
+    # Inject PAT for private HTTPS repos: https://TOKEN@github.com/...
+    CLONE_URL="${AI_RULES_URL/https:\/\//https://${AI_RULES_TOKEN}@}"
+  fi
+  # SSH URLs (git@github.com:...) pass through unchanged — uses machine SSH key
+
+  if ! git clone --depth 1 --quiet "${CLONE_URL}" "${WORK_DIR}" 2>/dev/null; then
+    echo "Warning: could not reach ai-rules repo — skipping remote checks"
+    WORK_DIR=""
+  fi
+fi
+
+# Use remote version.json as fallback if local settings don't have rulesVersion
+if [[ -z "${REMOTE_VERSION}" && -n "${WORK_DIR}" ]]; then
+  REMOTE_VERSION=$(jq -r '.version // ""' "${WORK_DIR}/version.json" 2>/dev/null || echo "")
+fi
 
 if [[ -n "${REMOTE_VERSION}" && "${REMOTE_VERSION}" != "${LAST_VERSION}" ]]; then
   echo "Rules updated to v${REMOTE_VERSION} — re-read rules/ before continuing."
 fi
 
-# Check for resolved tickets opened by this AI (files in tickets/archive/ matching requesting-ai)
+# ── Ticket resolution check (requires remote clone) ──
 REPORTED_IDS=$(jq -r '.reported_tickets // [] | .[]' "${CACHE_FILE}" 2>/dev/null || true)
 NEW_REPORTED=()
-if [[ -d "${WORK_DIR}/tickets/archive" ]]; then
+
+if [[ -n "${WORK_DIR}" && -d "${WORK_DIR}/tickets/archive" ]]; then
   while IFS= read -r -d '' ticket; do
     TICKET_AI=$(grep -i "^\*\*Opened by\*\*:" "${ticket}" 2>/dev/null | sed 's/.*: *//' | tr -d '[:space:]' || echo "")
     if [[ "${TICKET_AI}" == "${AI_ID}" ]]; then

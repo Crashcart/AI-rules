@@ -4,6 +4,15 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.11.3] 2026-05-21
+
+**Rationale**: When AI-rules goes private, target repos couldn't clone it to check for version updates without a PAT. The sync workflow already writes `rulesVersion` into each target repo's `.claude/settings.json` — the check script now reads that local value instead of cloning, eliminating the network requirement for version detection entirely.
+
+### Changed
+- `scripts/check-rules-updates.sh` — reads `rulesVersion` from local `.claude/settings.json` first; remote clone only happens if URL is provided (for ticket resolution checks). Falls back to remote `version.json` if local field is absent.
+
+---
+
 ## [1.11.2] 2026-05-21
 
 **Rationale**: Phone-friendly ticket submission. No copy-paste, no terminal, no tokens to set up. Works on private repos.

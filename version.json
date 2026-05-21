@@ -1,8 +1,8 @@
 {
-  "version": "1.11.2",
+  "version": "1.11.3",
   "released": "2026-05-21",
   "rules_sha256": "7eebd971a8e67088e8fad92fa7fe26c4ccf78bfbe2ca154acd8fccfc245d1bfc",
-  "changelog_entry": "GitHub Issues ticket form: tap New Issue on mobile, fill structured form, workflow auto-converts to tickets/ file. Zero setup, works on private repos.",
+  "changelog_entry": "check-rules-updates.sh now reads rulesVersion from local .claude/settings.json — no clone needed for version check, works when AI-rules is private.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",
