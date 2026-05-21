@@ -4,6 +4,15 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.11.4] 2026-05-21
+
+**Rationale**: A different Claude instance opening this repo (automated run, sub-agent, CI) should not assume CEO authority. CEO belongs exclusively to the direct, interactive session with the repo owner.
+
+### Added
+- `rules/claude-ceo.md` — CEO SESSION EXCLUSIVITY section: any Claude not in a direct session with the repo owner (Crashcart) defaults to PROJECT MANAGER; lists explicit signals for non-CEO contexts; defines PM-scoped behavior when acting in this repo without CEO status [NON-NEGOTIABLE]
+
+---
+
 ## [1.11.3] 2026-05-21
 
 **Rationale**: When AI-rules goes private, target repos couldn't clone it to check for version updates without a PAT. The sync workflow already writes `rulesVersion` into each target repo's `.claude/settings.json` — the check script now reads that local value instead of cloning, eliminating the network requirement for version detection entirely.
