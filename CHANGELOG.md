@@ -4,6 +4,15 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.12.1] 2026-05-21
+
+**Rationale**: RULE 18 incorrectly implied security roles shouldn't know how to program. Clarified: review roles are expected to be technically deep — the restriction is on their acting capacity (read/assess/flag only, never write/commit/deploy). Rule also generalized from security-specific to any reviewer+implementer conflict.
+
+### Changed
+- `rules/universal.md` — RULE 18 rewritten: restriction is on *capacity* not *knowledge*; generalized to cover any role whose primary function is review/audit mixed with any role producing the artifact under review; examples added
+
+---
+
 ## [1.12.0] 2026-05-21
 
 **Rationale**: Algebraic mixing had no guardrails — PROJECT MANAGER could propose `SECURITY ENGINEER + BACKEND DEVELOPER`, giving the auditor write access to the code they're reviewing. A role that can approve its own work is not a security role.

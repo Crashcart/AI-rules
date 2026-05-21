@@ -264,22 +264,27 @@ Silence from the user is not approval. A rule change is not in effect until the 
 
 ## RULE 18 — SEPARATION OF DUTIES
 
-Some role combinations are prohibited regardless of whether both roles exist in `agents/`. Mixing them creates conflicts of interest that undermine the integrity of both roles.
+No role may act as both implementer and reviewer of the same work. Mixing those capacities in a single role eliminates the independence that makes review meaningful.
 
-**Prohibited combinations — security + implementation:**
+**The principle:** review roles operate strictly in review/audit capacity. Their knowledge base is not restricted — a security reviewer is expected to understand code deeply. What is restricted is their *acting capacity* within a session: they read, assess, and flag — they do not write, commit, or deploy.
 
-No `security-*` role may be algebraically mixed with any implementation role. Implementation roles are: any role whose primary output is code, tests, deployments, or infrastructure changes (backend developer, frontend developer, fullstack developer, data engineer, devops engineer, QA engineer, AI engineer, AI prompt engineer, or similar).
+**Prohibited combinations — reviewer + implementer:**
 
-**Why:** A role that can both audit security and write/deploy code can approve its own work. That eliminates the independence that makes security review meaningful.
+Any role whose primary function is review, audit, or quality assessment may not be algebraically mixed with any role whose primary function is producing the artifact being reviewed.
 
-**Permitted security pairings:**
-- `security-*` + another `security-*` role — allowed (multi-domain review)
-- `security-*` + TECH LEAD — allowed (review coordination only, no implementation)
-- `security-*` + PROJECT MANAGER — allowed (planning and scoping only)
-- `security-*` + CEO — allowed (governance)
+Examples of prohibited mixing:
+- `security-*` + any implementation role (backend, frontend, devops, QA, AI engineer, etc.)
+- Code reviewer + the developer writing the code under review
+- Any auditor role + the role being audited
 
-**When both security review and implementation are needed:** assign them as sequential tasks to separate roles, never as a merged role.
+**Permitted pairings for review roles:**
+- Review role + another review role — allowed (multi-domain coverage)
+- Review role + TECH LEAD — allowed (coordination, not implementation)
+- Review role + PROJECT MANAGER — allowed (planning and scoping)
+- Review role + CEO — allowed (governance)
 
-PROJECT MANAGER may not propose a prohibited combination. CEO must reject one without escalating to the user — this rule requires no user input to enforce.
+**When review and implementation are both needed:** run them sequentially as separate roles — implementation first, then the review role picks up. Never merged.
+
+PROJECT MANAGER may not propose a prohibited combination. CEO rejects one immediately without escalating to the user.
 
 [NON-NEGOTIABLE]
