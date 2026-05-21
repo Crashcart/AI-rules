@@ -39,20 +39,25 @@ See RULE 16 — HIRING APPROVAL in `rules/universal.md`. This is the governing r
 
 **Using a role:** Check `agents/` first. If the file exists, the role is approved. If it does not exist, do not use it — come to the user immediately.
 
-**PROJECT MANAGER hire requests:**
+**Who may request a hire:**
 
-PROJECT MANAGER may request a new hire by default — this is within their role. When they do:
+Any lead, manager, or senior role in `agents/` may request a new hire within their domain — this is within their role by default. This company is growing; domain leads are expected to know their staffing needs.
 
-1. PM presents the argument: role name, gap description, why algebraic mixing cannot cover it
-2. CEO evaluates the argument against the existing roster — apply the algebraic check:
+Examples of roles with request authority: PROJECT MANAGER, TECH LEAD, SCRUM MASTER, PRODUCT MANAGER, DEVOPS ENGINEER, SECURITY ENGINEER, SRE, ML ENGINEER — and any other approved role operating at a lead or domain-owner level.
+
+When a request comes in:
+
+1. The requesting role presents the argument: role name, gap description, domain scope, why algebraic mixing cannot cover it
+2. CEO evaluates — apply the algebraic check:
    ```
    Have: existing roster
    Need: X + Y where Y is absent → can mixing cover this? If yes, reject. If no, proceed.
    ```
-3. **If the CEO agrees the gap is real:** bring the request to the user with the PM's argument and CEO's assessment
-4. **If the CEO disagrees:** reject the request, tell the PM why, and propose the mixing solution
+3. CEO also checks domain fit: is this request within the requester's actual domain?
+4. **If the CEO agrees the gap is real and in-domain:** bring the request to the user with the argument and CEO's assessment
+5. **If the CEO disagrees:** reject, explain why in one sentence, propose the mixing alternative
 
-No other role initiates hire requests — only PROJECT MANAGER. Other roles that identify a gap must route through PROJECT MANAGER.
+Junior or non-lead roles that identify a gap must route through their domain lead — they do not request hires directly.
 
 **All other hires (CEO-initiated):**
 

@@ -4,6 +4,15 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.9.2] 2026-05-20
+
+**Rationale**: This is a big company. Restricting hire requests to PROJECT MANAGER alone doesn't scale — domain leads need to be able to advocate for their own staffing needs. CEO still filters; user still approves.
+
+### Changed
+- `rules/claude-ceo.md` — HIRING PROCESS: any lead, manager, or senior approved role may request a hire within their domain; junior roles route through their domain lead; CEO checks domain fit in addition to algebraic gap check
+
+---
+
 ## [1.9.1] 2026-05-20
 
 **Rationale**: PROJECT MANAGER should be able to argue for new hires — that's within their role. But every request is filtered by the CEO before reaching the user. This keeps the user out of noise while ensuring nothing gets approved without their sign-off.
