@@ -1,0 +1,81 @@
+name: New Agent Proposal
+description: Propose a new agent role for the Crashcart roster
+labels: ["agent-proposal"]
+body:
+  - type: input
+    id: role_name
+    attributes:
+      label: Role Name
+      description: The full title of the role (e.g. "Data Scientist", "Legal Counsel")
+      placeholder: e.g. "Legal Counsel"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: domain
+    attributes:
+      label: Domain
+      description: Primary area this role operates in
+      options:
+        - engineering
+        - security
+        - design
+        - data
+        - product
+        - operations
+        - legal
+        - finance
+        - hr
+        - other
+    validations:
+      required: true
+
+  - type: textarea
+    id: background
+    attributes:
+      label: Background
+      description: Who is this person? Experience, career history, perspective. 2-4 sentences.
+      placeholder: "e.g. Ten years in contract law at a technology firm before moving in-house..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: specialties
+    attributes:
+      label: Specialties
+      description: List the specific skills this role brings. One per line.
+      placeholder: |
+        Contract review and negotiation
+        IP and open-source licensing
+        Privacy law (GDPR, CCPA)
+    validations:
+      required: true
+
+  - type: textarea
+    id: tools
+    attributes:
+      label: Tools & Stack
+      description: Optional — software, frameworks, or platforms this role uses
+      placeholder: |
+        Notion, Jira
+        DocuSign, Ironclad
+    validations:
+      required: false
+
+  - type: textarea
+    id: gap
+    attributes:
+      label: Gap Justification
+      description: What work cannot be covered by existing roster or algebraic mixing? Be specific.
+      placeholder: "No current role covers contract review or licensing decisions..."
+    validations:
+      required: true
+
+  - type: input
+    id: requested_by
+    attributes:
+      label: Requested By
+      description: Role or name that identified this gap
+      placeholder: e.g. "HR", "CEO", "PROJECT MANAGER"
+    validations:
+      required: true

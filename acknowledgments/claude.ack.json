@@ -1,6 +1,6 @@
 {
   "ai": "claude",
-  "version": "1.13.0",
+  "version": "1.13.1",
   "rules_sha256": "2343dc64736da6061b831a2bd2e6c93a487e38d530517a573b97a4bbbbe2d7be",
   "acknowledged_at": "2026-05-20T00:00:00Z",
   "acknowledged_by": "claude-sonnet-4-6",

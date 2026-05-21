@@ -4,6 +4,20 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.13.1] 2026-05-21
+
+**Rationale**: HR needs a mobile-friendly way to submit agent proposals without copy-pasting markdown. Same pattern as the ticket form — fill a structured issue, workflow generates the draft.
+
+### Added
+- `.github/ISSUE_TEMPLATE/new-agent.yml` — agent proposal form: role name, domain (dropdown), background, specialties, tools, gap justification, requested-by
+- `.github/workflows/agent-proposal.yml` — converts submission to `agents/pending/{number}-{slug}.md` draft; commits; comments with filename; closes issue. RULE 16 still enforced — pending drafts require CEO review and explicit user approval before moving to `agents/`
+- `agents/pending/README.md` — staging area for unapproved drafts
+
+### Mobile usage
+GitHub app → AI-rules → Issues → New Issue → New Agent Proposal → fill form → submit → draft appears in `agents/pending/`
+
+---
+
 ## [1.13.0] 2026-05-21
 
 **Rationale**: PROJECT MANAGER was doing double duty — managing projects AND owning hiring. Those are separate concerns. HIRING MANAGER (HR) is a dedicated role that owns the full hiring pipeline: gap intake from any role, algebraic check, proposal writing, and CEO escalation.

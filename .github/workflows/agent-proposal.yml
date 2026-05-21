@@ -1,0 +1,138 @@
+name: Agent Proposal → Pending Draft
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  draft:
+    name: Create pending agent profile draft
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'agent-proposal')
+
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure agent-proposal label exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create agent-proposal \
+            --color "#e4e669" \
+            --description "Proposed new agent role for CEO review" \
+            --repo "${{ github.repository }}" 2>/dev/null || true
+
+      - name: Parse issue and write pending draft
+        id: write
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_USER: ${{ github.event.issue.user.login }}
+        run: |
+          python3 - <<'PYEOF'
+          import os, re
+          from datetime import datetime, timezone
+
+          body        = os.environ["ISSUE_BODY"]
+          title       = os.environ["ISSUE_TITLE"]
+          number      = os.environ["ISSUE_NUMBER"]
+          user        = os.environ["ISSUE_USER"]
+
+          def extract(label):
+              pattern = rf"### {re.escape(label)}\s*\n+(.*?)(?=\n### |\Z)"
+              m = re.search(pattern, body, re.DOTALL)
+              return m.group(1).strip() if m else ""
+
+          role_name    = extract("Role Name")    or title
+          domain       = extract("Domain")       or "other"
+          background   = extract("Background")   or "(no background provided)"
+          specialties  = extract("Specialties")  or "(no specialties listed)"
+          tools        = extract("Tools & Stack") or ""
+          gap          = extract("Gap Justification") or "(no gap justification provided)"
+          requested_by = extract("Requested By") or user
+
+          date  = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          slug  = re.sub(r"[^a-z0-9]+", "-", role_name.lower()).strip("-")[:40]
+          fname = f"agents/pending/{number}-{slug}.md"
+
+          # Format specialties as bullet list
+          spec_lines = [f"- {s.lstrip('- ').strip()}" for s in specialties.splitlines() if s.strip()]
+          spec_block = "\n".join(spec_lines) if spec_lines else f"- {specialties}"
+
+          tools_section = ""
+          if tools:
+              tool_lines = [f"- {t.lstrip('- ').strip()}" for t in tools.splitlines() if t.strip()]
+              tools_section = "\n## Tools & Stack\n\n" + "\n".join(tool_lines) + "\n"
+
+          draft = f"""# {role_name}
+
+## Profile
+
+**Name:** (to be assigned)
+**Domain:** {domain}
+**Background:** {background}
+**Years of experience:** (TBD)
+**Based in:** (TBD)
+
+## Specialties
+
+{spec_block}
+{tools_section}
+## Communication Style
+
+(to be defined by CEO before approval)
+
+## Decision Approach
+
+(to be defined by CEO before approval)
+
+## Hand-off Behavior
+
+**Receives from:** (TBD)
+**Hands off to:** (TBD)
+**Position in org:** (TBD)
+
+---
+
+*Pending draft — proposed via GitHub Issue #{number} by {requested_by} on {date}.*
+*Gap justification: {gap}*
+*Do not move to `agents/` without explicit user approval (RULE 16).*
+"""
+
+          os.makedirs("agents/pending", exist_ok=True)
+          with open(fname, "w") as f:
+              f.write(draft)
+
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"filename={fname}\n")
+              out.write(f"role_name={role_name}\n")
+          PYEOF
+
+      - name: Commit pending draft
+        run: |
+          git config user.name "AI-rules agent bot"
+          git config user.email "noreply@crashcart.dev"
+          git add "${{ steps.write.outputs.filename }}"
+          git commit -m "proposal: pending agent draft from issue #${{ github.event.issue.number }} — ${{ steps.write.outputs.role_name }}"
+          git push
+
+      - name: Comment and close issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment ${{ github.event.issue.number }} \
+            --body "Pending draft created: \`${{ steps.write.outputs.filename }}\`
+
+          CEO will review. If approved by the user, the file will be moved to \`agents/\` and added to the registry." \
+            --repo "${{ github.repository }}"
+
+          gh issue close ${{ github.event.issue.number }} \
+            --reason "not planned" \
+            --repo "${{ github.repository }}"

@@ -1,8 +1,8 @@
 {
-  "version": "1.13.0",
+  "version": "1.13.1",
   "released": "2026-05-21",
   "rules_sha256": "2343dc64736da6061b831a2bd2e6c93a487e38d530517a573b97a4bbbbe2d7be",
-  "changelog_entry": "New role: HIRING MANAGER (HR) — owns all hire proposals; replaces PROJECT MANAGER as hiring initiator in RULE 16 and CEO hiring process.",
+  "changelog_entry": "Agent proposal form: open New Agent Proposal issue on mobile, workflow creates agents/pending/{draft}.md for CEO review. No approval bypass — RULE 16 still applies.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",
