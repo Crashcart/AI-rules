@@ -1,8 +1,8 @@
 {
-  "version": "1.9.2",
+  "version": "1.9.3",
   "released": "2026-05-20",
-  "rules_sha256": "339a1da6f070e85b104b20e5ca69203b6a83fb7412191471b07f100acc632bbe",
-  "changelog_entry": "Any lead, manager, or senior role may request hires within their domain — not just PROJECT MANAGER. CEO evaluates domain fit and gap validity before escalating to user.",
+  "rules_sha256": "6ab46b0e6341bbb26264e054b9dcb24f473adbb80b65f99fdcb2eaf5d6571987",
+  "changelog_entry": "Reverted hire request authority to PROJECT MANAGER only. All other roles route gaps through PM. User decision — non-negotiable.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

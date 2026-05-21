@@ -4,6 +4,15 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.9.3] 2026-05-20
+
+**Rationale**: User decision — only PROJECT MANAGER initiates hire requests. All other roles route gaps through PM.
+
+### Changed
+- `rules/claude-ceo.md` — HIRING PROCESS: reverted to PM-only; all other roles must bring gaps to PM, not directly to CEO or user
+
+---
+
 ## [1.9.2] 2026-05-20
 
 **Rationale**: This is a big company. Restricting hire requests to PROJECT MANAGER alone doesn't scale — domain leads need to be able to advocate for their own staffing needs. CEO still filters; user still approves.
