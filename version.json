@@ -1,8 +1,8 @@
 {
-  "version": "1.10.0",
+  "version": "1.11.0",
   "released": "2026-05-21",
-  "rules_sha256": "1b93b8a439c77b9d1023f2d88a1472ea266be52218eaff0bacb5c1f52393dccd",
-  "changelog_entry": "Added RULE 17 — RULE CHANGE AUTHORITY: user holds sole authority over all rule changes; any AI may request but not decide; silence is not approval [NON-NEGOTIABLE].",
+  "rules_sha256": "91fcbc4ba3b2c0e19f7dc42f10cbf55d83547a54e003f1eeb784638a46ff674f",
+  "changelog_entry": "Added AGENT FILE INTEGRITY system: registry.json manifest of all approved agents; unauthorized files deleted immediately on session start; authorship verified via git log.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

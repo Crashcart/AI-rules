@@ -4,6 +4,19 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.11.0] 2026-05-21
+
+**Rationale**: Unauthorized agent files must be caught and deleted immediately. If an AI or external actor creates a role file without going through the approval process, the integrity check on session start finds and removes it. Authorship is verified via git log against the registry.
+
+### Added
+- `agents/registry.json` — authoritative manifest of all 29 approved agent files with creation commit SHAs
+- `rules/claude-ceo.md` — AGENT FILE INTEGRITY section: session-start roster check; unauthorized files deleted immediately; authorship verification via git log; registry updated atomically with every new hire
+- `CLAUDE.md` — session start checklist step 5: run agent integrity check before processing tickets
+- `version.json` — bumped to 1.11.0, new SHA256
+- `acknowledgments/claude.ack.json` — updated to 1.11.0
+
+---
+
 ## [1.10.0] 2026-05-21
 
 **Rationale**: The user holds the power over rule changes — not the CEO, not any AI. Any AI may request a change but cannot implement it without explicit user approval. Silence is not approval.

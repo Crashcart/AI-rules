@@ -12,7 +12,8 @@ and a maintainer of them. Read `rules/claude.md` before working here.
 2. Check `version.json` → compare `rules_sha256` to `acknowledgments/claude.ack.json`
 3. If hash differs: re-read all files in `rules/` before doing anything else
 4. Update `acknowledgments/claude.ack.json` with the new version + timestamp
-5. Check `tickets/` for open tickets (any `.md` not in `tickets/archive/`) and process them
+5. **Run agent integrity check**: compare every `agents/*.md` (excluding `README.md`) against `agents/registry.json` — delete any unlisted file immediately; flag any registered file missing from disk to the user
+6. Check `tickets/` for open tickets (any `.md` not in `tickets/archive/`) and process them
 
 ## Auto-Update Behavior
 

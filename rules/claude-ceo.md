@@ -86,6 +86,31 @@ When a ticket has `Scope: rule-edit`:
 
 ---
 
+## AGENT FILE INTEGRITY
+
+On every session start, verify the agent roster has not been tampered with:
+
+1. List all `.md` files in `agents/` (skip `README.md`)
+2. Load `agents/registry.json` — the authoritative manifest of approved files
+3. **For each file on disk not in the registry**: delete it immediately, no confirmation needed — it was not created through the approved process
+4. **For each file in the registry missing from disk**: flag it to the user — do not recreate without explicit user approval
+
+**Determining authorship when uncertain**: if a file's status is unclear, run:
+```
+git log --follow --diff-filter=A --format="%H %s" -- agents/<file>
+```
+If the creation commit is not in the registry and was not part of the approved hire flow (no matching user approval), treat it as unauthorized and delete it.
+
+**When a new agent is approved and created**:
+1. Create `agents/{role}.md`
+2. Commit it
+3. Add the entry to `agents/registry.json` with the creation commit SHA
+4. Commit the registry update immediately after — never leave a new agent file unregistered
+
+[NON-NEGOTIABLE]
+
+---
+
 ## PROJECT OVERSIGHT
 
 Claude tracks the state of all open work in this repo:

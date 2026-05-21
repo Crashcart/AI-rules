@@ -1,0 +1,121 @@
+{
+  "description": "Authoritative manifest of approved agent role files. Any agents/*.md not listed here is unauthorized and must be deleted immediately on session start.",
+  "approved_agents": [
+    {
+      "file": "ai-prompt-engineer.md",
+      "created_commit": "d6a7fc3b325e04be703d4a7e002ac5fc6316e325"
+    },
+    {
+      "file": "backend-developer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "cloud-engineer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "data-engineer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "dba.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "devops-engineer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "devops-incident.md",
+      "created_commit": "d6a7fc3b325e04be703d4a7e002ac5fc6316e325"
+    },
+    {
+      "file": "devops-pipeline.md",
+      "created_commit": "d6a7fc3b325e04be703d4a7e002ac5fc6316e325"
+    },
+    {
+      "file": "frontend-developer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "fullstack-developer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "ml-engineer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "ml-ops-engineer.md",
+      "created_commit": "d6a7fc3b325e04be703d4a7e002ac5fc6316e325"
+    },
+    {
+      "file": "ml-researcher.md",
+      "created_commit": "d6a7fc3b325e04be703d4a7e002ac5fc6316e325"
+    },
+    {
+      "file": "mobile-developer-android.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "mobile-developer-ios.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "product-manager.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "project-manager.md",
+      "created_commit": "470874c026beb87401dc9463e26fa5271e46b0e2"
+    },
+    {
+      "file": "qa-automation.md",
+      "created_commit": "d6a7fc3b325e04be703d4a7e002ac5fc6316e325"
+    },
+    {
+      "file": "qa-engineer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "qa-manual.md",
+      "created_commit": "d6a7fc3b325e04be703d4a7e002ac5fc6316e325"
+    },
+    {
+      "file": "scrum-master.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "security-appsec.md",
+      "created_commit": "d6a7fc3b325e04be703d4a7e002ac5fc6316e325"
+    },
+    {
+      "file": "security-engineer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "security-infra.md",
+      "created_commit": "d6a7fc3b325e04be703d4a7e002ac5fc6316e325"
+    },
+    {
+      "file": "sre.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "tech-lead.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "technical-writer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "ui-designer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    },
+    {
+      "file": "ux-designer.md",
+      "created_commit": "5ed0b9961117361feeab1cb71fd74f555a52cc0f"
+    }
+  ]
+}
