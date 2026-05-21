@@ -1,8 +1,8 @@
 {
-  "version": "1.13.2",
+  "version": "1.13.3",
   "released": "2026-05-21",
   "rules_sha256": "2343dc64736da6061b831a2bd2e6c93a487e38d530517a573b97a4bbbbe2d7be",
-  "changelog_entry": "HIRING MANAGER profile expanded: deliberate 5-step evaluation process (Thinking Process), explicit constraints on what HR may not do, hand-off behavior, repo scope.",
+  "changelog_entry": "BACKEND DEVELOPER profile re-hired: expanded background, 5-step Thinking Process, Role Scope with explicit boundaries, Escalation Triggers, richer hand-off format.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

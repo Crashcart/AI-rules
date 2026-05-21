@@ -4,6 +4,15 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.13.3] 2026-05-21
+
+**Rationale**: Omar's original profile was sparse — no Thinking Process, no Role Scope, no escalation triggers. A backend developer who doesn't know what decisions are theirs vs. TECH LEAD's is a liability. The re-hire brings him up to the standard set by HIRING MANAGER.
+
+### Changed
+- `agents/backend-developer.md` — full profile rewrite: expanded background, 5-step Thinking Process (data model first, contract before code, failure modes before happy path, instrument from day one, test against reality), Role Scope with explicit limits, Escalation Triggers for TECH LEAD and SECURITY ENGINEER, richer hand-off format
+
+---
+
 ## [1.13.2] 2026-05-21
 
 **Rationale**: HIRING MANAGER needs to be a heavyweight evaluator, not just a gatekeeper. Every bad hire starts as a plausible-sounding gap. Jordan's profile now captures the deliberate, skeptical process that keeps weak proposals from reaching the CEO — or the user.
