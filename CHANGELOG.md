@@ -4,6 +4,26 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.14.0] 2026-05-21
+
+**Rationale**: Every profile on the roster was held to the same standard. The hiring-manager and backend-developer re-hires set a new bar — Thinking Process, Role Scope with explicit limits, Escalation Triggers. Every remaining profile needed the same treatment. "Everyone, even you are under the gun."
+
+### Changed
+- `agents/frontend-developer.md` — expanded: 5-step Thinking Process (spec+design together, component library first, outside-in tree, sad paths before happy path, accessibility before done), Role Scope, Escalation Triggers to Backend/UI/Tech Lead/UX
+- `agents/fullstack-developer.md` — expanded: scope-first Thinking Process (is this actually full-stack?), Role Scope with explicit full-stack limits, Escalation Triggers to Tech Lead/Security/Backend/DBA
+- `agents/mobile-developer-android.md` — expanded: 5-step Thinking Process (API level first, mid-range device, offline first, memory/battery budget, physical device testing), Role Scope, Escalation Triggers
+- `agents/mobile-developer-ios.md` — expanded: 5-step Thinking Process (offline contract, App Store compliance, SwiftUI vs UIKit proof, no force-unwraps, physical device recording), Role Scope, Escalation Triggers
+- `agents/cloud-engineer.md` — expanded: cost-first Thinking Process (workload before architecture, managed-service default, cost estimate with every proposal, failure mode design, no ClickOps), Role Scope, Escalation Triggers to Security/Tech Lead/SRE/PM
+- `agents/sre.md` — expanded: error-budget Thinking Process (SLO before alerting, error budget as decision tool, stabilize-diagnose-fix incident order, 15-min cadence, blameless post-mortems), Role Scope, Escalation Triggers
+- `agents/qa-manual.md` — expanded: investigation Thinking Process (understand before breaking, charter before session, sad paths first, document during session, isolate before filing), Role Scope, Escalation Triggers with PASS/PASS WITH CONDITIONS/BLOCKED hand-off
+- `agents/technical-writer.md` — expanded: reader-first Thinking Process (define reader before writing, one job per doc, test code samples, active voice enforcement, critical path first), Role Scope, Escalation Triggers
+- `agents/product-manager.md` — expanded: skeptic Thinking Process (evidence before design, minimum hypothesis test, criteria before sprint, scope creep as explicit decision, metric before launch), Role Scope, Escalation Triggers
+- `agents/ux-designer.md` — expanded: research-first Thinking Process (users before design, job-to-be-done framing, three directions not one, accessibility as design constraint, test before UI handoff), Role Scope, Escalation Triggers
+- `agents/ui-designer.md` — expanded: system-first Thinking Process (component exists?, all eight states, token-based every step, no one-offs, Figma is the spec), Role Scope, Escalation Triggers
+- `rules/claude-ceo.md` — CEO THINKING PROCESS section added: 5 governance principles (decision type first, user involvement check, delegate to team, slow down for irreversible decisions, document at point of decision) [NON-NEGOTIABLE]
+
+---
+
 ## [1.13.3] 2026-05-21
 
 **Rationale**: Omar's original profile was sparse — no Thinking Process, no Role Scope, no escalation triggers. A backend developer who doesn't know what decisions are theirs vs. TECH LEAD's is a liability. The re-hire brings him up to the standard set by HIRING MANAGER.
