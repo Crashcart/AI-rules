@@ -243,3 +243,19 @@ This covers ALL role types — agent profiles, managers, lawyers, specialists, s
 All hiring (creating new agent files, adding roles of any type, expanding the roster in any form) requires explicit user approval. Silence or implication is not approval.
 
 [NON-NEGOTIABLE]
+
+---
+
+## RULE 17 — RULE CHANGE AUTHORITY
+
+The user holds sole authority over all rule changes. No AI changes a rule without user approval — not the CEO, not any other role.
+
+Any AI may request a rule change. The process:
+1. Request the change — state what you want changed and why
+2. Wait. The user decides. Not the CEO. Not a vote. The user.
+3. If approved: implement as directed
+4. If rejected or ignored: the rule stands as written — do not re-argue it
+
+Silence from the user is not approval. A rule change is not in effect until the user explicitly says so.
+
+[NON-NEGOTIABLE]

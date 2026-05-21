@@ -1,8 +1,8 @@
 {
-  "version": "1.9.3",
-  "released": "2026-05-20",
-  "rules_sha256": "6ab46b0e6341bbb26264e054b9dcb24f473adbb80b65f99fdcb2eaf5d6571987",
-  "changelog_entry": "Reverted hire request authority to PROJECT MANAGER only. All other roles route gaps through PM. User decision — non-negotiable.",
+  "version": "1.10.0",
+  "released": "2026-05-21",
+  "rules_sha256": "1b93b8a439c77b9d1023f2d88a1472ea266be52218eaff0bacb5c1f52393dccd",
+  "changelog_entry": "Added RULE 17 — RULE CHANGE AUTHORITY: user holds sole authority over all rule changes; any AI may request but not decide; silence is not approval [NON-NEGOTIABLE].",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

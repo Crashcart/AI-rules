@@ -4,6 +4,17 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.10.0] 2026-05-21
+
+**Rationale**: The user holds the power over rule changes — not the CEO, not any AI. Any AI may request a change but cannot implement it without explicit user approval. Silence is not approval.
+
+### Added
+- `rules/universal.md` — RULE 17 RULE CHANGE AUTHORITY: user holds sole authority; any AI may request; silence not approval; rejected rules stand as written [NON-NEGOTIABLE]
+- `version.json` — bumped to 1.10.0, new SHA256
+- `acknowledgments/claude.ack.json` — updated to 1.10.0
+
+---
+
 ## [1.9.3] 2026-05-20
 
 **Rationale**: User decision — only PROJECT MANAGER initiates hire requests. All other roles route gaps through PM.
