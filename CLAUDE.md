@@ -57,6 +57,35 @@ needs to grant GitHub MCP access to read them, or provide files manually:
 
 Copy imported files to `imports/{repo-name}/` for review before normalizing.
 
+## Commit Message Standard
+
+Every commit must include a **Risk Notes** section so the user can trace what changed and where something could go wrong. No commit without it.
+
+**Required format:**
+
+```
+<type>: <short summary> (vX.Y.Z)
+
+<what changed — one line per file or logical group>
+
+Risk Notes:
+- <file or area>: <what could break and why>
+- <file or area>: <what to verify if something looks wrong>
+- No known risks: <only use this if the change is truly read-only or cosmetic>
+
+https://claude.ai/code/session_...
+```
+
+**Risk Note examples:**
+- `rules/universal.md: new RULE 18 — any AI that hasn't re-read rules/ will act on stale constraints`
+- `agents/registry.json: SHA updated — integrity check on next session will use this; mismatch deletes unlisted files`
+- `version.json: hash bumped — if sha256 doesn't match rules/*.md, session start will stall`
+- `acknowledgments/claude.ack.json: version mismatch here will trigger re-read on session start`
+
+**Type prefixes:** `feat` (new rule/role/feature), `fix` (bug/wording correction), `chore` (admin/metadata only), `refactor` (restructure, no behavior change)
+
+[NON-NEGOTIABLE]
+
 ## Branching Policy
 
 - **This repo (`AI-rules`)**: push directly to `main`
