@@ -1,0 +1,65 @@
+name: Ticket
+description: Submit a ticket for CEO processing
+labels: ["ticket"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: Short description of what needs to happen
+      placeholder: e.g. "Clarify rule 3 for multi-file changes"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: scope
+    attributes:
+      label: Scope
+      options:
+        - rule-edit
+        - agents/
+        - rules/
+        - templates/
+        - scripts/
+        - tickets/
+        - docs
+        - other
+    validations:
+      required: true
+
+  - type: dropdown
+    id: priority
+    attributes:
+      label: Priority
+      options:
+        - medium
+        - high
+        - low
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: What needs to happen. One paragraph maximum.
+      placeholder: Describe the change or request...
+    validations:
+      required: true
+
+  - type: textarea
+    id: criteria
+    attributes:
+      label: Acceptance Criteria
+      description: Optional — done when these are true
+      placeholder: "- [ ] Rule updated\n- [ ] Version bumped"
+    validations:
+      required: false
+
+  - type: textarea
+    id: context
+    attributes:
+      label: Context
+      description: Optional — anything the CEO needs to know
+    validations:
+      required: false

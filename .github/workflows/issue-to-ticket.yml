@@ -1,0 +1,122 @@
+name: Issue → Ticket Converter
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  convert:
+    name: Convert issue to ticket file
+    runs-on: ubuntu-latest
+    if: contains(github.event.issue.labels.*.name, 'ticket')
+
+    permissions:
+      contents: write
+      issues: write
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Ensure ticket label exists
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh label create ticket \
+            --color "#0075ca" \
+            --description "Ticket for CEO processing" \
+            --repo "${{ github.repository }}" 2>/dev/null || true
+
+      - name: Parse issue and write ticket
+        id: write
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          ISSUE_BODY: ${{ github.event.issue.body }}
+          ISSUE_TITLE: ${{ github.event.issue.title }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          ISSUE_USER: ${{ github.event.issue.user.login }}
+        run: |
+          python3 - <<'PYEOF'
+          import os, re, subprocess
+          from datetime import datetime, timezone
+
+          body    = os.environ["ISSUE_BODY"]
+          title   = os.environ["ISSUE_TITLE"]
+          number  = os.environ["ISSUE_NUMBER"]
+          user    = os.environ["ISSUE_USER"]
+
+          def extract(label):
+              pattern = rf"### {re.escape(label)}\s*\n+(.*?)(?=\n### |\Z)"
+              m = re.search(pattern, body, re.DOTALL)
+              return m.group(1).strip() if m else ""
+
+          scope    = extract("Scope")    or "other"
+          priority = extract("Priority") or "medium"
+          desc     = extract("Description") or "(no description)"
+          criteria = extract("Acceptance Criteria") or "- [ ] Reviewed and actioned by CEO"
+          context  = extract("Context") or f"Submitted via GitHub Issue #{number} by {user}"
+
+          ts   = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
+          date = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+          slug = re.sub(r"[^a-z0-9]+", "-", title.lower()).strip("-")[:40]
+          fname = f"tickets/{number}-{slug}.md"
+
+          ticket = f"""# Ticket — {title}
+
+**ID**: TICK-{number}
+**Opened by**: {user}
+**Requesting AI**: {user}
+**Date**: {date}
+**Priority**: {priority}
+**Scope**: {scope}
+**Source**: GitHub Issue #{number}
+
+## Description
+
+{desc}
+
+## Acceptance criteria
+
+{criteria}
+
+## Context
+
+{context}
+
+---
+
+*Do not edit below this line — Claude fills in resolution on close.*
+
+**Status**: open
+**Resolution**: —
+**Closed**: —
+"""
+
+          with open(fname, "w") as f:
+              f.write(ticket)
+
+          with open(os.environ["GITHUB_OUTPUT"], "a") as out:
+              out.write(f"filename={fname}\n")
+              out.write(f"slug={slug}\n")
+          PYEOF
+
+      - name: Commit ticket file
+        run: |
+          git config user.name "AI-rules ticket bot"
+          git config user.email "noreply@crashcart.dev"
+          git add "${{ steps.write.outputs.filename }}"
+          git commit -m "chore: ticket from issue #${{ github.event.issue.number }} — ${{ github.event.issue.title }}"
+          git push
+
+      - name: Comment and close issue
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh issue comment ${{ github.event.issue.number }} \
+            --body "Ticket created: \`${{ steps.write.outputs.filename }}\`
+          The CEO will review it on next session start." \
+            --repo "${{ github.repository }}"
+
+          gh issue close ${{ github.event.issue.number }} \
+            --reason "not planned" \
+            --repo "${{ github.repository }}"

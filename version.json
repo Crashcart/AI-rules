@@ -1,8 +1,8 @@
 {
-  "version": "1.11.1",
+  "version": "1.11.2",
   "released": "2026-05-21",
   "rules_sha256": "7eebd971a8e67088e8fad92fa7fe26c4ccf78bfbe2ca154acd8fccfc245d1bfc",
-  "changelog_entry": "Cross-repo ticket posting: receive-ticket.yml workflow + post-ticket.sh script; other Crashcart repos can submit tickets via repository_dispatch — writes to tickets/ only.",
+  "changelog_entry": "GitHub Issues ticket form: tap New Issue on mobile, fill structured form, workflow auto-converts to tickets/ file. Zero setup, works on private repos.",
   "files": [
     "rules/agent-orchestration.md",
     "rules/claude-behavior.md",

@@ -4,6 +4,19 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.11.2] 2026-05-21
+
+**Rationale**: Phone-friendly ticket submission. No copy-paste, no terminal, no tokens to set up. Works on private repos.
+
+### Added
+- `.github/ISSUE_TEMPLATE/ticket.yml` — structured issue form: title, scope (dropdown), priority (dropdown), description, optional criteria and context
+- `.github/workflows/issue-to-ticket.yml` — converts any issue with the `ticket` label into `tickets/{number}-{slug}.md`; commits file; comments on issue with filename; closes issue automatically. Uses built-in `GITHUB_TOKEN` — zero setup required
+
+### Mobile usage
+GitHub app → AI-rules → Issues → New Issue → Ticket → fill form → submit → done
+
+---
+
 ## [1.11.1] 2026-05-21
 
 **Rationale**: Other Crashcart repos need to be able to post tickets to AI-rules without the user having to copy them manually. The workflow restricts writes to `tickets/` only — no other path is touched.
