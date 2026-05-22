@@ -1,7 +1,36 @@
 # Hiring Evaluation Process
-version: 1.0 | owner: HIRING MANAGER (Jordan Reyes)
+version: 1.1 | owner: HIRING MANAGER (Jordan Reyes)
 
 This document governs how all hire proposals are evaluated in the Crashcart AI-rules system. It supplements the 5-step Thinking Process in `agents/hiring-manager.md`. Every confirmed hire must have an archived pool in `hiring/pools/`.
+
+---
+
+## 0. Pre-Qualification Code Test
+
+Before any candidate advances to the scenario interview, they complete the role-appropriate code test from `hiring/test-bank.md`.
+
+**Pass threshold: 10/20 minimum.** Candidates who score below 10/20 are recorded in the pool table with their code test score but do not receive a scenario interview.
+
+**Scoring dimensions** (all 1–5, max 20 total):
+
+| Dimension | What It Measures |
+|-----------|-----------------|
+| **Correctness** | Does the implementation handle all required cases — including edge cases stated in the requirements? |
+| **Code Quality** | Is the code tight and minimal? Well-named, no unnecessary verbosity, no dead code. |
+| **Error Handling** | Are failure modes covered — network errors, malformed input, unexpected states? |
+| **Performance** | Is the approach efficient? No busy loops, unnecessary allocations, or blocking calls where async is required. |
+
+**Code test scoring table format** (required in every pool file):
+
+| Rank | Name | Correctness | Code Quality | Error Handling | Performance | Total | Status |
+|------|------|------------|---------|---------------|-------------|-------|--------|
+| 1 | ... | X/5 | X/5 | X/5 | X/5 | X/20 | Pass / Fail |
+
+Candidates who fail (< 10/20) are listed at the bottom with "FAIL — did not advance to scenario."
+
+The code test cannot be skipped for any reason. A candidate with an impressive background who cannot write correct, tight code under a time constraint is not the right hire.
+
+[NON-NEGOTIABLE — no candidate advances to scenario interview without a passing code test score]
 
 ---
 

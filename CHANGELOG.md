@@ -4,6 +4,20 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.16.0] 2026-05-22
+
+**Rationale**: The hiring process had no code quality gate — candidates were evaluated on scenario responses alone, which tests domain knowledge but not whether they can write correct, tight code. Adding a mandatory pre-qualification code test as Step 0 ensures every candidate who reaches the scenario interview has already demonstrated they can produce working implementations with minimal errors.
+
+### Added
+- `hiring/test-bank.md` — pre-qualification code tests for all 11 role categories. Each test has: task description, requirements, strong answer criteria, weak answer criteria. Pass threshold: 10/20. Scoring dimensions: Correctness, Code Quality, Error Handling, Performance (1–5 each, max 20).
+
+### Changed
+- `hiring/process.md` — inserted **Step 0 — Pre-Qualification Code Test** before pool generation; code test scoring table format added; candidates below 10/20 are recorded but do not advance to scenario interview [NON-NEGOTIABLE]
+- `hiring/pools/audio-streaming-engineer.md` — retroactive code test results added for all 7 candidates; combined rankings table (code + scenario, max 35); Kai Nakamura confirmed finalist with 34/35 combined. Notable: Chen Wei ranks 2nd on code (17/20) despite 9/15 scenario — stronger coder than incident responder.
+- `agents/hiring-manager.md` — Candidate Pool Process section updated: code pre-qualification test now listed as the first requirement before scenario testing; rubric section updated to reference both test dimensions
+
+---
+
 ## [1.15.0] 2026-05-22
 
 **Rationale**: All previous hires were created by generating a single candidate profile — no competitive pool, no evaluation rubric, no scenario testing. This adds a mandatory evaluation framework so future hires are chosen from a realistic pool of candidates assessed for competence, efficiency, and code quality.

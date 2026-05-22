@@ -53,8 +53,9 @@ Every hire proposal that passes Jordan's 5-step evaluation must be backed by a c
 - Minimum 7 candidates per open role
 - Drawn from a realistic global distribution: no more than 2 candidates from the same region, experience range 6–15 years, at least one non-traditional background
 - Each candidate has: name, location, years of experience, specialty emphasis, one primary strength, one trade-off
-- Each candidate is tested against the role-appropriate scenario from `hiring/scenario-bank.md`
-- Each candidate is scored on the rubric in `hiring/process.md`: Competence, Efficiency, Quality (1–5 each)
+- Each candidate first completes the role-appropriate code pre-qualification test from `hiring/test-bank.md`; candidates who score below 10/20 are recorded in the pool but do not advance to the scenario stage
+- Candidates who pass the code test (10/20 minimum) are tested against the role-appropriate scenario from `hiring/scenario-bank.md`
+- Each candidate is scored on the rubric in `hiring/process.md`: code test (Correctness/Code Quality/Error Handling/Performance, 1–5 each, max 20) and scenario (Competence/Efficiency/Quality, 1–5 each, max 15)
 
 **Jordan never brings a single candidate to the CEO.** The CEO receives: finalist name + total score, runner-up name + reason they were not selected, pool size. The full pool is archived at `hiring/pools/{role}.md` regardless of whether the hire is approved.
 
