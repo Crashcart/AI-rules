@@ -4,6 +4,21 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.15.0] 2026-05-22
+
+**Rationale**: All previous hires were created by generating a single candidate profile — no competitive pool, no evaluation rubric, no scenario testing. This adds a mandatory evaluation framework so future hires are chosen from a realistic pool of candidates assessed for competence, efficiency, and code quality.
+
+### Added
+- `hiring/process.md` — end-to-end pool evaluation procedure: pool generation rules (7–10 candidates, global distribution), scenario administration, scoring rubric (Competence/Efficiency/Quality 1–5 each, max 15), selection decision format, archive requirements
+- `hiring/scenario-bank.md` — role-appropriate test scenarios for all 11 role categories: Infrastructure, Backend, Frontend, Design, Data/ML, Quality, Security, Streaming/Media, Management, Documentation, Database. Each scenario includes a realistic ambiguous setup, a question, and evaluator notes (strong vs. weak answer)
+- `hiring/pools/README.md` — archive format: every confirmed hire and every rejected proposal gets a pool file
+- `hiring/pools/audio-streaming-engineer.md` — retroactive pool for Kai Nakamura's hire: 7 candidates from 7 countries, individual scenario responses, scored rankings, selection rationale
+
+### Changed
+- `agents/hiring-manager.md` — added **Candidate Pool Process** section [NON-NEGOTIABLE]: Jordan must run a 7+ candidate pool before any proposal reaches the CEO; added **Escalation Triggers** section (to CEO, closes internally, never directly to user)
+
+---
+
 ## [1.14.1] 2026-05-21
 
 **Rationale**: PM surveyed all 12 Crashcart repos and identified a capability gap: no existing roster role covers media pipeline engineering (ffmpeg, real-time audio streaming, Discord voice channel integration). HIRING MANAGER confirmed algebraic mixing fails — no pairing of current roles has media pipeline competency. Approved by user.
