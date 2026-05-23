@@ -4,6 +4,23 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.18.0] 2026-05-23
+
+**Rationale**: The user's /goal required gold aesthetic and production-readiness as a formal rule. Web design work produced without a standard has no defined aesthetic baseline and no checklist — resulting in inconsistent output. This rule codifies the gold design system token palette, a 10-item production-readiness checklist, and an SVG-first graphics policy. The reference implementation at `demo/web-design-showcase.html` gives every role a concrete pattern library to work from.
+
+### Added
+
+- `rules/web-design.md` — Web Design Standards rule covering: gold design system (CSS custom property tokens for color and typography), 10-item production-readiness checklist (performance, accessibility, responsive, reduced-motion, SVG-first, semantic HTML, no inline styles, scroll behavior, font loading, self-contained output), SVG graphics policy, demo reference pointer
+- `demo/web-design-showcase.html` — reference implementation: luxury landing page for "AURUM — Digital Craft Studio" demonstrating the gold palette, Cormorant Garamond + Inter typography, inline SVG graphics (logo, hero background, project mockups, service icons), IntersectionObserver scroll reveals, CSS marquee, nav backdrop blur, responsive layout at 900px breakpoint
+
+### Notes
+
+- SHA256 updated: `b3a41465ba975e6e298a23a008dedf42157b1f54223faede40cd8a457e5d883e` — any AI that cached the v1.17.0 hash will re-read rules/ on next session start
+- `rules/web-design.md`: gold palette and SVG-first policy are [NON-NEGOTIABLE]; individual checklist items are [DEFAULT, overridable] where user specifies otherwise
+- `demo/web-design-showcase.html`: reference only, no behavior enforcement
+
+---
+
 ## [1.17.0] 2026-05-23
 
 **Rationale**: 13 agent profiles were built across multiple versions without backfilling the sections added in later profile standards (Thinking Process, Role Scope, Escalation Triggers). Without Role Scope and Escalation Triggers, a role has no defined boundaries and no hand-off chain — it will make calls it shouldn't and hold work it should route. Thinking Process documents the 5-step reasoning sequence each role follows before acting.
