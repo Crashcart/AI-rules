@@ -4,6 +4,22 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.22.0] 2026-05-23
+
+**Rationale**: Leaderboard and leader features without shareable URLs have zero social reach — they cannot be linked, bookmarked, or shared. URL-addressability for all leaderboard entries is now a non-negotiable requirement for any game website delivered by any AI in this system.
+
+### Added
+
+- `rules/web-design.md` § Game Website Standards — **URL Requirements [NON-NEGOTIABLE]**: every leaderboard entry requires a deep-link URL, `history.pushState`/hash routing so browser back button works, copy-pasteable URLs that load the correct view in a new tab, and `<link rel="canonical">` per player view
+- `rules/web-design.md` § Game Landing Page Checklist — above-fold CTA, leaderboard rows with `<a href>` deep-links per row, `Intl.NumberFormat` score display, game embed or play link, Open Graph tags (`og:title`, `og:description`, `og:image`)
+
+### Notes
+
+- SHA256 updated: `87550dd13ec670e42397d15eaff1ff17cec7d7436775c75fa3bf5f70d4b4510a`
+- Game Website Standards and URL Requirements are `[NON-NEGOTIABLE]`; Game Landing Page Checklist items are `[DEFAULT, overridable]` where user specifies
+
+---
+
 ## [1.21.0] 2026-05-23
 
 **Rationale**: Agents had no standardized output format to confirm their compliance state at session start. Adding a mandatory `STARTUP` block (ROLE, RULES version match, PROFILE existence, ACK status) gives the user an instant audit signal on every first response. Hiring Priya Nair as AI Compliance Engineer closes the gap between written rules and actual AI behavior.

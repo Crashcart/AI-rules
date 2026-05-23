@@ -58,4 +58,29 @@ When producing SVG, use semantic structure: `<title>` for accessible name, `aria
 - Responsive grid layout
 - Full production page structure
 
+## Game Website Standards
+
+Apply when the deliverable is a website for a game (landing page, leaderboard, player profile, or game hub).
+
+### URL Requirements [NON-NEGOTIABLE]
+
+Every leader/leaderboard feature must be URL-addressable. "URL-addressable" means:
+
+1. **Every leaderboard entry has a deep-link** — individual player profiles reachable via a unique, shareable URL (e.g., `/leaderboard?player=username` or `#player-username`)
+2. **URLs update on navigation** — use `history.pushState` or hash routing so the browser back button works and the address bar reflects the current view
+3. **URLs are copy-pasteable** — opening a copied leaderboard URL in a new tab loads the correct player view without requiring login or state re-establishment
+4. **Canonical link in `<head>`** — every player page or leaderboard state includes a `<link rel="canonical" href="...">` element reflecting the current URL
+
+Why: leaderboard features without shareable URLs cannot be linked, bookmarked, or shared socially — the leader feature has zero reach without this.
+
+### Game Landing Page Checklist
+
+In addition to the Production-Readiness Checklist above:
+
+1. **Above-the-fold CTA** — game title, one-line description, and a primary call-to-action button visible without scrolling at 375px
+2. **Leaderboard section** — rank, player name/handle, score, and a `<a href>` deep-link per row; no leaderboard row without a URL
+3. **Score formatting** — large numbers formatted with `Intl.NumberFormat` (locale-aware commas); no raw integer display
+4. **Game embed or play link** — a direct play link or embedded iframe in the hero; never a landing page with no path to the game itself
+5. **Open Graph tags** — `og:title`, `og:description`, `og:image` for social sharing; game pages without these cannot be shared on any platform
+
 [NON-NEGOTIABLE for gold palette and SVG-first graphics; DEFAULT overridable for individual checklist items where user specifies otherwise]
