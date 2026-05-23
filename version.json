@@ -1,7 +1,7 @@
 {
-  "version": "1.20.1",
+  "version": "1.21.0",
   "released": "2026-05-23",
   "rules_sha256": "acbd177d90481275393ddbe590f7a8b0f9d668b6b9ee795c15a63ea4ca349c5e",
-  "changelog_entry": "Clarify RULE 19 language; enforce ROLE ANNOUNCEMENT as NON-NEGOTIABLE.",
-  "files": ["rules/universal.md", "rules/claude-behavior.md"]
+  "changelog_entry": "Add startup compliance checklist rule; hire AI Compliance Engineer.",
+  "files": ["rules/startup-checklist.md"]
 }

@@ -4,6 +4,22 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.21.0] 2026-05-23
+
+**Rationale**: Agents had no standardized output format to confirm their compliance state at session start. Adding a mandatory `STARTUP` block (ROLE, RULES version match, PROFILE existence, ACK status) gives the user an instant audit signal on every first response. Hiring Priya Nair as AI Compliance Engineer closes the gap between written rules and actual AI behavior.
+
+### Added
+
+- `rules/startup-checklist.md` — mandatory `STARTUP` output block every AI must print before the first substantive response; covers ROLE, RULES version/match, PROFILE existence, ACK status, and STATUS flag; `[NON-NEGOTIABLE]`
+- `agents/ai-compliance-engineer.md` — Priya Nair, AI Compliance Engineer; specialties: session-start compliance auditing, cross-model rule validation, behavioral regression testing, rule clarity analysis
+
+### Notes
+
+- SHA256 unchanged: `acbd177d90481275393ddbe590f7a8b0f9d668b6b9ee795c15a63ea4ca349c5e` — `startup-checklist.md` was already on disk when v1.20.1 SHA was computed
+- agents/registry.json updated; session-start integrity check now expects ai-compliance-engineer.md
+
+---
+
 ## [1.20.1] 2026-05-23
 
 **Rationale**: RULE 19 language tightened to make compliance non-negotiable ("These are not optional"); injection table now includes the `scripts/ai-bootstrap.sh` row for new/unknown AI types. ROLE ANNOUNCEMENT enforcement changed from `[DEFAULT, overridable]` to `[NON-NEGOTIABLE]` — role announcements are the user's primary compliance-detection signal and must not be skipped by any agent.
