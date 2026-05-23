@@ -4,6 +4,27 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.19.0] 2026-05-23
+
+**Rationale**: When a role is re-opened for hiring, the current incumbent should be benchmarked against the new candidate pool — otherwise there is no way to confirm that the replacement is demonstrably stronger. This formalizes that rule. The hired roster documents all 31 active agents as confirmed hires, establishing a clear record of who is on the roster and by what method they were approved.
+
+### Added
+
+- `hiring/hired-roster.md` — authoritative confirmed-hire record for all 31 registry entries: agent file, name, location, years of experience, mode/notes, hire method (pre-pool vs. formal pool), and pool archive reference. Kai Nakamura is the only formal-pool hire; all others are retroactively confirmed pre-pool hires with agent profile as the record.
+
+### Changed
+
+- `hiring/process.md` § 1 Pool Generation — added rule: if the role has a current incumbent, include them as Candidate #1 in the pool, scored on the same code test and scenario as all other candidates; establishes performance benchmark and ensures replacement is demonstrably stronger
+- `agents/hiring-manager.md` Candidate Pool Process — added bullet formalizing the incumbent-as-Candidate-#1 requirement
+
+### Notes
+
+- SHA256 unchanged: `b3a41465ba975e6e298a23a008dedf42157b1f54223faede40cd8a457e5d883e` — no `rules/*.md` files modified
+- `hiring/hired-roster.md`: routing alias files (devops-engineer, ml-engineer, qa-engineer, security-engineer) are listed as non-hires; their sub-mode files are the actual confirmed profiles
+- Multi-mode agents (Jake Moreau, Alexei Volkov, Sofia Reyes, Ingrid Svensson) are hired once; mode files represent specialization boundaries for the same individual
+
+---
+
 ## [1.18.0] 2026-05-23
 
 **Rationale**: The user's /goal required gold aesthetic and production-readiness as a formal rule. Web design work produced without a standard has no defined aesthetic baseline and no checklist — resulting in inconsistent output. This rule codifies the gold design system token palette, a 10-item production-readiness checklist, and an SVG-first graphics policy. The reference implementation at `demo/web-design-showcase.html` gives every role a concrete pattern library to work from.

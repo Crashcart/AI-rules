@@ -38,6 +38,8 @@ The code test cannot be skipped for any reason. A candidate with an impressive b
 
 Before any candidate is evaluated, HIRING MANAGER generates a pool of **7–10 candidates**.
 
+**If the role already has a current hire**, include the incumbent as **Candidate #1** in the pool. Score them on the same code test and scenario as all other candidates. This benchmarks the field against the current standard and ensures any replacement is demonstrably stronger. The incumbent's pool entry references their existing agent file at `agents/{role}.md` as the hiring record.
+
 Candidates must be drawn from a realistic global distribution:
 - Experience range: 6–15 years in the primary specialty
 - Geographic diversity: no more than 2 candidates from the same region

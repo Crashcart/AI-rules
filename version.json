@@ -1,7 +1,11 @@
 {
-  "version": "1.18.0",
+  "version": "1.19.0",
   "released": "2026-05-23",
   "rules_sha256": "b3a41465ba975e6e298a23a008dedf42157b1f54223faede40cd8a457e5d883e",
-  "changelog_entry": "Web design production standards: gold design system token palette, production-readiness checklist (10 items), SVG-first graphics policy, WCAG AA accessibility requirement. Reference implementation at demo/web-design-showcase.html.",
-  "files": ["rules/web-design.md", "demo/web-design-showcase.html"]
+  "changelog_entry": "Hiring: incumbents included in replacement pools; confirmed hire roster created for all 31 active agents.",
+  "files": [
+    "hiring/process.md",
+    "agents/hiring-manager.md",
+    "hiring/hired-roster.md"
+  ]
 }
