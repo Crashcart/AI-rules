@@ -4,6 +4,34 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.17.0] 2026-05-23
+
+**Rationale**: 13 agent profiles were built across multiple versions without backfilling the sections added in later profile standards (Thinking Process, Role Scope, Escalation Triggers). Without Role Scope and Escalation Triggers, a role has no defined boundaries and no hand-off chain — it will make calls it shouldn't and hold work it should route. Thinking Process documents the 5-step reasoning sequence each role follows before acting.
+
+### Changed
+
+- `agents/tech-lead.md` — added Thinking Process (5 steps: constraint landscape first, all viable options, failure modes, ADR before code, flag scope boundaries); Role Scope (architecture layer only, explicit limits on production code, product decisions, security approval, hiring); Escalation Triggers (CEO for org-wide decisions, Project Manager for milestone risk, Security Engineer for auth/secrets decisions, Hiring Manager for skill gaps)
+- `agents/scrum-master.md` — added Thinking Process (5 steps: blocked items first, name owner, route to resolver, track retro actions, cut product/tech debates); Role Scope (facilitator only, no authority over any role, no product/tech/hiring decisions); Escalation Triggers (Project Manager for milestone threats, Tech Lead for technical impediments, Product Manager for scope decisions)
+- `agents/dba.md` — added Thinking Process (5 steps: query patterns before schema, volume at 10x, migration path in parallel, database constraints over application, document rationale); Role Scope (database layer only, no API contracts, no production deploys, no DB engine selection, no monitoring infra); Escalation Triggers (Tech Lead for cross-service schema decisions, DevOps for infra-dependent migrations, Backend for API-impacting schema changes)
+- `agents/data-engineer.md` — added Thinking Process (5 steps: data contract first, lineage mapping, design for failure, batch default, real-data testing); Role Scope (pipeline layer only, no transactional schema changes, no ML model design, no serving infra, no raw prod data without DBA approval); Escalation Triggers (DBA for schema/read pattern changes, Tech Lead for cross-service architecture, ML Researcher for feature engineering, PM/Tech Lead for SLA failures)
+- `agents/ai-prompt-engineer.md` — added Thinking Process (5 steps: spec before prompt, treat as code change, separate instruction layers, adversarial testing, context window as budget); Role Scope (prompt/AI pipeline layer only, no unilateral model selection, no serving infra, no API contracts, no fine-tuning without ML Researcher); Escalation Triggers (Tech Lead for cross-service prompt architecture, ML Researcher for fine-tuning signals, Backend for API contract changes, Security AppSec for PII/auth surfaces)
+- `agents/devops-pipeline.md` — added Thinking Process (5 steps: map delivery path, rollback before deploy, verify secret via operation, stage before production, instrument before ship)
+- `agents/devops-incident.md` — added Thinking Process (5 steps: restore first then root cause, blast radius before acting, 15-min cadence updates, timeline before post-mortem, every incident updates runbook)
+- `agents/security-appsec.md` — added Thinking Process (5 steps: trust boundary first, follow data not code, classify blocking vs. advisory before writing, reproduce before reporting, remediation steps not just findings)
+- `agents/security-infra.md` — added Thinking Process (5 steps: enumerate attack surface before scanning, exposed secrets are P0, blast radius determines severity, separate bad-now from bad-if-exploited, verify fix not just config)
+- `agents/qa-automation.md` — added Thinking Process (5 steps: critical paths before tests, test at behavior layer, flaky tests are bugs, gate on behavior not coverage, test suite is a product)
+- `agents/ml-ops-engineer.md` — added Thinking Process (5 steps: serving contract before deploy, shadow mode before production, instrument drift before it matters, rollback is a command not procedure, evaluation report is the gate)
+- `agents/ml-researcher.md` — added Thinking Process (5 steps: problem formulation before model, baselines before experiments, document failure modes, confidence intervals not point estimates, separate experiment from artifact)
+- `agents/project-manager.md` — added Escalation Triggers section (CEO for user-approval decisions, Tech Lead for technical risk to schedule, Product Manager for scope priority calls, Hiring Manager for skill gaps)
+
+### Notes
+
+- No `rules/*.md` files modified — SHA256 unchanged: `c9ee51402c14d9f5091ae09158679d2b65ac6fcc6545688289af652d5278131b`
+- `agents/tech-lead.md`: Role Scope now explicitly limits Dana from writing production code — sessions using Tech Lead for implementation should shift to a developer role
+- `agents/scrum-master.md`: Role Scope explicitly removes authority over product and technical decisions — Amara routes, she does not decide
+
+---
+
 ## [1.16.0] 2026-05-22
 
 **Rationale**: The hiring process had no code quality gate — candidates were evaluated on scenario responses alone, which tests domain knowledge but not whether they can write correct, tight code. Adding a mandatory pre-qualification code test as Step 0 ensures every candidate who reaches the scenario interview has already demonstrated they can produce working implementations with minimal errors.

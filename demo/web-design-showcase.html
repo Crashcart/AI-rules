@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AURUM — Digital Craft Studio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    /* ── Design Tokens ─────────────────────────────────────── */
+    :root {
+      --gold-100: #FDF6E3;
+      --gold-200: #F7E8B0;
+      --gold-300: #EDD06A;
+      --gold-400: #D4AF37;
+      --gold-500: #B8960C;
+      --gold-600: #9A7D0A;
+      --dark-950: #080808;
+      --dark-900: #0D0D0D;
+      --dark-800: #141414;
+      --dark-700: #1C1C1C;
+      --dark-600: #272727;
+      --dark-500: #363636;
+      --text-primary: #F0EAD6;
+      --text-secondary: #A89F8C;
+      --text-muted: #6B6459;
+      --radius-sm: 4px;
+      --radius-md: 10px;
+      --radius-lg: 20px;
+      --radius-xl: 40px;
+      --ease-gold: cubic-bezier(0.22, 0.68, 0, 1.2);
+      --ease-smooth: cubic-bezier(0.4, 0, 0.2, 1);
+      --font-display: 'Cormorant Garamond', Georgia, serif;
+      --font-body: 'Inter', system-ui, sans-serif;
+    }
+
+    /* ── Reset ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      background: var(--dark-900);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+    img, svg { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    ul { list-style: none; }
+
+    /* ── Typography ─────────────────────────────────────────── */
+    .t-display {
+      font-family: var(--font-display);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+    }
+    .t-serif {
+      font-family: var(--font-display);
+      font-weight: 400;
+    }
+    .t-label {
+      font-family: var(--font-body);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .t-gold { color: var(--gold-400); }
+
+    /* ── Layout ─────────────────────────────────────────────── */
+    .container { width: min(1200px, 92vw); margin-inline: auto; }
+    .section { padding-block: clamp(80px, 12vw, 160px); }
+
+    /* ── Gold Gradient Text ────────────────────────────────── */
+    .gradient-text {
+      background: linear-gradient(135deg, var(--gold-300) 0%, var(--gold-400) 40%, var(--gold-500) 70%, var(--gold-300) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    /* ── Navigation ─────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+      padding: 24px 0;
+      transition: background 0.4s var(--ease-smooth), padding 0.4s var(--ease-smooth);
+    }
+    .nav.scrolled {
+      background: rgba(8, 8, 8, 0.92);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      padding: 16px 0;
+    }
+    .nav__inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .nav__logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .nav__logo-mark {
+      width: 32px;
+      height: 32px;
+    }
+    .nav__wordmark {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      color: var(--gold-400);
+    }
+    .nav__links {
+      display: flex;
+      gap: 40px;
+      align-items: center;
+    }
+    .nav__link {
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-secondary);
+      transition: color 0.2s;
+    }
+    .nav__link:hover { color: var(--gold-400); }
+    .nav__cta {
+      padding: 10px 24px;
+      border: 1px solid var(--gold-500);
+      border-radius: var(--radius-sm);
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-400);
+      transition: background 0.25s, color 0.25s;
+    }
+    .nav__cta:hover {
+      background: var(--gold-400);
+      color: var(--dark-950);
+    }
+
+    /* ── Hero ───────────────────────────────────────────────── */
+    .hero {
+      position: relative;
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+    }
+    .hero__bg {
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+    }
+    .hero__content {
+      position: relative;
+      z-index: 2;
+      text-align: center;
+      padding-top: 80px;
+    }
+    .hero__eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 32px;
+      color: var(--gold-400);
+    }
+    .hero__eyebrow-line {
+      width: 40px;
+      height: 1px;
+      background: var(--gold-400);
+      opacity: 0.6;
+    }
+    .hero__title {
+      font-size: clamp(3.5rem, 9vw, 9rem);
+      margin-bottom: 24px;
+      letter-spacing: -0.03em;
+    }
+    .hero__subtitle {
+      font-size: clamp(1.1rem, 2.5vw, 1.5rem);
+      font-family: var(--font-display);
+      font-style: italic;
+      color: var(--text-secondary);
+      max-width: 540px;
+      margin: 0 auto 48px;
+    }
+    .hero__actions {
+      display: flex;
+      gap: 20px;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .btn-primary {
+      padding: 16px 40px;
+      background: linear-gradient(135deg, var(--gold-300), var(--gold-400));
+      color: var(--dark-950);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: transform 0.25s var(--ease-gold), box-shadow 0.25s;
+      box-shadow: 0 0 0 rgba(212, 175, 55, 0);
+    }
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 40px rgba(212, 175, 55, 0.3);
+    }
+    .btn-ghost {
+      padding: 16px 40px;
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      color: var(--text-secondary);
+      border-radius: var(--radius-sm);
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      transition: border-color 0.25s, color 0.25s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--gold-400);
+      color: var(--gold-400);
+    }
+    .hero__scroll {
+      position: absolute;
+      bottom: 48px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      color: var(--text-muted);
+    }
+    .hero__scroll-text {
+      font-size: 0.625rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+    }
+    .hero__scroll-line {
+      width: 1px;
+      height: 48px;
+      background: linear-gradient(to bottom, var(--gold-500), transparent);
+      animation: scrollPulse 2.4s ease-in-out infinite;
+    }
+    @keyframes scrollPulse {
+      0%, 100% { opacity: 0.3; transform: scaleY(1); transform-origin: top; }
+      50% { opacity: 0.8; }
+    }
+
+    /* ── Marquee Strip ──────────────────────────────────────── */
+    .marquee-strip {
+      border-top: 1px solid rgba(212, 175, 55, 0.12);
+      border-bottom: 1px solid rgba(212, 175, 55, 0.12);
+      padding: 18px 0;
+      overflow: hidden;
+      background: rgba(212, 175, 55, 0.03);
+    }
+    .marquee-track {
+      display: flex;
+      gap: 0;
+      animation: marqueeScroll 28s linear infinite;
+      width: max-content;
+    }
+    .marquee-item {
+      display: flex;
+      align-items: center;
+      gap: 40px;
+      padding-right: 40px;
+      font-size: 0.6875rem;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      white-space: nowrap;
+    }
+    .marquee-dot {
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: var(--gold-500);
+      flex-shrink: 0;
+    }
+    @keyframes marqueeScroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    /* ── About ──────────────────────────────────────────────── */
+    .about {
+      background: var(--dark-800);
+    }
+    .about__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: clamp(48px, 8vw, 120px);
+      align-items: center;
+    }
+    .about__visual {
+      position: relative;
+    }
+    .about__number {
+      font-family: var(--font-display);
+      font-size: clamp(6rem, 14vw, 12rem);
+      font-weight: 300;
+      line-height: 1;
+      color: transparent;
+      -webkit-text-stroke: 1px rgba(212, 175, 55, 0.2);
+      user-select: none;
+      margin-bottom: -2rem;
+    }
+    .about__copy {
+      max-width: 520px;
+    }
+    .about__copy .t-label {
+      color: var(--gold-400);
+      margin-bottom: 20px;
+    }
+    .about__copy h2 {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      margin-bottom: 24px;
+    }
+    .about__copy p {
+      color: var(--text-secondary);
+      font-size: 1.0625rem;
+      line-height: 1.75;
+      margin-bottom: 16px;
+    }
+    .about__stats {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 48px;
+      padding-top: 48px;
+      border-top: 1px solid rgba(212, 175, 55, 0.12);
+    }
+    .stat__value {
+      font-family: var(--font-display);
+      font-size: 2.5rem;
+      font-weight: 300;
+      color: var(--gold-400);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+    .stat__label {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      letter-spacing: 0.08em;
+    }
+
+    /* ── Services ───────────────────────────────────────────── */
+    .services__header {
+      text-align: center;
+      margin-bottom: clamp(48px, 8vw, 80px);
+    }
+    .services__header .t-label {
+      color: var(--gold-400);
+      margin-bottom: 20px;
+    }
+    .services__header h2 {
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+    }
+    .services__grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2px;
+    }
+    .service-card {
+      background: var(--dark-800);
+      padding: clamp(32px, 5vw, 56px);
+      position: relative;
+      overflow: hidden;
+      transition: background 0.3s;
+      cursor: default;
+    }
+    .service-card::before {
+      content: '';
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, var(--gold-400), transparent);
+      transform: scaleX(0);
+      transition: transform 0.4s var(--ease-smooth);
+    }
+    .service-card:hover { background: var(--dark-700); }
+    .service-card:hover::before { transform: scaleX(1); }
+    .service-card__icon {
+      width: 48px;
+      height: 48px;
+      margin-bottom: 28px;
+      color: var(--gold-400);
+    }
+    .service-card__number {
+      position: absolute;
+      top: 24px;
+      right: 28px;
+      font-family: var(--font-display);
+      font-size: 0.875rem;
+      color: var(--text-muted);
+      letter-spacing: 0.1em;
+    }
+    .service-card__title {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 14px;
+    }
+    .service-card__desc {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ── Process ────────────────────────────────────────────── */
+    .process {
+      background: var(--dark-800);
+    }
+    .process__inner {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: clamp(48px, 8vw, 100px);
+      align-items: start;
+    }
+    .process__sticky {
+      position: sticky;
+      top: 120px;
+    }
+    .process__sticky .t-label {
+      color: var(--gold-400);
+      margin-bottom: 20px;
+    }
+    .process__sticky h2 {
+      font-size: clamp(2.2rem, 4vw, 3.5rem);
+      margin-bottom: 20px;
+    }
+    .process__sticky p {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      line-height: 1.75;
+    }
+    .process__steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+    .process-step {
+      display: grid;
+      grid-template-columns: 64px 1fr;
+      gap: 28px;
+      padding-block: 40px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      transition: border-color 0.3s;
+    }
+    .process-step:first-child { padding-top: 0; }
+    .process-step:last-child { border-bottom: none; }
+    .process-step:hover { border-bottom-color: rgba(212, 175, 55, 0.2); }
+    .process-step__num {
+      font-family: var(--font-display);
+      font-size: 1rem;
+      color: var(--gold-500);
+      margin-top: 4px;
+    }
+    .process-step__title {
+      font-family: var(--font-display);
+      font-size: 1.375rem;
+      font-weight: 400;
+      margin-bottom: 10px;
+    }
+    .process-step__desc {
+      font-size: 0.9375rem;
+      color: var(--text-secondary);
+      line-height: 1.7;
+    }
+
+    /* ── Work Grid ──────────────────────────────────────────── */
+    .work__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: clamp(40px, 6vw, 64px);
+    }
+    .work__header h2 {
+      font-size: clamp(2.4rem, 5vw, 4.5rem);
+    }
+    .work__link {
+      font-size: 0.75rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold-400);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: gap 0.25s;
+    }
+    .work__link:hover { gap: 14px; }
+    .work__grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      grid-template-rows: auto;
+      gap: 16px;
+    }
+    .work-item {
+      position: relative;
+      overflow: hidden;
+      border-radius: var(--radius-sm);
+      background: var(--dark-700);
+      cursor: pointer;
+    }
+    .work-item:nth-child(1) { grid-column: span 7; grid-row: span 1; aspect-ratio: 16/9; }
+    .work-item:nth-child(2) { grid-column: span 5; grid-row: span 1; aspect-ratio: 4/3; }
+    .work-item:nth-child(3) { grid-column: span 4; aspect-ratio: 3/4; }
+    .work-item:nth-child(4) { grid-column: span 8; aspect-ratio: 16/9; }
+    .work-item__visual {
+      width: 100%;
+      height: 100%;
+      transition: transform 0.6s var(--ease-smooth);
+    }
+    .work-item:hover .work-item__visual { transform: scale(1.04); }
+    .work-item__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 28px;
+    }
+    .work-item:hover .work-item__overlay { opacity: 1; }
+    .work-item__meta {}
+    .work-item__cat {
+      font-size: 0.625rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold-400);
+      margin-bottom: 6px;
+    }
+    .work-item__title {
+      font-family: var(--font-display);
+      font-size: 1.25rem;
+      font-weight: 400;
+    }
+
+    /* ── Testimonial ────────────────────────────────────────── */
+    .testimonial {
+      background: var(--dark-800);
+      text-align: center;
+    }
+    .testimonial__inner {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .testimonial__quote-mark {
+      font-family: var(--font-display);
+      font-size: 6rem;
+      line-height: 0.5;
+      color: var(--gold-400);
+      opacity: 0.4;
+      margin-bottom: 32px;
+    }
+    .testimonial__text {
+      font-family: var(--font-display);
+      font-size: clamp(1.5rem, 3vw, 2.25rem);
+      font-style: italic;
+      font-weight: 300;
+      line-height: 1.5;
+      color: var(--text-primary);
+      margin-bottom: 40px;
+    }
+    .testimonial__author {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+    }
+    .testimonial__avatar {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: var(--dark-600);
+      border: 1px solid rgba(212, 175, 55, 0.3);
+      overflow: hidden;
+    }
+    .testimonial__name {
+      font-size: 0.875rem;
+      color: var(--text-primary);
+      font-weight: 400;
+    }
+    .testimonial__role {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    /* ── CTA ────────────────────────────────────────────────── */
+    .cta {
+      position: relative;
+      overflow: hidden;
+      text-align: center;
+    }
+    .cta__bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 100%, rgba(212, 175, 55, 0.08) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .cta__inner {
+      position: relative;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .cta .t-label {
+      color: var(--gold-400);
+      margin-bottom: 20px;
+    }
+    .cta h2 {
+      font-size: clamp(2.8rem, 6vw, 5.5rem);
+      margin-bottom: 24px;
+    }
+    .cta p {
+      font-size: 1.125rem;
+      color: var(--text-secondary);
+      margin-bottom: 48px;
+      line-height: 1.75;
+    }
+
+    /* ── Footer ─────────────────────────────────────────────── */
+    footer {
+      border-top: 1px solid rgba(212, 175, 55, 0.1);
+      padding-block: 48px;
+    }
+    .footer__inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footer__copy {
+      font-size: 0.8125rem;
+      color: var(--text-muted);
+    }
+    .footer__links {
+      display: flex;
+      gap: 32px;
+    }
+    .footer__link {
+      font-size: 0.75rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      transition: color 0.2s;
+    }
+    .footer__link:hover { color: var(--gold-400); }
+
+    /* ── Animations ─────────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s var(--ease-smooth), transform 0.7s var(--ease-smooth);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── Responsive ─────────────────────────────────────────── */
+    @media (max-width: 900px) {
+      .nav__links { display: none; }
+      .about__grid { grid-template-columns: 1fr; }
+      .about__number { font-size: clamp(5rem, 18vw, 8rem); }
+      .services__grid { grid-template-columns: 1fr; gap: 2px; }
+      .process__inner { grid-template-columns: 1fr; }
+      .process__sticky { position: static; }
+      .work__grid { grid-template-columns: 1fr; }
+      .work-item { grid-column: span 1 !important; aspect-ratio: 16/9 !important; }
+      .footer__inner { flex-direction: column; gap: 24px; text-align: center; }
+      .footer__links { flex-wrap: wrap; justify-content: center; }
+    }
+
+    /* ── Geometric background orbs ──────────────────────────── */
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<!-- Navigation -->
+<nav class="nav" id="nav">
+  <div class="container">
+    <div class="nav__inner">
+      <a href="#" class="nav__logo" aria-label="Aurum home">
+        <!-- Logo SVG Mark -->
+        <svg class="nav__logo-mark" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+          <polygon points="16,2 30,26 2,26" stroke="#D4AF37" stroke-width="1.5" fill="none"/>
+          <polygon points="16,10 24,24 8,24" fill="#D4AF37" opacity="0.25"/>
+          <line x1="16" y1="2" x2="16" y2="26" stroke="#D4AF37" stroke-width="0.75" opacity="0.5"/>
+        </svg>
+        <span class="nav__wordmark">AURUM</span>
+      </a>
+      <ul class="nav__links" role="list">
+        <li><a href="#work" class="nav__link">Work</a></li>
+        <li><a href="#services" class="nav__link">Services</a></li>
+        <li><a href="#process" class="nav__link">Process</a></li>
+        <li><a href="#contact" class="nav__cta">Start a project</a></li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<!-- Hero -->
+<section class="hero" aria-labelledby="hero-heading">
+  <!-- Animated background SVG -->
+  <div class="hero__bg" aria-hidden="true">
+    <svg width="100%" height="100%" viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice">
+      <defs>
+        <radialGradient id="heroGlow" cx="50%" cy="70%" r="60%">
+          <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.06"/>
+          <stop offset="100%" stop-color="#D4AF37" stop-opacity="0"/>
+        </radialGradient>
+        <linearGradient id="lineGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+          <stop offset="0%" stop-color="#D4AF37" stop-opacity="0"/>
+          <stop offset="50%" stop-color="#D4AF37" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="#D4AF37" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      <rect width="1440" height="900" fill="url(#heroGlow)"/>
+      <!-- Geometric grid lines -->
+      <g opacity="0.07" stroke="#D4AF37" stroke-width="0.5">
+        <line x1="0" y1="150" x2="1440" y2="150"/>
+        <line x1="0" y1="300" x2="1440" y2="300"/>
+        <line x1="0" y1="450" x2="1440" y2="450"/>
+        <line x1="0" y1="600" x2="1440" y2="600"/>
+        <line x1="0" y1="750" x2="1440" y2="750"/>
+        <line x1="240" y1="0" x2="240" y2="900"/>
+        <line x1="480" y1="0" x2="480" y2="900"/>
+        <line x1="720" y1="0" x2="720" y2="900"/>
+        <line x1="960" y1="0" x2="960" y2="900"/>
+        <line x1="1200" y1="0" x2="1200" y2="900"/>
+      </g>
+      <!-- Large decorative diamond -->
+      <polygon points="720,160 860,450 720,740 580,450" stroke="#D4AF37" stroke-width="0.75" fill="none" opacity="0.1"/>
+      <polygon points="720,260 810,450 720,640 630,450" stroke="#D4AF37" stroke-width="0.5" fill="none" opacity="0.08"/>
+      <!-- Corner ornaments -->
+      <g opacity="0.15" stroke="#D4AF37" stroke-width="0.75" fill="none">
+        <polyline points="40,40 40,80 80,80"/>
+        <polyline points="1400,40 1360,40 1360,80"/>
+        <polyline points="40,860 40,820 80,820"/>
+        <polyline points="1400,860 1360,860 1360,820"/>
+      </g>
+    </svg>
+    <!-- Glow orbs -->
+    <div class="orb" style="width:600px;height:600px;background:radial-gradient(circle,rgba(212,175,55,0.06),transparent);top:-100px;left:-100px;"></div>
+    <div class="orb" style="width:400px;height:400px;background:radial-gradient(circle,rgba(212,175,55,0.08),transparent);bottom:-50px;right:10%;"></div>
+  </div>
+
+  <div class="container">
+    <div class="hero__content">
+      <div class="hero__eyebrow t-label reveal">
+        <span class="hero__eyebrow-line" aria-hidden="true"></span>
+        Digital Craft Studio
+        <span class="hero__eyebrow-line" aria-hidden="true"></span>
+      </div>
+      <h1 class="t-display hero__title reveal reveal-delay-1">
+        <span class="gradient-text">Crafting</span><br/>
+        <em style="font-style:italic;color:var(--text-primary)">beautiful</em> digital<br/>
+        <span class="gradient-text">experiences</span>
+      </h1>
+      <p class="hero__subtitle reveal reveal-delay-2">
+        We build web presences that feel as refined as the brands they represent.
+      </p>
+      <div class="hero__actions reveal reveal-delay-3">
+        <a href="#work" class="btn-primary">View our work</a>
+        <a href="#services" class="btn-ghost">Explore services</a>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero__scroll" aria-hidden="true">
+    <span class="hero__scroll-text">scroll</span>
+    <div class="hero__scroll-line"></div>
+  </div>
+</section>
+
+<!-- Marquee -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <!-- Duplicated for seamless loop -->
+    <div class="marquee-item"><span class="marquee-dot"></span>Brand Identity</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Web Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>UI Systems</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Motion Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Frontend Dev</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Design Systems</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Art Direction</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Production Ready</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Brand Identity</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Web Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>UI Systems</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Motion Design</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Frontend Dev</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Design Systems</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Art Direction</div>
+    <div class="marquee-item"><span class="marquee-dot"></span>Production Ready</div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about section" id="about" aria-labelledby="about-heading">
+  <div class="container">
+    <div class="about__grid">
+      <div class="about__visual reveal" aria-hidden="true">
+        <!-- Large decorative SVG composition -->
+        <div class="about__number">07</div>
+        <svg viewBox="0 0 480 480" fill="none" style="max-width:420px;margin-top:-60px;">
+          <defs>
+            <linearGradient id="circleGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.6"/>
+              <stop offset="100%" stop-color="#9A7D0A" stop-opacity="0.2"/>
+            </linearGradient>
+            <radialGradient id="innerGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#D4AF37" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <!-- Outer rings -->
+          <circle cx="240" cy="240" r="220" stroke="#D4AF37" stroke-width="0.5" opacity="0.15"/>
+          <circle cx="240" cy="240" r="180" stroke="#D4AF37" stroke-width="0.5" opacity="0.2"/>
+          <circle cx="240" cy="240" r="140" stroke="#D4AF37" stroke-width="1" opacity="0.25"/>
+          <!-- Filled inner -->
+          <circle cx="240" cy="240" r="90" fill="url(#innerGlow)"/>
+          <circle cx="240" cy="240" r="90" stroke="url(#circleGrad)" stroke-width="1.5"/>
+          <!-- Cross marks on ring -->
+          <g stroke="#D4AF37" stroke-width="1" opacity="0.5">
+            <line x1="60" y1="240" x2="70" y2="240"/>
+            <line x1="410" y1="240" x2="420" y2="240"/>
+            <line x1="240" y1="60" x2="240" y2="70"/>
+            <line x1="240" y1="410" x2="240" y2="420"/>
+          </g>
+          <!-- Center geometry -->
+          <polygon points="240,170 296,255 240,310 184,255" stroke="#D4AF37" stroke-width="1.5" fill="rgba(212,175,55,0.08)"/>
+          <!-- Small decorative circles -->
+          <circle cx="240" cy="170" r="4" fill="#D4AF37"/>
+          <circle cx="296" cy="255" r="4" fill="#D4AF37"/>
+          <circle cx="240" cy="310" r="4" fill="#D4AF37"/>
+          <circle cx="184" cy="255" r="4" fill="#D4AF37"/>
+          <!-- Dotted ring -->
+          <circle cx="240" cy="240" r="105" stroke="#D4AF37" stroke-width="0.5" stroke-dasharray="3 8" opacity="0.4"/>
+          <!-- Year label -->
+          <text x="240" y="248" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-size="14" fill="#D4AF37" opacity="0.7" letter-spacing="3">MMXXIV</text>
+        </svg>
+      </div>
+      <div class="about__copy">
+        <p class="t-label reveal">About the studio</p>
+        <h2 class="t-display reveal reveal-delay-1" id="about-heading">
+          Where craft meets<br/><em class="gradient-text">precision</em>
+        </h2>
+        <p class="reveal reveal-delay-2">
+          Aurum is a boutique digital studio that believes the web deserves the same
+          care as a hand-bound book or a tailored garment. We design and build
+          experiences that are beautiful before they are functional — because beauty
+          is a function.
+        </p>
+        <p class="reveal reveal-delay-2">
+          Every project ships with production-grade code, WCAG AA accessibility,
+          and a documented design system your team can maintain for years.
+        </p>
+        <div class="about__stats reveal reveal-delay-3">
+          <div>
+            <div class="stat__value">47</div>
+            <div class="stat__label">Projects shipped</div>
+          </div>
+          <div>
+            <div class="stat__value">98</div>
+            <div class="stat__label">Lighthouse avg.</div>
+          </div>
+          <div>
+            <div class="stat__value">7</div>
+            <div class="stat__label">Years building</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Services -->
+<section class="section" id="services" aria-labelledby="services-heading">
+  <div class="container">
+    <div class="services__header">
+      <p class="t-label reveal">What we do</p>
+      <h2 class="t-display reveal reveal-delay-1" id="services-heading">
+        Full-spectrum<br/><em class="gradient-text">digital craft</em>
+      </h2>
+    </div>
+    <div class="services__grid">
+      <article class="service-card reveal">
+        <span class="service-card__number">01</span>
+        <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <rect x="4" y="8" width="40" height="32" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="4" y1="16" x2="44" y2="16" stroke="currentColor" stroke-width="1.5"/>
+          <circle cx="10" cy="12" r="1.5" fill="currentColor"/>
+          <circle cx="16" cy="12" r="1.5" fill="currentColor"/>
+          <circle cx="22" cy="12" r="1.5" fill="currentColor"/>
+          <rect x="10" y="22" width="12" height="10" rx="1" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          <line x1="26" y1="24" x2="38" y2="24" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          <line x1="26" y1="28" x2="35" y2="28" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+          <line x1="26" y1="32" x2="38" y2="32" stroke="currentColor" stroke-width="1" opacity="0.5"/>
+        </svg>
+        <h3 class="service-card__title">Web Design</h3>
+        <p class="service-card__desc">High-fidelity designs with every state considered. Pixel-perfect specs your developers will thank you for.</p>
+      </article>
+      <article class="service-card reveal reveal-delay-1">
+        <span class="service-card__number">02</span>
+        <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M6 24C6 14.06 14.06 6 24 6s18 8.06 18 18-8.06 18-18 18" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="24" y1="6" x2="24" y2="18" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+          <line x1="24" y1="30" x2="24" y2="42" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+          <line x1="6" y1="24" x2="18" y2="24" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+          <line x1="30" y1="24" x2="42" y2="24" stroke="currentColor" stroke-width="1.5" opacity="0.5"/>
+        </svg>
+        <h3 class="service-card__title">Design Systems</h3>
+        <p class="service-card__desc">Token-based design systems with living documentation. Build once, scale forever, maintain without pain.</p>
+      </article>
+      <article class="service-card reveal reveal-delay-2">
+        <span class="service-card__number">03</span>
+        <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <polyline points="8,36 18,24 26,30 36,18 42,22" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <circle cx="8" cy="36" r="2.5" fill="currentColor"/>
+          <circle cx="18" cy="24" r="2.5" fill="currentColor"/>
+          <circle cx="26" cy="30" r="2.5" fill="currentColor"/>
+          <circle cx="36" cy="18" r="2.5" fill="currentColor"/>
+          <circle cx="42" cy="22" r="2.5" fill="currentColor"/>
+          <line x1="8" y1="42" x2="42" y2="42" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+        </svg>
+        <h3 class="service-card__title">Motion & Animation</h3>
+        <p class="service-card__desc">Purposeful micro-interactions and page transitions that communicate quality without demanding attention.</p>
+      </article>
+      <article class="service-card reveal">
+        <span class="service-card__number">04</span>
+        <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <rect x="6" y="6" width="36" height="36" rx="2" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="6" y1="18" x2="42" y2="18" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+          <line x1="18" y1="18" x2="18" y2="42" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+          <rect x="22" y="22" width="14" height="10" rx="1" fill="currentColor" opacity="0.15"/>
+          <rect x="22" y="22" width="14" height="10" rx="1" stroke="currentColor" stroke-width="1"/>
+        </svg>
+        <h3 class="service-card__title">Frontend Development</h3>
+        <p class="service-card__desc">Production code with Lighthouse 95+, WCAG AA accessibility, and zero render-blocking resources. Ships fast, stays fast.</p>
+      </article>
+      <article class="service-card reveal reveal-delay-1">
+        <span class="service-card__number">05</span>
+        <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <path d="M24 6L6 18v12l18 12 18-12V18L24 6z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
+          <line x1="24" y1="6" x2="24" y2="42" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+          <line x1="6" y1="18" x2="42" y2="18" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+          <line x1="6" y1="30" x2="42" y2="30" stroke="currentColor" stroke-width="1" opacity="0.4"/>
+        </svg>
+        <h3 class="service-card__title">Brand Identity</h3>
+        <p class="service-card__desc">Logomarks, typographic systems, and color palettes that communicate who you are before a single word is read.</p>
+      </article>
+      <article class="service-card reveal reveal-delay-2">
+        <span class="service-card__number">06</span>
+        <svg class="service-card__icon" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+          <circle cx="24" cy="20" r="10" stroke="currentColor" stroke-width="1.5"/>
+          <path d="M10 42c0-7.73 6.27-14 14-14s14 6.27 14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+          <circle cx="36" cy="14" r="6" fill="var(--dark-800)" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="36" y1="11" x2="36" y2="17" stroke="currentColor" stroke-width="1.5"/>
+          <line x1="33" y1="14" x2="39" y2="14" stroke="currentColor" stroke-width="1.5"/>
+        </svg>
+        <h3 class="service-card__title">UX Research</h3>
+        <p class="service-card__desc">User testing, heuristic evaluation, and flow analysis that removes assumption from design decisions.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Work -->
+<section class="section" id="work" aria-labelledby="work-heading">
+  <div class="container">
+    <div class="work__header">
+      <h2 class="t-display reveal" id="work-heading">Selected<br/><em class="gradient-text">work</em></h2>
+      <a href="#" class="work__link reveal">
+        View all projects
+        <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+          <line x1="2" y1="7" x2="12" y2="7" stroke="currentColor" stroke-width="1.25"/>
+          <polyline points="7,2 12,7 7,12" stroke="currentColor" stroke-width="1.25" stroke-linejoin="round"/>
+        </svg>
+      </a>
+    </div>
+    <div class="work__grid">
+      <!-- Work item 1 (large) — SVG mock -->
+      <div class="work-item reveal" tabindex="0" role="img" aria-label="Vesper e-commerce project">
+        <svg class="work-item__visual" viewBox="0 0 700 400" fill="none" preserveAspectRatio="xMidYMid slice">
+          <rect width="700" height="400" fill="#141414"/>
+          <rect x="0" y="0" width="700" height="400" fill="url(#wk1grad)"/>
+          <defs>
+            <linearGradient id="wk1grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#1a1500"/>
+              <stop offset="100%" stop-color="#0d0d0d"/>
+            </linearGradient>
+          </defs>
+          <!-- Simulated web page layout -->
+          <rect x="40" y="40" width="320" height="4" rx="2" fill="#D4AF37" opacity="0.6"/>
+          <rect x="40" y="60" width="200" height="3" rx="1.5" fill="#6B6459"/>
+          <rect x="40" y="72" width="240" height="3" rx="1.5" fill="#6B6459"/>
+          <rect x="40" y="110" width="120" height="44" rx="4" fill="#D4AF37" opacity="0.9"/>
+          <rect x="40" y="110" width="120" height="44" rx="4" fill="#D4AF37"/>
+          <text x="100" y="137" text-anchor="middle" font-family="Georgia,serif" font-size="11" fill="#0D0D0D" letter-spacing="2">SHOP NOW</text>
+          <rect x="180" y="110" width="120" height="44" rx="4" fill="none" stroke="#D4AF37" stroke-width="1" opacity="0.5"/>
+          <!-- Product cards -->
+          <rect x="400" y="20" width="140" height="180" rx="4" fill="#1C1C1C"/>
+          <rect x="400" y="20" width="140" height="120" rx="4" fill="#272727"/>
+          <circle cx="470" cy="80" r="28" fill="none" stroke="#D4AF37" stroke-width="1" opacity="0.3"/>
+          <circle cx="470" cy="80" r="16" fill="#D4AF37" opacity="0.15"/>
+          <text x="410" y="170" font-family="Georgia,serif" font-size="9" fill="#D4AF37" opacity="0.7">VESPER NO. 3</text>
+          <text x="410" y="185" font-family="Georgia,serif" font-size="8" fill="#6B6459">$340</text>
+          <rect x="560" y="20" width="120" height="180" rx="4" fill="#1C1C1C"/>
+          <rect x="560" y="20" width="120" height="120" rx="4" fill="#272727"/>
+          <circle cx="620" cy="80" r="24" fill="none" stroke="#B8960C" stroke-width="1" opacity="0.3"/>
+          <text x="568" y="170" font-family="Georgia,serif" font-size="9" fill="#D4AF37" opacity="0.7">VESPER NO. 7</text>
+          <text x="568" y="185" font-family="Georgia,serif" font-size="8" fill="#6B6459">$480</text>
+          <!-- Bottom bar -->
+          <rect x="0" y="360" width="700" height="40" fill="#0D0D0D" opacity="0.8"/>
+          <rect x="40" y="373" width="60" height="2" rx="1" fill="#D4AF37" opacity="0.4"/>
+          <rect x="620" y="370" width="48" height="20" rx="3" fill="#D4AF37"/>
+        </svg>
+        <div class="work-item__overlay">
+          <div class="work-item__meta">
+            <p class="work-item__cat">E-Commerce</p>
+            <p class="work-item__title">Vesper Luxury Fragrance</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Work item 2 (medium) — SVG mock -->
+      <div class="work-item reveal reveal-delay-1" tabindex="0" role="img" aria-label="Monolith architecture firm project">
+        <svg class="work-item__visual" viewBox="0 0 500 380" fill="none" preserveAspectRatio="xMidYMid slice">
+          <rect width="500" height="380" fill="#0E0E12"/>
+          <defs>
+            <linearGradient id="wk2grad" x1="0%" y1="100%" x2="100%" y2="0%">
+              <stop offset="0%" stop-color="#0a0a0f"/>
+              <stop offset="100%" stop-color="#141420"/>
+            </linearGradient>
+          </defs>
+          <rect width="500" height="380" fill="url(#wk2grad)"/>
+          <!-- Architectural lines -->
+          <line x1="0" y1="280" x2="500" y2="280" stroke="#D4AF37" stroke-width="0.5" opacity="0.15"/>
+          <rect x="60" y="100" width="2" height="180" fill="#D4AF37" opacity="0.3"/>
+          <rect x="160" y="140" width="2" height="140" fill="#D4AF37" opacity="0.2"/>
+          <rect x="260" y="80" width="2" height="200" fill="#D4AF37" opacity="0.4"/>
+          <rect x="360" y="120" width="2" height="160" fill="#D4AF37" opacity="0.2"/>
+          <rect x="440" y="160" width="2" height="120" fill="#D4AF37" opacity="0.15"/>
+          <!-- Headline text mock -->
+          <rect x="40" y="30" width="260" height="18" rx="3" fill="#EDD06A" opacity="0.7"/>
+          <rect x="40" y="56" width="180" height="12" rx="2" fill="#6B6459" opacity="0.6"/>
+          <rect x="40" y="74" width="140" height="12" rx="2" fill="#6B6459" opacity="0.4"/>
+          <!-- Dot nav -->
+          <circle cx="40" cy="310" r="4" fill="#D4AF37"/>
+          <circle cx="54" cy="310" r="3" fill="#6B6459" opacity="0.4"/>
+          <circle cx="66" cy="310" r="3" fill="#6B6459" opacity="0.4"/>
+        </svg>
+        <div class="work-item__overlay">
+          <div class="work-item__meta">
+            <p class="work-item__cat">Architecture</p>
+            <p class="work-item__title">Monolith Studio</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Work item 3 (portrait) — SVG mock -->
+      <div class="work-item reveal" tabindex="0" role="img" aria-label="Auric app design project">
+        <svg class="work-item__visual" viewBox="0 0 400 540" fill="none" preserveAspectRatio="xMidYMid slice">
+          <rect width="400" height="540" fill="#100D08"/>
+          <!-- Phone bezel -->
+          <rect x="100" y="40" width="200" height="400" rx="28" fill="#1C1C1C" stroke="#2A2A2A" stroke-width="1.5"/>
+          <rect x="114" y="56" width="172" height="368" rx="20" fill="#0D0D0D"/>
+          <!-- Dynamic island -->
+          <rect x="158" y="66" width="84" height="14" rx="7" fill="#1C1C1C"/>
+          <!-- App UI -->
+          <rect x="130" y="96" width="140" height="3" rx="1.5" fill="#D4AF37" opacity="0.8"/>
+          <rect x="130" y="108" width="90" height="2" rx="1" fill="#6B6459" opacity="0.5"/>
+          <!-- Card -->
+          <rect x="124" y="124" width="152" height="90" rx="12" fill="#1C1C1C"/>
+          <circle cx="200" cy="158" r="18" fill="none" stroke="#D4AF37" stroke-width="1.5" opacity="0.6"/>
+          <circle cx="200" cy="158" r="8" fill="#D4AF37" opacity="0.3"/>
+          <rect x="134" y="200" width="70" height="2" rx="1" fill="#6B6459" opacity="0.4"/>
+          <rect x="134" y="208" width="50" height="2" rx="1" fill="#6B6459" opacity="0.3"/>
+          <!-- Bottom tabs -->
+          <rect x="124" y="390" width="152" height="28" rx="8" fill="#1C1C1C"/>
+          <rect x="134" y="398" width="28" height="12" rx="4" fill="#D4AF37" opacity="0.8"/>
+          <rect x="172" y="400" width="20" height="8" rx="3" fill="#363636"/>
+          <rect x="202" y="400" width="20" height="8" rx="3" fill="#363636"/>
+          <rect x="232" y="400" width="20" height="8" rx="3" fill="#363636"/>
+          <!-- Home indicator -->
+          <rect x="160" y="424" width="80" height="3" rx="1.5" fill="#363636"/>
+        </svg>
+        <div class="work-item__overlay">
+          <div class="work-item__meta">
+            <p class="work-item__cat">Mobile App</p>
+            <p class="work-item__title">Auric Finance</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Work item 4 (wide) — SVG mock -->
+      <div class="work-item reveal reveal-delay-1" tabindex="0" role="img" aria-label="Lumen editorial magazine project">
+        <svg class="work-item__visual" viewBox="0 0 800 450" fill="none" preserveAspectRatio="xMidYMid slice">
+          <rect width="800" height="450" fill="#08080C"/>
+          <defs>
+            <radialGradient id="wk4glow" cx="70%" cy="40%" r="50%">
+              <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.07"/>
+              <stop offset="100%" stop-color="#D4AF37" stop-opacity="0"/>
+            </radialGradient>
+          </defs>
+          <rect width="800" height="450" fill="url(#wk4glow)"/>
+          <!-- Editorial grid -->
+          <rect x="40" y="40" width="340" height="370" rx="4" fill="#111"/>
+          <!-- Text columns mock -->
+          <rect x="60" y="60" width="120" height="8" rx="2" fill="#D4AF37" opacity="0.6"/>
+          <rect x="60" y="78" width="300" height="4" rx="2" fill="#3A3A3A"/>
+          <rect x="60" y="90" width="280" height="4" rx="2" fill="#3A3A3A"/>
+          <rect x="60" y="102" width="300" height="4" rx="2" fill="#3A3A3A"/>
+          <rect x="60" y="114" width="200" height="4" rx="2" fill="#3A3A3A"/>
+          <!-- Pull quote -->
+          <rect x="60" y="140" width="3" height="80" fill="#D4AF37" opacity="0.6"/>
+          <rect x="72" y="150" width="200" height="6" rx="2" fill="#D4AF37" opacity="0.3"/>
+          <rect x="72" y="164" width="170" height="6" rx="2" fill="#D4AF37" opacity="0.2"/>
+          <rect x="72" y="178" width="190" height="6" rx="2" fill="#D4AF37" opacity="0.25"/>
+          <rect x="72" y="192" width="120" height="6" rx="2" fill="#D4AF37" opacity="0.15"/>
+          <!-- Large image placeholder -->
+          <rect x="420" y="40" width="340" height="240" rx="4" fill="#1C1C1C"/>
+          <circle cx="590" cy="160" r="50" fill="none" stroke="#D4AF37" stroke-width="0.75" opacity="0.2"/>
+          <circle cx="590" cy="160" r="30" fill="#D4AF37" opacity="0.05"/>
+          <text x="590" y="165" text-anchor="middle" font-family="Georgia,serif" font-size="28" fill="#D4AF37" opacity="0.15">✦</text>
+          <!-- Caption -->
+          <rect x="420" y="296" width="140" height="4" rx="2" fill="#3A3A3A"/>
+          <rect x="420" y="308" width="100" height="3" rx="1.5" fill="#2A2A2A"/>
+          <!-- Nav -->
+          <rect x="40" y="12" width="720" height="1" fill="#D4AF37" opacity="0.1"/>
+          <rect x="60" y="18" width="60" height="6" rx="2" fill="#D4AF37" opacity="0.5"/>
+          <rect x="660" y="18" width="80" height="6" rx="2" fill="#3A3A3A"/>
+        </svg>
+        <div class="work-item__overlay">
+          <div class="work-item__meta">
+            <p class="work-item__cat">Editorial</p>
+            <p class="work-item__title">Lumen Magazine</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Process -->
+<section class="process section" id="process" aria-labelledby="process-heading">
+  <div class="container">
+    <div class="process__inner">
+      <div class="process__sticky">
+        <p class="t-label reveal">How we work</p>
+        <h2 class="t-display reveal reveal-delay-1" id="process-heading">
+          A process<br/>built on<br/><em class="gradient-text">trust</em>
+        </h2>
+        <p class="reveal reveal-delay-2" style="color:var(--text-secondary);margin-top:20px;font-size:1rem;line-height:1.75;">
+          Every deliverable is production-ready the day it ships.
+          No "phase two cleanup." No design debt handed off.
+        </p>
+      </div>
+      <div class="process__steps">
+        <div class="process-step reveal">
+          <span class="process-step__num">01</span>
+          <div>
+            <h3 class="process-step__title">Discovery &amp; Alignment</h3>
+            <p class="process-step__desc">We learn your audience, your constraints, and the one thing your site must communicate before anything else. We leave with a brief both sides can commit to.</p>
+          </div>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <span class="process-step__num">02</span>
+          <div>
+            <h3 class="process-step__title">Design System Foundation</h3>
+            <p class="process-step__desc">Tokens first — color, type, spacing, motion. Every visual decision that follows traces back to a token. We build the language before we speak in it.</p>
+          </div>
+        </div>
+        <div class="process-step reveal reveal-delay-2">
+          <span class="process-step__num">03</span>
+          <div>
+            <h3 class="process-step__title">High-Fidelity Design</h3>
+            <p class="process-step__desc">Every state. Every breakpoint. Every empty, error, and loading condition. We do not hand off ambiguity — we hand off specs a developer can follow without asking questions.</p>
+          </div>
+        </div>
+        <div class="process-step reveal">
+          <span class="process-step__num">04</span>
+          <div>
+            <h3 class="process-step__title">Production Build</h3>
+            <p class="process-step__desc">Semantic HTML, accessible markup, optimised assets, zero render-blocking. Lighthouse 95+ is the floor, not the goal. Code you can read in two years.</p>
+          </div>
+        </div>
+        <div class="process-step reveal reveal-delay-1">
+          <span class="process-step__num">05</span>
+          <div>
+            <h3 class="process-step__title">QA &amp; Handoff</h3>
+            <p class="process-step__desc">Cross-browser, cross-device, accessibility audit. You receive the live site and a documented design system your team can extend without us in the room.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonial -->
+<section class="testimonial section" aria-label="Client testimonial">
+  <div class="container">
+    <div class="testimonial__inner">
+      <div class="testimonial__quote-mark reveal" aria-hidden="true">"</div>
+      <blockquote>
+        <p class="testimonial__text reveal reveal-delay-1">
+          "Aurum delivered something I could not have articulated to them at the start —
+          a site that feels like the brand rather than describing it."
+        </p>
+        <footer class="testimonial__author reveal reveal-delay-2">
+          <div class="testimonial__avatar" aria-hidden="true">
+            <svg viewBox="0 0 48 48" fill="none">
+              <circle cx="24" cy="18" r="8" fill="#D4AF37" opacity="0.3"/>
+              <path d="M8 42c0-8.84 7.16-16 16-16s16 7.16 16 16" fill="#D4AF37" opacity="0.2"/>
+            </svg>
+          </div>
+          <div>
+            <div class="testimonial__name">Élise Marchand</div>
+            <div class="testimonial__role">Founder, Maison Marchand</div>
+          </div>
+        </footer>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="cta section" id="contact" aria-labelledby="cta-heading">
+  <div class="cta__bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="cta__inner">
+      <p class="t-label reveal">Start a project</p>
+      <h2 class="t-display reveal reveal-delay-1" id="cta-heading">
+        Let's make something<br/><em class="gradient-text">extraordinary</em>
+      </h2>
+      <p class="reveal reveal-delay-2">
+        We take on four projects per quarter. If you have a brief —
+        or just an ambition — we would like to hear from you.
+      </p>
+      <div class="hero__actions reveal reveal-delay-3">
+        <a href="mailto:hello@aurum.studio" class="btn-primary">Send us a brief</a>
+        <a href="#work" class="btn-ghost">See our work first</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer aria-label="Site footer">
+  <div class="container">
+    <div class="footer__inner">
+      <span class="footer__copy">© 2024 Aurum Studio. All rights reserved.</span>
+      <ul class="footer__links" role="list">
+        <li><a href="#" class="footer__link">Privacy</a></li>
+        <li><a href="#" class="footer__link">Terms</a></li>
+        <li><a href="#" class="footer__link">Colophon</a></li>
+        <li><a href="#" class="footer__link">Instagram</a></li>
+      </ul>
+    </div>
+  </div>
+</footer>
+
+<!-- Scripts -->
+<script>
+  // ── Scroll-triggered nav ───────────────────────────────────
+  const nav = document.getElementById('nav');
+  const onScroll = () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  };
+  window.addEventListener('scroll', onScroll, { passive: true });
+
+  // ── Reveal on scroll ───────────────────────────────────────
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          observer.unobserve(e.target);
+        }
+      });
+    },
+    { threshold: 0.12, rootMargin: '0px 0px -40px 0px' }
+  );
+  reveals.forEach(el => observer.observe(el));
+
+  // ── Respect reduced motion ─────────────────────────────────
+  const mq = window.matchMedia('(prefers-reduced-motion: reduce)');
+  if (mq.matches) {
+    reveals.forEach(el => el.classList.add('visible'));
+    document.querySelectorAll('.marquee-track').forEach(el => {
+      el.style.animationPlayState = 'paused';
+    });
+  }
+</script>
+
+</body>
+</html>

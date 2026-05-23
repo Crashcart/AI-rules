@@ -1,12 +1,21 @@
 {
-  "version": "1.16.0",
-  "released": "2026-05-22",
+  "version": "1.17.0",
+  "released": "2026-05-23",
   "rules_sha256": "c9ee51402c14d9f5091ae09158679d2b65ac6fcc6545688289af652d5278131b",
-  "changelog_entry": "Pre-qualification code test gate: mandatory before scenario interview, pass threshold 10/20, scored on Correctness/Code Quality/Error Handling/Performance (max 20). Test bank for all 11 role categories. Audio/Streaming Engineer pool retroactively tested — Kai Nakamura confirmed finalist (34/35 combined). HIRING MANAGER profile updated with code test requirement.",
+  "changelog_entry": "Agent profile standardization: 13 profiles updated to full profile standard. Priority 1 (Thinking Process + Role Scope + Escalation Triggers): tech-lead, scrum-master, dba, data-engineer, ai-prompt-engineer. Priority 2 (Thinking Process only): devops-pipeline, devops-incident, security-appsec, security-infra, qa-automation, ml-ops-engineer, ml-researcher. Priority 3 (Escalation Triggers only): project-manager.",
   "files": [
-    "hiring/test-bank.md",
-    "hiring/process.md",
-    "hiring/pools/audio-streaming-engineer.md",
-    "agents/hiring-manager.md"
+    "agents/tech-lead.md",
+    "agents/scrum-master.md",
+    "agents/dba.md",
+    "agents/data-engineer.md",
+    "agents/ai-prompt-engineer.md",
+    "agents/devops-pipeline.md",
+    "agents/devops-incident.md",
+    "agents/security-appsec.md",
+    "agents/security-infra.md",
+    "agents/qa-automation.md",
+    "agents/ml-ops-engineer.md",
+    "agents/ml-researcher.md",
+    "agents/project-manager.md"
   ]
 }
