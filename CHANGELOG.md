@@ -4,6 +4,29 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.20.0] 2026-05-23
+
+**Rationale**: When a new AI (GPT, Gemini, Ollama, or any future model) loads into the Crashcart system, it had no automated way to detect rule updates or bootstrap its own rules file if missing. This version adds RULE 19 to `rules/universal.md` — a mandatory session-start check covering (1) version verification on every load and (2) auto-bootstrap if the AI's rules file doesn't exist. GPT and Gemini rules files now include explicit SESSION START CHECK and HIGHEST-LEVEL INJECTION sections. A bootstrap template and CLI script make onboarding any new AI type a one-command operation.
+
+### Added
+
+- `rules/universal.md` § RULE 19 — AI BOOTSTRAP AND SESSION-START CHECK: version verification on every load; bootstrap procedure for missing rules files; highest-available-level injection table per AI type
+- `templates/ai-rules-bootstrap.md` — skeleton template for onboarding new AI types; fill `{AI_NAME}`, `{AI_ID}`, `{APPLIES_TO}`, `{GRAMMAR_NOTE}` placeholders and all sections are pre-wired to the correct universal.md rules
+- `scripts/ai-bootstrap.sh` — CLI tool to initialize any new AI in one command: creates `rules/{ai-id}.md` from template and `acknowledgments/{ai-id}.ack.json` with `"version": "pending"`, prints injection instructions per AI type
+
+### Changed
+
+- `rules/gpt.md` — added SESSION START CHECK (version comparison + ask user for update if stale) and HIGHEST-LEVEL INJECTION (Custom Instructions for ChatGPT chat; system message for API)
+- `rules/gemini.md` — added SESSION START CHECK (same pattern as GPT) and HIGHEST-LEVEL INJECTION (Gem instructions for Gemini Advanced; `system_instruction` for Gemini API)
+
+### Notes
+
+- SHA256 changed: `ae6bb5d663484ca3a603abd6afbeb2491dc08999e0ee250a0eab93c09a9d7465` — `rules/universal.md`, `rules/gpt.md`, and `rules/gemini.md` were all modified
+- Session start integrity check will trigger on next load for any AI with the old SHA in its ack file
+- `scripts/ai-bootstrap.sh`: refuses to overwrite existing rules files; safe to run on any new AI ID
+
+---
+
 ## [1.19.0] 2026-05-23
 
 **Rationale**: When a role is re-opened for hiring, the current incumbent should be benchmarked against the new candidate pool — otherwise there is no way to confirm that the replacement is demonstrably stronger. This formalizes that rule. The hired roster documents all 31 active agents as confirmed hires, establishing a clear record of who is on the roster and by what method they were approved.

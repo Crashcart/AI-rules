@@ -290,3 +290,44 @@ Examples of prohibited mixing:
 PROJECT MANAGER may not propose a prohibited combination. CEO rejects one immediately without escalating to the user.
 
 [NON-NEGOTIABLE]
+
+---
+
+## RULE 19 — AI BOOTSTRAP AND SESSION-START CHECK
+
+Every AI that reads these rules must perform the following checks on every session start.
+
+### Check 1: Version Verification (every load)
+
+1. Read `version.json` — note the `version` and `rules_sha256` fields
+2. Read your `acknowledgments/{ai-id}.ack.json` — note the `version` field
+3. If the versions differ: re-read all files in `rules/` before responding to anything
+4. After re-reading: output `[rules v{version} acknowledged]` as your first line, then produce the acknowledgment JSON per your AI-specific rules file and update your ack file
+
+If you lack direct file access: compare the version embedded in your system instructions against the version the user provides or you can retrieve.
+
+### Check 2: Bootstrap — Rules File Existence (first load or if file is missing)
+
+If `rules/{your-ai-id}.md` does not exist:
+1. Read `templates/ai-rules-bootstrap.md`
+2. Fill in the placeholders: `{AI_NAME}`, `{AI_ID}`, `{APPLIES_TO}`, `{GRAMMAR_NOTE}`
+3. Claude Code: write `rules/{ai-id}.md` directly and commit it
+4. All other AIs: output the completed file content to the user — "Please save this as `rules/{ai-id}.md` in the AI-rules repo"
+5. Initialize `acknowledgments/{ai-id}.ack.json` with `"version": "pending"` and fill in version + timestamp after reading all rules
+
+### Highest-Available-Level Injection (per AI type)
+
+| AI Type | Highest Level | How |
+|---------|--------------|-----|
+| Claude Code | CLAUDE.md + PreToolUse hook | Already handled |
+| Claude API | System prompt | Paste `rules/claude-behavior.md` content as system message |
+| ChatGPT (chat) | Custom Instructions | Settings → Personalization → Custom instructions → paste `rules/gpt.md` |
+| ChatGPT (API) | System message | Pass `rules/gpt.md` content as the `system` role message |
+| Gemini Advanced | Gem instructions | Create a Gem → paste `rules/gemini.md` as Gem system instruction |
+| Gemini API | `system_instruction` | Pass `rules/gemini.md` content in `system_instruction` field |
+| GitHub Copilot | `.github/copilot-instructions.md` | Already handled via templates/base/ |
+| Ollama | Modelfile `SYSTEM` block | See `rules/ollama.md` |
+
+Rules applied at a lower level may be overridden. Always use the highest-persistence level.
+
+[NON-NEGOTIABLE — version check and bootstrap run on every session start]

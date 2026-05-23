@@ -1,11 +1,13 @@
 {
-  "version": "1.19.0",
+  "version": "1.20.0",
   "released": "2026-05-23",
-  "rules_sha256": "b3a41465ba975e6e298a23a008dedf42157b1f54223faede40cd8a457e5d883e",
-  "changelog_entry": "Hiring: incumbents included in replacement pools; confirmed hire roster created for all 31 active agents.",
+  "rules_sha256": "ae6bb5d663484ca3a603abd6afbeb2491dc08999e0ee250a0eab93c09a9d7465",
+  "changelog_entry": "AI bootstrap + session-start update check: RULE 19 in universal.md, SESSION START CHECK + HIGHEST-LEVEL INJECTION in gpt.md and gemini.md, bootstrap template and CLI script.",
   "files": [
-    "hiring/process.md",
-    "agents/hiring-manager.md",
-    "hiring/hired-roster.md"
+    "rules/universal.md",
+    "rules/gpt.md",
+    "rules/gemini.md",
+    "templates/ai-rules-bootstrap.md",
+    "scripts/ai-bootstrap.sh"
   ]
 }
