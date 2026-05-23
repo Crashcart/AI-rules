@@ -4,6 +4,22 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.20.1] 2026-05-23
+
+**Rationale**: RULE 19 language tightened to make compliance non-negotiable ("These are not optional"); injection table now includes the `scripts/ai-bootstrap.sh` row for new/unknown AI types. ROLE ANNOUNCEMENT enforcement changed from `[DEFAULT, overridable]` to `[NON-NEGOTIABLE]` — role announcements are the user's primary compliance-detection signal and must not be skipped by any agent.
+
+### Changed
+
+- `rules/universal.md` § RULE 19 — added "These are not optional" enforcement language; bolded **Claude Code** / **All other AIs** in Check 2 for clarity; added `| New / unknown AI type | Run \`scripts/ai-bootstrap.sh {ai-id}\` |` row to injection table
+- `rules/claude-behavior.md` § ROLE ANNOUNCEMENT — tag changed from `[DEFAULT, overridable — user can disable with "skip role announcements"]` to `[NON-NEGOTIABLE]`; role announcements are mandatory for all agents with no opt-out
+
+### Notes
+
+- SHA256 changed: `acbd177d90481275393ddbe590f7a8b0f9d668b6b9ee795c15a63ea4ca349c5e`
+- Any agent with 1.20.0 SHA in ack file will trigger re-read on next session start
+
+---
+
 ## [1.20.0] 2026-05-23
 
 **Rationale**: When a new AI (GPT, Gemini, Ollama, or any future model) loads into the Crashcart system, it had no automated way to detect rule updates or bootstrap its own rules file if missing. This version adds RULE 19 to `rules/universal.md` — a mandatory session-start check covering (1) version verification on every load and (2) auto-bootstrap if the AI's rules file doesn't exist. GPT and Gemini rules files now include explicit SESSION START CHECK and HIGHEST-LEVEL INJECTION sections. A bootstrap template and CLI script make onboarding any new AI type a one-command operation.

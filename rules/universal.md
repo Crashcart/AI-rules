@@ -295,39 +295,42 @@ PROJECT MANAGER may not propose a prohibited combination. CEO rejects one immedi
 
 ## RULE 19 — AI BOOTSTRAP AND SESSION-START CHECK
 
-Every AI that reads these rules must perform the following checks on every session start.
+Every AI that reads these rules performs the following checks on every session start. These are not optional — operating on a stale rule version or without a registered rules file is non-compliant.
 
 ### Check 1: Version Verification (every load)
 
 1. Read `version.json` — note the `version` and `rules_sha256` fields
 2. Read your `acknowledgments/{ai-id}.ack.json` — note the `version` field
 3. If the versions differ: re-read all files in `rules/` before responding to anything
-4. After re-reading: output `[rules v{version} acknowledged]` as your first line, then produce the acknowledgment JSON per your AI-specific rules file and update your ack file
+4. After re-reading: output `[rules v{version} acknowledged]` as your first line, produce the acknowledgment JSON per your AI-specific rules file, and update your ack file
 
-If you lack direct file access: compare the version embedded in your system instructions against the version the user provides or you can retrieve.
+If you lack direct file access to this repo: compare the version string embedded in your current system instructions against the version the user provides or you can retrieve. Ask the user for the updated rules content if they differ.
 
-### Check 2: Bootstrap — Rules File Existence (first load or if file is missing)
+### Check 2: Bootstrap — Rules File Existence (first load only, or if file is missing)
 
-If `rules/{your-ai-id}.md` does not exist:
+If `rules/{your-ai-id}.md` does not exist in this repo:
+
 1. Read `templates/ai-rules-bootstrap.md`
-2. Fill in the placeholders: `{AI_NAME}`, `{AI_ID}`, `{APPLIES_TO}`, `{GRAMMAR_NOTE}`
-3. Claude Code: write `rules/{ai-id}.md` directly and commit it
-4. All other AIs: output the completed file content to the user — "Please save this as `rules/{ai-id}.md` in the AI-rules repo"
-5. Initialize `acknowledgments/{ai-id}.ack.json` with `"version": "pending"` and fill in version + timestamp after reading all rules
+2. Fill in all placeholders: `{AI_NAME}`, `{AI_ID}`, `{APPLIES_TO}`, `{GRAMMAR_NOTE}`
+3. **Claude Code** — write `rules/{ai-id}.md` directly and commit it
+4. **All other AIs** — output the completed file content to the user with this instruction: "Please save this as `rules/{ai-id}.md` in the AI-rules repo and commit it"
+5. Initialize `acknowledgments/{ai-id}.ack.json` with `"version": "pending"`; fill in the current version and timestamp after reading all rules files
 
 ### Highest-Available-Level Injection (per AI type)
 
+Apply your rules at the highest-persistence level your interface supports. Lower-level application (per-conversation) may be overridden by the interface:
+
 | AI Type | Highest Level | How |
 |---------|--------------|-----|
-| Claude Code | CLAUDE.md + PreToolUse hook | Already handled |
-| Claude API | System prompt | Paste `rules/claude-behavior.md` content as system message |
-| ChatGPT (chat) | Custom Instructions | Settings → Personalization → Custom instructions → paste `rules/gpt.md` |
-| ChatGPT (API) | System message | Pass `rules/gpt.md` content as the `system` role message |
-| Gemini Advanced | Gem instructions | Create a Gem → paste `rules/gemini.md` as Gem system instruction |
-| Gemini API | `system_instruction` | Pass `rules/gemini.md` content in `system_instruction` field |
-| GitHub Copilot | `.github/copilot-instructions.md` | Already handled via templates/base/ |
+| Claude Code | CLAUDE.md + PreToolUse hook | Already handled — rules auto-loaded via hook |
+| Claude API | System prompt | Paste `rules/claude-behavior.md` content as the system message |
+| ChatGPT (chat) | Custom Instructions | Settings → Personalization → Custom instructions → paste `rules/gpt.md` in the "What would you like ChatGPT to know?" field |
+| ChatGPT (API) | System message | Pass `rules/gpt.md` content as the `system` role message in every request |
+| Gemini Advanced | Gem instructions | Create a Gem → paste `rules/gemini.md` content as the Gem's system instruction |
+| Gemini API | `system_instruction` | Pass `rules/gemini.md` content in the `system_instruction` field of every request |
+| GitHub Copilot | `.github/copilot-instructions.md` | Already handled via `templates/base/` |
 | Ollama | Modelfile `SYSTEM` block | See `rules/ollama.md` |
+| New / unknown AI type | Run `scripts/ai-bootstrap.sh {ai-id}` | Script creates rules file, ack file, and prints injection instructions |
 
-Rules applied at a lower level may be overridden. Always use the highest-persistence level.
+[NON-NEGOTIABLE — version check and bootstrap check run on every session start]
 
-[NON-NEGOTIABLE — version check and bootstrap run on every session start]

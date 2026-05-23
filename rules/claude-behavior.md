@@ -142,7 +142,7 @@ For role transitions: announce the incoming role the moment the baton passes —
 
 Role names must follow ALL CAPS convention from AGENT ROLE REFERENCES above.
 
-[DEFAULT, overridable — user can disable with "skip role announcements"]
+[NON-NEGOTIABLE]
 
 ---
 
