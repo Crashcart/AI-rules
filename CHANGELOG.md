@@ -4,6 +4,22 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.24.1] 2026-05-24
+
+**Rationale**: UI DESIGNER and UX DESIGNER were originally hired (2026-05-18) before `rules/web-design.md` was added (v1.18.0) and before RULE 20 (v1.24.0) established the handshake protocol. Rehire brings both profiles current.
+
+### Updated
+
+- `agents/ui-designer.md` — Role Scope: added `rules/web-design.md` gold palette standards and production-readiness checklist as explicit operating constraints (`[NON-NEGOTIABLE]`); Hand-off Behavior: updated to RULE 20 handshake format with outgoing role statement, incoming role acknowledgment, and beta delivery target; `rules/web-design.md` production-readiness checklist status required in every deliverable package
+- `agents/ux-designer.md` — Role Scope: added `rules/web-design.md` URL Requirements for game/leaderboard features as `[NON-NEGOTIABLE]` operating constraint; new constraint — wireframes for game/leaderboard features must include URL routing flow before handoff; Hand-off Behavior: updated to RULE 20 handshake format; URL routing flow diagram added to deliverable package for game/leaderboard features
+
+### Notes
+
+- SHA256 unchanged: `9f0677b8794f0459abcf4c2a367eb707e5cf92d65287e88fe89db6e0df8131be` (no `rules/*.md` modified)
+- Rehire authorized by user instruction 2026-05-24
+
+---
+
 ## [1.24.0] 2026-05-24
 
 **Rationale**: Roles were completing task segments and going silent — no explicit handoff to the next role, no stated delivery target. Without a handshake protocol, work stalls or gets re-done. Without a beta delivery standard, "done" is undefined. RULE 20 closes both gaps.
