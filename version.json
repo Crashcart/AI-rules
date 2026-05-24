@@ -1,7 +1,11 @@
 {
-  "version": "1.22.0",
-  "released": "2026-05-23",
+  "version": "1.22.1",
+  "released": "2026-05-24",
   "rules_sha256": "87550dd13ec670e42397d15eaff1ff17cec7d7436775c75fa3bf5f70d4b4510a",
-  "changelog_entry": "Add game website standards and URL requirements for leader/leaderboard features to web-design.md.",
-  "files": ["rules/web-design.md"]
+  "changelog_entry": "Hire RULE ARCHITECT (Vera Okonkwo); add NEXUS UI component showcase demo.",
+  "files": [
+    "agents/rule-architect.md",
+    "agents/registry.json",
+    "demo/complex-showcase.html"
+  ]
 }

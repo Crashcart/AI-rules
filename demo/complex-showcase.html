@@ -1,0 +1,1844 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="NEXUS UI — Gold design system component library showcase">
+<meta property="og:title" content="NEXUS UI Component Showcase">
+<meta property="og:description" content="Production-ready components in the gold luxury design system">
+<meta property="og:type" content="website">
+<link rel="canonical" href="demo/complex-showcase.html">
+<title>NEXUS UI — Component Showcase</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --gold-300: #EDD06A;
+  --gold-400: #D4AF37;
+  --gold-500: #B8960C;
+  --gold-600: #9A7D0A;
+  --dark-900: #0D0D0D;
+  --dark-800: #1C1C1C;
+  --dark-700: #2A2A2A;
+  --dark-600: #333333;
+  --dark-500: #363636;
+  --dark-400: #4A4A4A;
+  --text-primary: #F5F0E8;
+  --text-muted: #8A8070;
+  --text-dim: #5A5248;
+  --success: #4CAF78;
+  --error: #E05C5C;
+  --warning: #E0A45C;
+  --font-display: 'Cormorant Garamond', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+  --radius-sm: 4px;
+  --radius-md: 8px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+  --shadow-gold: 0 0 40px rgba(212, 175, 55, 0.15);
+  --shadow-card: 0 4px 24px rgba(0,0,0,0.4);
+  --transition: 200ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; font-size: 16px; }
+
+body {
+  background: var(--dark-900);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  font-weight: 400;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* ── TYPOGRAPHY ── */
+h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 600; line-height: 1.2; }
+h1 { font-size: clamp(2.5rem, 6vw, 5rem); }
+h2 { font-size: clamp(1.8rem, 4vw, 3rem); }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.8rem); }
+h4 { font-size: 1.2rem; }
+p { line-height: 1.7; color: var(--text-muted); }
+
+.gold { color: var(--gold-400); }
+.section-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--gold-500);
+  display: block;
+  margin-bottom: 0.75rem;
+}
+
+/* ── LAYOUT ── */
+.container { max-width: 1200px; margin: 0 auto; padding: 0 1.5rem; }
+.section { padding: 6rem 0; }
+.section-header { text-align: center; margin-bottom: 4rem; }
+.section-header p { max-width: 520px; margin: 1rem auto 0; }
+
+/* ── REVEAL ANIMATIONS ── */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ── DIVIDER ── */
+.divider {
+  width: 60px; height: 2px;
+  background: linear-gradient(90deg, var(--gold-500), var(--gold-300));
+  margin: 1.5rem auto;
+}
+.divider-left { margin-left: 0; }
+
+/* ── BUTTONS ── */
+.btn {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: var(--radius-md);
+  font-family: var(--font-body);
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border: none;
+  transition: var(--transition);
+  text-decoration: none;
+}
+.btn-primary {
+  background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+  color: var(--dark-900);
+}
+.btn-primary:hover { background: linear-gradient(135deg, var(--gold-300), var(--gold-400)); transform: translateY(-1px); }
+.btn-outline {
+  background: transparent;
+  color: var(--gold-400);
+  border: 1px solid var(--gold-500);
+}
+.btn-outline:hover { background: rgba(212,175,55,0.08); }
+.btn-ghost { background: rgba(255,255,255,0.05); color: var(--text-primary); }
+.btn-ghost:hover { background: rgba(255,255,255,0.1); }
+.btn:focus-visible { outline: 2px solid var(--gold-400); outline-offset: 3px; }
+
+/* ── CARD ── */
+.card {
+  background: var(--dark-800);
+  border: 1px solid var(--dark-500);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  transition: border-color var(--transition), box-shadow var(--transition);
+}
+.card:hover { border-color: var(--gold-500); box-shadow: var(--shadow-gold); }
+
+/* ═══════════════════════════════════
+   NAVIGATION
+═══════════════════════════════════ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+  background: rgba(13,13,13,0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(212,175,55,0.12);
+  transition: background var(--transition);
+}
+.nav-inner {
+  display: flex; align-items: center; justify-content: space-between;
+  height: 64px; padding: 0 1.5rem; max-width: 1200px; margin: 0 auto;
+}
+.nav-logo {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--gold-400);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+.nav-links {
+  display: flex; align-items: center; gap: 2rem;
+  list-style: none;
+}
+.nav-links a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: color var(--transition);
+}
+.nav-links a:hover { color: var(--gold-400); }
+.nav-cta { display: flex; align-items: center; gap: 1rem; }
+.hamburger {
+  display: none;
+  flex-direction: column; gap: 5px;
+  background: none; border: none; cursor: pointer; padding: 4px;
+}
+.hamburger span {
+  display: block; width: 22px; height: 2px;
+  background: var(--text-primary);
+  transition: var(--transition);
+  transform-origin: center;
+}
+.hamburger[aria-expanded="true"] span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger[aria-expanded="true"] span:nth-child(2) { opacity: 0; }
+.hamburger[aria-expanded="true"] span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+.mobile-menu {
+  display: none;
+  position: fixed; top: 64px; left: 0; right: 0; bottom: 0;
+  background: var(--dark-900);
+  padding: 2rem 1.5rem;
+  flex-direction: column; gap: 1.5rem;
+  z-index: 999;
+  border-top: 1px solid var(--dark-500);
+}
+.mobile-menu.open { display: flex; }
+.mobile-menu a {
+  color: var(--text-primary); text-decoration: none;
+  font-size: 1.25rem; font-family: var(--font-display);
+  padding: 0.5rem 0; border-bottom: 1px solid var(--dark-500);
+}
+
+@media (max-width: 768px) {
+  .nav-links, .nav-cta { display: none; }
+  .hamburger { display: flex; }
+}
+
+/* ═══════════════════════════════════
+   HERO
+═══════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  display: flex; align-items: center;
+  padding: 8rem 0 6rem;
+  position: relative;
+  overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 80% 60% at 70% 40%, rgba(212,175,55,0.06) 0%, transparent 70%),
+    radial-gradient(ellipse 60% 80% at 10% 80%, rgba(184,150,12,0.04) 0%, transparent 60%);
+  pointer-events: none;
+}
+.hero-grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+}
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 0.5rem;
+  background: rgba(212,175,55,0.08);
+  border: 1px solid rgba(212,175,55,0.2);
+  border-radius: 100px;
+  padding: 0.375rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  color: var(--gold-400);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+.hero-title { margin-bottom: 1.5rem; }
+.hero-title em { font-style: italic; color: var(--gold-400); }
+.hero-desc { font-size: 1.125rem; margin-bottom: 2.5rem; max-width: 480px; }
+.hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
+.hero-visual { position: relative; }
+.hero-card-stack { position: relative; height: 380px; }
+.hero-card-stack .card {
+  position: absolute;
+  width: 280px;
+}
+.hero-card-stack .card:nth-child(1) { top: 0; right: 20px; transform: rotate(3deg); }
+.hero-card-stack .card:nth-child(2) { top: 60px; right: 0; z-index: 2; }
+.hero-card-stack .card:nth-child(3) { top: 120px; right: 40px; transform: rotate(-2deg); }
+.mini-chart-bar { display: flex; align-items: flex-end; gap: 4px; height: 60px; margin-top: 0.75rem; }
+.mini-chart-bar span {
+  flex: 1; background: var(--gold-500); border-radius: 2px 2px 0 0;
+  min-height: 8px;
+}
+.mini-chart-bar span.active { background: var(--gold-400); }
+
+@media (max-width: 768px) {
+  .hero-grid { grid-template-columns: 1fr; }
+  .hero-visual { display: none; }
+}
+
+/* ═══════════════════════════════════
+   STATS
+═══════════════════════════════════ */
+.stats { padding: 3rem 0; border-top: 1px solid var(--dark-500); border-bottom: 1px solid var(--dark-500); }
+.stats-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2rem; text-align: center; }
+.stat-number {
+  font-family: var(--font-display);
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--gold-400);
+  line-height: 1;
+  display: block;
+}
+.stat-label { font-size: 0.8rem; color: var(--text-muted); letter-spacing: 0.1em; text-transform: uppercase; margin-top: 0.25rem; }
+
+@media (max-width: 640px) { .stats-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ═══════════════════════════════════
+   FEATURES
+═══════════════════════════════════ */
+.features-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+.feature-card { position: relative; overflow: hidden; }
+.feature-icon {
+  width: 48px; height: 48px;
+  background: rgba(212,175,55,0.1);
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 1.25rem;
+  color: var(--gold-400);
+}
+.feature-card h3 { font-size: 1.1rem; margin-bottom: 0.5rem; color: var(--text-primary); }
+.feature-tag {
+  display: inline-block;
+  font-size: 0.7rem; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  background: rgba(212,175,55,0.1);
+  color: var(--gold-500);
+  padding: 0.2rem 0.6rem;
+  border-radius: 100px;
+  margin-top: 1rem;
+}
+
+@media (max-width: 768px) { .features-grid { grid-template-columns: 1fr; } }
+@media (min-width: 640px) and (max-width: 768px) { .features-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ═══════════════════════════════════
+   DATA VISUALIZATION
+═══════════════════════════════════ */
+.charts-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+.chart-container { position: relative; }
+.chart-title { font-size: 0.875rem; font-weight: 500; color: var(--text-muted); margin-bottom: 1.25rem; }
+.chart-legend {
+  display: flex; gap: 1.25rem; margin-top: 1rem;
+  font-size: 0.75rem; color: var(--text-muted);
+}
+.legend-dot { width: 8px; height: 8px; border-radius: 50%; display: inline-block; margin-right: 4px; }
+
+@media (max-width: 768px) { .charts-grid { grid-template-columns: 1fr; } }
+
+/* ═══════════════════════════════════
+   TABS
+═══════════════════════════════════ */
+.tabs-container { max-width: 760px; margin: 0 auto; }
+.tabs-list {
+  display: flex; gap: 0; list-style: none;
+  background: var(--dark-800);
+  border: 1px solid var(--dark-500);
+  border-radius: var(--radius-md);
+  padding: 4px;
+  margin-bottom: 2rem;
+  overflow-x: auto;
+}
+.tab-btn {
+  flex: 1; min-width: max-content;
+  padding: 0.625rem 1.25rem;
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.875rem; font-weight: 500;
+  color: var(--text-muted);
+  border-radius: 6px;
+  transition: var(--transition);
+  white-space: nowrap;
+}
+.tab-btn:hover { color: var(--text-primary); background: rgba(255,255,255,0.05); }
+.tab-btn[aria-selected="true"] {
+  background: rgba(212,175,55,0.12);
+  color: var(--gold-400);
+}
+.tab-panel { display: none; }
+.tab-panel[aria-hidden="false"] { display: block; }
+.tab-panel .card { animation: fadeIn 0.2s ease; }
+
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* ═══════════════════════════════════
+   ACCORDION
+═══════════════════════════════════ */
+.accordion { display: flex; flex-direction: column; gap: 0.75rem; max-width: 720px; margin: 0 auto; }
+.accordion-item {
+  background: var(--dark-800);
+  border: 1px solid var(--dark-500);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  transition: border-color var(--transition);
+}
+.accordion-item.open { border-color: var(--gold-500); }
+.accordion-trigger {
+  width: 100%; display: flex; align-items: center; justify-content: space-between;
+  padding: 1.25rem 1.5rem;
+  background: none; border: none; cursor: pointer;
+  font-family: var(--font-body); font-size: 0.9rem; font-weight: 500;
+  color: var(--text-primary);
+  text-align: left;
+  transition: color var(--transition);
+}
+.accordion-trigger:hover { color: var(--gold-400); }
+.accordion-icon {
+  width: 20px; height: 20px; flex-shrink: 0;
+  color: var(--gold-500);
+  transition: transform var(--transition);
+}
+.accordion-item.open .accordion-icon { transform: rotate(45deg); }
+.accordion-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.accordion-body-inner { padding: 0 1.5rem 1.25rem; }
+.accordion-body-inner p { font-size: 0.875rem; }
+
+/* ═══════════════════════════════════
+   PRICING
+═══════════════════════════════════ */
+.pricing-toggle-wrap { display: flex; align-items: center; justify-content: center; gap: 1rem; margin-bottom: 3rem; }
+.pricing-toggle-label { font-size: 0.875rem; color: var(--text-muted); }
+.pricing-toggle-label.active { color: var(--text-primary); font-weight: 500; }
+.toggle-switch {
+  position: relative; width: 48px; height: 26px;
+  background: var(--dark-600); border: 1px solid var(--dark-400);
+  border-radius: 100px; cursor: pointer;
+  transition: background var(--transition);
+}
+.toggle-switch.on { background: rgba(212,175,55,0.25); border-color: var(--gold-500); }
+.toggle-knob {
+  position: absolute; top: 3px; left: 3px;
+  width: 18px; height: 18px;
+  background: var(--text-muted);
+  border-radius: 50%;
+  transition: transform var(--transition), background var(--transition);
+}
+.toggle-switch.on .toggle-knob { transform: translateX(22px); background: var(--gold-400); }
+.save-badge {
+  font-size: 0.7rem; font-weight: 600; letter-spacing: 0.05em;
+  background: rgba(212,175,55,0.15); color: var(--gold-400);
+  padding: 0.2rem 0.5rem; border-radius: 100px;
+}
+
+.pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; align-items: start; }
+.pricing-card { position: relative; }
+.pricing-card.featured {
+  border-color: var(--gold-400);
+  box-shadow: var(--shadow-gold);
+}
+.pricing-badge {
+  position: absolute; top: -12px; left: 50%; transform: translateX(-50%);
+  background: linear-gradient(135deg, var(--gold-400), var(--gold-500));
+  color: var(--dark-900);
+  font-size: 0.7rem; font-weight: 700;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  padding: 0.25rem 0.875rem; border-radius: 100px;
+  white-space: nowrap;
+}
+.pricing-name { font-size: 0.75rem; font-weight: 600; letter-spacing: 0.15em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 0.5rem; }
+.pricing-amount {
+  font-family: var(--font-display);
+  font-size: 3rem; font-weight: 700;
+  color: var(--text-primary);
+  line-height: 1;
+  display: flex; align-items: flex-start; gap: 0.25rem;
+}
+.pricing-amount sup { font-size: 1.25rem; margin-top: 0.5rem; }
+.pricing-amount .period { font-size: 1rem; font-family: var(--font-body); color: var(--text-muted); align-self: flex-end; margin-bottom: 4px; }
+.pricing-desc { font-size: 0.8rem; margin: 0.75rem 0 1.5rem; }
+.pricing-features { list-style: none; display: flex; flex-direction: column; gap: 0.75rem; margin-bottom: 1.75rem; }
+.pricing-features li { display: flex; align-items: center; gap: 0.625rem; font-size: 0.875rem; color: var(--text-muted); }
+.pricing-features li svg { color: var(--gold-400); flex-shrink: 0; }
+.pricing-features li.dimmed { opacity: 0.4; text-decoration: line-through; }
+
+@media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; max-width: 380px; margin: 0 auto; } }
+
+/* ═══════════════════════════════════
+   TESTIMONIALS
+═══════════════════════════════════ */
+.testimonials-track-wrap { overflow: hidden; position: relative; }
+.testimonials-track {
+  display: flex; gap: 1.5rem;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+.testimonial-slide { min-width: calc(50% - 0.75rem); }
+.testimonial-quote {
+  font-family: var(--font-display);
+  font-size: 1.2rem; font-style: italic;
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+}
+.testimonial-author { display: flex; align-items: center; gap: 1rem; }
+.author-avatar {
+  width: 44px; height: 44px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--gold-500), var(--gold-400));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 700; font-size: 1rem;
+  color: var(--dark-900);
+  flex-shrink: 0;
+}
+.author-name { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); }
+.author-role { font-size: 0.75rem; color: var(--text-muted); }
+.testimonials-nav {
+  display: flex; align-items: center; justify-content: center; gap: 1rem;
+  margin-top: 2.5rem;
+}
+.carousel-btn {
+  width: 40px; height: 40px;
+  background: var(--dark-800);
+  border: 1px solid var(--dark-500);
+  border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+.carousel-btn:hover { border-color: var(--gold-500); color: var(--gold-400); }
+.carousel-dots { display: flex; gap: 0.5rem; align-items: center; }
+.carousel-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--dark-500);
+  border: none; cursor: pointer;
+  transition: var(--transition);
+  padding: 0;
+}
+.carousel-dot.active { background: var(--gold-400); width: 18px; border-radius: 3px; }
+
+@media (max-width: 640px) { .testimonial-slide { min-width: 100%; } }
+
+/* ═══════════════════════════════════
+   SEARCH + FILTER
+═══════════════════════════════════ */
+.filter-bar {
+  display: flex; gap: 1rem; align-items: center;
+  margin-bottom: 2rem; flex-wrap: wrap;
+}
+.search-wrap { position: relative; flex: 1; min-width: 200px; }
+.search-wrap svg {
+  position: absolute; left: 1rem; top: 50%; transform: translateY(-50%);
+  color: var(--text-dim); pointer-events: none;
+}
+.search-input {
+  width: 100%; padding: 0.75rem 1rem 0.75rem 2.75rem;
+  background: var(--dark-800);
+  border: 1px solid var(--dark-500);
+  border-radius: var(--radius-md);
+  font-family: var(--font-body); font-size: 0.875rem;
+  color: var(--text-primary);
+  transition: border-color var(--transition);
+}
+.search-input::placeholder { color: var(--text-dim); }
+.search-input:focus { outline: none; border-color: var(--gold-500); }
+
+.filter-chips { display: flex; gap: 0.5rem; flex-wrap: wrap; }
+.chip {
+  padding: 0.375rem 0.875rem;
+  background: var(--dark-800); border: 1px solid var(--dark-500);
+  border-radius: 100px; cursor: pointer;
+  font-size: 0.75rem; font-weight: 500; color: var(--text-muted);
+  transition: var(--transition); white-space: nowrap;
+}
+.chip.active { background: rgba(212,175,55,0.12); border-color: var(--gold-500); color: var(--gold-400); }
+
+.items-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; }
+.item-card {
+  background: var(--dark-800);
+  border: 1px solid var(--dark-500);
+  border-radius: var(--radius-md);
+  padding: 1.25rem;
+  transition: var(--transition);
+  cursor: pointer;
+}
+.item-card:hover { border-color: var(--dark-400); }
+.item-card[hidden] { display: none; }
+.item-tag {
+  font-size: 0.65rem; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--gold-500);
+  margin-bottom: 0.5rem; display: block;
+}
+.item-card h4 { font-family: var(--font-body); font-size: 0.9rem; color: var(--text-primary); margin-bottom: 0.25rem; }
+.item-card p { font-size: 0.8rem; }
+
+@media (max-width: 640px) { .items-grid { grid-template-columns: 1fr; } }
+@media (min-width: 640px) and (max-width: 900px) { .items-grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ═══════════════════════════════════
+   FORM
+═══════════════════════════════════ */
+.form-section { background: var(--dark-800); }
+.form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+.form-info h2 { text-align: left; }
+.contact-list { list-style: none; display: flex; flex-direction: column; gap: 1.25rem; margin-top: 2rem; }
+.contact-list li { display: flex; align-items: center; gap: 0.875rem; font-size: 0.875rem; color: var(--text-muted); }
+.contact-list li svg { color: var(--gold-400); flex-shrink: 0; }
+
+.form { display: flex; flex-direction: column; gap: 1.25rem; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+.field { display: flex; flex-direction: column; gap: 0.375rem; }
+.field label { font-size: 0.8rem; font-weight: 500; color: var(--text-muted); }
+.field-input,
+.field-textarea {
+  background: var(--dark-700);
+  border: 1px solid var(--dark-500);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-body); font-size: 0.875rem;
+  color: var(--text-primary);
+  transition: border-color var(--transition);
+  width: 100%;
+}
+.field-input::placeholder, .field-textarea::placeholder { color: var(--text-dim); }
+.field-input:focus, .field-textarea:focus { outline: none; border-color: var(--gold-500); }
+.field-input.error, .field-textarea.error { border-color: var(--error); }
+.field-textarea { resize: vertical; min-height: 120px; }
+.field-error { font-size: 0.75rem; color: var(--error); display: none; }
+.field.has-error .field-error { display: block; }
+.field-hint { font-size: 0.75rem; color: var(--text-dim); }
+
+.select-wrap { position: relative; }
+.select-wrap select {
+  appearance: none; width: 100%;
+  background: var(--dark-700);
+  border: 1px solid var(--dark-500);
+  border-radius: var(--radius-md);
+  padding: 0.75rem 2.5rem 0.75rem 1rem;
+  font-family: var(--font-body); font-size: 0.875rem;
+  color: var(--text-primary); cursor: pointer;
+}
+.select-wrap select:focus { outline: none; border-color: var(--gold-500); }
+.select-wrap svg { position: absolute; right: 1rem; top: 50%; transform: translateY(-50%); color: var(--text-dim); pointer-events: none; }
+
+@media (max-width: 768px) {
+  .form-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+  .form-row { grid-template-columns: 1fr; }
+}
+
+/* ═══════════════════════════════════
+   MODAL
+═══════════════════════════════════ */
+.modal-backdrop {
+  position: fixed; inset: 0; z-index: 2000;
+  background: rgba(0,0,0,0.75);
+  backdrop-filter: blur(6px);
+  display: flex; align-items: center; justify-content: center;
+  padding: 1.5rem;
+  opacity: 0; pointer-events: none;
+  transition: opacity var(--transition);
+}
+.modal-backdrop.open { opacity: 1; pointer-events: all; }
+.modal {
+  background: var(--dark-800);
+  border: 1px solid var(--dark-500);
+  border-radius: var(--radius-xl);
+  width: 100%; max-width: 520px;
+  padding: 2rem;
+  transform: translateY(16px) scale(0.98);
+  transition: transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+.modal-backdrop.open .modal { transform: translateY(0) scale(1); }
+.modal-close {
+  position: absolute; top: 1rem; right: 1rem;
+  width: 32px; height: 32px;
+  background: var(--dark-700); border: none;
+  border-radius: 50%; cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  color: var(--text-muted);
+  transition: var(--transition);
+}
+.modal-close:hover { background: var(--dark-500); color: var(--text-primary); }
+.modal h3 { margin-bottom: 0.5rem; }
+.modal p { font-size: 0.875rem; margin-bottom: 1.5rem; }
+.modal-actions { display: flex; gap: 0.75rem; justify-content: flex-end; margin-top: 1.5rem; }
+
+/* ═══════════════════════════════════
+   TOAST
+═══════════════════════════════════ */
+.toast-region {
+  position: fixed; bottom: 1.5rem; right: 1.5rem;
+  z-index: 3000;
+  display: flex; flex-direction: column; gap: 0.625rem;
+  pointer-events: none;
+  max-width: 360px; width: calc(100vw - 3rem);
+}
+.toast {
+  background: var(--dark-700);
+  border: 1px solid var(--dark-500);
+  border-left-width: 3px;
+  border-radius: var(--radius-md);
+  padding: 0.875rem 1.25rem;
+  display: flex; align-items: flex-start; gap: 0.75rem;
+  pointer-events: all;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  transform: translateX(120%);
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s;
+  opacity: 0;
+}
+.toast.show { transform: translateX(0); opacity: 1; }
+.toast.toast-success { border-left-color: var(--success); }
+.toast.toast-error { border-left-color: var(--error); }
+.toast.toast-warning { border-left-color: var(--warning); }
+.toast.toast-info { border-left-color: var(--gold-400); }
+.toast-icon { margin-top: 1px; flex-shrink: 0; }
+.toast-title { font-size: 0.875rem; font-weight: 600; color: var(--text-primary); }
+.toast-body { font-size: 0.8rem; color: var(--text-muted); margin-top: 0.125rem; }
+.toast-dismiss {
+  margin-left: auto; flex-shrink: 0;
+  background: none; border: none; cursor: pointer;
+  color: var(--text-dim); font-size: 1rem; line-height: 1;
+  padding: 0 0 0 0.5rem;
+}
+.toast-dismiss:hover { color: var(--text-primary); }
+
+/* ═══════════════════════════════════
+   FOOTER
+═══════════════════════════════════ */
+.footer {
+  padding: 4rem 0 2rem;
+  border-top: 1px solid var(--dark-500);
+}
+.footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3rem; }
+.footer-brand p { font-size: 0.875rem; margin-top: 0.75rem; max-width: 280px; }
+.footer-col h4 {
+  font-family: var(--font-body);
+  font-size: 0.75rem; font-weight: 600;
+  letter-spacing: 0.12em; text-transform: uppercase;
+  color: var(--text-muted); margin-bottom: 1rem;
+}
+.footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.625rem; }
+.footer-links a { color: var(--text-dim); font-size: 0.875rem; text-decoration: none; transition: color var(--transition); }
+.footer-links a:hover { color: var(--gold-400); }
+.footer-bottom {
+  display: flex; align-items: center; justify-content: space-between;
+  padding-top: 2rem; border-top: 1px solid var(--dark-500);
+  font-size: 0.8rem; color: var(--text-dim);
+}
+.footer-bottom a { color: var(--gold-500); text-decoration: none; }
+
+@media (max-width: 768px) {
+  .footer-grid { grid-template-columns: 1fr 1fr; }
+  .footer-brand { grid-column: 1 / -1; }
+  .footer-bottom { flex-direction: column; gap: 0.5rem; text-align: center; }
+}
+@media (max-width: 480px) { .footer-grid { grid-template-columns: 1fr; } }
+
+/* ═══════════════════════════════════
+   DEMO CONTROLS BAR
+═══════════════════════════════════ */
+.demo-bar {
+  position: sticky; top: 64px; z-index: 900;
+  background: rgba(28,28,28,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--dark-500);
+  padding: 0.625rem 1.5rem;
+  display: flex; gap: 0.75rem; align-items: center; flex-wrap: wrap;
+}
+.demo-bar span { font-size: 0.7rem; color: var(--text-dim); letter-spacing: 0.1em; text-transform: uppercase; }
+.demo-bar .btn { padding: 0.4rem 0.875rem; font-size: 0.75rem; }
+
+/* ═══════════════════════════════════
+   SECTION BACKGROUNDS
+═══════════════════════════════════ */
+.bg-alt { background: var(--dark-800); }
+
+/* ═══════════════════════════════════
+   SKIP LINK
+═══════════════════════════════════ */
+.skip-link {
+  position: fixed; top: -100%; left: 1rem; z-index: 9999;
+  background: var(--gold-400); color: var(--dark-900);
+  padding: 0.5rem 1rem; border-radius: var(--radius-sm);
+  font-weight: 600; font-size: 0.875rem; text-decoration: none;
+}
+.skip-link:focus { top: 1rem; }
+</style>
+</head>
+<body>
+
+<a href="#main" class="skip-link">Skip to main content</a>
+
+<!-- TOAST REGION -->
+<div class="toast-region" role="region" aria-live="assertive" aria-label="Notifications" id="toastRegion"></div>
+
+<!-- MODAL BACKDROP -->
+<div class="modal-backdrop" id="modalBackdrop" role="dialog" aria-modal="true" aria-labelledby="modalTitle" aria-hidden="true">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close dialog">
+      <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M1 1l12 12M13 1L1 13" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </button>
+    <h3 id="modalTitle" class="gold">Confirm Action</h3>
+    <div class="divider divider-left"></div>
+    <p id="modalBody">This is a sample modal dialog with a confirming action. It traps focus and supports keyboard dismissal via Escape.</p>
+    <div class="modal-actions">
+      <button class="btn btn-ghost" id="modalCancel">Cancel</button>
+      <button class="btn btn-primary" id="modalConfirm">Confirm</button>
+    </div>
+  </div>
+</div>
+
+<!-- NAVIGATION -->
+<nav class="nav" aria-label="Primary navigation">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo" aria-label="NEXUS UI home">NEXUS</a>
+    <ul class="nav-links" role="list">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#charts">Data</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <div class="nav-cta">
+      <button class="btn btn-ghost" onclick="openModal('Learn More', 'This would navigate to the documentation page in a full implementation.')">Docs</button>
+      <button class="btn btn-primary" onclick="showToast('success','Access Granted','Welcome to NEXUS UI.')">Get Access</button>
+    </div>
+    <button class="hamburger" aria-expanded="false" aria-controls="mobileMenu" aria-label="Open menu" id="hamburger">
+      <span></span><span></span><span></span>
+    </button>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" aria-hidden="true">
+  <a href="#features" onclick="closeMobileMenu()">Features</a>
+  <a href="#charts" onclick="closeMobileMenu()">Data Visualization</a>
+  <a href="#tabs" onclick="closeMobileMenu()">Components</a>
+  <a href="#pricing" onclick="closeMobileMenu()">Pricing</a>
+  <a href="#testimonials" onclick="closeMobileMenu()">Testimonials</a>
+  <a href="#contact" onclick="closeMobileMenu()">Contact</a>
+  <button class="btn btn-primary" style="width:100%;justify-content:center;margin-top:1rem" onclick="showToast('success','Access Granted','Welcome to NEXUS UI.')">Get Access</button>
+</nav>
+
+<main id="main">
+
+<!-- DEMO CONTROLS BAR -->
+<div class="demo-bar" aria-label="Demo controls">
+  <span>Demo controls:</span>
+  <button class="btn btn-outline" onclick="showToast('success','Success','Operation completed successfully.')">Toast: Success</button>
+  <button class="btn btn-outline" onclick="showToast('error','Error','Something went wrong.')">Toast: Error</button>
+  <button class="btn btn-outline" onclick="showToast('warning','Warning','This action may have side effects.')">Toast: Warning</button>
+  <button class="btn btn-outline" onclick="openModal('Component Demo', 'This modal was triggered from the demo control bar. Focus is trapped inside. Press Escape or click Cancel to close.')">Open Modal</button>
+</div>
+
+<!-- ═══ HERO ═══ -->
+<section class="hero" aria-labelledby="heroTitle">
+  <div class="hero-bg" aria-hidden="true"></div>
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-content">
+        <span class="hero-eyebrow reveal">
+          <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor" aria-hidden="true"><circle cx="6" cy="6" r="3"/></svg>
+          Gold Design System v2.0
+        </span>
+        <h1 class="hero-title reveal reveal-delay-1" id="heroTitle">
+          Build <em>beautiful</em><br>interfaces faster
+        </h1>
+        <p class="hero-desc reveal reveal-delay-2">A production-ready component library built on the gold luxury aesthetic. Every component is accessible, responsive, and performant by default.</p>
+        <div class="hero-actions reveal reveal-delay-3">
+          <button class="btn btn-primary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">
+            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1v14M1 8h14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Explore Components
+          </button>
+          <button class="btn btn-outline" onclick="openModal('View Source', 'Full source code is available in the AI-rules demo directory. This file demonstrates production-ready patterns for the gold design system.')">View Source</button>
+        </div>
+      </div>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-card-stack">
+          <div class="card reveal reveal-delay-1">
+            <div class="section-label">Revenue</div>
+            <div style="font-family:var(--font-display);font-size:1.75rem;color:var(--gold-400)">$48,290</div>
+            <div class="mini-chart-bar">
+              <span style="height:30%"></span><span style="height:50%"></span><span style="height:40%"></span><span style="height:70%" class="active"></span><span style="height:55%"></span><span style="height:80%" class="active"></span><span style="height:90%" class="active"></span>
+            </div>
+          </div>
+          <div class="card reveal reveal-delay-2">
+            <div class="section-label">Active Users</div>
+            <div style="font-family:var(--font-display);font-size:1.75rem;color:var(--text-primary)">12,847</div>
+            <div style="font-size:0.75rem;color:var(--success);margin-top:0.25rem">↑ 18.4% this month</div>
+          </div>
+          <div class="card reveal reveal-delay-3">
+            <div class="section-label">Satisfaction</div>
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-top:0.25rem">
+              <div style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold-400)">4.9</div>
+              <div style="font-size:0.75rem;color:var(--text-muted)">/5.0 — 2,841 reviews</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STATS ═══ -->
+<section class="stats" aria-labelledby="statsLabel">
+  <span id="statsLabel" class="sr-only">Key statistics</span>
+  <div class="container">
+    <div class="stats-grid">
+      <div class="reveal">
+        <span class="stat-number" data-target="12847" data-suffix="">12,847</span>
+        <span class="stat-label">Active Developers</span>
+      </div>
+      <div class="reveal reveal-delay-1">
+        <span class="stat-number">98.9%</span>
+        <span class="stat-label">Uptime SLA</span>
+      </div>
+      <div class="reveal reveal-delay-2">
+        <span class="stat-number">340ms</span>
+        <span class="stat-label">Avg Response</span>
+      </div>
+      <div class="reveal reveal-delay-3">
+        <span class="stat-number">4.9★</span>
+        <span class="stat-label">Satisfaction Score</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FEATURES ═══ -->
+<section class="section" id="features" aria-labelledby="featuresTitle">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Features</span>
+      <h2 id="featuresTitle" class="reveal">Everything you need to <span class="gold">ship fast</span></h2>
+      <div class="divider"></div>
+      <p class="reveal">Production-ready components with accessibility, responsiveness, and performance baked in.</p>
+    </div>
+    <div class="features-grid">
+      <article class="card feature-card reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 2L2 7v8l9 5 9-5V7L11 2z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>Gold Design System</h3>
+        <p>CSS custom properties for every token. Dark-first, no hardcoded hex values in component styles.</p>
+        <span class="feature-tag">Tokens</span>
+      </article>
+      <article class="card feature-card reveal reveal-delay-1">
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><rect x="3" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="3" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="3" y="12" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/><rect x="12" y="12" width="7" height="7" rx="1.5" stroke="currentColor" stroke-width="1.5"/></svg>
+        </div>
+        <h3>Responsive Grid</h3>
+        <p>Mobile-first layouts tested at 375px, 768px, and 1280px. Breakpoints defined by content, not device.</p>
+        <span class="feature-tag">Layout</span>
+      </article>
+      <article class="card feature-card reveal reveal-delay-2">
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M11 4a7 7 0 100 14A7 7 0 0011 4z" stroke="currentColor" stroke-width="1.5"/><path d="M11 8v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Reduced Motion</h3>
+        <p>All animations wrapped in <code>prefers-reduced-motion</code>. Static fallbacks for every transition.</p>
+        <span class="feature-tag">Accessibility</span>
+      </article>
+      <article class="card feature-card reveal">
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M3 17l4-4 4 4 8-8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>SVG-First Graphics</h3>
+        <p>Inline SVG for all icons and illustrations. <code>currentColor</code> theming, no raster PNG for decorative elements.</p>
+        <span class="feature-tag">Performance</span>
+      </article>
+      <article class="card feature-card reveal reveal-delay-1">
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M4 11h14M4 7h14M4 15h8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        </div>
+        <h3>Semantic HTML</h3>
+        <p>Proper landmarks, heading hierarchy enforced, one <code>&lt;h1&gt;</code> per page. WCAG 2.1 AA minimum.</p>
+        <span class="feature-tag">A11y</span>
+      </article>
+      <article class="card feature-card reveal reveal-delay-2">
+        <div class="feature-icon" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 22 22" fill="none"><path d="M6 18l6-6 6 6M6 12l6-6 6 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3>IntersectionObserver</h3>
+        <p>Scroll-triggered reveals via IntersectionObserver. <code>will-change</code> budget managed carefully.</p>
+        <span class="feature-tag">Animation</span>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ DATA VISUALIZATION ═══ -->
+<section class="section bg-alt" id="charts" aria-labelledby="chartsTitle">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Data Visualization</span>
+      <h2 id="chartsTitle" class="reveal">SVG-native <span class="gold">charts</span></h2>
+      <div class="divider"></div>
+      <p class="reveal">Inline SVG, no chart library dependencies. Fully themeable via CSS custom properties.</p>
+    </div>
+    <div class="charts-grid">
+      <!-- Bar Chart -->
+      <div class="card chart-container reveal">
+        <div class="chart-title">Monthly Revenue (USD)</div>
+        <svg viewBox="0 0 400 180" width="100%" aria-label="Bar chart showing monthly revenue from January to June" role="img">
+          <defs>
+            <linearGradient id="barGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D4AF37"/>
+              <stop offset="100%" stop-color="#B8960C" stop-opacity="0.6"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid lines -->
+          <line x1="40" y1="20" x2="40" y2="150" stroke="#363636" stroke-width="1"/>
+          <line x1="40" y1="150" x2="390" y2="150" stroke="#363636" stroke-width="1"/>
+          <line x1="40" y1="110" x2="390" y2="110" stroke="#363636" stroke-width="0.5" stroke-dasharray="4,4"/>
+          <line x1="40" y1="70" x2="390" y2="70" stroke="#363636" stroke-width="0.5" stroke-dasharray="4,4"/>
+          <!-- Y axis labels -->
+          <text x="35" y="154" text-anchor="end" fill="#5A5248" font-size="9" font-family="Inter">0</text>
+          <text x="35" y="114" text-anchor="end" fill="#5A5248" font-size="9" font-family="Inter">25k</text>
+          <text x="35" y="74" text-anchor="end" fill="#5A5248" font-size="9" font-family="Inter">50k</text>
+          <!-- Bars -->
+          <rect x="55" y="110" width="34" height="40" fill="url(#barGrad)" rx="3"/>
+          <rect x="110" y="95" width="34" height="55" fill="url(#barGrad)" rx="3"/>
+          <rect x="165" y="80" width="34" height="70" fill="url(#barGrad)" rx="3"/>
+          <rect x="220" y="60" width="34" height="90" fill="url(#barGrad)" rx="3" opacity="1"/>
+          <rect x="275" y="50" width="34" height="100" fill="url(#barGrad)" rx="3"/>
+          <rect x="330" y="30" width="34" height="120" fill="#D4AF37" rx="3"/>
+          <!-- X axis labels -->
+          <text x="72" y="163" text-anchor="middle" fill="#5A5248" font-size="9" font-family="Inter">Jan</text>
+          <text x="127" y="163" text-anchor="middle" fill="#5A5248" font-size="9" font-family="Inter">Feb</text>
+          <text x="182" y="163" text-anchor="middle" fill="#5A5248" font-size="9" font-family="Inter">Mar</text>
+          <text x="237" y="163" text-anchor="middle" fill="#5A5248" font-size="9" font-family="Inter">Apr</text>
+          <text x="292" y="163" text-anchor="middle" fill="#5A5248" font-size="9" font-family="Inter">May</text>
+          <text x="347" y="163" text-anchor="middle" fill="#8A8070" font-size="9" font-family="Inter" font-weight="600">Jun</text>
+          <!-- Value labels -->
+          <text x="347" y="26" text-anchor="middle" fill="#D4AF37" font-size="9" font-family="Inter" font-weight="600">$48k</text>
+        </svg>
+        <div class="chart-legend">
+          <span><span class="legend-dot" style="background:var(--gold-400)"></span>Revenue</span>
+          <span style="margin-left:auto;font-size:0.8rem;color:var(--gold-400);font-weight:600">↑ 34% YoY</span>
+        </div>
+      </div>
+
+      <!-- Line Chart -->
+      <div class="card chart-container reveal reveal-delay-1">
+        <div class="chart-title">User Engagement Rate (%)</div>
+        <svg viewBox="0 0 400 180" width="100%" aria-label="Line chart showing user engagement rate over 6 months" role="img">
+          <defs>
+            <linearGradient id="areaGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#D4AF37" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#D4AF37" stop-opacity="0"/>
+            </linearGradient>
+            <linearGradient id="lineGrad2" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#EDD06A" stop-opacity="0.15"/>
+              <stop offset="100%" stop-color="#EDD06A" stop-opacity="0"/>
+            </linearGradient>
+          </defs>
+          <!-- Grid -->
+          <line x1="40" y1="20" x2="40" y2="150" stroke="#363636" stroke-width="1"/>
+          <line x1="40" y1="150" x2="390" y2="150" stroke="#363636" stroke-width="1"/>
+          <line x1="40" y1="110" x2="390" y2="110" stroke="#363636" stroke-width="0.5" stroke-dasharray="4,4"/>
+          <line x1="40" y1="70" x2="390" y2="70" stroke="#363636" stroke-width="0.5" stroke-dasharray="4,4"/>
+          <!-- Y labels -->
+          <text x="35" y="154" text-anchor="end" fill="#5A5248" font-size="9" font-family="Inter">0</text>
+          <text x="35" y="114" text-anchor="end" fill="#5A5248" font-size="9" font-family="Inter">50%</text>
+          <text x="35" y="74" text-anchor="end" fill="#5A5248" font-size="9" font-family="Inter">100%</text>
+          <!-- Area fill (primary) -->
+          <path d="M72,125 C100,118 127,105 182,88 C237,71 292,60 347,42 L347,150 L72,150 Z" fill="url(#areaGrad)"/>
+          <!-- Area fill (secondary) -->
+          <path d="M72,135 C100,130 127,122 182,108 C237,95 292,82 347,70 L347,150 L72,150 Z" fill="url(#lineGrad2)"/>
+          <!-- Lines -->
+          <path d="M72,125 C100,118 127,105 182,88 C237,71 292,60 347,42" fill="none" stroke="#D4AF37" stroke-width="2" stroke-linecap="round"/>
+          <path d="M72,135 C100,130 127,122 182,108 C237,95 292,82 347,70" fill="none" stroke="#EDD06A" stroke-width="1.5" stroke-linecap="round" stroke-dasharray="6,3"/>
+          <!-- Points -->
+          <circle cx="72" cy="125" r="4" fill="#D4AF37"/>
+          <circle cx="182" cy="88" r="4" fill="#D4AF37"/>
+          <circle cx="347" cy="42" r="5" fill="#D4AF37" stroke="#1C1C1C" stroke-width="2"/>
+          <!-- X labels -->
+          <text x="72" y="163" text-anchor="middle" fill="#5A5248" font-size="9" font-family="Inter">Jan</text>
+          <text x="127" y="163" text-anchor="middle" fill="#5A5248" font-size="9" font-family="Inter">Feb</text>
+          <text x="182" y="163" text-anchor="middle" fill="#5A5248" font-size="9" font-family="Inter">Mar</text>
+          <text x="237" y="163" text-anchor="middle" fill="#5A5248" font-size="9" font-family="Inter">Apr</text>
+          <text x="292" y="163" text-anchor="middle" fill="#5A5248" font-size="9" font-family="Inter">May</text>
+          <text x="347" y="163" text-anchor="middle" fill="#8A8070" font-size="9" font-family="Inter" font-weight="600">Jun</text>
+        </svg>
+        <div class="chart-legend">
+          <span><span class="legend-dot" style="background:var(--gold-400)"></span>DAU</span>
+          <span><span class="legend-dot" style="background:var(--gold-300);opacity:0.7"></span>WAU</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TABS ═══ -->
+<section class="section" id="tabs" aria-labelledby="tabsTitle">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Interactive Components</span>
+      <h2 id="tabsTitle" class="reveal">Tabs, Accordion <span class="gold">&amp; more</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="tabs-container">
+      <div class="tabs-list" role="tablist" aria-label="Component examples">
+        <button class="tab-btn" role="tab" aria-selected="true" aria-controls="tab-overview" id="tab-btn-overview">Overview</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-usage" id="tab-btn-usage">Usage</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-props" id="tab-btn-props">Properties</button>
+        <button class="tab-btn" role="tab" aria-selected="false" aria-controls="tab-a11y" id="tab-btn-a11y">Accessibility</button>
+      </div>
+      <div id="tab-overview" role="tabpanel" aria-labelledby="tab-btn-overview" aria-hidden="false" class="tab-panel">
+        <div class="card">
+          <h3>Component Overview</h3>
+          <div class="divider divider-left"></div>
+          <p>The NEXUS UI tab component follows WAI-ARIA 1.1 patterns. Keyboard navigation with Arrow keys, Home, and End. Each panel has a unique <code>id</code> referenced by its trigger via <code>aria-controls</code>.</p>
+          <div style="display:flex;gap:1rem;margin-top:1.5rem;flex-wrap:wrap">
+            <div style="flex:1;min-width:140px;background:var(--dark-700);border-radius:var(--radius-md);padding:1rem;text-align:center">
+              <div style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold-400)">4</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem">Tab Panels</div>
+            </div>
+            <div style="flex:1;min-width:140px;background:var(--dark-700);border-radius:var(--radius-md);padding:1rem;text-align:center">
+              <div style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold-400)">ARIA</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem">Compliant</div>
+            </div>
+            <div style="flex:1;min-width:140px;background:var(--dark-700);border-radius:var(--radius-md);padding:1rem;text-align:center">
+              <div style="font-family:var(--font-display);font-size:1.5rem;color:var(--gold-400)">0</div>
+              <div style="font-size:0.75rem;color:var(--text-muted);margin-top:0.25rem">Dependencies</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div id="tab-usage" role="tabpanel" aria-labelledby="tab-btn-usage" aria-hidden="true" class="tab-panel">
+        <div class="card">
+          <h3>Usage Guidelines</h3>
+          <div class="divider divider-left"></div>
+          <p>Use tabs when you have parallel content categories where only one needs to be visible at a time. Do not use tabs for sequential content (use a stepper instead) or for navigation between pages (use navigation links).</p>
+          <ul style="margin-top:1rem;display:flex;flex-direction:column;gap:0.5rem;padding-left:1.25rem">
+            <li style="font-size:0.875rem;color:var(--text-muted)">Label tabs with nouns, not verbs</li>
+            <li style="font-size:0.875rem;color:var(--text-muted)">Keep tab labels short — 1 to 3 words</li>
+            <li style="font-size:0.875rem;color:var(--text-muted)">2 to 6 tabs per group is ideal</li>
+          </ul>
+        </div>
+      </div>
+      <div id="tab-props" role="tabpanel" aria-labelledby="tab-btn-props" aria-hidden="true" class="tab-panel">
+        <div class="card">
+          <h3>Component Properties</h3>
+          <div class="divider divider-left"></div>
+          <div style="overflow-x:auto;margin-top:0.5rem">
+            <table style="width:100%;border-collapse:collapse;font-size:0.8rem">
+              <thead><tr style="border-bottom:1px solid var(--dark-500)">
+                <th style="text-align:left;padding:0.5rem 0.75rem;color:var(--text-muted);font-weight:500">Property</th>
+                <th style="text-align:left;padding:0.5rem 0.75rem;color:var(--text-muted);font-weight:500">Type</th>
+                <th style="text-align:left;padding:0.5rem 0.75rem;color:var(--text-muted);font-weight:500">Default</th>
+              </tr></thead>
+              <tbody>
+                <tr style="border-bottom:1px solid var(--dark-700)"><td style="padding:0.625rem 0.75rem;color:var(--text-primary)">defaultIndex</td><td style="padding:0.625rem 0.75rem;color:var(--gold-500)">number</td><td style="padding:0.625rem 0.75rem;color:var(--text-muted)">0</td></tr>
+                <tr style="border-bottom:1px solid var(--dark-700)"><td style="padding:0.625rem 0.75rem;color:var(--text-primary)">onChange</td><td style="padding:0.625rem 0.75rem;color:var(--gold-500)">function</td><td style="padding:0.625rem 0.75rem;color:var(--text-muted)">undefined</td></tr>
+                <tr><td style="padding:0.625rem 0.75rem;color:var(--text-primary)">orientation</td><td style="padding:0.625rem 0.75rem;color:var(--gold-500)">horizontal | vertical</td><td style="padding:0.625rem 0.75rem;color:var(--text-muted)">horizontal</td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div id="tab-a11y" role="tabpanel" aria-labelledby="tab-btn-a11y" aria-hidden="true" class="tab-panel">
+        <div class="card">
+          <h3>Accessibility Notes</h3>
+          <div class="divider divider-left"></div>
+          <p>Keyboard interactions follow the WAI-ARIA Tabs pattern. Arrow Left/Right moves focus between tabs. Space/Enter selects. Home moves to first tab. End moves to last tab. Tab moves focus into the active panel.</p>
+          <div style="margin-top:1rem;display:flex;flex-direction:column;gap:0.5rem">
+            <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--success)">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              WCAG 2.1 AA color contrast ≥ 4.5:1
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--success)">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              Focus visible on all interactive elements
+            </div>
+            <div style="display:flex;align-items:center;gap:0.5rem;font-size:0.8rem;color:var(--success)">
+              <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+              role="tablist", role="tab", role="tabpanel" set correctly
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ACCORDION -->
+    <div style="margin-top:4rem">
+      <h3 style="text-align:center;margin-bottom:2rem" class="reveal">Frequently Asked <span class="gold">Questions</span></h3>
+      <div class="accordion" id="faq">
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-1">
+            What is the gold design system?
+            <svg class="accordion-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div id="faq-1" class="accordion-body" role="region" aria-hidden="true">
+            <div class="accordion-body-inner">
+              <p>The gold design system is a set of CSS custom properties, components, and patterns built around a luxury dark-gold aesthetic. Primary brand color is <code>--gold-400: #D4AF37</code>. All design tokens live on <code>:root</code> — never hardcoded in component styles.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-2">
+            How do I customize the color palette?
+            <svg class="accordion-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div id="faq-2" class="accordion-body" role="region" aria-hidden="true">
+            <div class="accordion-body-inner">
+              <p>Override the CSS custom properties on <code>:root</code> in your own stylesheet. Every component reads from these tokens at runtime, so a single override cascades through all components without touching component styles.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-3">
+            Does it work without JavaScript?
+            <svg class="accordion-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div id="faq-3" class="accordion-body" role="region" aria-hidden="true">
+            <div class="accordion-body-inner">
+              <p>Static content and layout work without JS. Interactive components (tabs, accordion, modal, toast, carousel) require JavaScript. All JS is vanilla — no framework dependencies. A no-JS fallback shows all content in expanded state.</p>
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <button class="accordion-trigger" aria-expanded="false" aria-controls="faq-4">
+            What browsers are supported?
+            <svg class="accordion-icon" viewBox="0 0 20 20" fill="none" aria-hidden="true"><path d="M10 4v12M4 10h12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </button>
+          <div id="faq-4" class="accordion-body" role="region" aria-hidden="true">
+            <div class="accordion-body-inner">
+              <p>Chrome 90+, Firefox 88+, Safari 14+, Edge 90+. CSS custom properties, <code>backdrop-filter</code>, <code>IntersectionObserver</code>, and <code>CSS Grid</code> are all required. No IE11 support.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PRICING ═══ -->
+<section class="section bg-alt" id="pricing" aria-labelledby="pricingTitle">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Pricing</span>
+      <h2 id="pricingTitle" class="reveal">Simple, <span class="gold">transparent</span> pricing</h2>
+      <div class="divider"></div>
+    </div>
+    <div class="pricing-toggle-wrap">
+      <span class="pricing-toggle-label active" id="monthlyLabel">Monthly</span>
+      <button class="toggle-switch" id="billingToggle" role="switch" aria-checked="false" aria-label="Toggle annual billing">
+        <span class="toggle-knob"></span>
+      </button>
+      <span class="pricing-toggle-label" id="annualLabel">
+        Annual <span class="save-badge" id="saveBadge">Save 20%</span>
+      </span>
+    </div>
+    <div class="pricing-grid">
+      <div class="card pricing-card reveal">
+        <div class="pricing-name">Starter</div>
+        <div class="pricing-amount">
+          <sup>$</sup><span class="price-value" data-monthly="29" data-annual="23">29</span>
+          <span class="period">/mo</span>
+        </div>
+        <p class="pricing-desc">For individuals and small projects getting started.</p>
+        <ul class="pricing-features" aria-label="Starter features">
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            5 projects
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            10 GB storage
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Community support
+          </li>
+          <li class="dimmed">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Team collaboration
+          </li>
+          <li class="dimmed">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Analytics dashboard
+          </li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="showToast('info','Starter Plan','Redirecting to checkout…')">Get Started</button>
+      </div>
+      <div class="card pricing-card featured reveal reveal-delay-1">
+        <div class="pricing-badge" aria-label="Most popular plan">Most Popular</div>
+        <div class="pricing-name">Pro</div>
+        <div class="pricing-amount">
+          <sup>$</sup><span class="price-value" data-monthly="79" data-annual="63">79</span>
+          <span class="period">/mo</span>
+        </div>
+        <p class="pricing-desc">For growing teams that need more power and collaboration.</p>
+        <ul class="pricing-features" aria-label="Pro features">
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Unlimited projects
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            100 GB storage
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Priority support
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Team collaboration
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Analytics dashboard
+          </li>
+        </ul>
+        <button class="btn btn-primary" style="width:100%;justify-content:center" onclick="showToast('success','Pro Plan','Starting your 14-day free trial.')">Start Free Trial</button>
+      </div>
+      <div class="card pricing-card reveal reveal-delay-2">
+        <div class="pricing-name">Enterprise</div>
+        <div class="pricing-amount">
+          <sup>$</sup><span class="price-value" data-monthly="249" data-annual="199">249</span>
+          <span class="period">/mo</span>
+        </div>
+        <p class="pricing-desc">For large organizations with advanced security and compliance needs.</p>
+        <ul class="pricing-features" aria-label="Enterprise features">
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Unlimited everything
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            1 TB storage
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Dedicated SLA support
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            SSO &amp; SAML
+          </li>
+          <li>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M2 7l3.5 3.5L12 3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Custom contracts
+          </li>
+        </ul>
+        <button class="btn btn-outline" style="width:100%;justify-content:center" onclick="openModal('Enterprise Sales', 'Our enterprise team will reach out within one business day to discuss custom pricing, SLA requirements, and onboarding.')">Contact Sales</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ TESTIMONIALS ═══ -->
+<section class="section" id="testimonials" aria-labelledby="testimonialsTitle">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Testimonials</span>
+      <h2 id="testimonialsTitle" class="reveal">Trusted by <span class="gold">thousands</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="testimonials-track-wrap" aria-label="Customer testimonials carousel">
+      <div class="testimonials-track" id="testimonialsTrack">
+        <div class="testimonial-slide card">
+          <p class="testimonial-quote">"The gold design system is unlike anything else in the ecosystem. We shipped a production UI in two days that looked like it took two months."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">AS</div>
+            <div>
+              <div class="author-name">Adriana Santos</div>
+              <div class="author-role">Lead Frontend Engineer, Veridian Labs</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-slide card">
+          <p class="testimonial-quote">"Accessibility was an afterthought in our old system. With NEXUS UI, WCAG 2.1 AA is the default. Audit results went from a page of issues to zero critical findings."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">MK</div>
+            <div>
+              <div class="author-name">Marcus Kim</div>
+              <div class="author-role">Design Systems Lead, Archon Inc.</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-slide card">
+          <p class="testimonial-quote">"The SVG-first approach cut our bundle size by 40%. No image requests for icons, every graphic is perfectly crisp at every screen density."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">PL</div>
+            <div>
+              <div class="author-name">Priya Langford</div>
+              <div class="author-role">CTO, Solstice Digital</div>
+            </div>
+          </div>
+        </div>
+        <div class="testimonial-slide card">
+          <p class="testimonial-quote">"We evaluated six design systems. NEXUS was the only one where dark mode wasn't a bolt-on — it's the foundation everything is built on."</p>
+          <div class="testimonial-author">
+            <div class="author-avatar" aria-hidden="true">OB</div>
+            <div>
+              <div class="author-name">Olumide Bright</div>
+              <div class="author-role">Product Designer, Cascade Systems</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="testimonials-nav" role="group" aria-label="Carousel controls">
+      <button class="carousel-btn" id="prevBtn" aria-label="Previous testimonial">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 12L6 8l4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+      <div class="carousel-dots" role="group" aria-label="Testimonial position">
+        <button class="carousel-dot active" aria-label="Testimonial 1" data-index="0"></button>
+        <button class="carousel-dot" aria-label="Testimonial 2" data-index="1"></button>
+        <button class="carousel-dot" aria-label="Testimonial 3" data-index="2"></button>
+        <button class="carousel-dot" aria-label="Testimonial 4" data-index="3"></button>
+      </div>
+      <button class="carousel-btn" id="nextBtn" aria-label="Next testimonial">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M6 12l4-4-4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SEARCH + FILTER ═══ -->
+<section class="section bg-alt" aria-labelledby="catalogTitle">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Component Catalog</span>
+      <h2 id="catalogTitle" class="reveal">Search &amp; <span class="gold">filter</span></h2>
+      <div class="divider"></div>
+    </div>
+    <div class="filter-bar">
+      <div class="search-wrap">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="6.5" cy="6.5" r="4.5" stroke="currentColor" stroke-width="1.5"/><path d="M10.5 10.5L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+        <input type="search" class="search-input" id="catalogSearch" placeholder="Search components…" aria-label="Search catalog">
+      </div>
+      <div class="filter-chips" role="group" aria-label="Filter by category">
+        <button class="chip active" data-filter="all">All</button>
+        <button class="chip" data-filter="layout">Layout</button>
+        <button class="chip" data-filter="input">Input</button>
+        <button class="chip" data-filter="feedback">Feedback</button>
+        <button class="chip" data-filter="data">Data</button>
+      </div>
+    </div>
+    <div class="items-grid" id="catalogGrid" role="list" aria-label="Component catalog">
+      <div class="item-card" role="listitem" data-category="feedback" data-name="toast notification">
+        <span class="item-tag">Feedback</span>
+        <h4>Toast Notification</h4>
+        <p>Non-blocking alerts with auto-dismiss.</p>
+      </div>
+      <div class="item-card" role="listitem" data-category="feedback" data-name="modal dialog">
+        <span class="item-tag">Feedback</span>
+        <h4>Modal Dialog</h4>
+        <p>Focus-trapped overlay with backdrop.</p>
+      </div>
+      <div class="item-card" role="listitem" data-category="layout" data-name="card grid">
+        <span class="item-tag">Layout</span>
+        <h4>Card Grid</h4>
+        <p>Responsive multi-column card layout.</p>
+      </div>
+      <div class="item-card" role="listitem" data-category="input" data-name="form fields">
+        <span class="item-tag">Input</span>
+        <h4>Form Fields</h4>
+        <p>Validated inputs, selects, textareas.</p>
+      </div>
+      <div class="item-card" role="listitem" data-category="layout" data-name="tabs">
+        <span class="item-tag">Layout</span>
+        <h4>Tabs</h4>
+        <p>ARIA-compliant tabbed interface.</p>
+      </div>
+      <div class="item-card" role="listitem" data-category="layout" data-name="accordion faq">
+        <span class="item-tag">Layout</span>
+        <h4>Accordion</h4>
+        <p>Collapsible content panels.</p>
+      </div>
+      <div class="item-card" role="listitem" data-category="data" data-name="bar chart svg">
+        <span class="item-tag">Data</span>
+        <h4>Bar Chart</h4>
+        <p>SVG-native, no library required.</p>
+      </div>
+      <div class="item-card" role="listitem" data-category="data" data-name="line chart area">
+        <span class="item-tag">Data</span>
+        <h4>Line / Area Chart</h4>
+        <p>Multi-series with gradient fill.</p>
+      </div>
+      <div class="item-card" role="listitem" data-category="feedback" data-name="carousel testimonials slider">
+        <span class="item-tag">Feedback</span>
+        <h4>Carousel</h4>
+        <p>Snap-scroll slider with dots nav.</p>
+      </div>
+      <div class="item-card" role="listitem" data-category="input" data-name="pricing toggle billing switch">
+        <span class="item-tag">Input</span>
+        <h4>Toggle Switch</h4>
+        <p>ARIA switch for binary settings.</p>
+      </div>
+      <div class="item-card" role="listitem" data-category="layout" data-name="navigation mobile menu hamburger">
+        <span class="item-tag">Layout</span>
+        <h4>Navigation</h4>
+        <p>Responsive nav with mobile hamburger.</p>
+      </div>
+      <div class="item-card" role="listitem" data-category="input" data-name="search filter chips">
+        <span class="item-tag">Input</span>
+        <h4>Search + Filter</h4>
+        <p>Live search with category filter chips.</p>
+      </div>
+    </div>
+    <p id="noResults" style="text-align:center;padding:3rem;color:var(--text-dim);display:none">No components match your search.</p>
+  </div>
+</section>
+
+<!-- ═══ CONTACT FORM ═══ -->
+<section class="section form-section" id="contact" aria-labelledby="contactTitle">
+  <div class="container">
+    <div class="form-grid">
+      <div class="form-info reveal">
+        <span class="section-label">Contact</span>
+        <h2 id="contactTitle">Get in <span class="gold">touch</span></h2>
+        <div class="divider divider-left"></div>
+        <p>Have a question or want to discuss a project? Fill out the form and our team will respond within one business day.</p>
+        <ul class="contact-list" aria-label="Contact information">
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M3 3h12v12H3z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M3 6l6 4 6-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            hello@nexus-ui.design
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><path d="M9 2a5 5 0 100 10A5 5 0 009 2z" stroke="currentColor" stroke-width="1.5"/><path d="M3.5 14.5c0-2 2.5-3.5 5.5-3.5s5.5 1.5 5.5 3.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            San Francisco, California
+          </li>
+          <li>
+            <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true"><circle cx="9" cy="9" r="7" stroke="currentColor" stroke-width="1.5"/><path d="M9 5v4l2.5 2.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            Mon–Fri, 9am–6pm PST
+          </li>
+        </ul>
+      </div>
+      <form class="form reveal reveal-delay-1" id="contactForm" novalidate aria-label="Contact form">
+        <div class="form-row">
+          <div class="field" id="field-firstName">
+            <label for="firstName">First name</label>
+            <input type="text" class="field-input" id="firstName" name="firstName" autocomplete="given-name" required aria-required="true" aria-describedby="firstName-error">
+            <span class="field-error" id="firstName-error" role="alert">First name is required.</span>
+          </div>
+          <div class="field" id="field-lastName">
+            <label for="lastName">Last name</label>
+            <input type="text" class="field-input" id="lastName" name="lastName" autocomplete="family-name" required aria-required="true" aria-describedby="lastName-error">
+            <span class="field-error" id="lastName-error" role="alert">Last name is required.</span>
+          </div>
+        </div>
+        <div class="field" id="field-email">
+          <label for="email">Email address</label>
+          <input type="email" class="field-input" id="email" name="email" autocomplete="email" required aria-required="true" aria-describedby="email-error">
+          <span class="field-error" id="email-error" role="alert">Please enter a valid email address.</span>
+        </div>
+        <div class="field" id="field-subject">
+          <label for="subject">Subject</label>
+          <div class="select-wrap">
+            <select id="subject" name="subject" class="field-input">
+              <option value="">Select a topic…</option>
+              <option value="sales">Sales inquiry</option>
+              <option value="support">Technical support</option>
+              <option value="feedback">Product feedback</option>
+              <option value="other">Other</option>
+            </select>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true"><path d="M3 5l4 4 4-4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+          </div>
+        </div>
+        <div class="field" id="field-message">
+          <label for="message">Message</label>
+          <textarea class="field-textarea" id="message" name="message" rows="4" required aria-required="true" aria-describedby="message-error message-hint" placeholder="Tell us about your project…"></textarea>
+          <span class="field-hint" id="message-hint">Minimum 20 characters.</span>
+          <span class="field-error" id="message-error" role="alert">Please enter at least 20 characters.</span>
+        </div>
+        <button type="submit" class="btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2 8h12M10 4l4 4-4 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          Send Message
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="footer" aria-label="Site footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div style="font-family:var(--font-display);font-size:1.75rem;font-weight:700;color:var(--gold-400)">NEXUS</div>
+        <p>A production-ready component library built on the gold luxury design system.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Product</h4>
+        <ul class="footer-links">
+          <li><a href="#features">Features</a></li>
+          <li><a href="#pricing">Pricing</a></li>
+          <li><a href="#charts">Data Viz</a></li>
+          <li><a href="#tabs">Components</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Resources</h4>
+        <ul class="footer-links">
+          <li><a href="#contact">Documentation</a></li>
+          <li><a href="#contact">API Reference</a></li>
+          <li><a href="#testimonials">Case Studies</a></li>
+          <li><a href="#tabs">Changelog</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul class="footer-links">
+          <li><a href="#contact">About</a></li>
+          <li><a href="#contact">Blog</a></li>
+          <li><a href="#contact">Careers</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <span>© 2026 NEXUS UI. Built with the <a href="#features">gold design system</a>.</span>
+      <span>v2.0 — <a href="#charts">Component Showcase</a></span>
+    </div>
+  </div>
+</footer>
+
+<script>
+/* ── INTERSECTION OBSERVER — reveal on scroll ── */
+const revealObserver = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); revealObserver.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+/* ── NAVIGATION ── */
+const hamburger = document.getElementById('hamburger');
+const mobileMenu = document.getElementById('mobileMenu');
+
+function closeMobileMenu() {
+  hamburger.setAttribute('aria-expanded', 'false');
+  mobileMenu.classList.remove('open');
+  mobileMenu.setAttribute('aria-hidden', 'true');
+}
+
+hamburger.addEventListener('click', () => {
+  const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+  hamburger.setAttribute('aria-expanded', String(!isOpen));
+  mobileMenu.classList.toggle('open', !isOpen);
+  mobileMenu.setAttribute('aria-hidden', String(isOpen));
+});
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeMobileMenu();
+    closeModal();
+  }
+});
+
+/* ── TABS ── */
+const tabBtns = document.querySelectorAll('.tab-btn');
+tabBtns.forEach(btn => {
+  btn.addEventListener('click', () => selectTab(btn));
+  btn.addEventListener('keydown', e => {
+    const tabs = [...tabBtns];
+    const idx = tabs.indexOf(btn);
+    if (e.key === 'ArrowRight') { e.preventDefault(); selectTab(tabs[(idx + 1) % tabs.length]); tabs[(idx + 1) % tabs.length].focus(); }
+    if (e.key === 'ArrowLeft') { e.preventDefault(); selectTab(tabs[(idx - 1 + tabs.length) % tabs.length]); tabs[(idx - 1 + tabs.length) % tabs.length].focus(); }
+    if (e.key === 'Home') { e.preventDefault(); selectTab(tabs[0]); tabs[0].focus(); }
+    if (e.key === 'End') { e.preventDefault(); selectTab(tabs[tabs.length - 1]); tabs[tabs.length - 1].focus(); }
+  });
+});
+
+function selectTab(btn) {
+  tabBtns.forEach(b => {
+    b.setAttribute('aria-selected', 'false');
+    document.getElementById(b.getAttribute('aria-controls')).setAttribute('aria-hidden', 'true');
+  });
+  btn.setAttribute('aria-selected', 'true');
+  document.getElementById(btn.getAttribute('aria-controls')).setAttribute('aria-hidden', 'false');
+}
+
+/* ── ACCORDION ── */
+document.querySelectorAll('.accordion-trigger').forEach(trigger => {
+  trigger.addEventListener('click', () => {
+    const item = trigger.closest('.accordion-item');
+    const body = document.getElementById(trigger.getAttribute('aria-controls'));
+    const isOpen = item.classList.contains('open');
+    item.classList.toggle('open', !isOpen);
+    trigger.setAttribute('aria-expanded', String(!isOpen));
+    body.setAttribute('aria-hidden', String(isOpen));
+    body.style.maxHeight = isOpen ? '0' : body.scrollHeight + 'px';
+  });
+});
+
+/* ── PRICING TOGGLE ── */
+const billingToggle = document.getElementById('billingToggle');
+const monthlyLabel = document.getElementById('monthlyLabel');
+const annualLabel = document.getElementById('annualLabel');
+let isAnnual = false;
+
+billingToggle.addEventListener('click', () => {
+  isAnnual = !isAnnual;
+  billingToggle.classList.toggle('on', isAnnual);
+  billingToggle.setAttribute('aria-checked', String(isAnnual));
+  monthlyLabel.classList.toggle('active', !isAnnual);
+  annualLabel.classList.toggle('active', isAnnual);
+  document.querySelectorAll('.price-value').forEach(el => {
+    el.textContent = isAnnual ? el.dataset.annual : el.dataset.monthly;
+  });
+  showToast('info', isAnnual ? 'Annual Billing' : 'Monthly Billing', isAnnual ? 'Saving 20% with annual plan.' : 'Switched to monthly billing.');
+});
+
+/* ── TESTIMONIALS CAROUSEL ── */
+const track = document.getElementById('testimonialsTrack');
+const dots = document.querySelectorAll('.carousel-dot');
+let currentSlide = 0;
+const slidesPerView = () => window.innerWidth < 640 ? 1 : 2;
+
+function goToSlide(n) {
+  const total = track.children.length;
+  const spv = slidesPerView();
+  const max = Math.max(0, total - spv);
+  currentSlide = Math.max(0, Math.min(n, max));
+  const slideWidth = track.children[0].offsetWidth + 24;
+  track.style.transform = `translateX(-${currentSlide * slideWidth}px)`;
+  dots.forEach((d, i) => d.classList.toggle('active', i === currentSlide));
+}
+
+document.getElementById('prevBtn').addEventListener('click', () => goToSlide(currentSlide - 1));
+document.getElementById('nextBtn').addEventListener('click', () => goToSlide(currentSlide + 1));
+dots.forEach(dot => dot.addEventListener('click', () => goToSlide(parseInt(dot.dataset.index))));
+window.addEventListener('resize', () => goToSlide(currentSlide));
+
+/* ── SEARCH + FILTER ── */
+const searchInput = document.getElementById('catalogSearch');
+const chips = document.querySelectorAll('[data-filter]');
+const catalogItems = document.querySelectorAll('#catalogGrid [data-category]');
+const noResults = document.getElementById('noResults');
+let activeFilter = 'all';
+
+function filterCatalog() {
+  const query = searchInput.value.toLowerCase().trim();
+  let visible = 0;
+  catalogItems.forEach(item => {
+    const matchesFilter = activeFilter === 'all' || item.dataset.category === activeFilter;
+    const matchesSearch = !query || item.dataset.name.includes(query) || item.querySelector('h4').textContent.toLowerCase().includes(query) || item.querySelector('p').textContent.toLowerCase().includes(query);
+    const show = matchesFilter && matchesSearch;
+    item.hidden = !show;
+    if (show) visible++;
+  });
+  noResults.style.display = visible === 0 ? 'block' : 'none';
+}
+
+searchInput.addEventListener('input', filterCatalog);
+chips.forEach(chip => {
+  chip.addEventListener('click', () => {
+    chips.forEach(c => c.classList.remove('active'));
+    chip.classList.add('active');
+    activeFilter = chip.dataset.filter;
+    filterCatalog();
+  });
+});
+
+/* ── FORM VALIDATION ── */
+const contactForm = document.getElementById('contactForm');
+
+function validateField(id, isValid) {
+  const fieldEl = document.getElementById('field-' + id);
+  const inputEl = document.getElementById(id);
+  if (!fieldEl || !inputEl) return isValid;
+  fieldEl.classList.toggle('has-error', !isValid);
+  inputEl.classList.toggle('error', !isValid);
+  return isValid;
+}
+
+contactForm.addEventListener('submit', e => {
+  e.preventDefault();
+  const firstName = document.getElementById('firstName').value.trim();
+  const lastName = document.getElementById('lastName').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const message = document.getElementById('message').value.trim();
+  const emailRe = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  const v1 = validateField('firstName', firstName.length > 0);
+  const v2 = validateField('lastName', lastName.length > 0);
+  const v3 = validateField('email', emailRe.test(email));
+  const v4 = validateField('message', message.length >= 20);
+  if (v1 && v2 && v3 && v4) {
+    showToast('success', 'Message Sent', 'We\'ll get back to you within one business day.');
+    contactForm.reset();
+    document.querySelectorAll('.field').forEach(f => f.classList.remove('has-error'));
+    document.querySelectorAll('.field-input, .field-textarea').forEach(i => i.classList.remove('error'));
+  } else {
+    showToast('error', 'Validation Error', 'Please fix the highlighted fields.');
+    const firstError = contactForm.querySelector('.error');
+    if (firstError) firstError.focus();
+  }
+});
+
+/* ── TOAST ── */
+function showToast(type, title, body) {
+  const region = document.getElementById('toastRegion');
+  const icons = {
+    success: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#4CAF78" stroke-width="1.5"/><path d="M5 8l2 2 4-4" stroke="#4CAF78" stroke-width="1.5" stroke-linecap="round"/></svg>',
+    error: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#E05C5C" stroke-width="1.5"/><path d="M8 5v4M8 11v.5" stroke="#E05C5C" stroke-width="1.5" stroke-linecap="round"/></svg>',
+    warning: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 2L2 13h12L8 2z" stroke="#E0A45C" stroke-width="1.5" stroke-linejoin="round"/><path d="M8 7v3M8 12v.5" stroke="#E0A45C" stroke-width="1.5" stroke-linecap="round"/></svg>',
+    info: '<svg width="16" height="16" viewBox="0 0 16 16" fill="none" aria-hidden="true"><circle cx="8" cy="8" r="7" stroke="#D4AF37" stroke-width="1.5"/><path d="M8 7v5M8 5v.5" stroke="#D4AF37" stroke-width="1.5" stroke-linecap="round"/></svg>'
+  };
+  const toast = document.createElement('div');
+  toast.className = `toast toast-${type}`;
+  toast.setAttribute('role', 'status');
+  toast.innerHTML = `<span class="toast-icon">${icons[type]}</span><div><div class="toast-title">${title}</div><div class="toast-body">${body}</div></div><button class="toast-dismiss" aria-label="Dismiss notification">×</button>`;
+  toast.querySelector('.toast-dismiss').addEventListener('click', () => dismissToast(toast));
+  region.appendChild(toast);
+  requestAnimationFrame(() => { requestAnimationFrame(() => toast.classList.add('show')); });
+  setTimeout(() => dismissToast(toast), 5000);
+}
+
+function dismissToast(toast) {
+  toast.classList.remove('show');
+  toast.addEventListener('transitionend', () => toast.remove(), { once: true });
+}
+
+/* ── MODAL ── */
+const backdrop = document.getElementById('modalBackdrop');
+const modalTitle = document.getElementById('modalTitle');
+const modalBody = document.getElementById('modalBody');
+let prevFocus = null;
+
+function openModal(title, body) {
+  prevFocus = document.activeElement;
+  modalTitle.textContent = title;
+  modalBody.textContent = body;
+  backdrop.classList.add('open');
+  backdrop.setAttribute('aria-hidden', 'false');
+  document.body.style.overflow = 'hidden';
+  document.getElementById('modalClose').focus();
+  trapFocus(backdrop);
+}
+
+function closeModal() {
+  backdrop.classList.remove('open');
+  backdrop.setAttribute('aria-hidden', 'true');
+  document.body.style.overflow = '';
+  if (prevFocus) prevFocus.focus();
+}
+
+document.getElementById('modalClose').addEventListener('click', closeModal);
+document.getElementById('modalCancel').addEventListener('click', closeModal);
+document.getElementById('modalConfirm').addEventListener('click', () => {
+  closeModal();
+  showToast('success', 'Confirmed', 'Action completed successfully.');
+});
+backdrop.addEventListener('click', e => { if (e.target === backdrop) closeModal(); });
+
+function trapFocus(el) {
+  const focusable = el.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+  const first = focusable[0], last = focusable[focusable.length - 1];
+  el.addEventListener('keydown', function handler(e) {
+    if (e.key !== 'Tab') return;
+    if (e.shiftKey) { if (document.activeElement === first) { e.preventDefault(); last.focus(); } }
+    else { if (document.activeElement === last) { e.preventDefault(); first.focus(); } }
+    if (!backdrop.classList.contains('open')) el.removeEventListener('keydown', handler);
+  });
+}
+</script>
+</body>
+</html>

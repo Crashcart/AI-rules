@@ -4,6 +4,22 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.22.1] 2026-05-24
+
+**Rationale**: No dedicated rulemaker role existed — the function of drafting, versioning, and conflict-checking rules was distributed informally. RULE ARCHITECT centralizes that function with a clear scope: proposes but never self-approves (RULE 17), and is the designated owner of rule quality before user review.
+
+### Added
+
+- `agents/rule-architect.md` — Vera Okonkwo, RULE ARCHITECT; specialties: rule drafting, rule system design, version governance, conflict detection, cross-model validation, rule deprecation; scope: proposes rules via ticket protocol, does not modify `rules/*.md` directly
+- `demo/complex-showcase.html` — NEXUS UI component library showcase built on the gold design system; all required components: nav, hero, stats, feature grid, SVG charts, tabs, accordion, pricing toggle, testimonials carousel, search/filter catalog, contact form, toast system, modal dialog, footer; WCAG 2.1 AA, prefers-reduced-motion, SVG-first, IntersectionObserver scroll reveals
+
+### Notes
+
+- SHA256 unchanged: `87550dd13ec670e42397d15eaff1ff17cec7d7436775c75fa3bf5f70d4b4510a` (no `rules/*.md` modified)
+- RULE ARCHITECT operates under RULE 16 (hire approved by user) and RULE 17 (cannot self-approve rule changes)
+
+---
+
 ## [1.22.0] 2026-05-23
 
 **Rationale**: Leaderboard and leader features without shareable URLs have zero social reach — they cannot be linked, bookmarked, or shared. URL-addressability for all leaderboard entries is now a non-negotiable requirement for any game website delivered by any AI in this system.
