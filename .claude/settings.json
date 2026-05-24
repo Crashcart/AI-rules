@@ -3,6 +3,16 @@
     "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50"
   },
   "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "$CLAUDE_PROJECT_DIR/.claude/hooks/session-start.sh"
+          }
+        ]
+      }
+    ],
     "PreToolUse": [
       {
         "matcher": "Bash",
@@ -31,5 +41,5 @@
   "snapshotRepo": "AI-rules",
   "snapshotTargetRepo": "",
   "snapshotBranch": "snapshot",
-  "rulesVersion": "1.6.1"
+  "rulesVersion": "1.25.0"
 }

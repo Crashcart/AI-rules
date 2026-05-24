@@ -4,6 +4,20 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.25.1] 2026-05-24
+
+**Rationale**: ROLE ANNOUNCEMENT and RULE 20 were NON-NEGOTIABLE but had no mechanical enforcement. The only load trigger was a SHA mismatch — rules were never loaded during normal sessions. Root cause: no SessionStart hook existed to inject behavioral rules into context.
+
+### Added
+
+- `.claude/hooks/session-start.sh` — extracts and outputs AGENT ROLE REFERENCES, ROLE ANNOUNCEMENT, and RULE 20 sections from `rules/` at every session start; ensures these NON-NEGOTIABLE rules are always in active context regardless of whether the SHA check triggers a rules reload
+
+### Fixed
+
+- `.claude/settings.json` — `rulesVersion` corrected from stale `"1.6.1"` to `"1.25.0"`; `SessionStart` hook registered pointing to the new script
+
+---
+
 ## [1.25.0] 2026-05-24
 
 **Rationale**: No guide existed for operating the 33-role pipeline as a multi-session software factory. Users had no documented invocation syntax, no inter-session context convention, and no factory-configured project template. This version adds all three layers: conceptual guide, HANDOFF.md inter-session bus, and standalone factory template.
