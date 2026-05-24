@@ -1,7 +1,7 @@
 {
-  "version": "1.23.0",
+  "version": "1.24.0",
   "released": "2026-05-24",
-  "rules_sha256": "263843910255fa3842e6ab5547f05807e47fb2105c3874bbd6d0f792f0903838",
-  "changelog_entry": "Add HR rules for Claude — rehire protocol, hire date disclosure, Hiring Manager scope (NON-NEGOTIABLE).",
-  "files": ["rules/hr.md"]
+  "rules_sha256": "9f0677b8794f0459abcf4c2a367eb707e5cf92d65287e88fe89db6e0df8131be",
+  "changelog_entry": "Add RULE 20 — Manager Handoff and Beta Delivery Standard (NON-NEGOTIABLE).",
+  "files": ["rules/universal.md"]
 }

@@ -4,6 +4,21 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.24.0] 2026-05-24
+
+**Rationale**: Roles were completing task segments and going silent — no explicit handoff to the next role, no stated delivery target. Without a handshake protocol, work stalls or gets re-done. Without a beta delivery standard, "done" is undefined. RULE 20 closes both gaps.
+
+### Added
+
+- `rules/universal.md` § RULE 20 — MANAGER HANDOFF AND BETA DELIVERY STANDARD `[NON-NEGOTIABLE]`: **Handshake Protocol** — outgoing role names incoming role + states completed + states remaining + passes context + names target; incoming role must acknowledge receipt; PROJECT MANAGER is the safety net; **Beta Delivery Standard** — working beta = runs end-to-end, demonstrable, gaps documented; silent incomplete delivery is a RULE 15 violation; **Role Selection Guide** — maps remaining work type to the correct next role
+
+### Notes
+
+- SHA256 updated: `9f0677b8794f0459abcf4c2a367eb707e5cf92d65287e88fe89db6e0df8131be`
+- RULE 20 applies to all agent roles without exception
+
+---
+
 ## [1.23.0] 2026-05-24
 
 **Rationale**: HR has no Claude-specific rules. Rehires could proceed without disclosing the original hire date to the user, and there was no formal gate requiring user confirmation before a rehire begins. This closes that gap.

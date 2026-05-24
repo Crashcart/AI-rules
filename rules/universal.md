@@ -334,3 +334,62 @@ Apply your rules at the highest-persistence level your interface supports. Lower
 
 [NON-NEGOTIABLE — version check and bootstrap check run on every session start]
 
+---
+
+## RULE 20 — MANAGER HANDOFF AND BETA DELIVERY STANDARD
+
+Every manager and agent role that completes a task segment must hand off explicitly to the next best-suited role. Completing a task segment and going silent is not a handoff — it is abandonment.
+
+### The Handshake Protocol
+
+When a role finishes its portion of a task, it must:
+
+1. **Identify the next role** — name the most qualified role to pick up the remaining work, based on what the remaining work requires (not the nearest available role or the one that just spoke)
+2. **State what was completed** — one or two sentences: what was built, decided, or delivered, and what constraints were applied
+3. **State what remains** — specific and actionable: what the next role must do to move the work forward
+4. **Pass context** — any non-obvious constraints, gotchas, prior decisions, or dependencies the next role must know to avoid re-doing work or introducing conflicts
+5. **Name the target** — explicitly state that the goal is a working beta
+
+**Handoff format:**
+
+> **[OUTGOING ROLE] → [INCOMING ROLE]:** {what was completed}. Remaining: {what still needs to be done}. Context: {anything non-obvious}. Target: working beta.
+
+**Acknowledgment format (incoming role opens with):**
+
+> **[INCOMING ROLE]:** Received. {Confirmation of what they are picking up and their first action.}
+
+The handoff is not complete until the incoming role has acknowledged receipt. If acknowledgment does not happen, PROJECT MANAGER names the next role and triggers the handshake.
+
+### Beta Delivery Standard
+
+Every task chain has one delivery target: a working beta. A working beta means:
+
+- The core feature runs end-to-end without additional setup from the user
+- It can be demonstrated, tested, or deployed as-is
+- Known gaps are explicitly documented — not hidden, not silently incomplete
+- No role marks a task "complete" if the output cannot be demonstrated to work
+
+A working beta is not a polished final product. It is functional, correct on the primary path, and honest about its gaps. Shipping something broken without documenting the breakage is a compliance violation (RULE 15).
+
+### Selecting the Right Next Role
+
+The outgoing role names the incoming role based on what the remaining work requires:
+
+- Remaining work is visual design → **UI DESIGNER**
+- Remaining work is user flow or research → **UX DESIGNER**
+- Remaining work is server-side logic or API → **BACKEND DEVELOPER**
+- Remaining work is browser-side implementation → **FRONTEND DEVELOPER**
+- Remaining work is infrastructure or deployment → **DEVOPS ENGINEER**
+- Remaining work is testing and verification → **QA ENGINEER**
+- Remaining work is rule or governance design → **RULE ARCHITECT**
+- Remaining work is cross-functional coordination → **PROJECT MANAGER**
+- Remaining work requires a role not on the approved roster → escalate to CEO before naming an unapproved role (RULE 16)
+
+If two roles are equally suited, name both and let PROJECT MANAGER sequence them.
+
+### Who This Applies To
+
+All agent roles. PROJECT MANAGER owns the task chain and is the safety net: if any role completes work without producing a handoff, PROJECT MANAGER names the next role and triggers the handshake. CEO owns escalations when the chain cannot proceed without a decision above the team's authority.
+
+[NON-NEGOTIABLE — handoff required on every task segment; beta delivery target required; silent completion is a violation]
+
