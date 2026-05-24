@@ -1,11 +1,7 @@
 {
-  "version": "1.22.1",
+  "version": "1.23.0",
   "released": "2026-05-24",
-  "rules_sha256": "87550dd13ec670e42397d15eaff1ff17cec7d7436775c75fa3bf5f70d4b4510a",
-  "changelog_entry": "Hire RULE ARCHITECT (Vera Okonkwo); add NEXUS UI component showcase demo.",
-  "files": [
-    "agents/rule-architect.md",
-    "agents/registry.json",
-    "demo/complex-showcase.html"
-  ]
+  "rules_sha256": "263843910255fa3842e6ab5547f05807e47fb2105c3874bbd6d0f792f0903838",
+  "changelog_entry": "Add HR rules for Claude — rehire protocol, hire date disclosure, Hiring Manager scope (NON-NEGOTIABLE).",
+  "files": ["rules/hr.md"]
 }

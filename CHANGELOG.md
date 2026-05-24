@@ -4,6 +4,21 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.23.0] 2026-05-24
+
+**Rationale**: HR has no Claude-specific rules. Rehires could proceed without disclosing the original hire date to the user, and there was no formal gate requiring user confirmation before a rehire begins. This closes that gap.
+
+### Added
+
+- `rules/hr.md` — HR rules for Claude running the HIRING MANAGER role; REHIRE PROTOCOL `[NON-NEGOTIABLE]`: must surface original hire date + confirmation prompt before any rehire action; HIRE DATE DISCLOSURE `[NON-NEGOTIABLE]`: must resolve date from git commit, never estimate; HIRING MANAGER SCOPE ON CLAUDE: registry as source of truth, 7-candidate minimum pool, RULE 16 approval gate; Claude-specific instruction grammar notes
+
+### Notes
+
+- SHA256 updated: `263843910255fa3842e6ab5547f05807e47fb2105c3874bbd6d0f792f0903838`
+- `rules/hr.md` is Claude-only — other AI types are not bound by this file
+
+---
+
 ## [1.22.1] 2026-05-24
 
 **Rationale**: No dedicated rulemaker role existed — the function of drafting, versioning, and conflict-checking rules was distributed informally. RULE ARCHITECT centralizes that function with a clear scope: proposes but never self-approves (RULE 17), and is the designated owner of rule quality before user review.
