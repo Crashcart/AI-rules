@@ -4,6 +4,30 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.25.0] 2026-05-24
+
+**Rationale**: No guide existed for operating the 33-role pipeline as a multi-session software factory. Users had no documented invocation syntax, no inter-session context convention, and no factory-configured project template. This version adds all three layers: conceptual guide, HANDOFF.md inter-session bus, and standalone factory template.
+
+### Added
+
+- `notes/context/software-factory.md` — three-phase guide (Vibe Coding → Structured AI Dev → Agentic Factory); prerequisites checklist; exact role invocation syntax for Claude Code; parallel fork and review-checkpoint patterns (RULE 18 constraint noted); HANDOFF.md append-only convention with section header format; quality gates per stage (10-stage table with blocking conditions); worked PM→SRE example for "Add User Credits Endpoint" with three sample HANDOFF.md entries; phase transition reference table
+- `templates/factory/CLAUDE.md` — standalone factory project template; Factory Mode section (do not default to PM solo); Session Start Checklist (6 steps: rules hook, read HANDOFF.md, read role profile, announce receipt, verify FACTORY_STAGE, check quality gate); Role Activation table (10 stages, slugs, algebraic mix syntax); HANDOFF.md Convention section; Quality Gate Checklist (10 stages × blocking conditions as checkboxes); Working Beta Checklist (4 items from RULE 20 Beta Delivery Standard)
+- `templates/factory/.claude/settings.json` — `CLAUDE_FACTORY_MODE=true`, `FACTORY_STAGE=""` (empty = hook warning on every Bash call), rules update check hook, FACTORY_STAGE warning hook, PostToolUse auto-formatter; `rulesVersion: "1.25.0"`; `factoryPipeline` array ordering all 10 roles
+- `templates/factory/HANDOFF.md` — Pipeline Status table (10 stages, status emoji legend); Project Context slot (fill once at pipeline start); Open Blockers slot; Known Gaps slot; Handoff Log with RULE 20 format as inline comment block for copy-paste
+
+### Updated
+
+- `templates/README.md` — factory row added to Which Template to Use table; Factory layer section added (standalone rationale, file descriptions, apply command, next steps)
+- `templates/setup.sh` — `factory` case added (standalone copy, no base layer merge, own next-steps output); validation pattern updated to `typescript|python|shell|factory`; usage strings updated
+
+### Notes
+
+- SHA256 unchanged: `9f0677b8794f0459abcf4c2a367eb707e5cf92d65287e88fe89db6e0df8131be` (no `rules/*.md` modified)
+- `templates/factory/` is opt-in only via `setup.sh factory` — no existing template behavior affected
+- Factory template is standalone (not layered on `base/`) by design — session start behavior conflicts with base template
+
+---
+
 ## [1.24.1] 2026-05-24
 
 **Rationale**: UI DESIGNER and UX DESIGNER were originally hired (2026-05-18) before `rules/web-design.md` was added (v1.18.0) and before RULE 20 (v1.24.0) established the handshake protocol. Rehire brings both profiles current.

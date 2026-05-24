@@ -12,6 +12,7 @@ Drop-in starter files for any new Crashcart repo using the AI-rules system.
 | Python (bots, scripts, ML) | `python/` |
 | Shell / Docker / infrastructure | `shell/` |
 | Mixed or unsure | Start with `base/` only |
+| Multi-agent factory pipeline | `factory/` |
 
 ---
 
@@ -19,7 +20,7 @@ Drop-in starter files for any new Crashcart repo using the AI-rules system.
 
 ```bash
 # From the ai-rules repo root:
-bash templates/setup.sh <typescript|python|shell> /path/to/your/new-repo
+bash templates/setup.sh <typescript|python|shell|factory> /path/to/your/new-repo
 ```
 
 Then open `/path/to/your/new-repo/CLAUDE.md` and fill in every line marked `{TODO}`.
@@ -59,6 +60,34 @@ Each language template overrides `CLAUDE.md` and `.claude/settings.json` with la
    - Shell: no formatter needed
 3. Commit the template files on your `dev` branch — never on `main`
 4. Add your repo structure to the `## Repo Structure` section of `CLAUDE.md`
+
+---
+
+## Factory Layer
+
+For multi-agent pipelines running multiple Claude Code sessions against a shared
+context bus. Unlike the base/language templates, the factory template is **standalone**
+— it does not inherit from `base/` because its session start behavior (read HANDOFF.md
+first, activate role-appropriate profile) fundamentally differs from base behavior
+(default to PROJECT MANAGER, check TODO.md).
+
+| File | Purpose |
+|------|---------|
+| `CLAUDE.md` | Factory session checklist, role activation table, quality gate and working beta checklists |
+| `.claude/settings.json` | `CLAUDE_FACTORY_MODE=true`, `FACTORY_STAGE` warning hook, `factoryPipeline` order array |
+| `HANDOFF.md` | Inter-session context bus — Pipeline Status table, Context Slots, Handoff Log |
+
+Apply the factory template:
+
+```bash
+bash templates/setup.sh factory /path/to/your/project-repo
+```
+
+Then:
+1. Fill `{TODO}` placeholders in `CLAUDE.md` and `HANDOFF.md`
+2. Set `FACTORY_STAGE` in `.claude/settings.json` to the first stage name (`"PM"`)
+3. Fill the Project Context slot in `HANDOFF.md`
+4. Read `notes/context/software-factory.md` in the AI-rules repo for the full guide
 
 ---
 

@@ -1,7 +1,14 @@
 {
-  "version": "1.24.1",
+  "version": "1.25.0",
   "released": "2026-05-24",
   "rules_sha256": "9f0677b8794f0459abcf4c2a367eb707e5cf92d65287e88fe89db6e0df8131be",
-  "changelog_entry": "Rehire UI DESIGNER and UX DESIGNER — update profiles to reference web-design.md standards and RULE 20 handshake format.",
-  "files": ["agents/ui-designer.md", "agents/ux-designer.md"]
+  "changelog_entry": "Add software factory template and guide — vibe coding to agentic development.",
+  "files": [
+    "notes/context/software-factory.md",
+    "templates/factory/CLAUDE.md",
+    "templates/factory/.claude/settings.json",
+    "templates/factory/HANDOFF.md",
+    "templates/README.md",
+    "templates/setup.sh"
+  ]
 }
