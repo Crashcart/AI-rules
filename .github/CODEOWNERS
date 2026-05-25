@@ -1,0 +1,8 @@
+# CODEOWNERS — AI-rules canonical repo
+#
+# Every file requires owner review before merging.
+# Combined with branch protection (Settings → Branches → main →
+# "Require review from Code Owners"), this blocks all fork PRs
+# from landing without @Crashcart explicit approval.
+
+* @Crashcart

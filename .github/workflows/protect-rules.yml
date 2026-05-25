@@ -1,0 +1,23 @@
+name: Protect Rules from Fork Modifications
+
+on:
+  pull_request:
+    paths:
+      - 'rules/**'
+      - 'version.json'
+      - 'acknowledgments/**'
+
+jobs:
+  block-fork-rule-changes:
+    name: Block rule changes from fork PRs
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check PR origin
+        run: |
+          if [ "${{ github.event.pull_request.head.repo.fork }}" = "true" ]; then
+            echo "::error::Rule changes from fork repositories are not permitted."
+            echo "::error::Rules flow one direction only: canonical AI-rules repo → forks (RULE 22)."
+            echo "::error::To change a rule, open an issue or contact the repo owner directly."
+            exit 1
+          fi
+          echo "PR is from the canonical repo — rule changes permitted with owner review."
