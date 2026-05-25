@@ -4,6 +4,21 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.26.4] 2026-05-25
+
+**Rationale**: The fork embedding model (v1.26.3) made AI-rules locally available in fork repos but did not formally prohibit forks from pushing rule changes back. The user's directive: rules are always protected — no fork can modify or pull changes into the canonical repo.
+
+### Added
+
+- `rules/universal.md`: RULE 22 — RULE REPO PROTECTION AND ONE-WAY FLOW `[NON-NEGOTIABLE]`; rules flow canonical AI-rules repo → forks only; `.ai-rules/` is read-only in all fork repos; `.ai-rules/` rules always override local config; GitHub branch protection on `main` required (documented as manual setup step)
+- `notes/decisions/007-rule-repo-protection.md`: ADR capturing the one-way flow decision, three enforcement layers (git subtree semantics, RULE 22, GitHub branch protection), and scope of planned work not yet decided (.github integration, side-mesh insert)
+
+### Updated
+
+- `templates/fork-starter/CLAUDE.md`: explicit read-only and override-precedence callouts for `.ai-rules/` with RULE 22 reference
+
+---
+
 ## [1.26.3] 2026-05-25
 
 **Rationale**: Fork repos running `check-rules-updates.sh` were being told "re-read rules/" but the `rules/` directory doesn't exist in target repos — only in AI-rules itself. Embedding AI-rules as a git subtree at `.ai-rules/` fixes this: the rules are locally available at `.ai-rules/rules/`. The `fork-init.sh` script automates the entire setup in one command, and the fork-starter template is wired to `.ai-rules/` paths throughout.

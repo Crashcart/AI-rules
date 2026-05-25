@@ -434,3 +434,34 @@ Do NOT auto-pull. Do NOT block the session — the user decides whether to sync 
 
 [DEFAULT, overridable — disable by not configuring an upstream remote, or with "skip upstream sync check"]
 
+
+---
+
+## RULE 22 — RULE REPO PROTECTION AND ONE-WAY FLOW
+
+The canonical AI-rules repository is the sole source of truth for all rules. Rules flow in one direction only: from the AI-rules repo into fork/project repos — never the reverse.
+
+### What this means
+
+- **Forks cannot change rules.** A fork of this repo, or a project repo embedding `.ai-rules/` as a subtree, has no authority to modify rule files. Edits to `.ai-rules/` inside a fork are local mutations that will be overwritten on the next `git subtree pull`.
+- **Rules in `.ai-rules/` always override local config.** If a fork defines a local rule or hook that conflicts with `.ai-rules/rules/`, the `.ai-rules/` version wins.
+- **Only the user can approve rule changes.** See RULE 17. Any change to files in `rules/` requires explicit user approval in the canonical repo, then flows downstream on the next subtree pull.
+- **The canonical repo must be protected.** Branch protection on `main` must be enabled so no fork-originated PR can be merged without user review. Auto-merge from forked branches is not permitted.
+
+### In practice
+
+- Do NOT edit files inside `.ai-rules/` in a fork repo. Treat the directory as read-only.
+- To apply a rule change: make the change in the canonical AI-rules repo → commit + push to `main` → run `git subtree pull --prefix=.ai-rules https://github.com/crashcart/ai-rules main --squash` in each fork repo.
+- If an AI in a fork suggests editing `.ai-rules/` directly: refuse and route to the canonical repo.
+
+### GitHub Branch Protection (required manual setup)
+
+In the canonical AI-rules repo → Settings → Branches → Add rule for `main`:
+- [x] Require a pull request before merging
+- [x] Dismiss stale pull request approvals when new commits are pushed
+- [x] Require review from Code Owners (optional but recommended)
+- [x] Do not allow bypassing the above settings
+
+This prevents any fork PR from landing on `main` without user review.
+
+[NON-NEGOTIABLE]

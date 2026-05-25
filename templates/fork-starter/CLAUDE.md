@@ -10,6 +10,10 @@
 
 Rules live at `.ai-rules/rules/` — embedded via git subtree from `https://github.com/crashcart/ai-rules`.
 
+**`.ai-rules/` is read-only.** Do NOT edit any file inside it. Changes will be overwritten on the next subtree pull. Rule changes must be made in the canonical AI-rules repo by the repo owner — they flow downstream here on the next update. (RULE 22)
+
+**`.ai-rules/` rules always override local config.** If anything in this repo conflicts with `.ai-rules/rules/`, `.ai-rules/` wins.
+
 If the SessionStart hook output says "Rules updated to vX.Y.Z": re-read `.ai-rules/rules/` before doing anything else.
 
 To update AI-rules to the latest version:

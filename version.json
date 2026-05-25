@@ -1,13 +1,11 @@
 {
-  "version": "1.26.3",
+  "version": "1.26.4",
   "released": "2026-05-25",
-  "rules_sha256": "ca54bfe0108e73b4d6f6219a58c31032d26f1d210f8ad77bc9b3b8286d96bc3c",
-  "changelog_entry": "Fork-init script + embedded AI-rules subtree support for fork repos.",
+  "rules_sha256": "655719a2feeff090895c4da710fae11dc6469c1762082ff216fc8549745b4ca1",
+  "changelog_entry": "RULE 22 — Rule Repo Protection and One-Way Flow. Rules are canonical; forks cannot push changes back.",
   "files": [
-    "scripts/fork-init.sh",
-    "templates/fork-starter/.claude/hooks/session-start.sh",
-    "templates/fork-starter/.claude/settings.json",
-    "templates/fork-starter/CLAUDE.md",
-    "templates/fork-starter/FORK_MODULES.md"
+    "rules/universal.md",
+    "notes/decisions/007-rule-repo-protection.md",
+    "templates/fork-starter/CLAUDE.md"
   ]
 }
