@@ -1,13 +1,11 @@
 {
-  "version": "1.26.0",
+  "version": "1.26.1",
   "released": "2026-05-25",
   "rules_sha256": "ca54bfe0108e73b4d6f6219a58c31032d26f1d210f8ad77bc9b3b8286d96bc3c",
-  "changelog_entry": "Add RULE 21 upstream fork sync — notify-only check at session start, companion script, and GitHub Actions workflow template.",
+  "changelog_entry": "Add fork module tracking — FORK_MODULES.md manifest template, PR-based upstream sync workflow, templates/README.md fork section.",
   "files": [
-    "rules/universal.md",
-    "scripts/check-upstream.sh",
-    "templates/upstream-sync.yml",
-    ".claude/hooks/session-start.sh",
-    "CLAUDE.md"
+    "templates/fork-modules.md",
+    "templates/upstream-sync-pr.yml",
+    "templates/README.md"
   ]
 }

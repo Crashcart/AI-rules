@@ -4,6 +4,18 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.26.1] 2026-05-25
+
+**Rationale**: Forks that add custom modules need a safe way to track what they own vs. what came from upstream, so upstream syncs don't silently overwrite custom additions. A manifest template and a PR-based sync workflow fill this gap.
+
+### Added
+
+- `templates/fork-modules.md`: manifest template listing custom additions per fork, with conflict-risk rating per file/directory; used by the PR-based sync to surface which files need human review before merging
+- `templates/upstream-sync-pr.yml`: PR-based daily upstream sync workflow — creates a `sync/upstream-YYYYMMDD` branch and opens a pull request with a diff summary and FORK_MODULES.md conflict check; use instead of `upstream-sync.yml` when any module has Medium or High conflict risk
+- `templates/README.md`: Fork Templates section added — explains which sync workflow to use and full setup instructions
+
+---
+
 ## [1.26.0] 2026-05-25
 
 **Rationale**: Repos that are GitHub forks had no mechanism to detect when the upstream source had new commits. Without detection, a fork can silently diverge for weeks. This version adds a factual, rate-limited upstream check script, a behavioral rule (RULE 21) mandating the check at session start, and a GitHub Actions workflow template for daily automatic sync.

@@ -91,6 +91,38 @@ Then:
 
 ---
 
+## Fork Templates
+
+For repos that are GitHub forks adding custom modules on top of upstream.
+
+| File | Purpose |
+|------|---------|
+| `fork-modules.md` | Manifest template — tracks custom additions vs. upstream files, conflict risk per module |
+| `upstream-sync.yml` | Auto-merge daily sync (safe when all fork additions are `None`/`Low` conflict risk) |
+| `upstream-sync-pr.yml` | PR-based daily sync (use when any module has `Medium`/`High` conflict risk) |
+
+**Which sync workflow to use:**
+- No custom modules or all `None`/`Low` risk → `upstream-sync.yml` (auto-merges silently)
+- Any `Medium`/`High` conflict risk modules → `upstream-sync-pr.yml` (opens a PR for review)
+
+**Setup:**
+
+```bash
+# 1. Copy fork-modules.md to your fork repo root
+cp templates/fork-modules.md /path/to/fork/FORK_MODULES.md
+
+# 2. Copy the appropriate sync workflow
+cp templates/upstream-sync-pr.yml /path/to/fork/.github/workflows/upstream-sync.yml
+
+# 3. Set upstream remote once
+cd /path/to/fork
+git remote add upstream https://github.com/original-owner/original-repo
+
+# 4. For PR-based workflow: set UPSTREAM_URL as a repo variable in GitHub Settings → Variables → Actions
+```
+
+---
+
 ## Keeping Templates in Sync
 
 When AI-rules bumps a version, check `MIGRATION.md` in this repo. If the version bump changes
