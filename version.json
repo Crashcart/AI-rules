@@ -1,10 +1,13 @@
 {
-  "version": "1.26.2",
+  "version": "1.26.3",
   "released": "2026-05-25",
   "rules_sha256": "ca54bfe0108e73b4d6f6219a58c31032d26f1d210f8ad77bc9b3b8286d96bc3c",
-  "changelog_entry": "Add fork starter files — lean FORK_MODULES.md instance and PM startup prompt doc.",
+  "changelog_entry": "Fork-init script + embedded AI-rules subtree support for fork repos.",
   "files": [
-    "templates/fork-starter/FORK_MODULES.md",
-    "notes/context/fork-pm-startup.md"
+    "scripts/fork-init.sh",
+    "templates/fork-starter/.claude/hooks/session-start.sh",
+    "templates/fork-starter/.claude/settings.json",
+    "templates/fork-starter/CLAUDE.md",
+    "templates/fork-starter/FORK_MODULES.md"
   ]
 }

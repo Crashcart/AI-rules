@@ -4,6 +4,23 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.26.3] 2026-05-25
+
+**Rationale**: Fork repos running `check-rules-updates.sh` were being told "re-read rules/" but the `rules/` directory doesn't exist in target repos — only in AI-rules itself. Embedding AI-rules as a git subtree at `.ai-rules/` fixes this: the rules are locally available at `.ai-rules/rules/`. The `fork-init.sh` script automates the entire setup in one command, and the fork-starter template is wired to `.ai-rules/` paths throughout.
+
+### Added
+
+- `scripts/fork-init.sh`: one-command fork setup — adds `upstream` remote, embeds AI-rules as `git subtree` at `.ai-rules/`, copies fork-starter config files, prints TODO list and update commands
+- `templates/fork-starter/.claude/hooks/session-start.sh`: session-start hook reading rules from `.ai-rules/rules/` (not a remote URL); runs upstream check via `.ai-rules/scripts/check-upstream.sh`
+- `templates/fork-starter/.claude/settings.json`: hooks wired to `.ai-rules/scripts/`; `rulesVersion: 1.26.3`; `rulesRepo` set for reference
+- `templates/fork-starter/CLAUDE.md`: fork-specific CLAUDE.md; references `.ai-rules/rules/` for re-reads; documents subtree update command and TODO placeholders
+
+### Updated
+
+- `templates/fork-starter/FORK_MODULES.md`: added `.ai-rules/` row (conflict risk: None — upstream project won't have this directory); Setup section now shows `fork-init.sh` as the TODO run command and includes the two update commands (`git subtree pull` for AI-rules, `git pull upstream` for project)
+
+---
+
 ## [1.26.2] 2026-05-25
 
 **Rationale**: The fork module tracking templates (v1.26.1) explain the format but require users to construct their own starting files. These two files are the concrete, ready-to-use instances: a lean manifest to drop into any fork repo root, and a PM startup prompt to paste at the beginning of any fork project session.
