@@ -1,7 +1,15 @@
 name: Setup Branch Protection (run once)
 
 on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/setup-branch-protection.yml'
   workflow_dispatch:
+
+permissions:
+  administration: write
+  contents: read
 
 jobs:
   protect-main:
@@ -9,22 +17,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Apply branch protection rules
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          curl -fsSL -X PUT \
-            -H "Authorization: token ${{ secrets.BRANCH_PROTECTION_TOKEN }}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${{ github.repository }}/branches/main/protection \
-            -d '{
-              "required_status_checks": {
-                "strict": false,
-                "contexts": ["Block rule changes from fork PRs"]
-              },
-              "enforce_admins": true,
-              "required_pull_request_reviews": {
-                "require_code_owner_reviews": true,
-                "required_approving_review_count": 1,
-                "dismiss_stale_reviews": false
-              },
-              "restrictions": null
-            }'
+          gh api \
+            --method PUT \
+            -H "Accept: application/vnd.github+json" \
+            /repos/${{ github.repository }}/branches/main/protection \
+            -f 'required_status_checks[strict]=false' \
+            -f 'required_status_checks[contexts][]=Block rule changes from fork PRs' \
+            -F 'enforce_admins=true' \
+            -F 'required_pull_request_reviews[require_code_owner_reviews]=true' \
+            -F 'required_pull_request_reviews[required_approving_review_count]=1' \
+            -F 'required_pull_request_reviews[dismiss_stale_reviews]=false' \
+            -f 'restrictions=null' \
+            --input - <<'EOF'
+          {
+            "required_status_checks": {
+              "strict": false,
+              "contexts": ["Block rule changes from fork PRs"]
+            },
+            "enforce_admins": true,
+            "required_pull_request_reviews": {
+              "require_code_owner_reviews": true,
+              "required_approving_review_count": 1,
+              "dismiss_stale_reviews": false
+            },
+            "restrictions": null
+          }
+          EOF
           echo "Branch protection applied."
+      - name: Verify
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          gh api /repos/${{ github.repository }}/branches/main/protection \
+            --jq '"protected: " + (.url | tostring)' 2>/dev/null && echo "Verified." || echo "Verification failed."
