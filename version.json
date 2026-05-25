@@ -1,11 +1,10 @@
 {
-  "version": "1.26.1",
+  "version": "1.26.2",
   "released": "2026-05-25",
   "rules_sha256": "ca54bfe0108e73b4d6f6219a58c31032d26f1d210f8ad77bc9b3b8286d96bc3c",
-  "changelog_entry": "Add fork module tracking — FORK_MODULES.md manifest template, PR-based upstream sync workflow, templates/README.md fork section.",
+  "changelog_entry": "Add fork starter files — lean FORK_MODULES.md instance and PM startup prompt doc.",
   "files": [
-    "templates/fork-modules.md",
-    "templates/upstream-sync-pr.yml",
-    "templates/README.md"
+    "templates/fork-starter/FORK_MODULES.md",
+    "notes/context/fork-pm-startup.md"
   ]
 }

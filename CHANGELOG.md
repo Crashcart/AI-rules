@@ -4,6 +4,17 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.26.2] 2026-05-25
+
+**Rationale**: The fork module tracking templates (v1.26.1) explain the format but require users to construct their own starting files. These two files are the concrete, ready-to-use instances: a lean manifest to drop into any fork repo root, and a PM startup prompt to paste at the beginning of any fork project session.
+
+### Added
+
+- `templates/fork-starter/FORK_MODULES.md`: minimal pre-filled manifest with empty tables and a discovery command; two TODOs (project name, upstream URL); no example rows; includes sync strategy guidance
+- `notes/context/fork-pm-startup.md`: PROJECT MANAGER startup prompt document with copy-paste prompt block, TODO fill guide, and explanation of what PM does after activation
+
+---
+
 ## [1.26.1] 2026-05-25
 
 **Rationale**: Forks that add custom modules need a safe way to track what they own vs. what came from upstream, so upstream syncs don't silently overwrite custom additions. A manifest template and a PR-based sync workflow fill this gap.
