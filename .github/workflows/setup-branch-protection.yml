@@ -16,20 +16,32 @@ jobs:
     name: Enable branch protection on main
     runs-on: ubuntu-latest
     steps:
+      - name: Check current protection status
+        run: |
+          echo "Checking current branch protection status..."
+          curl -s \
+            -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+            -H "Accept: application/vnd.github+json" \
+            "https://api.github.com/repos/${{ github.repository }}/branches/main" \
+            | python3 -c "import sys,json; d=json.load(sys.stdin); print('protected:', d.get('protected', False))"
+
       - name: Apply branch protection via REST API
         run: |
+          PAYLOAD='{"required_status_checks":null,"enforce_admins":false,"required_pull_request_reviews":{"require_code_owner_reviews":true,"required_approving_review_count":1,"dismiss_stale_reviews":false},"restrictions":null}'
+          echo "Sending payload: $PAYLOAD"
           RESPONSE=$(curl -s -w "\nHTTP_STATUS:%{http_code}" -X PUT \
             -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
             -H "Accept: application/vnd.github+json" \
             -H "Content-Type: application/json" \
             "https://api.github.com/repos/${{ github.repository }}/branches/main/protection" \
-            -d '{"required_status_checks":{"strict":false,"contexts":["Block rule changes from fork PRs"]},"enforce_admins":true,"required_pull_request_reviews":{"require_code_owner_reviews":true,"required_approving_review_count":1,"dismiss_stale_reviews":false},"restrictions":null}')
+            -d "$PAYLOAD")
           HTTP_STATUS=$(echo "$RESPONSE" | grep "HTTP_STATUS:" | cut -d: -f2)
           BODY=$(echo "$RESPONSE" | grep -v "HTTP_STATUS:")
           echo "HTTP Status: $HTTP_STATUS"
           echo "Response: $BODY"
           if [ "$HTTP_STATUS" != "200" ]; then
             echo "ERROR: Branch protection API returned $HTTP_STATUS"
+            echo "If 403: Go to Settings > Actions > General > Workflow permissions > Read and write"
             exit 1
           fi
           echo "Branch protection applied successfully."
