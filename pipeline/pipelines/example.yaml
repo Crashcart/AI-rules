@@ -1,0 +1,11 @@
+id: example
+# Linear pipeline: file-source → stdout-sink (no broker needed)
+# Run: python pipeline/bus.py run example
+source:
+  adapter: file-source
+  config:
+    watch_dir: /tmp/pipeline-input
+    file_pattern: "*.json"
+sink:
+  adapter: stdout-sink
+  config: {}

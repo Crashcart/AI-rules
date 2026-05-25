@@ -1,0 +1,12 @@
+id: example-bridge
+# Broker bridge: file-source → broker topic "events"
+# Start broker first:  python pipeline/broker.py
+# Then run:            python pipeline/bus.py bridge example-bridge
+# Subscribe (curl):    curl -N http://localhost:4242/subscribe/events
+topic: events
+source:
+  adapter: file-source
+  config:
+    watch_dir: /tmp/pipeline-input
+    file_pattern: "*.json"
+broker: http://localhost:4242

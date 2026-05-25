@@ -1,0 +1,58 @@
+version: "3.9"
+
+services:
+  broker:
+    build:
+      context: ..
+      dockerfile: pipeline/Dockerfile
+    ports:
+      - "4242:4242"
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:4242/health')"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  # Example source: drop JSON files into /tmp/input → broker publishes to "events" topic
+  source:
+    build:
+      context: ..
+      dockerfile: pipeline/Dockerfile
+    depends_on:
+      broker:
+        condition: service_healthy
+    volumes:
+      - ./input:/tmp/pipeline-input
+    entrypoint: ["python", "-m", "pipeline.bus", "bridge", "example-bridge", "--broker", "http://broker:4242"]
+    command: []
+
+  # Example sink: subscribe to "events" and print to stdout
+  sink:
+    build:
+      context: ..
+      dockerfile: pipeline/Dockerfile
+    depends_on:
+      broker:
+        condition: service_healthy
+    entrypoint:
+      - python
+      - -c
+      - |
+        import json, urllib.request
+        resp = urllib.request.urlopen('http://broker:4242/subscribe/events')
+        buf = b''
+        while True:
+            chunk = resp.read(1)
+            if not chunk:
+                break
+            buf += chunk
+            if buf.endswith(b'\n\n'):
+                line = buf.decode().strip()
+                buf = b''
+                if line.startswith('data: '):
+                    print(json.loads(line[6:]))
+
+# Usage:
+#   mkdir -p pipeline/input
+#   docker compose -f pipeline/docker-compose.yml up
+#   echo '{"hello":"world"}' > pipeline/input/test.json

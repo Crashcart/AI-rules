@@ -1,11 +1,19 @@
 {
-  "version": "1.26.4",
+  "version": "1.27.0",
   "released": "2026-05-25",
   "rules_sha256": "655719a2feeff090895c4da710fae11dc6469c1762082ff216fc8549745b4ca1",
-  "changelog_entry": "RULE 22 — Rule Repo Protection and One-Way Flow. Rules are canonical; forks cannot push changes back.",
+  "changelog_entry": "Universal Software Pipeline — HTTP pub/sub broker, adapter system, Docker support.",
   "files": [
-    "rules/universal.md",
-    "notes/decisions/007-rule-repo-protection.md",
-    "templates/fork-starter/CLAUDE.md"
+    "pipeline/broker.py",
+    "pipeline/client.py",
+    "pipeline/bus.py",
+    "pipeline/configurator.py",
+    "pipeline/envelope.py",
+    "pipeline/adapter.py",
+    "pipeline/adapters/",
+    "pipeline/pipelines/",
+    "pipeline/Dockerfile",
+    "pipeline/docker-compose.yml",
+    "pipeline/README.md"
   ]
 }

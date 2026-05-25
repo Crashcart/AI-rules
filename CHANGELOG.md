@@ -4,6 +4,28 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.27.0] 2026-05-25
+
+**Rationale**: Universal software interoperability system — make any tool talk to any other tool through a shared HTTP pub/sub broker. Zero external dependencies. Docker-first.
+
+### Added
+
+- `pipeline/broker.py`: HTTP pub/sub broker; POST /publish/<topic>, GET /subscribe/<topic> (SSE), GET /topics, GET /health; stdlib only; thread-safe, slow-subscriber drop protection; `python pipeline/broker.py [--host] [--port]`
+- `pipeline/client.py`: `BrokerClient` — `publish()`, `subscribe()` (blocking generator), `topics()`, `health()`; stdlib only; no external deps
+- `pipeline/bus.py`: added `cmd_bridge()` (source → broker topic), `cmd_topics()` (list broker topics), `--broker` flag parsing; linear mode unchanged
+- `pipeline/configurator.py`: interactive CLI — pick source/sink/topic → save pipeline YAML → print run command
+- `pipeline/pipelines/example.yaml`: linear pipeline (file-source → stdout-sink)
+- `pipeline/pipelines/example-bridge.yaml`: broker bridge (file-source → broker topic "events")
+- `pipeline/Dockerfile`: containerized broker, stdlib + pyyaml only
+- `pipeline/docker-compose.yml`: broker + source + sink example stack
+- `pipeline/README.md`: quick start, API reference, adapter guide, pipeline YAML format
+
+### SHA unchanged
+
+No `rules/*.md` modified — SHA `655719a2feeff090895c4da710fae11dc6469c1762082ff216fc8549745b4ca1` unchanged.
+
+---
+
 ## [1.26.4] 2026-05-25
 
 **Rationale**: The fork embedding model (v1.26.3) made AI-rules locally available in fork repos but did not formally prohibit forks from pushing rule changes back. The user's directive: rules are always protected — no fork can modify or pull changes into the canonical repo.
