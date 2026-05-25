@@ -1,6 +1,7 @@
 {
   "env": {
-    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50"
+    "CLAUDE_AUTOCOMPACT_PCT_OVERRIDE": "50",
+    "AI_RULES_TOKEN": ""
   },
   "hooks": {
     "SessionStart": [
@@ -20,12 +21,12 @@
           {
             "type": "command",
             "command": "bash \"$CLAUDE_PROJECT_DIR/.ai-rules/scripts/check-rules-updates.sh\" \"https://github.com/crashcart/ai-rules\" \"claude\" 2>/dev/null || true",
-            "statusMessage": "Checking for rule updates..."
+            "statusMessage": "Checking for AI-rules updates..."
           }
         ]
       }
     ]
   },
-  "rulesVersion": "1.26.3",
+  "rulesVersion": "1.26.4",
   "rulesRepo": "https://github.com/crashcart/ai-rules"
 }

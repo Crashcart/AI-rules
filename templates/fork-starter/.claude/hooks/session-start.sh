@@ -6,19 +6,15 @@ RULES_DIR="${REPO_ROOT}/.ai-rules/rules"
 
 echo "=== ACTIVE SESSION RULES (NON-NEGOTIABLE) ==="
 echo ""
-
 echo "--- AGENT ROLE REFERENCES ---"
 awk '/^## AGENT ROLE REFERENCES/,/^\[NON-NEGOTIABLE/' "${RULES_DIR}/claude-behavior.md" 2>/dev/null || true
 echo ""
-
 echo "--- ROLE ANNOUNCEMENT ---"
 awk '/^## ROLE ANNOUNCEMENT/,/^\[NON-NEGOTIABLE\]/' "${RULES_DIR}/claude-behavior.md" 2>/dev/null || true
 echo ""
-
 echo "--- RULE 20: MANAGER HANDOFF AND BETA DELIVERY STANDARD ---"
 awk '/^## RULE 20/,/^\[NON-NEGOTIABLE — handoff required/' "${RULES_DIR}/universal.md" 2>/dev/null || true
 echo ""
-
 # Upstream sync check (RULE 21 — rate-limited, non-fatal)
 bash "${REPO_ROOT}/.ai-rules/scripts/check-upstream.sh" 2>/dev/null || true
 
