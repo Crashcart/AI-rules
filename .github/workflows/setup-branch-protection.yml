@@ -24,13 +24,6 @@ jobs:
             --method PUT \
             -H "Accept: application/vnd.github+json" \
             /repos/${{ github.repository }}/branches/main/protection \
-            -f 'required_status_checks[strict]=false' \
-            -f 'required_status_checks[contexts][]=Block rule changes from fork PRs' \
-            -F 'enforce_admins=true' \
-            -F 'required_pull_request_reviews[require_code_owner_reviews]=true' \
-            -F 'required_pull_request_reviews[required_approving_review_count]=1' \
-            -F 'required_pull_request_reviews[dismiss_stale_reviews]=false' \
-            -f 'restrictions=null' \
             --input - <<'EOF'
           {
             "required_status_checks": {
@@ -46,10 +39,10 @@ jobs:
             "restrictions": null
           }
           EOF
-          echo "Branch protection applied."
-      - name: Verify
+      - name: Verify protection is active
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh api /repos/${{ github.repository }}/branches/main/protection \
-            --jq '"protected: " + (.url | tostring)' 2>/dev/null && echo "Verified." || echo "Verification failed."
+          PROTECTED=$(gh api /repos/${{ github.repository }}/branches/main --jq '.protected')
+          echo "main protected: $PROTECTED"
+          [ "$PROTECTED" = "true" ] && echo "SUCCESS: Branch protection is active." || echo "WARNING: Protection may not have applied."
