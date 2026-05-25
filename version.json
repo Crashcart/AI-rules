@@ -1,7 +1,13 @@
 {
-  "version": "1.25.1",
-  "released": "2026-05-24",
-  "rules_sha256": "9f0677b8794f0459abcf4c2a367eb707e5cf92d65287e88fe89db6e0df8131be",
-  "changelog_entry": "Add SessionStart hook to inject ROLE ANNOUNCEMENT, AGENT ROLE REFERENCES, and RULE 20 into every session.",
-  "files": [".claude/hooks/session-start.sh", ".claude/settings.json"]
+  "version": "1.26.0",
+  "released": "2026-05-25",
+  "rules_sha256": "ca54bfe0108e73b4d6f6219a58c31032d26f1d210f8ad77bc9b3b8286d96bc3c",
+  "changelog_entry": "Add RULE 21 upstream fork sync — notify-only check at session start, companion script, and GitHub Actions workflow template.",
+  "files": [
+    "rules/universal.md",
+    "scripts/check-upstream.sh",
+    "templates/upstream-sync.yml",
+    ".claude/hooks/session-start.sh",
+    "CLAUDE.md"
+  ]
 }

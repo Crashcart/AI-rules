@@ -14,5 +14,9 @@ echo ""
 echo "--- RULE 20: MANAGER HANDOFF AND BETA DELIVERY STANDARD ---"
 awk '/^## RULE 20/,/^\[NON-NEGOTIABLE — handoff required/' "${RULES_DIR}/universal.md" 2>/dev/null || true
 echo ""
+# Upstream sync check (RULE 21 — rate-limited, non-fatal)
+REPO_ROOT="${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel 2>/dev/null)}"
+bash "${REPO_ROOT}/scripts/check-upstream.sh" 2>/dev/null || true
+
 echo "=== END ACTIVE SESSION RULES ==="
 echo "REMINDER: Announce role before EVERY task segment. Format: **ROLE NAME:** description."

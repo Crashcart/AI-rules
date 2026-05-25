@@ -393,3 +393,44 @@ All agent roles. PROJECT MANAGER owns the task chain and is the safety net: if a
 
 [NON-NEGOTIABLE — handoff required on every task segment; beta delivery target required; silent completion is a violation]
 
+---
+
+## RULE 21 — UPSTREAM SOURCE SYNC
+
+If the current repo has an upstream remote configured (it is a fork or copy of a source repo), check for upstream updates at session start and report the commit count to the user. Do not auto-merge.
+
+### How to Check
+
+Run `scripts/check-upstream.sh` from the repo root. The script:
+1. Checks for an `upstream` git remote — exits silently if none is configured
+2. Fetches from upstream (non-destructive; does not merge)
+3. Counts commits behind: `git rev-list HEAD..upstream/<branch> --count`
+4. Prints a notification if behind; exits silently if up to date
+
+### Configuring the Upstream Remote
+
+Run once in the fork repo:
+
+```bash
+git remote add upstream <source-repo-url>
+git remote -v  # verify
+```
+
+For GitHub forks, the upstream URL is the original repo's clone URL.
+
+### Auto-Sync Option (GitHub Forks Only)
+
+Copy `templates/upstream-sync.yml` to `.github/workflows/upstream-sync.yml` in the fork repo for daily automatic sync via GitHub's `merge-upstream` API. Uses `GITHUB_TOKEN` — no PAT or secrets required.
+
+On conflict (diverged history), the workflow step returns HTTP 409, the CI step fails, and GitHub notifies the repo owner. No silent data loss.
+
+### When an Upstream Update Is Detected
+
+Report before proceeding with the session task:
+
+> "Upstream has N new commit(s). Run `git pull upstream <branch>` to sync, or use GitHub's 'Sync fork' button."
+
+Do NOT auto-pull. Do NOT block the session — the user decides whether to sync before continuing.
+
+[DEFAULT, overridable — disable by not configuring an upstream remote, or with "skip upstream sync check"]
+

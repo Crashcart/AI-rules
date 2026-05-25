@@ -4,6 +4,20 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.26.0] 2026-05-25
+
+**Rationale**: Repos that are GitHub forks had no mechanism to detect when the upstream source had new commits. Without detection, a fork can silently diverge for weeks. This version adds a factual, rate-limited upstream check script, a behavioral rule (RULE 21) mandating the check at session start, and a GitHub Actions workflow template for daily automatic sync.
+
+### Added
+
+- `rules/universal.md`: RULE 21 — UPSTREAM SOURCE SYNC; `[DEFAULT, overridable]` rule requiring any AI in a fork repo to run the upstream check at session start and notify the user; includes upstream remote setup instructions, auto-sync option documentation, and "notify only" behavior spec
+- `scripts/check-upstream.sh`: rate-limited (1-hour cache) upstream staleness check; detects `upstream` git remote, fetches quietly, counts commits behind via `git rev-list`, prints notification; exits silently if no upstream configured or if unreachable
+- `templates/upstream-sync.yml`: GitHub Actions workflow for daily fork auto-sync via `POST /repos/{owner}/merge-upstream` API; uses `GITHUB_TOKEN` — no PAT required; fails on conflict with GitHub notification
+- `.claude/hooks/session-start.sh`: upstream check call added (RULE 21); non-fatal via `|| true`
+- `CLAUDE.md`: active session enforcement callout added above checklist listing all four always-active rules
+
+---
+
 ## [1.25.1] 2026-05-24
 
 **Rationale**: ROLE ANNOUNCEMENT and RULE 20 were NON-NEGOTIABLE but had no mechanical enforcement. The only load trigger was a SHA mismatch — rules were never loaded during normal sessions. Root cause: no SessionStart hook existed to inject behavioral rules into context.
