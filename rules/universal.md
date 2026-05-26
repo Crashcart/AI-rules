@@ -465,3 +465,37 @@ In the canonical AI-rules repo → Settings → Branches → Add rule for `main`
 This prevents any fork PR from landing on `main` without user review.
 
 [NON-NEGOTIABLE]
+
+
+---
+
+## RULE 23 — PLAN PERSISTENCE
+
+Plans exist in the repo or they do not exist. Context compaction, session resets, and
+container recycling erase anything not committed to git.
+
+**PROJECT MANAGER must:**
+1. Create `plans/active/{initiative-slug}.md` for every initiative that spans more than
+   one session or requires more than one role
+2. Commit and push the plan file before ending any session where planning occurred
+3. Update the plan file when the initiative changes direction or completes
+
+**Every plan file must contain:**
+- `## Status` — `active` | `blocked` | `complete` | `superseded`
+- `## Goal` — one sentence: what done looks like
+- `## Next Action` — the single next thing to do and who does it
+- `## Context` — any non-obvious constraints the next session needs
+
+**Session start:** Read `plans/active/` before doing anything else. If an active plan
+exists for the current work, pick up from `## Next Action`. Do not re-plan what is
+already planned.
+
+**Completion:** Move the file to `plans/archive/` with a `## Completed: YYYY-MM-DD` header added.
+
+**Autonomy:** PROJECT MANAGER makes tactical decisions without user sign-off. Only
+strategic escalations go to the user: new hires, scope changes beyond the sprint,
+cross-repo architectural decisions, or actions that affect systems outside this repo.
+Daily decisions — which ticket to pick up, which role to assign, how to sequence
+work — are made autonomously and recorded in the plan file.
+
+[NON-NEGOTIABLE — plans not in the repo are plans that do not exist; silent completion of planning is a violation]

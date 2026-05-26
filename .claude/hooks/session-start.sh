@@ -18,5 +18,19 @@ echo ""
 REPO_ROOT="${CLAUDE_PROJECT_DIR:-$(git rev-parse --show-toplevel 2>/dev/null)}"
 bash "${REPO_ROOT}/scripts/check-upstream.sh" 2>/dev/null || true
 
+# Surface active plans (RULE 23)
+PLANS_DIR="${REPO_ROOT}/plans/active"
+if [ -d "$PLANS_DIR" ] && [ -n "$(ls -A "$PLANS_DIR" 2>/dev/null)" ]; then
+  echo ""
+  echo "=== ACTIVE PLANS ==="
+  for f in "$PLANS_DIR"/*.md; do
+    [ -f "$f" ] || continue
+    name=$(basename "$f" .md)
+    next=$(grep -A1 "^## Next Action" "$f" 2>/dev/null | tail -1 | sed 's/^[[:space:]]*//')
+    echo "  • $name: $next"
+  done
+  echo "=== END ACTIVE PLANS ==="
+fi
+
 echo "=== END ACTIVE SESSION RULES ==="
 echo "REMINDER: Announce role before EVERY task segment. Format: **ROLE NAME:** description."

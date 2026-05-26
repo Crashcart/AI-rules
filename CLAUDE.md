@@ -8,9 +8,11 @@ and a maintainer of them. Read `rules/claude.md` before working here.
 ## Session Start Checklist
 
 > **Active session enforcement (always injected by SessionStart hook):**
-> ROLE ANNOUNCEMENT · AGENT ROLE REFERENCES · RULE 20 (handoff required) · RULE 21 (upstream sync if `upstream` remote is configured)
+> ROLE ANNOUNCEMENT · AGENT ROLE REFERENCES · RULE 20 (handoff required) · RULE 21 (upstream sync if `upstream` remote is configured) · RULE 23 (plan persistence)
 > Announce your role before every task segment: `**ROLE NAME:** description.`
 
+0. **Read `plans/active/`** — if active plans exist, pick up from `## Next Action` in the most
+   recently modified plan before doing anything else (RULE 23)
 1. The PreToolUse hook auto-pulls from `origin/main` on every Bash call — if the hook
    output says "Rules updated", re-read all files in `rules/` before doing anything else
 2. Check `version.json` → compare `rules_sha256` to `acknowledgments/claude.ack.json`

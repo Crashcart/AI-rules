@@ -4,6 +4,27 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.28.0] 2026-05-26
+
+**Rationale**: Context compaction erases in-memory plans — PM was losing all planning work between sessions. Fix: treat the git repo as persistent PM memory. Plans in `plans/active/` survive compaction, session resets, and container recycling. RULE 23 makes this mandatory.
+
+### Added
+
+- `rules/universal.md`: RULE 23 — PLAN PERSISTENCE; PM must commit plans to `plans/active/` before every session ends; every plan file requires Status/Goal/Next Action/Context headers; session start reads plans/active/ first (NON-NEGOTIABLE)
+- `agents/project-manager.md`: [NON-NEGOTIABLE] Plan Persistence Rule — create/update/archive plan files; [NON-NEGOTIABLE] Autonomy Rule — PM decides ticket priority, role assignment, work sequencing, and hiring recommendations without user sign-off; only strategic escalations go to user
+- `CLAUDE.md`: Step 0 added to session start checklist — read `plans/active/` before anything else (RULE 23)
+- `.claude/hooks/session-start.sh`: active plans surface block — prints each plan name and Next Action at session start
+- `plans/README.md`: plans/ directory structure documentation
+- `plans/active/company-state.md`: current snapshot of all Crashcart repos; Next Action: TECH LEAD triage RPG-Bot 43 open issues
+- `plans/active/zerotier-ds918.md`: active plan for ZeroTier moon server on DS918+; Next Action: DEVOPS ENGINEER review Zerotierone-moon open issue
+- `notes/context/ds918-zerotier-environment.md`: comprehensive DS918+/DSM 7 environment reference — kernel 4.4.x permanently, glibc 2.20, Docker API v1.43 max, ZeroTier TUN/TAP setup, insmod vs modprobe, systemd persistence patterns, TCP drop bug and iptables workaround
+
+### SHA changed
+
+`rules/universal.md` modified (RULE 23 added) — new SHA `ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c`
+
+---
+
 ## [1.27.0] 2026-05-25
 
 **Rationale**: Universal software interoperability system — make any tool talk to any other tool through a shared HTTP pub/sub broker. Zero external dependencies. Docker-first.
