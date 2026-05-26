@@ -4,6 +4,21 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.28.1] 2026-05-26
+
+**Rationale**: Rules could be modified without any enforcement — PM or any agent could proceed on stale/mismatched rules. Fix: a hard-gate SHA check that blocks Bash tool calls when `rules/*.md` doesn't match `version.json`. No PM override possible — it's a PreToolUse hook.
+
+### Added
+
+- `scripts/verify-rules-integrity.sh`: computes `cat rules/*.md | sha256sum`, compares against `version.json.rules_sha256`, exits 1 with loud message if mismatch — blocks all Bash tool execution until rules are in sync
+- `.claude/settings.json`: `verify-rules-integrity.sh` wired as first PreToolUse hook on Bash matcher; runs before `daily-snapshot.sh`; `rulesVersion` bumped to 1.28.1
+
+### SHA unchanged
+
+No `rules/*.md` modified — SHA `ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c` unchanged.
+
+---
+
 ## [1.28.0] 2026-05-26
 
 **Rationale**: Context compaction erases in-memory plans — PM was losing all planning work between sessions. Fix: treat the git repo as persistent PM memory. Plans in `plans/active/` survive compaction, session resets, and container recycling. RULE 23 makes this mandatory.

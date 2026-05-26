@@ -19,6 +19,11 @@
         "hooks": [
           {
             "type": "command",
+            "command": "bash \"${CLAUDE_PROJECT_DIR}/scripts/verify-rules-integrity.sh\"",
+            "statusMessage": "Checking rules integrity..."
+          },
+          {
+            "type": "command",
             "command": "bash scripts/daily-snapshot.sh 2>/dev/null || true"
           }
         ]
@@ -41,5 +46,5 @@
   "snapshotRepo": "AI-rules",
   "snapshotTargetRepo": "",
   "snapshotBranch": "snapshot",
-  "rulesVersion": "1.25.0"
+  "rulesVersion": "1.28.1"
 }

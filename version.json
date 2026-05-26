@@ -1,16 +1,7 @@
 {
-  "version": "1.28.0",
+  "version": "1.28.1",
   "released": "2026-05-26",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
-  "changelog_entry": "Repo-as-memory architecture — RULE 23 plan persistence, PM autonomy, DS918+/ZeroTier environment docs.",
-  "files": [
-    "rules/universal.md",
-    "agents/project-manager.md",
-    "CLAUDE.md",
-    ".claude/hooks/session-start.sh",
-    "plans/README.md",
-    "plans/active/company-state.md",
-    "plans/active/zerotier-ds918.md",
-    "notes/context/ds918-zerotier-environment.md"
-  ]
+  "changelog_entry": "Rules integrity gate — SHA check blocks Bash tool calls when rules/*.md is out of sync.",
+  "files": ["scripts/verify-rules-integrity.sh", ".claude/settings.json"]
 }
