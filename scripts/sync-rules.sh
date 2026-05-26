@@ -27,7 +27,8 @@ SOURCE_BRANCH="${AI_RULES_BRANCH:-main}"
 TARGET_ROOT="${1:-$(pwd)}"
 DEST="${AI_RULES_DEST:-${TARGET_ROOT}/.ai-rules}"
 
-DIRS_TO_SYNC="rules agents notes plans proposals templates scripts acknowledgments imports"
+DIRS_TO_SYNC="rules agents notes plans proposals templates scripts acknowledgments imports demo deploy hiring pipeline tickets"
+HIDDEN_DIRS=".claude .github"
 FILES_TO_SYNC="version.json CHANGELOG.md MIGRATION.md README.md"
 
 # ── Helpers ──────────────────────────────────────────────────────────────────
@@ -84,6 +85,21 @@ for dir in $DIRS_TO_SYNC; do
   fi
 done
 
+# ── Sync hidden dirs (.claude, .github) ──────────────────────────────────────
+for dir in $HIDDEN_DIRS; do
+  if [ -d "${SRC}/${dir}" ]; then
+    rm -rf "${DEST:?}/${dir}"
+    cp -r "${SRC}/${dir}" "${DEST}/${dir}"
+    ok "${dir}/"
+  else
+    skip "${dir}/"
+  fi
+done
+
+# Strip compiled Python bytecode — not useful, wastes space
+find "${DEST}/pipeline" -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
+find "${DEST}/pipeline" -name "*.pyc" -delete 2>/dev/null || true
+
 # ── Sync top-level files ──────────────────────────────────────────────────────
 echo ""
 echo "Syncing files..."
@@ -130,7 +146,7 @@ echo "All AI-rules content is now at:"
 echo "  ${DEST}/"
 echo ""
 echo "Directories available:"
-for dir in $DIRS_TO_SYNC; do
+for dir in $DIRS_TO_SYNC $HIDDEN_DIRS; do
   [ -d "${DEST}/${dir}" ] && echo "  ${DEST}/${dir}/"
 done
 echo ""
