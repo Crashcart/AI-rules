@@ -1,7 +1,7 @@
 {
-  "version": "1.28.1",
+  "version": "1.28.2",
   "released": "2026-05-26",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
-  "changelog_entry": "Rules integrity gate — SHA check blocks Bash tool calls when rules/*.md is out of sync.",
-  "files": ["scripts/verify-rules-integrity.sh", ".claude/settings.json"]
+  "changelog_entry": "sync-rules.sh — PM can run this from any other repo to pull all AI-rules content locally.",
+  "files": ["scripts/sync-rules.sh"]
 }

@@ -4,6 +4,20 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.28.2] 2026-05-26
+
+**Rationale**: Any PM working in another repo had no way to access the full AI-rules knowledge base (rules, agents, notes, plans, templates, etc.) without manually cloning. Fix: a single script that pulls everything down into `.ai-rules/` in the target repo, verifies the SHA, and tells you exactly where everything is.
+
+### Added
+
+- `scripts/sync-rules.sh`: run from any other repo (or bootstrap via curl); clones AI-rules and copies `rules/`, `agents/`, `notes/`, `plans/`, `proposals/`, `templates/`, `scripts/`, `acknowledgments/`, `imports/` + top-level files into `<target>/.ai-rules/`; verifies SHA on completion; self-detects if running inside AI-rules (skips clone, copies directly); supports `AI_RULES_REPO`, `AI_RULES_BRANCH`, `AI_RULES_DEST` env overrides
+
+### SHA unchanged
+
+No `rules/*.md` modified — SHA `ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c` unchanged.
+
+---
+
 ## [1.28.1] 2026-05-26
 
 **Rationale**: Rules could be modified without any enforcement — PM or any agent could proceed on stale/mismatched rules. Fix: a hard-gate SHA check that blocks Bash tool calls when `rules/*.md` doesn't match `version.json`. No PM override possible — it's a PreToolUse hook.

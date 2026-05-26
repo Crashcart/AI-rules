@@ -1,0 +1,154 @@
+#!/usr/bin/env bash
+# sync-rules.sh — Pull the full AI-rules repo into any target repo.
+#
+# Run from ANOTHER repo to get all rules, agents, notes, plans, templates,
+# scripts, proposals, acknowledgments — everything.
+#
+# Usage (from within another repo):
+#   bash .ai-rules/sync-rules.sh               # refresh in-place
+#   bash sync-rules.sh                         # if copied to repo root
+#
+# Usage (one-liner bootstrap from scratch):
+#   curl -fsSL <raw-url>/sync-rules.sh | bash
+#
+# Usage (pointed at a specific target):
+#   bash sync-rules.sh /path/to/other-repo
+#
+# Env overrides:
+#   AI_RULES_REPO=<url-or-path>   override the source repo (default: GitHub)
+#   AI_RULES_DEST=<path>          override the destination (default: .ai-rules/)
+#   AI_RULES_BRANCH=<branch>      override the branch (default: main)
+
+set -euo pipefail
+
+# ── Config ───────────────────────────────────────────────────────────────────
+SOURCE_REPO="${AI_RULES_REPO:-https://github.com/crashcart/ai-rules.git}"
+SOURCE_BRANCH="${AI_RULES_BRANCH:-main}"
+TARGET_ROOT="${1:-$(pwd)}"
+DEST="${AI_RULES_DEST:-${TARGET_ROOT}/.ai-rules}"
+
+DIRS_TO_SYNC="rules agents notes plans proposals templates scripts acknowledgments imports"
+FILES_TO_SYNC="version.json CHANGELOG.md MIGRATION.md README.md"
+
+# ── Helpers ──────────────────────────────────────────────────────────────────
+bold()  { printf '\033[1m%s\033[0m\n' "$*"; }
+ok()    { printf '  \033[32m✓\033[0m  %s\n' "$*"; }
+skip()  { printf '  \033[2m–\033[0m  %s (not found, skipped)\n' "$*"; }
+err()   { printf '\033[31mERROR:\033[0m %s\n' "$*" >&2; }
+die()   { err "$*"; exit 1; }
+
+# ── Validate target ──────────────────────────────────────────────────────────
+[ -d "$TARGET_ROOT" ] || die "Target directory '$TARGET_ROOT' does not exist."
+
+# ── Detect if we're already inside AI-rules ──────────────────────────────────
+SELF_ROOT="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." 2>/dev/null && pwd || echo "")"
+IN_AI_RULES=false
+if [ -f "${SELF_ROOT}/version.json" ] && grep -q '"rules_sha256"' "${SELF_ROOT}/version.json" 2>/dev/null; then
+  IN_AI_RULES=true
+  SRC="$SELF_ROOT"
+fi
+
+# ── Acquire source ────────────────────────────────────────────────────────────
+TMPDIR_WORK=""
+if [ "$IN_AI_RULES" = false ]; then
+  bold "=== AI-Rules Sync ==="
+  echo "Source : $SOURCE_REPO (branch: $SOURCE_BRANCH)"
+  echo "Target : $DEST"
+  echo ""
+  echo "Cloning AI-rules (shallow, branch: $SOURCE_BRANCH)..."
+  TMPDIR_WORK=$(mktemp -d)
+  trap 'rm -rf "$TMPDIR_WORK"' EXIT
+  git clone --depth 1 --branch "$SOURCE_BRANCH" --quiet "$SOURCE_REPO" "${TMPDIR_WORK}/ai-rules" \
+    || die "Clone failed. Check that AI_RULES_REPO is accessible: $SOURCE_REPO"
+  SRC="${TMPDIR_WORK}/ai-rules"
+  ok "Clone complete"
+else
+  bold "=== AI-Rules Sync (local copy) ==="
+  echo "Source : $SRC"
+  echo "Target : $DEST"
+  echo ""
+fi
+
+# ── Create destination ────────────────────────────────────────────────────────
+mkdir -p "$DEST"
+
+# ── Sync directories ──────────────────────────────────────────────────────────
+echo "Syncing directories..."
+for dir in $DIRS_TO_SYNC; do
+  if [ -d "${SRC}/${dir}" ]; then
+    rm -rf "${DEST:?}/${dir}"
+    cp -r "${SRC}/${dir}" "${DEST}/${dir}"
+    ok "${dir}/"
+  else
+    skip "${dir}/"
+  fi
+done
+
+# ── Sync top-level files ──────────────────────────────────────────────────────
+echo ""
+echo "Syncing files..."
+for f in $FILES_TO_SYNC; do
+  if [ -f "${SRC}/${f}" ]; then
+    cp "${SRC}/${f}" "${DEST}/${f}"
+    ok "$f"
+  else
+    skip "$f"
+  fi
+done
+
+# ── Write sync manifest ───────────────────────────────────────────────────────
+VERSION=$(grep '"version"' "${DEST}/version.json" 2>/dev/null \
+  | head -1 | sed 's/.*"version"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/' || echo "unknown")
+SHA=$(grep '"rules_sha256"' "${DEST}/version.json" 2>/dev/null \
+  | head -1 | sed 's/.*"rules_sha256"[[:space:]]*:[[:space:]]*"\([^"]*\)".*/\1/' || echo "unknown")
+
+cat > "${DEST}/.sync-info" <<EOF
+synced_at=$(date -u +"%Y-%m-%dT%H:%M:%SZ")
+source=${SOURCE_REPO}
+branch=${SOURCE_BRANCH}
+version=${VERSION}
+rules_sha256=${SHA}
+EOF
+
+# ── Verify integrity ──────────────────────────────────────────────────────────
+echo ""
+echo "Verifying rules integrity..."
+ACTUAL_SHA=$(cat "${DEST}/rules/"*.md 2>/dev/null | sha256sum | awk '{print $1}')
+if [ "$ACTUAL_SHA" = "$SHA" ]; then
+  ok "SHA256 verified: ${SHA:0:16}..."
+else
+  printf '  \033[33m!\033[0m  SHA mismatch — expected %s, got %s\n' \
+    "${SHA:0:16}..." "${ACTUAL_SHA:0:16}..."
+  echo "    The rules files may have changed since version.json was last updated."
+fi
+
+# ── Done ─────────────────────────────────────────────────────────────────────
+echo ""
+bold "=== Sync complete — v${VERSION} ==="
+echo ""
+echo "All AI-rules content is now at:"
+echo "  ${DEST}/"
+echo ""
+echo "Directories available:"
+for dir in $DIRS_TO_SYNC; do
+  [ -d "${DEST}/${dir}" ] && echo "  ${DEST}/${dir}/"
+done
+echo ""
+echo "Quick-start reads:"
+echo "  ${DEST}/rules/universal.md     — rules for all AIs"
+echo "  ${DEST}/rules/claude.md        — Claude-specific rules"
+echo "  ${DEST}/agents/README.md       — role index and handoff workflow"
+echo "  ${DEST}/plans/active/          — active plans (pick up ## Next Action)"
+echo ""
+echo "To keep rules current, re-run this script any time:"
+if [ "$IN_AI_RULES" = true ]; then
+  echo "  bash ${BASH_SOURCE[0]}"
+else
+  echo "  bash ${DEST}/scripts/sync-rules.sh"
+fi
+echo ""
+echo "To gitignore synced rules (recommended for most repos):"
+echo "  echo '.ai-rules/' >> ${TARGET_ROOT}/.gitignore"
+echo ""
+echo "To commit rules into the repo (pin a specific version):"
+echo "  git add ${DEST} && git commit -m 'chore: pin AI-rules v${VERSION}'"
