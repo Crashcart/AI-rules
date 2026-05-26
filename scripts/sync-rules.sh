@@ -27,7 +27,7 @@ SOURCE_BRANCH="${AI_RULES_BRANCH:-main}"
 TARGET_ROOT="${1:-$(pwd)}"
 DEST="${AI_RULES_DEST:-${TARGET_ROOT}/.ai-rules}"
 
-DIRS_TO_SYNC="rules agents notes plans proposals templates scripts acknowledgments imports demo deploy hiring pipeline tickets"
+DIRS_TO_SYNC="rules agents notes plans proposals templates scripts acknowledgments imports demo deploy hiring pipeline"
 HIDDEN_DIRS=".claude .github"
 FILES_TO_SYNC="version.json CHANGELOG.md MIGRATION.md README.md"
 
@@ -84,6 +84,10 @@ for dir in $DIRS_TO_SYNC; do
     skip "${dir}/"
   fi
 done
+
+# plans/active/ contains repo-specific work items — strip from sync so
+# to-dos never leave the AI-rules repo or overwrite a target repo's own work
+rm -rf "${DEST:?}/plans/active"
 
 # ── Sync hidden dirs (.claude, .github) ──────────────────────────────────────
 for dir in $HIDDEN_DIRS; do
@@ -154,7 +158,12 @@ echo "Quick-start reads:"
 echo "  ${DEST}/rules/universal.md     — rules for all AIs"
 echo "  ${DEST}/rules/claude.md        — Claude-specific rules"
 echo "  ${DEST}/agents/README.md       — role index and handoff workflow"
-echo "  ${DEST}/plans/active/          — active plans (pick up ## Next Action)"
+echo "  ${DEST}/notes/context/         — background context docs"
+echo "  ${DEST}/hiring/                — role definitions, scenario + test banks"
+echo ""
+echo "Not synced (stays in AI-rules only):"
+echo "  tickets/                       — open to-dos"
+echo "  plans/active/                  — active future to-dos"
 echo ""
 echo "To keep rules current, re-run this script any time:"
 if [ "$IN_AI_RULES" = true ]; then
