@@ -3,7 +3,7 @@
 **Author**: PROJECT MANAGER
 **Date**: 2026-05-28
 **Ticket**: —
-**Status**: Open — no decision made; research incomplete
+**Status**: Open — no decision made; research complete as of 2026-05-28
 
 ---
 
@@ -15,15 +15,66 @@ The `AI_USAGE.md` in that repo explicitly names "Lyria 3 / Gemini 3" as the AI A
 integration target for music, suggesting an API-first (not self-hosted) path is already
 assumed by that project's governance.
 
-Research was initiated 2026-05-28 into the best Docker setup for self-hosted AI music
-generation. The primary candidates considered were:
+Research was completed 2026-05-28 into the best Docker setup for self-hosted AI music
+generation. The primary candidates evaluated were:
 
 - **Meta AudioCraft / MusicGen** — open source, self-hostable, CUDA-dependent
 - **Stable Audio Open** — Stability AI, self-hostable
-- **AudioLDM2** — open source
+- **AudioLDM2** — open source (deprecated/superseded in 2026)
+- **ACE-Step 1.5** — 2026 state-of-the-art, open-source, Apache 2.0
+- **YuE** — full song with vocals, very hardware-intensive
+- **Magenta RealTime** — Google open-weights, real-time streaming, 40 GB VRAM required
+- **Riffusion** — obsolete/abandoned for broadcast use
 - **Google Lyria 3** — API-only, not self-hostable (matches RP-Music-Radio's stated plan)
 - **Icecast + Liquidsoap** — streaming layer, not generation
-- **Post-processing chain** — ffmpeg, sox, pedalboard for broadcast-quality output
+- **Post-processing chain** — ffmpeg+soxr, sox, pedalboard (Spotify) for broadcast output
+
+## Research Findings (2026-05-28)
+
+### Model Comparison
+
+| Model | Native Rate | VRAM (min) | VRAM (recommended) | Speed (RTX 4090) | Clip Limit | Status |
+|-------|------------|-----------|-------------------|-----------------|-----------|--------|
+| MusicGen-small | 32 kHz mono | 4–6 GB | 6 GB | ~50 steps/sec | 120s | Active |
+| MusicGen-medium | 32 kHz mono | 8 GB | 16 GB | ~50 steps/sec | 120s | Active |
+| MusicGen-large | 32 kHz mono | 16 GB | 24 GB | ~50 steps/sec | 120s | Active |
+| Stable Audio Open | **44.1 kHz stereo** | 8 GB | 12–16 GB | 8 steps/sec | **47s max** | Active |
+| AudioLDM2 | 16 kHz default | 8 GB | 12 GB | moderate | none | Superseded |
+| ACE-Step 2B turbo | **48 kHz stereo** | 6 GB | 8 GB | **34× real-time** | unlimited | Active (best) |
+| ACE-Step XL 4B | **48 kHz stereo** | 16 GB | 24 GB | ~20× real-time | unlimited | Active |
+| YuE (quantized) | ~24 kHz stereo | 12 GB | 16 GB | ~4 min / 1 min audio | song length | Active |
+| YuE (full 7B) | ~24 kHz stereo | 80 GB | 80 GB | ~6 min / 30s audio | song length | Active |
+| Magenta RealTime | **48 kHz stereo** | **40 GB** | 40 GB | real-time streaming | unlimited | Active |
+| Riffusion | 44.1 kHz | 4–6 GB | 6 GB | fast | 5s clips | Obsolete |
+
+**Key finding:** MusicGen is capped at 32 kHz by its EnCodec tokenizer — this is a hard limit, not
+a config option. Upsampling to 44.1 kHz is required for broadcast use. ACE-Step 1.5 outputs
+48 kHz stereo natively and is the strongest self-hosted candidate (Apache 2.0, active development,
+purpose-built radio fork available: [ACE-Step-RADIO](https://github.com/PasiKoodaa/ACE-Step-RADIO)).
+
+### Self-Hosted Architecture Pattern (if chosen)
+
+The correct architecture for continuous radio generation with any model:
+
+```
+Redis (broker) → Celery GPU worker (model loaded once) → track output dir
+                                                              ↓
+                                          Liquidsoap (watch dir) → Icecast → listeners
+```
+
+- Celery worker: `worker_max_tasks_per_child=10` to prevent VRAM fragmentation
+- Buffer manager: maintains 4–5 tracks ahead minimum
+- Post-processing sidecar: `ffmpeg -resampler soxr -precision 28` → 44.1 kHz/24-bit FLAC
+- ACE-Step-RADIO fork implements this queue natively with configurable buffer depth
+
+### API-First (Lyria 3) Trade-offs
+
+- No GPU hardware required
+- Lyria 3 is confirmed API-only — weights are not released; no self-hosted path exists
+- At radio scale (continuous 24/7), per-call costs and rate limits become significant unknowns
+- RP-Music-Radio's `AI_USAGE.md` already names this path, but predates any cost/volume analysis
+
+---
 
 ## The Open Question
 
@@ -65,7 +116,9 @@ The user's position as of 2026-05-28: **unsure which approach is better**.
 
 1. Clarify hardware: is a GPU node available or planned beyond the DS918+?
 2. Clarify API budget: is Lyria 3 / Google AI API cost acceptable at radio-scale volume?
-3. If self-hosted: benchmark AudioCraft on available hardware to get realistic per-track times.
+3. If self-hosted: benchmark ACE-Step 2B turbo (not AudioCraft — MusicGen's 32 kHz ceiling
+   is a disqualifier for broadcast) on available hardware. The ACE-Step-RADIO fork is the
+   most ready-to-deploy option; it requires a minimum 6–8 GB VRAM dedicated GPU.
 4. If API-first: design a queue + prebuffer architecture that handles rate limits gracefully.
 5. Any implementation goes to RP-Music-Radio via its own feature branch — not here.
 
