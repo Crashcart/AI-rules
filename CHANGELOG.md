@@ -4,6 +4,31 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.29.0] 2026-05-29
+
+**Rationale**: PROJECT MANAGER was identified as the failing point in the AI team system — it had no Thinking Process, no Session Activation Protocol, no rule enforcement authority, and its handoff format referenced Notion/Confluence/Jira instead of RULE 20. Any PM activation produced inconsistent behavior. Fix: complete rewrite making PM the rule enforcement authority and mandatory safety net at every handoff boundary.
+
+### Changed
+
+- `agents/project-manager.md`: full rewrite
+  - **Thinking Process (new)**: 5-step ordered process PM runs before delegating any work — read `plans/active/`, read `tickets/`, version check, map the gap, produce RULE 20 handoff
+  - **Session Activation Protocol (new, NON-NEGOTIABLE)**: 5 ordered steps required before any delegation; skipping any step is a RULE 15 violation
+  - **Rule Enforcement Authority (new, NON-NEGOTIABLE)**: PM has standing to enforce RULE 15, 16, 18, 19, 20, 21, 23; silence on a violation is itself a RULE 15 violation
+  - **Org Architecture Rule (new, NON-NEGOTIABLE)**: PM defines org structure before assigning any project; algebraic mixing preferred over new hires
+  - **Planning Rule (new, NON-NEGOTIABLE)**: 7 plan artifacts required before any work begins; none may be missing
+  - **Plan Persistence Rule (new, NON-NEGOTIABLE)**: plans in `plans/active/` or they do not exist
+  - **Autonomy Rule (new, NON-NEGOTIABLE)**: PM makes tactical decisions without user sign-off; only escalates strategic decisions
+  - **Candidate Pool Process (new)**: minimum 7 candidates, code pre-qual gate (10/20), scenario scoring; PM never presents single candidate
+  - **Tools & Stack**: replaced Jira/Notion/Loom with actual system tools (`plans/active/`, `tickets/`, `agents/registry.json`, RULE 20 format, Risk Notes commits)
+  - **Hand-off Behavior**: rewritten to RULE 20 format; PM is safety net at EVERY handoff boundary, not just milestones
+  - **Escalation Triggers**: added immediate CEO escalation when rule violation persists after one correction (RULE 15 — session ends)
+
+### SHA unchanged
+
+No `rules/*.md` modified — SHA `ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c` unchanged.
+
+---
+
 ## [1.28.2] 2026-05-26
 
 **Rationale**: Any PM working in another repo had no way to access the full AI-rules knowledge base (rules, agents, notes, plans, templates, etc.) without manually cloning. Fix: a single script that pulls everything down into `.ai-rules/` in the target repo, verifies the SHA, and tells you exactly where everything is.

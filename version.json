@@ -1,7 +1,7 @@
 {
-  "version": "1.28.2",
-  "released": "2026-05-26",
+  "version": "1.29.0",
+  "released": "2026-05-29",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
-  "changelog_entry": "sync-rules.sh — PM can run this from any other repo to pull all AI-rules content locally.",
-  "files": ["scripts/sync-rules.sh"]
+  "changelog_entry": "agents/project-manager.md — complete rewrite: PM is now rule enforcement authority with Session Activation Protocol, NON-NEGOTIABLE rule table, Thinking Process, Candidate Pool Process, and RULE 20 handoff discipline.",
+  "files": ["agents/project-manager.md"]
 }
