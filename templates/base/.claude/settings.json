@@ -28,6 +28,7 @@
       }
     ]
   },
+  "allowedTools": ["Bash(bash .ai-rules/scripts/sync-rules.sh)"],
   "rulesRepo": "https://github.com/crashcart/ai-rules",
   "rulesVersion": "1.6.1"
 }

@@ -1,5 +1,5 @@
 {
-  "version": "1.29.2",
+  "version": "1.29.3",
   "released": "2026-05-29",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
   "changelog_entry": "sync-rules.sh is now the delivery mechanism — all AI-rules content lands in .ai-rules/ subdirectory in target repos; stray root-level dirs cleaned up; workflow redesigned to use shell script clone approach.",

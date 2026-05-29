@@ -4,6 +4,23 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.29.3] 2026-05-29
+
+**Rationale**: "Update the rules" should work in any repo without a permission prompt. Added `/update-rules` slash command + `allowedTools` pre-approval to the base template and this repo.
+
+### Added
+
+- `templates/base/.claude/commands/update-rules.md`: slash command — runs `bash .ai-rules/scripts/sync-rules.sh` without confirmation
+- `.claude/commands/update-rules.md`: same for AI-rules repo itself (`bash scripts/sync-rules.sh`)
+- `templates/base/.claude/settings.json`: `allowedTools` entry pre-approves `bash .ai-rules/scripts/sync-rules.sh`
+- `.claude/settings.json`: `allowedTools` entry pre-approves `bash scripts/sync-rules.sh`
+
+### SHA unchanged
+
+No `rules/*.md` modified — SHA `ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c` unchanged.
+
+---
+
 ## [1.29.2] 2026-05-29
 
 **Rationale**: The v1.29.1 fix was architecturally wrong — it pushed `rules/` and `agents/` to the root of target repos, creating exactly the stray files the cleanup block was designed to remove. The correct approach is `scripts/sync-rules.sh`, which already syncs everything into a `.ai-rules/` subdirectory (clean separation). Fix: workflow redesigned to clone each target repo and run `sync-rules.sh`; `deploy/sync.sh` reverted to 3-file API sync only; `templates/base/CLAUDE.md` paths corrected to `.ai-rules/`; `sync-rules.sh` gets stray-directory cleanup and "not synced" footer.
