@@ -1,7 +1,7 @@
 {
-  "version": "1.29.4",
+  "version": "1.29.5",
   "released": "2026-05-29",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
-  "changelog_entry": "PM Session Activation Protocol: roster check (agents/registry.json) is now step 1 — PM halts if registry missing rather than planning around unknown roster.",
-  "files": ["agents/project-manager.md"]
+  "changelog_entry": "sync-rules.sh now installs Claude Code slash commands at {target-root}/.claude/commands/ so /update-rules works immediately after sync.",
+  "files": ["scripts/sync-rules.sh"]
 }

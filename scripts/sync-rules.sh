@@ -124,6 +124,20 @@ for dir in $HIDDEN_DIRS; do
   fi
 done
 
+# ── Install Claude Code commands at target repo root ─────────────────────────
+# Claude Code scans {project-root}/.claude/commands/ — NOT .ai-rules/.claude/commands/.
+# Copy the base template commands to the target root so /update-rules and other
+# commands are available without a sync. Only runs when syncing into a foreign repo.
+if [ "$TARGET_ROOT" != "$DEST" ]; then
+  CMD_SRC="${SRC}/templates/base/.claude/commands"
+  CMD_DEST="${TARGET_ROOT}/.claude/commands"
+  if [ -d "$CMD_SRC" ]; then
+    mkdir -p "$CMD_DEST"
+    cp -r "${CMD_SRC}/." "${CMD_DEST}/"
+    ok ".claude/commands/ → repo root"
+  fi
+fi
+
 # Strip compiled Python bytecode — not useful, wastes space
 find "${DEST}/pipeline" -name "__pycache__" -type d -exec rm -rf {} + 2>/dev/null || true
 find "${DEST}/pipeline" -name "*.pyc" -delete 2>/dev/null || true

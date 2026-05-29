@@ -4,6 +4,16 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.29.5] 2026-05-29
+
+**Rationale**: `/update-rules` returned "Unknown command" because `sync-rules.sh` was placing commands at `.ai-rules/.claude/commands/` — inside the subdirectory. Claude Code only scans `.claude/commands/` at the project root. Fixed by adding a step that copies `templates/base/.claude/commands/` to `{target-root}/.claude/commands/` after every sync.
+
+### Changed
+
+- `scripts/sync-rules.sh`: added "Install Claude Code commands at target repo root" block — copies `templates/base/.claude/commands/` to `{TARGET_ROOT}/.claude/commands/` when syncing into a foreign repo; skipped when syncing within AI-rules itself
+
+---
+
 ## [1.29.4] 2026-05-29
 
 **Rationale**: PM was wasting tokens planning a hire before RULE 16 caught it. Root cause: roster check was buried in Org Architecture Rule, not at session start. Fix: `agents/registry.json` read is now step 1 of Session Activation Protocol — PM halts if the file is missing rather than proceeding without a roster.
