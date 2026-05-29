@@ -9,7 +9,7 @@
 This repo follows the Crashcart AI-rules system.
 
 - Rules source: `https://github.com/crashcart/ai-rules` (set in `.claude/settings.json` as `rulesRepo`)
-- Governing files: `rules/claude.md` + `rules/universal.md`
+- Governing files: `.ai-rules/rules/claude.md` + `.ai-rules/rules/universal.md`
 - Current version in force: check `rulesVersion` in `.claude/settings.json`
 
 The PreToolUse hook in `.claude/settings.json` calls `scripts/check-rules-updates.sh` on every
@@ -18,8 +18,8 @@ and re-read your rules before continuing.
 
 ## Session Start Checklist
 
-1. Check hook output — if it says "Rules updated", re-read `rules/` before anything else
-2. **Read `agents/project-manager.md`** — PROJECT MANAGER activates first on every session;
+1. Check hook output — if it says "Rules updated", re-read `.ai-rules/rules/` before anything else
+2. **Read `.ai-rules/agents/project-manager.md`** — PROJECT MANAGER activates first on every session;
    follow the Session Activation Protocol defined there before delegating any work
 3. Check for a `TODO.md` — if it exists, review open items from the last session
 4. Confirm the active branch is `dev` (or a feature branch) — never `main`
@@ -28,18 +28,18 @@ and re-read your rules before continuing.
 
 ## Agent Role Activation
 
-Agent profiles live in `agents/`. When activating any role, read its profile first:
+Agent profiles live in `.ai-rules/agents/`. When activating any role, read its profile first:
 
 ```
-Read agents/project-manager.md — you are now PROJECT MANAGER. Follow the Session
+Read .ai-rules/agents/project-manager.md — you are now PROJECT MANAGER. Follow the Session
 Activation Protocol in that file before doing anything else.
 ```
 
 Every role profile defines: Thinking Process, Role Scope, Escalation Triggers,
 Hand-off Behavior. These are not optional — they define how the role operates.
 
-Rules live in `rules/` — `rules/universal.md` applies to every AI; `rules/claude.md`
-applies specifically to Claude Code sessions in this repo.
+Rules live in `.ai-rules/rules/` — `.ai-rules/rules/universal.md` applies to every AI;
+`.ai-rules/rules/claude.md` applies specifically to Claude Code sessions in this repo.
 
 ## Branching Policy
 

@@ -73,6 +73,27 @@ fi
 # ── Create destination ────────────────────────────────────────────────────────
 mkdir -p "$DEST"
 
+# ── Clean up stray AI-rules-managed directories at target repo root ───────────
+# PM or other agents may have incorrectly created these at root level of the
+# target repo. They belong in .ai-rules/ — remove them from root if found.
+# Only runs when TARGET_ROOT != DEST (i.e. syncing into a foreign repo).
+if [ "$TARGET_ROOT" != "$DEST" ] && [ "$IN_AI_RULES" = false ] || \
+   { [ "$IN_AI_RULES" = true ] && [ "$TARGET_ROOT" != "$SELF_ROOT" ]; }; then
+  STRAY_DIRS="agents rules notes proposals hiring pipeline"
+  for stray in $STRAY_DIRS; do
+    STRAY_PATH="${TARGET_ROOT}/${stray}"
+    if [ -d "$STRAY_PATH" ]; then
+      # Only remove if it contains AI-rules fingerprint files
+      if find "$STRAY_PATH" -maxdepth 1 -name "universal.md" -o \
+              -name "project-manager.md" -o -name "claude-behavior.md" \
+              2>/dev/null | grep -q .; then
+        printf '  \033[33m!\033[0m  Removing stray AI-rules dir from repo root: %s/\n' "$stray"
+        rm -rf "${STRAY_PATH:?}"
+      fi
+    fi
+  done
+fi
+
 # ── Sync directories ──────────────────────────────────────────────────────────
 echo "Syncing directories..."
 for dir in $DIRS_TO_SYNC; do
@@ -86,8 +107,11 @@ for dir in $DIRS_TO_SYNC; do
 done
 
 # plans/active/ contains repo-specific work items — strip from sync so
-# to-dos never leave the AI-rules repo or overwrite a target repo's own work
+# active plans never leave AI-rules or overwrite a target repo's own work
 rm -rf "${DEST:?}/plans/active"
+
+# tickets/ is repo-specific — never sync it to target repos
+rm -rf "${DEST:?}/tickets"
 
 # ── Sync hidden dirs (.claude, .github) ──────────────────────────────────────
 for dir in $HIDDEN_DIRS; do
@@ -161,9 +185,12 @@ echo "  ${DEST}/agents/README.md       — role index and handoff workflow"
 echo "  ${DEST}/notes/context/         — background context docs"
 echo "  ${DEST}/hiring/                — role definitions, scenario + test banks"
 echo ""
-echo "Not synced (stays in AI-rules only):"
-echo "  tickets/                       — open to-dos"
-echo "  plans/active/                  — active future to-dos"
+echo "Not synced (stays in AI-rules only or is repo-specific):"
+echo "  tickets/                       — open tickets (repo-specific)"
+echo "  plans/active/                  — active plans (repo-specific)"
+echo "  TODO.md                        — repo-specific task list (never overwritten)"
+echo "  HANDOFF.md                     — session handoff file (repo-specific)"
+echo "  CLAUDE.md                      — repo-specific Claude instructions (never overwritten)"
 echo ""
 echo "To keep rules current, re-run this script any time:"
 if [ "$IN_AI_RULES" = true ]; then

@@ -8,7 +8,7 @@ on:
 
 jobs:
   sync:
-    name: Push updated files to Crashcart repos
+    name: Push updated AI-rules to Crashcart repos
     runs-on: ubuntu-latest
 
     steps:
@@ -22,8 +22,71 @@ jobs:
         id: version
         run: echo "version=$(jq -r '.version' version.json)" >> "$GITHUB_OUTPUT"
 
-      - name: Run sync script
+      - name: Sync to target repos
         env:
           GITHUB_TOKEN: ${{ secrets.RULES_SYNC_TOKEN }}
           RULES_VERSION: ${{ steps.version.outputs.version }}
-        run: bash deploy/sync.sh
+        run: |
+          set -euo pipefail
+
+          AI_RULES_ROOT="$(pwd)"
+          REPOS=("Kali-AI-term" "RPG-Bot" "Ollama-intelgpu" "Claud")
+          FAILED=()
+
+          for repo in "${REPOS[@]}"; do
+            echo "── ${repo} ──────────────────────────────"
+            TARGET="/tmp/${repo}"
+
+            # Clone the target repo (dev branch if it exists, else default)
+            if git clone --depth 1 \
+                "https://x-access-token:${GITHUB_TOKEN}@github.com/Crashcart/${repo}.git" \
+                "${TARGET}" 2>&1; then
+              echo "  Cloned ${repo}"
+            else
+              echo "  ERROR: clone failed — skipping ${repo}"
+              FAILED+=("${repo}")
+              continue
+            fi
+
+            # Ensure dev branch exists in the clone
+            cd "${TARGET}"
+            if git ls-remote --exit-code --heads origin dev > /dev/null 2>&1; then
+              git fetch origin dev --depth 1
+              git checkout dev
+            else
+              git checkout -b dev
+            fi
+            cd "${AI_RULES_ROOT}"
+
+            # Run sync-rules.sh from AI-rules root — auto-detects IN_AI_RULES=true
+            # Syncs everything into .ai-rules/ subdirectory of target repo
+            bash scripts/sync-rules.sh "${TARGET}" || {
+              echo "  ERROR: sync-rules.sh failed for ${repo}"
+              FAILED+=("${repo}")
+              continue
+            }
+
+            # Commit and push if anything changed
+            cd "${TARGET}"
+            git config user.name "ai-rules-sync"
+            git config user.email "noreply@github.com"
+            git add .ai-rules/
+            if git diff --staged --quiet; then
+              echo "  No changes — already up to date"
+            else
+              git commit -m "chore: sync AI-rules v${RULES_VERSION}"
+              git push origin HEAD:dev
+              echo "  Pushed to dev"
+            fi
+            cd "${AI_RULES_ROOT}"
+
+            echo ""
+          done
+
+          echo "════════════════════════════════════"
+          if [[ ${#FAILED[@]} -eq 0 ]]; then
+            echo "  All repos synced to v${RULES_VERSION}."
+          else
+            echo "  FAILED repos: ${FAILED[*]}"
+            exit 1
+          fi

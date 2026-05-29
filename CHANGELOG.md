@@ -4,6 +4,23 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.29.2] 2026-05-29
+
+**Rationale**: The v1.29.1 fix was architecturally wrong — it pushed `rules/` and `agents/` to the root of target repos, creating exactly the stray files the cleanup block was designed to remove. The correct approach is `scripts/sync-rules.sh`, which already syncs everything into a `.ai-rules/` subdirectory (clean separation). Fix: workflow redesigned to clone each target repo and run `sync-rules.sh`; `deploy/sync.sh` reverted to 3-file API sync only; `templates/base/CLAUDE.md` paths corrected to `.ai-rules/`; `sync-rules.sh` gets stray-directory cleanup and "not synced" footer.
+
+### Changed
+
+- `.github/workflows/sync-rules.yml`: redesigned — clones each target repo, runs `bash scripts/sync-rules.sh <target>` (auto-detects IN_AI_RULES=true), commits `.ai-rules/` changes, pushes to `dev`; no longer calls `deploy/sync.sh`
+- `deploy/sync.sh`: removed `sync_directory` helper and the `rules/` + `agents/` sync calls added in v1.29.1; back to pushing 3 files via Contents API (check-rules-updates.sh, .claude/settings.json rulesVersion, copilot-instructions.md)
+- `scripts/sync-rules.sh`: added stray AI-rules directory cleanup (removes fingerprinted dirs from target repo root); added `rm -rf tickets` strip; updated footer to list TODO.md, HANDOFF.md, CLAUDE.md as repo-specific files never overwritten
+- `templates/base/CLAUDE.md`: corrected all `agents/` and `rules/` paths to `.ai-rules/agents/` and `.ai-rules/rules/` — content lives in `.ai-rules/` subdirectory after sync
+
+### SHA unchanged
+
+No `rules/*.md` modified — SHA `ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c` unchanged.
+
+---
+
 ## [1.29.1] 2026-05-29
 
 **Rationale**: PROJECT MANAGER profile and all governance rules were never reaching other repos — the sync only pushed 3 files. Claude in other repos had no PM profile and improvised, producing inconsistent behavior. Fix: sync now pushes `rules/` and `agents/` directories to every target repo on every version update, and `templates/base/CLAUDE.md` tells Claude to read the PM profile at session start.
