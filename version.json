@@ -1,7 +1,7 @@
 {
-  "version": "1.29.0",
+  "version": "1.29.1",
   "released": "2026-05-29",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
-  "changelog_entry": "agents/project-manager.md — complete rewrite: PM is now rule enforcement authority with Session Activation Protocol, NON-NEGOTIABLE rule table, Thinking Process, Candidate Pool Process, and RULE 20 handoff discipline.",
-  "files": ["agents/project-manager.md"]
+  "changelog_entry": "deploy/sync.sh — sync now pushes rules/ and agents/ to every target repo so PM profile and all governance files travel with every version update.",
+  "files": ["deploy/sync.sh", "templates/base/CLAUDE.md"]
 }

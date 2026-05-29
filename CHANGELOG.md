@@ -4,6 +4,21 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.29.1] 2026-05-29
+
+**Rationale**: PROJECT MANAGER profile and all governance rules were never reaching other repos — the sync only pushed 3 files. Claude in other repos had no PM profile and improvised, producing inconsistent behavior. Fix: sync now pushes `rules/` and `agents/` directories to every target repo on every version update, and `templates/base/CLAUDE.md` tells Claude to read the PM profile at session start.
+
+### Changed
+
+- `deploy/sync.sh`: added `sync_directory` helper; main loop now also syncs `rules/*.md` and `agents/*.md` (excluding README.md) to every target repo alongside the existing 3 files — PM profile, all rule files, and all role profiles now travel with every sync
+- `templates/base/CLAUDE.md`: session start step 2 now explicitly reads `agents/project-manager.md` before any other work; added **Agent Role Activation** section explaining that profiles live in `agents/`, rules live in `rules/`, and reading the profile before activating any role is not optional
+
+### SHA unchanged
+
+No `rules/*.md` modified — SHA `ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c` unchanged.
+
+---
+
 ## [1.29.0] 2026-05-29
 
 **Rationale**: PROJECT MANAGER was identified as the failing point in the AI team system — it had no Thinking Process, no Session Activation Protocol, no rule enforcement authority, and its handoff format referenced Notion/Confluence/Jira instead of RULE 20. Any PM activation produced inconsistent behavior. Fix: complete rewrite making PM the rule enforcement authority and mandatory safety net at every handoff boundary.

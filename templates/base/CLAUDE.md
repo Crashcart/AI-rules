@@ -19,10 +19,27 @@ and re-read your rules before continuing.
 ## Session Start Checklist
 
 1. Check hook output — if it says "Rules updated", re-read `rules/` before anything else
-2. Check for a `TODO.md` — if it exists, review open items from the last session
-3. Confirm the active branch is `dev` (or a feature branch) — never `main`
-4. Check for any resolved tickets that were opened by this repo's AI (hook output will say
+2. **Read `agents/project-manager.md`** — PROJECT MANAGER activates first on every session;
+   follow the Session Activation Protocol defined there before delegating any work
+3. Check for a `TODO.md` — if it exists, review open items from the last session
+4. Confirm the active branch is `dev` (or a feature branch) — never `main`
+5. Check for any resolved tickets that were opened by this repo's AI (hook output will say
    "Ticket TICK-NNN resolved")
+
+## Agent Role Activation
+
+Agent profiles live in `agents/`. When activating any role, read its profile first:
+
+```
+Read agents/project-manager.md — you are now PROJECT MANAGER. Follow the Session
+Activation Protocol in that file before doing anything else.
+```
+
+Every role profile defines: Thinking Process, Role Scope, Escalation Triggers,
+Hand-off Behavior. These are not optional — they define how the role operates.
+
+Rules live in `rules/` — `rules/universal.md` applies to every AI; `rules/claude.md`
+applies specifically to Claude Code sessions in this repo.
 
 ## Branching Policy
 

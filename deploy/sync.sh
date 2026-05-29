@@ -107,6 +107,31 @@ sync_file() {
   api_put "${repo}" "${remote_path}" "${commit_msg}" "${content_b64}" "${sha}" "${BRANCH}" > /dev/null
 }
 
+# Sync all .md files from a local directory to a remote directory path.
+# Skips files that match the optional exclude pattern.
+sync_directory() {
+  local repo="$1" local_dir="$2" remote_dir="$3" commit_msg="$4" exclude="${5:-}"
+  local ok=0 fail=0
+
+  while IFS= read -r -d '' local_file; do
+    local filename remote_path
+    filename=$(basename "${local_file}")
+    [[ -n "${exclude}" && "${filename}" == ${exclude} ]] && continue
+
+    remote_path="${remote_dir}/${filename}"
+    if sync_file "${repo}" "${remote_path}" "${local_file}" "${commit_msg}" 2>/dev/null; then
+      echo "  OK  ${remote_path}"
+      (( ok++ )) || true
+    else
+      echo "  FAIL ${remote_path}"
+      (( fail++ )) || true
+    fi
+  done < <(find "${local_dir}" -maxdepth 1 -name "*.md" -print0 | sort -z)
+
+  echo "  ${remote_dir}/: ${ok} synced, ${fail} failed"
+  return $(( fail > 0 ? 1 : 0 ))
+}
+
 sync_settings_json() {
   local repo="$1"
   local remote_path=".claude/settings.json"
@@ -174,6 +199,24 @@ for repo in "${REPOS[@]}"; do
     echo "  OK  .github/copilot-instructions.md"
   else
     echo "  FAIL .github/copilot-instructions.md"
+    FAILED+=("${repo}")
+  fi
+
+  # Sync rules/ — all AI governance rule files
+  if ! sync_directory "${repo}" \
+      "${AI_RULES_ROOT}/rules" \
+      "rules" \
+      "${COMMIT_MSG}"; then
+    FAILED+=("${repo}")
+  fi
+
+  # Sync agents/ — all role profiles (PM, Tech Lead, Backend Dev, etc.)
+  # Excludes README.md (workflow overview) — agents use the profiles directly
+  if ! sync_directory "${repo}" \
+      "${AI_RULES_ROOT}/agents" \
+      "agents" \
+      "${COMMIT_MSG}" \
+      "README.md"; then
     FAILED+=("${repo}")
   fi
 
