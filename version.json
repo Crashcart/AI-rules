@@ -1,12 +1,7 @@
 {
-  "version": "1.29.3",
+  "version": "1.29.4",
   "released": "2026-05-29",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
-  "changelog_entry": "sync-rules.sh is now the delivery mechanism — all AI-rules content lands in .ai-rules/ subdirectory in target repos; stray root-level dirs cleaned up; workflow redesigned to use shell script clone approach.",
-  "files": [
-    "scripts/sync-rules.sh",
-    ".github/workflows/sync-rules.yml",
-    "deploy/sync.sh",
-    "templates/base/CLAUDE.md"
-  ]
+  "changelog_entry": "PM Session Activation Protocol: roster check (agents/registry.json) is now step 1 — PM halts if registry missing rather than planning around unknown roster.",
+  "files": ["agents/project-manager.md"]
 }

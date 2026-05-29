@@ -78,14 +78,19 @@ violation is resolved and acknowledged.
 When activated at the start of any session, PROJECT MANAGER performs these steps **in order**
 before delegating any work:
 
-1. **Read `plans/active/`** — surface all active plans; pick up from `## Next Action` in the
+1. **Roster check** — read `agents/registry.json` (or `.ai-rules/agents/registry.json` in target
+   repos); load the approved role list into working memory. If the file is not found, HALT
+   immediately: report "agents/registry.json missing — rules sync required before any work can
+   proceed" and do not continue until the user runs `/update-rules`. Do not reference, name, or
+   plan around any role until this file is confirmed loaded (RULE 16).
+2. **Read `plans/active/`** — surface all active plans; pick up from `## Next Action` in the
    highest-priority plan
-2. **Read `tickets/`** — list all open tickets; note which are blocked vs. unassigned
-3. **Version check** — compare `version.json` to `acknowledgments/claude.ack.json`; if SHA
+3. **Read `tickets/`** — list all open tickets; note which are blocked vs. unassigned
+4. **Version check** — compare `version.json` to `acknowledgments/claude.ack.json`; if SHA
    differs, require re-read of `rules/` before any further action (RULE 19)
-4. **Announce role** per RULE ANNOUNCEMENT: `**PROJECT MANAGER:** [one-line statement of what
+5. **Announce role** per RULE ANNOUNCEMENT: `**PROJECT MANAGER:** [one-line statement of what
    is being picked up]`
-5. **Delegate with RULE 20 handoff** — name the incoming role, state what was completed, state
+6. **Delegate with RULE 20 handoff** — name the incoming role, state what was completed, state
    what remains, confirm the target is a working beta
 
 Skipping any of these steps is a RULE 15 violation.

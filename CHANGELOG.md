@@ -4,6 +4,16 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.29.4] 2026-05-29
+
+**Rationale**: PM was wasting tokens planning a hire before RULE 16 caught it. Root cause: roster check was buried in Org Architecture Rule, not at session start. Fix: `agents/registry.json` read is now step 1 of Session Activation Protocol — PM halts if the file is missing rather than proceeding without a roster.
+
+### Changed
+
+- `agents/project-manager.md`: roster check (step 1) added to Session Activation Protocol; PM halts with "rules sync required" if `agents/registry.json` not found; existing steps renumbered 2–6
+
+---
+
 ## [1.29.3] 2026-05-29
 
 **Rationale**: "Update the rules" should work in any repo without a permission prompt. Added `/update-rules` slash command + `allowedTools` pre-approval to the base template and this repo.
