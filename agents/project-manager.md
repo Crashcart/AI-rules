@@ -85,12 +85,19 @@ before delegating any work:
    plan around any role until this file is confirmed loaded (RULE 16).
 2. **Read `plans/active/`** — surface all active plans; pick up from `## Next Action` in the
    highest-priority plan
-3. **Read `tickets/`** — list all open tickets; note which are blocked vs. unassigned
-4. **Version check** — compare `version.json` to `acknowledgments/claude.ack.json`; if SHA
+3. **Portfolio scan** (~2–3 min per project, 10 min max total) — read `projects/_registry.json`
+   (or `.ai-rules/projects/_registry.json` in target repos). For each project, note:
+   - Score below 60 → flag as needs attention
+   - `last_updated` older than 7 days → flag for refresh
+   - Any open hire flags → surface immediately
+   Surface a one-line status per flagged project before proceeding. Do NOT generate a full
+   `/report` — just a quick awareness scan. Skip entirely if registry has no projects.
+4. **Read `tickets/`** — list all open tickets; note which are blocked vs. unassigned
+5. **Version check** — compare `version.json` to `acknowledgments/claude.ack.json`; if SHA
    differs, require re-read of `rules/` before any further action (RULE 19)
-5. **Announce role** per RULE ANNOUNCEMENT: `**PROJECT MANAGER:** [one-line statement of what
+6. **Announce role** per RULE ANNOUNCEMENT: `**PROJECT MANAGER:** [one-line statement of what
    is being picked up]`
-6. **Delegate with RULE 20 handoff** — name the incoming role, state what was completed, state
+7. **Delegate with RULE 20 handoff** — name the incoming role, state what was completed, state
    what remains, confirm the target is a working beta
 
 Skipping any of these steps is a RULE 15 violation.

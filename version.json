@@ -1,7 +1,13 @@
 {
-  "version": "1.29.5",
-  "released": "2026-05-29",
+  "version": "1.30.0",
+  "released": "2026-05-30",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
-  "changelog_entry": "sync-rules.sh now installs Claude Code slash commands at {target-root}/.claude/commands/ so /update-rules works immediately after sync.",
-  "files": ["scripts/sync-rules.sh"]
+  "changelog_entry": "Project portfolio tracking system: /report, /new-project, /help commands; projects/ directory with scoring, leeway rules, and hire-flag copy-paste format; PM Session Activation now includes portfolio scan step.",
+  "files": [
+    "projects/",
+    ".claude/commands/",
+    "templates/base/.claude/commands/",
+    "scripts/sync-rules.sh",
+    "agents/project-manager.md"
+  ]
 }

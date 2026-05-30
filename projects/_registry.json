@@ -1,0 +1,4 @@
+{
+  "description": "Registry of all tracked projects. PROJECT MANAGER reads this on every session start. Update last_updated when project data is refreshed.",
+  "projects": []
+}

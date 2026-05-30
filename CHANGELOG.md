@@ -4,6 +4,29 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.30.0] 2026-05-30
+
+**Rationale**: Project portfolio tracking system — PM needs a way to watch all projects without getting slammed. Adds `/report`, `/new-project`, `/help` slash commands; `projects/` directory with scoring formula, leeway rules for new/dev phase, and hire-flag copy-paste format. PM Session Activation Protocol now includes a lightweight portfolio scan step (step 3, ~2–3 min/project, 10 min cap). `sync-rules.sh` now syncs `projects/` to target repos.
+
+### Added
+
+- `projects/README.md`: scoring formula (Fix Rate = bugs_closed / max(bugs_opened,1) × 100), score bands (🟢🟡🟠🔴), leeway rules, hire-flag copy-paste format, PM check-in protocol
+- `projects/template.md`: per-project tracking template (team table, score card, session notes, hire flags)
+- `projects/_registry.json`: empty manifest — PM reads on every session start
+- `.claude/commands/report.md`: `/report` command — single project or full portfolio; pulls live GitHub data via MCP; updates score card and session note; never fabricates metrics
+- `.claude/commands/help.md`: `/help` command — scans `.claude/commands/` and lists all commands
+- `.claude/commands/new-project.md`: `/new-project <repo-name>` — checks team fit, creates tracking file, registers project, creates context note; no hire requests until observed gap
+- `templates/base/.claude/commands/report.md`: target-repo version of `/report` (paths use `.ai-rules/projects/`)
+- `templates/base/.claude/commands/help.md`: target-repo version of `/help`
+- `templates/base/.claude/commands/new-project.md`: target-repo version of `/new-project` (paths use `.ai-rules/agents/` and `.ai-rules/projects/`)
+
+### Changed
+
+- `scripts/sync-rules.sh`: `projects` added to `DIRS_TO_SYNC`; footer note added clarifying `projects/` is synced as read-only context to target repos
+- `agents/project-manager.md`: portfolio scan added as step 3 of Session Activation Protocol — reads `projects/_registry.json`, flags score < 60 or last_updated > 7 days, surfaces hire flags; time-boxed at ~2–3 min/project, 10 min total; steps 3–7 renumbered from old 3–6
+
+---
+
 ## [1.29.5] 2026-05-29
 
 **Rationale**: `/update-rules` returned "Unknown command" because `sync-rules.sh` was placing commands at `.ai-rules/.claude/commands/` — inside the subdirectory. Claude Code only scans `.claude/commands/` at the project root. Fixed by adding a step that copies `templates/base/.claude/commands/` to `{target-root}/.claude/commands/` after every sync.

@@ -27,7 +27,7 @@ SOURCE_BRANCH="${AI_RULES_BRANCH:-main}"
 TARGET_ROOT="${1:-$(pwd)}"
 DEST="${AI_RULES_DEST:-${TARGET_ROOT}/.ai-rules}"
 
-DIRS_TO_SYNC="rules agents notes plans proposals templates scripts acknowledgments imports demo deploy hiring pipeline"
+DIRS_TO_SYNC="rules agents notes plans projects proposals templates scripts acknowledgments imports demo deploy hiring pipeline"
 HIDDEN_DIRS=".claude .github"
 FILES_TO_SYNC="version.json CHANGELOG.md MIGRATION.md README.md"
 
@@ -128,13 +128,41 @@ done
 # Claude Code scans {project-root}/.claude/commands/ — NOT .ai-rules/.claude/commands/.
 # Copy the base template commands to the target root so /update-rules and other
 # commands are available without a sync. Only runs when syncing into a foreign repo.
+# PERSONAL FILE PROTECTION: any command file already present is left untouched
+# (the user may have a custom version). Missing files are installed from the template.
+# A blank stub is written first so the user can see the slot exists even if they
+# replace the file with their own version.
 if [ "$TARGET_ROOT" != "$DEST" ]; then
   CMD_SRC="${SRC}/templates/base/.claude/commands"
   CMD_DEST="${TARGET_ROOT}/.claude/commands"
   if [ -d "$CMD_SRC" ]; then
     mkdir -p "$CMD_DEST"
-    cp -r "${CMD_SRC}/." "${CMD_DEST}/"
-    ok ".claude/commands/ → repo root"
+    for src_file in "${CMD_SRC}"/*.md; do
+      fname="$(basename "$src_file")"
+      dest_file="${CMD_DEST}/${fname}"
+      if [ -f "$dest_file" ]; then
+        # Personal file exists — leave it alone
+        printf '  \033[2m–\033[0m  .claude/commands/%s (personal copy preserved)\n' "$fname"
+      else
+        # Slot is empty — install the template version
+        cp "$src_file" "$dest_file"
+        ok ".claude/commands/${fname} → installed"
+      fi
+    done
+  fi
+
+  # ── Protect personal .claude/settings.json ───────────────────────────────
+  # If the repo root has no .claude/settings.json yet, install a blank stub so
+  # the AI-rules version inside .ai-rules/.claude/ is never mistaken for the
+  # project's personal settings. User fills it in (or runs /update-config).
+  PERSONAL_SETTINGS="${TARGET_ROOT}/.claude/settings.json"
+  if [ ! -f "$PERSONAL_SETTINGS" ]; then
+    mkdir -p "${TARGET_ROOT}/.claude"
+    printf '{\n  "// NOTE": "Add your project-specific Claude Code settings here. AI-rules settings live in .ai-rules/.claude/settings.json"\n}\n' \
+      > "$PERSONAL_SETTINGS"
+    ok ".claude/settings.json → blank stub installed (fill in project settings)"
+  else
+    printf '  \033[2m–\033[0m  .claude/settings.json (personal copy preserved)\n'
   fi
 fi
 
@@ -205,6 +233,9 @@ echo "  plans/active/                  — active plans (repo-specific)"
 echo "  TODO.md                        — repo-specific task list (never overwritten)"
 echo "  HANDOFF.md                     — session handoff file (repo-specific)"
 echo "  CLAUDE.md                      — repo-specific Claude instructions (never overwritten)"
+echo ""
+echo "  projects/ syncs as read-only context (registry + template + scoring docs)."
+echo "  Target repos use .ai-rules/projects/ for their own /report and /new-project commands."
 echo ""
 echo "To keep rules current, re-run this script any time:"
 if [ "$IN_AI_RULES" = true ]; then
