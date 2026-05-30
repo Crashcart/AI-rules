@@ -10,6 +10,12 @@ Format:
 /report <repo-name>        — Report for one project
 /new-project <repo-name>   — Onboard a new project (team check + tracking file)
 
+### PM Messages (rule suggestions + hire requests)
+/messages                  — List pending PM messages awaiting approval
+/messages new              — PM drafts a rule-suggestion or hire-request (shown to you inline)
+/messages approve <file>   — Approve a message; PM implements then archives it
+/messages reject <file>    — Reject a message; PM archives it, implements nothing
+
 ### Rules Management
 /update-rules              — Pull latest AI-rules into this repo (no confirmation needed)
 

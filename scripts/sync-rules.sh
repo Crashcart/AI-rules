@@ -27,7 +27,7 @@ SOURCE_BRANCH="${AI_RULES_BRANCH:-main}"
 TARGET_ROOT="${1:-$(pwd)}"
 DEST="${AI_RULES_DEST:-${TARGET_ROOT}/.ai-rules}"
 
-DIRS_TO_SYNC="rules agents notes plans projects proposals templates scripts acknowledgments imports demo deploy hiring pipeline"
+DIRS_TO_SYNC="rules agents notes plans projects messages proposals templates scripts acknowledgments imports demo deploy hiring pipeline"
 HIDDEN_DIRS=".claude .github"
 FILES_TO_SYNC="version.json CHANGELOG.md MIGRATION.md README.md"
 
@@ -109,6 +109,13 @@ done
 # plans/active/ contains repo-specific work items — strip from sync so
 # active plans never leave AI-rules or overwrite a target repo's own work
 rm -rf "${DEST:?}/plans/active"
+
+# messages/inbox/ holds repo-specific pending PM messages — strip the inbox so
+# one repo's pending messages never leak into another. The README, template, and
+# archive structure still sync; the inbox is re-created empty per repo.
+rm -rf "${DEST:?}/messages/inbox"
+mkdir -p "${DEST:?}/messages/inbox"
+touch "${DEST:?}/messages/inbox/.gitkeep"
 
 # tickets/ is repo-specific — never sync it to target repos
 rm -rf "${DEST:?}/tickets"

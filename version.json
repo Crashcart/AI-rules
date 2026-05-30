@@ -1,13 +1,17 @@
 {
-  "version": "1.30.0",
+  "version": "1.31.0",
   "released": "2026-05-30",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
-  "changelog_entry": "Project portfolio tracking system: /report, /new-project, /help commands; projects/ directory with scoring, leeway rules, and hire-flag copy-paste format; PM Session Activation now includes portfolio scan step.",
+  "changelog_entry": "PM message inbox: /messages command + messages/ directory for rule-suggestions and hire-requests; 4×/day GitHub Actions check alerts the user for approval; PM announces and shows any message inline. ZeroTier One prepped to go gold: full 6-role team, milestones, and Gold Standard Definition of Done.",
   "files": [
-    "projects/",
-    ".claude/commands/",
-    "templates/base/.claude/commands/",
+    "messages/",
+    ".claude/commands/messages.md",
+    "templates/base/.claude/commands/messages.md",
+    ".github/workflows/messages-check.yml",
+    "scripts/check-messages.sh",
     "scripts/sync-rules.sh",
-    "agents/project-manager.md"
+    "agents/project-manager.md",
+    "projects/zerotierone-moon.md",
+    "plans/active/zerotier-ds918.md"
   ]
 }

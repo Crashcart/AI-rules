@@ -4,6 +4,32 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.31.0] 2026-05-30
+
+**Rationale**: Two deliverables. (1) PM message inbox — PROJECT MANAGER needs a durable channel to send rule-change suggestions to RULE ARCHITECT and new-hire requests to the user, with the user alerted before anything is approved. (2) ZeroTier One prepped to "go gold" — full team and a Gold Standard Definition of Done so the project has a clear production target.
+
+### Added
+
+- `messages/README.md`: PM inbox system — rule-suggestion + hire-request types, approval gate (RULE 16 / RULE 17), how the 4×/day check works
+- `messages/template.md`: message format (type, from/to, summary, detail, evidence, recommendation, decision)
+- `messages/inbox/`, `messages/archive/`: pending vs. processed messages
+- `scripts/check-messages.sh`: scans the inbox; `--markdown` mode for the alert issue body; exit 1 when pending
+- `.github/workflows/messages-check.yml`: runs every 6 hours (00:00/06:00/12:00/18:00 UTC = 4×/day) + on inbox push + manual; opens/updates a single `pending-approval` GitHub issue to alert the user; closes it when the inbox clears. Alerts only — never approves, edits a rule, or hires
+- `.claude/commands/messages.md` + `templates/base/.claude/commands/messages.md`: `/messages` command — list / new / approve / reject. PM announces and prints any new message inline so the user always sees it
+- ZeroTier One go-gold prep: `projects/zerotierone-moon.md` full 6-role team (TECH LEAD, DEVOPS, BACKEND, SRE, QA, SECURITY INFRA sequential) + 8-criterion Gold Standard Definition of Done; `plans/active/zerotier-ds918.md` team table, 5 milestones (design → build → harden → verify → security sign-off), gold goal
+
+### Changed
+
+- `scripts/sync-rules.sh`: `messages` added to `DIRS_TO_SYNC`; `messages/inbox/` stripped on sync (repo-specific, like `plans/active/`) and re-created empty
+- `agents/project-manager.md`: new "Message Inbox" section (tell-and-show requirement, approval gate); Session Activation Protocol step 3 now also scans `messages/inbox/`
+- `.claude/commands/help.md` + `templates/base/.claude/commands/help.md`: `/messages` added to the command reference
+
+### Note
+
+- No `rules/*.md` changed — SHA256 unchanged (`ddf496ac…788c`); no stale-rules re-read triggered
+
+---
+
 ## [1.30.0] 2026-05-30
 
 **Rationale**: Project portfolio tracking system — PM needs a way to watch all projects without getting slammed. Adds `/report`, `/new-project`, `/help` slash commands; `projects/` directory with scoring formula, leeway rules for new/dev phase, and hire-flag copy-paste format. PM Session Activation Protocol now includes a lightweight portfolio scan step (step 3, ~2–3 min/project, 10 min cap). `sync-rules.sh` now syncs `projects/` to target repos.

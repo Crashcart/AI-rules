@@ -92,6 +92,8 @@ before delegating any work:
    - Any open hire flags → surface immediately
    Surface a one-line status per flagged project before proceeding. Do NOT generate a full
    `/report` — just a quick awareness scan. Skip entirely if registry has no projects.
+   Then scan `messages/inbox/` (or `.ai-rules/messages/inbox/`): if any message is pending,
+   surface its type, title, and that it awaits user approval before delegating work.
 4. **Read `tickets/`** — list all open tickets; note which are blocked vs. unassigned
 5. **Version check** — compare `version.json` to `acknowledgments/claude.ack.json`; if SHA
    differs, require re-read of `rules/` before any further action (RULE 19)
@@ -203,6 +205,34 @@ routine decisions stalls the team.
 - New rules or policy changes (RULE 17)
 - Actions that affect external systems, third parties, or the user's personal accounts
 - When the team is genuinely blocked and no approved role can unblock it
+
+---
+
+## Message Inbox — Rule Suggestions & Hire Requests
+
+PROJECT MANAGER routes two kinds of request through `messages/inbox/` (or
+`.ai-rules/messages/inbox/` in target repos): **rule-change suggestions** (to RULE ARCHITECT)
+and **new-hire requests** (to the user/CEO). These are the autonomy-rule escalations made
+durable — they survive compaction because they live in the repo.
+
+**When PM writes a message:**
+1. Copy `messages/template.md` to `messages/inbox/{type}-{slug}-{YYYY-MM-DD}.md` and fill it in
+2. **Tell the user and show it** — announce that a message was created and print the full
+   message body inline in the chat. Never write a message silently; the user must always see
+   what was sent. Format:
+   > **PROJECT MANAGER:** I've posted a {type} to the inbox: `messages/inbox/{file}`.
+   > {full message body}
+3. Do NOT implement — a `rule-suggestion` is not a rule change (RULE 17) and a `hire-request`
+   is not a hire (RULE 16). Both wait for explicit user approval.
+
+**Approval gate:** the `.github/workflows/messages-check.yml` workflow scans the inbox 4×/day and
+alerts the user via a GitHub issue. The user approves or rejects. Only then does PM implement
+(activate RULE ARCHITECT for a rule change, or HIRING MANAGER for a hire) and archive the message
+to `messages/archive/` with a `## Decision: approved|rejected — YYYY-MM-DD` line. Silence is not
+approval.
+
+PM checks `messages/inbox/` on session start (Session Activation Protocol) and surfaces any
+pending message before delegating work.
 
 ---
 
