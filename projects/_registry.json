@@ -1,4 +1,76 @@
 {
   "description": "Registry of all tracked projects. PROJECT MANAGER reads this on every session start. Update last_updated when project data is refreshed.",
-  "projects": []
+  "projects": [
+    {
+      "name": "kali-ai-term",
+      "repo": "https://github.com/Crashcart/Kali-AI-term",
+      "status": "active",
+      "phase": "development",
+      "last_updated": "2026-05-30"
+    },
+    {
+      "name": "discord-chromecast",
+      "repo": "https://github.com/Crashcart/discord-chromecast",
+      "status": "active",
+      "phase": "maintenance",
+      "last_updated": "2026-05-30"
+    },
+    {
+      "name": "rpg-bot",
+      "repo": "https://github.com/Crashcart/RPG-Bot",
+      "status": "needs-review",
+      "phase": "unknown",
+      "last_updated": "2026-05-30",
+      "flag": "HOLD — repo description says 'delete it'; 46 open issues. CEO decision required before onboarding."
+    },
+    {
+      "name": "ollama-intelgpu",
+      "repo": "https://github.com/Crashcart/Ollama-intelgpu",
+      "status": "active",
+      "phase": "development",
+      "last_updated": "2026-05-30"
+    },
+    {
+      "name": "qbittorrent-monitor",
+      "repo": "https://github.com/Crashcart/qbittorrent-monitor.sh",
+      "status": "active",
+      "phase": "maintenance",
+      "last_updated": "2026-05-30"
+    },
+    {
+      "name": "claud",
+      "repo": "https://github.com/Crashcart/Claud",
+      "status": "active",
+      "phase": "development",
+      "last_updated": "2026-05-30"
+    },
+    {
+      "name": "zerotierone-moon",
+      "repo": "https://github.com/Crashcart/Zerotierone-moon",
+      "status": "active",
+      "phase": "development",
+      "last_updated": "2026-05-30"
+    },
+    {
+      "name": "rp-music-radio",
+      "repo": "https://github.com/Crashcart/RP-Music-Radio",
+      "status": "active",
+      "phase": "development",
+      "last_updated": "2026-05-30"
+    },
+    {
+      "name": "tipistore",
+      "repo": "https://github.com/Crashcart/tipistore",
+      "status": "active",
+      "phase": "new",
+      "last_updated": "2026-05-30"
+    },
+    {
+      "name": "musicbot",
+      "repo": "https://github.com/Crashcart/MusicBot",
+      "status": "active",
+      "phase": "maintenance",
+      "last_updated": "2026-05-30"
+    }
+  ]
 }
