@@ -8,8 +8,7 @@ Get ZeroTier moon server running reliably on the DS918+ NAS via Docker, with pro
 TUN/TAP setup and persistence across reboots and DSM updates.
 
 ## Next Action
-DEVOPS ENGINEER: Read `notes/context/ds918-zerotier-environment.md` first, then review
-the current state of `Crashcart/Zerotierone-moon` repo and address the 1 open issue.
+DEVOPS ENGINEER: When user is ready to work on ZeroTier — read `notes/context/ds918-zerotier-environment.md` first, then review the current state of `Crashcart/Zerotierone-moon` repo. No rush — slow/steady process per user direction. Tracking only until user initiates work.
 
 ## Context
 - **MUST read before any code**: `notes/context/ds918-zerotier-environment.md`
