@@ -1,17 +1,14 @@
 {
-  "version": "1.31.0",
-  "released": "2026-05-30",
+  "version": "1.32.0",
+  "released": "2026-06-02",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
-  "changelog_entry": "PM message inbox: /messages command + messages/ directory for rule-suggestions and hire-requests; 4×/day GitHub Actions check alerts the user for approval; PM announces and shows any message inline. ZeroTier One prepped to go gold: full 6-role team, milestones, and Gold Standard Definition of Done.",
+  "changelog_entry": "Rogue AI PM audit: scripts/audit-branches.sh scans all branches for unauthorized rule changes; /audit command + templates/base version; session-start hook alerts on pending PM inbox messages and offers to show them; improvement ideas documented.",
   "files": [
-    "messages/",
-    ".claude/commands/messages.md",
-    "templates/base/.claude/commands/messages.md",
-    ".github/workflows/messages-check.yml",
-    "scripts/check-messages.sh",
-    "scripts/sync-rules.sh",
-    "agents/project-manager.md",
-    "projects/zerotierone-moon.md",
-    "plans/active/zerotier-ds918.md"
+    "scripts/audit-branches.sh",
+    ".claude/commands/audit.md",
+    "templates/base/.claude/commands/audit.md",
+    ".claude/hooks/session-start.sh",
+    ".claude/commands/help.md",
+    "templates/base/.claude/commands/help.md"
   ]
 }

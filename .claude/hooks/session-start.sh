@@ -32,5 +32,26 @@ if [ -d "$PLANS_DIR" ] && [ -n "$(ls -A "$PLANS_DIR" 2>/dev/null)" ]; then
   echo "=== END ACTIVE PLANS ==="
 fi
 
+# Alert: pending PM messages awaiting user approval
+INBOX_DIR="${REPO_ROOT}/messages/inbox"
+if [ -d "$INBOX_DIR" ]; then
+  shopt -s nullglob
+  MSG_FILES=("${INBOX_DIR}"/*.md)
+  MSG_COUNT=${#MSG_FILES[@]}
+  if [ "$MSG_COUNT" -gt 0 ]; then
+    echo ""
+    echo "=== ⚠️  PM INBOX: ${MSG_COUNT} MESSAGE(S) AWAITING YOUR APPROVAL ==="
+    for f in "${MSG_FILES[@]}"; do
+      msg_name=$(basename "$f")
+      msg_type=$(grep -m1 "^Type:" "$f" 2>/dev/null | sed 's/Type:[[:space:]]*//' || echo "unknown")
+      msg_title=$(grep -m1 "^Title:" "$f" 2>/dev/null | sed 's/Title:[[:space:]]*//' || basename "$f" .md)
+      echo "  • [${msg_type}] ${msg_title}"
+      echo "    File: messages/inbox/${msg_name}"
+    done
+    echo "  → Type /messages to review, or say 'show messages' to see full content."
+    echo "=== END PM INBOX ALERT ==="
+  fi
+fi
+
 echo "=== END ACTIVE SESSION RULES ==="
 echo "REMINDER: Announce role before EVERY task segment. Format: **ROLE NAME:** description."

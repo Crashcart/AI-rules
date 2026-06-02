@@ -19,6 +19,12 @@ Format:
 ### Rules Management
 /update-rules              — Pull latest AI-rules into this repo (no confirmation needed)
 
+### Security + Audit
+/audit                     — Scan all branches for rogue AI PM rule changes
+/audit quick               — Scan only recently active branches (last 7 days)
+/audit branch <name>       — Audit one specific branch
+/audit delete <branch>     — Delete a confirmed rogue branch (asks for confirmation)
+
 ### Help
 /help                      — This list
 

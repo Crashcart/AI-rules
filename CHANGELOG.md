@@ -4,6 +4,24 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.32.0] 2026-06-02
+
+**Rationale**: Three improvements. (1) Rogue AI PM audit — `scripts/audit-branches.sh` scans every git branch for unauthorized rule changes: rules modified without a version bump, missing Risk Notes, agents added outside the registry, and SHA mismatches. `/audit` command exposes this on-demand; templates/base gets its own copy. (2) Session-start inbox alert — the hook now surfaces pending PM messages at startup and tells the user to type `/messages` or "show messages" to review them. (3) Improvement ideas for commands captured in audit command docs.
+
+### Added
+
+- `scripts/audit-branches.sh`: branch scanner — four checks: rules modified without version bump, rules SHA mismatch on branch, agents/*.md not in registry.json, commits touching rules/ with no Risk Notes. Exit 0 = clean, exit 1 = issues found (CI-safe).
+- `.claude/commands/audit.md`: `/audit` slash command — full scan, quick scan, single-branch, delete rogue branch. Includes rogue-change verdict table referencing RULE 15/16/17.
+- `templates/base/.claude/commands/audit.md`: target-repo copy of `/audit` (paths prefixed `.ai-rules/`)
+
+### Modified
+
+- `.claude/hooks/session-start.sh`: added PM inbox alert block — on startup, if `messages/inbox/*.md` exist, prints count + type + title of each and prompts user to `/messages` or say "show messages"
+- `.claude/commands/help.md`: added Security + Audit section with four `/audit` variants
+- `templates/base/.claude/commands/help.md`: same section added
+
+---
+
 ## [1.31.0] 2026-05-30
 
 **Rationale**: Two deliverables. (1) PM message inbox — PROJECT MANAGER needs a durable channel to send rule-change suggestions to RULE ARCHITECT and new-hire requests to the user, with the user alerted before anything is approved. (2) ZeroTier One prepped to "go gold" — full team and a Gold Standard Definition of Done so the project has a clear production target.
