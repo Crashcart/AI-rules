@@ -45,7 +45,7 @@
   "allowedTools": [
     "Bash(bash scripts/sync-rules.sh)"
   ],
-  "lastSnapshotDate": "2026-06-02",
+  "lastSnapshotDate": "2026-06-18",
   "snapshotRepo": "AI-rules",
   "snapshotTargetRepo": "",
   "snapshotBranch": "snapshot",

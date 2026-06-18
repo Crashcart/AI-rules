@@ -93,7 +93,9 @@ before delegating any work:
    Surface a one-line status per flagged project before proceeding. Do NOT generate a full
    `/report` — just a quick awareness scan. Skip entirely if registry has no projects.
    Then scan `messages/inbox/` (or `.ai-rules/messages/inbox/`): if any message is pending,
-   surface its type, title, and that it awaits user approval before delegating work.
+   print the FULL content of each message inline and immediately ask: "Would you like to approve
+   or reject this? Reply: approve [filename] or reject [filename]. Nothing is approved until you
+   say so (RULE 17)." Do NOT summarize — show the complete message body.
 4. **Read `tickets/`** — list all open tickets; note which are blocked vs. unassigned
 5. **Version check** — compare `version.json` to `acknowledgments/claude.ack.json`; if SHA
    differs, require re-read of `rules/` before any further action (RULE 19)

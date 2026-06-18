@@ -32,7 +32,7 @@ if [ -d "$PLANS_DIR" ] && [ -n "$(ls -A "$PLANS_DIR" 2>/dev/null)" ]; then
   echo "=== END ACTIVE PLANS ==="
 fi
 
-# Alert: pending PM messages awaiting user approval
+# Alert: pending PM messages awaiting user approval — show full content
 INBOX_DIR="${REPO_ROOT}/messages/inbox"
 if [ -d "$INBOX_DIR" ]; then
   shopt -s nullglob
@@ -41,15 +41,18 @@ if [ -d "$INBOX_DIR" ]; then
   if [ "$MSG_COUNT" -gt 0 ]; then
     echo ""
     echo "=== ⚠️  PM INBOX: ${MSG_COUNT} MESSAGE(S) AWAITING YOUR APPROVAL ==="
+    echo "Nothing is approved until you explicitly say so (RULE 17)."
+    echo ""
     for f in "${MSG_FILES[@]}"; do
       msg_name=$(basename "$f")
-      msg_type=$(grep -m1 "^Type:" "$f" 2>/dev/null | sed 's/Type:[[:space:]]*//' || echo "unknown")
-      msg_title=$(grep -m1 "^Title:" "$f" 2>/dev/null | sed 's/Title:[[:space:]]*//' || basename "$f" .md)
-      echo "  • [${msg_type}] ${msg_title}"
-      echo "    File: messages/inbox/${msg_name}"
+      echo "--- MESSAGE: ${msg_name} ---"
+      cat "$f"
+      echo ""
+      echo "  → Reply: approve ${msg_name}  |  reject ${msg_name}"
+      echo "--------------------------------------------"
+      echo ""
     done
-    echo "  → Type /messages to review, or say 'show messages' to see full content."
-    echo "=== END PM INBOX ALERT ==="
+    echo "=== END PM INBOX ==="
   fi
 fi
 

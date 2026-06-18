@@ -1,14 +1,7 @@
 {
-  "version": "1.32.0",
-  "released": "2026-06-02",
+  "version": "1.33.0",
+  "released": "2026-06-18",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
-  "changelog_entry": "Rogue AI PM audit: scripts/audit-branches.sh scans all branches for unauthorized rule changes; /audit command + templates/base version; session-start hook alerts on pending PM inbox messages and offers to show them; improvement ideas documented.",
-  "files": [
-    "scripts/audit-branches.sh",
-    ".claude/commands/audit.md",
-    "templates/base/.claude/commands/audit.md",
-    ".claude/hooks/session-start.sh",
-    ".claude/commands/help.md",
-    "templates/base/.claude/commands/help.md"
-  ]
+  "changelog_entry": "PM inbox alert upgraded: session-start hook now prints full message content with approve/reject prompt; PM agent protocol updated to show full content inline.",
+  "files": [".claude/hooks/session-start.sh", "agents/project-manager.md"]
 }

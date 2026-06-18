@@ -4,6 +4,17 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.33.0] 2026-06-18
+
+**Rationale**: PM inbox alert upgraded to show full message content. Previously the session-start hook only listed message type/title and said "say 'show messages'". Now it prints the complete body of each pending message inline and prompts with "approve [filename] | reject [filename]" so you can act immediately without a second command. `agents/project-manager.md` updated to match — PM must now display full content when surfacing inbox messages, not just a summary.
+
+### Modified
+
+- `.claude/hooks/session-start.sh`: inbox alert now prints full `cat` of each pending message with an approve/reject prompt per message; removed "say 'show messages'" prompt
+- `agents/project-manager.md`: Session Activation Protocol step 3 now requires printing full message body inline and asking for an explicit approve/reject decision (RULE 17)
+
+---
+
 ## [1.32.0] 2026-06-02
 
 **Rationale**: Three improvements. (1) Rogue AI PM audit — `scripts/audit-branches.sh` scans every git branch for unauthorized rule changes: rules modified without a version bump, missing Risk Notes, agents added outside the registry, and SHA mismatches. `/audit` command exposes this on-demand; templates/base gets its own copy. (2) Session-start inbox alert — the hook now surfaces pending PM messages at startup and tells the user to type `/messages` or "show messages" to review them. (3) Improvement ideas for commands captured in audit command docs.
