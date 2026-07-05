@@ -4,6 +4,21 @@ Newest entries first. Format: `[VERSION] DATE — description`
 
 ---
 
+## [1.34.0] 2026-07-05
+
+**Rationale**: New hire — **CLAUDE CODE SPECIALIST** added to the roster. This role owns the Claude Code harness and the AI-rules automation layer: `.claude/` hooks and settings, slash commands and their `templates/base/` twins, hook scripts, MCP wiring, and the version/SHA integrity chain. It fills a gap — no existing role was scoped to the repo's own tooling and bootstrap mechanics. Registered per RULE 16 with user approval.
+
+### Added
+
+- `agents/claude-code-specialist.md`: new agent profile — Claude Code harness + AI-rules automation specialist. Scope: may edit `.claude/`, `scripts/`, `templates/`; may NOT modify `rules/*.md` directly (RULE 17). Escalates rule changes to CEO/user, behavior-impacting changes to AI COMPLIANCE ENGINEER.
+
+### Modified
+
+- `agents/registry.json`: registered `claude-code-specialist.md` (integrity check will now expect this file on disk)
+- `agents/README.md`: added CLAUDE CODE SPECIALIST to the Role Index (harness/automation layer, outside the feature loop)
+
+---
+
 ## [1.33.0] 2026-06-18
 
 **Rationale**: PM inbox alert upgraded to show full message content. Previously the session-start hook only listed message type/title and said "say 'show messages'". Now it prints the complete body of each pending message inline and prompts with "approve [filename] | reject [filename]" so you can act immediately without a second command. `agents/project-manager.md` updated to match — PM must now display full content when surfacing inbox messages, not just a summary.

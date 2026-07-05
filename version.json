@@ -1,7 +1,11 @@
 {
-  "version": "1.33.0",
-  "released": "2026-06-18",
+  "version": "1.34.0",
+  "released": "2026-07-05",
   "rules_sha256": "ddf496ac94ef1e1efd24975435648392fae64b350ba9a824bdb8fb18a9fd788c",
-  "changelog_entry": "PM inbox alert upgraded: session-start hook now prints full message content with approve/reject prompt; PM agent protocol updated to show full content inline.",
-  "files": [".claude/hooks/session-start.sh", "agents/project-manager.md"]
+  "changelog_entry": "New agent: CLAUDE CODE SPECIALIST (claude-code-specialist.md) added to roster and registry — owns the Claude Code harness and AI-rules automation layer.",
+  "files": [
+    "agents/claude-code-specialist.md",
+    "agents/registry.json",
+    "agents/README.md"
+  ]
 }

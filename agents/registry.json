@@ -132,6 +132,10 @@
     {
       "file": "rule-architect.md",
       "created_commit": "pending"
+    },
+    {
+      "file": "claude-code-specialist.md",
+      "created_commit": "pending"
     }
   ]
 }
